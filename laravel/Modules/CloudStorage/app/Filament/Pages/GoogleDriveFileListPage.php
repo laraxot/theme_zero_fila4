@@ -39,7 +39,7 @@ class GoogleDriveFileListPage extends Page
     }
         */
 
-    public function setUp()
+    public function setUp(): void
     {
         dddx('c');
     }

@@ -68,7 +68,9 @@ class ChartColumn extends Column
             'obj' => $this,
         ];
 
-        return view($this->view, $view_params);
+        /** @var view-string $viewName */
+        $viewName = $this->view;
+        return view($viewName, $view_params);
     }
 
     /**

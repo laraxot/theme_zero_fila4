@@ -1,8 +1,0 @@
----
-description:
-globs:
-alwaysApply: false
----
-## Console Commands Politica
-- Vietata la registrazione manuale dei comandi console nei moduli
-- La coerenza è garantita dalla base comune (XotBaseServiceProvider)
