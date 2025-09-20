@@ -10,7 +10,7 @@ use Modules\CloudStorage\Models\CloudStorageFile;
 /**
  * CloudStorageFile factory.
  *
- * @extends Factory<\Modules\CloudStorage\Models\CloudStorageFile>
+ * @extends Factory<CloudStorageFile>
  */
 class CloudStorageFileFactory extends Factory
 {
