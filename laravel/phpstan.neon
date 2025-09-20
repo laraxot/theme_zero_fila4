@@ -38,6 +38,7 @@ parameters:
         - ./*/rector.php
         - ./*/*.blade.php
         - ./Modules/Media/app/Actions/Image/Merge.php
+        - ./Modules/Limesurvey/*
         # - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
         - ./Modules/*/packages/*
         - ./Modules/*/tests/*
