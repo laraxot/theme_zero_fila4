@@ -23,4 +23,4 @@ yarn-error.log
 /storage/framework/views/
 *.old
 docs/
-docs_old/
+docs_old/quaeris_data
