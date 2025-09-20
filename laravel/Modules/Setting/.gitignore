@@ -1,143 +1,160 @@
-# Dependencies and packages
-/vendor/
-/node_modules/
-/docs/vendor/
+# ==============================================
+# LARAXOT MODULE SETTING - .GITIGNORE
+# ==============================================
+# Modulo Setting Laraxot - Template standardizzato
+# Ultimo aggiornamento: 2025-01-31
+# ==============================================
 
-# Lock files and cache
-*.lock
-*.cache
-*.phar
-*.jar
+# ==============================================
+# DEPENDENCIES & PACKAGES
+# ==============================================
+/vendor/
+/vendor
+/node_modules/
+/node_modules
+/docs/vendor/
 package-lock.json
+yarn.lock
+composer.lock
 yarn-error.log
 npm-debug.log
-composer.lock
-.phpunit.result.cache
-.php-cs-fixer.cache
 
-# Log files
-*.log
-error_log
-
-# Build directories
-/build/
+# ==============================================
+# BUILD & COMPILED FILES
+# ==============================================
 /build
+/build/
 build/
+dist/
+docs/cache/
+cache/
 
-# Laravel specific
-bootstrap/compiled.php
-app/storage/
-public/storage
-public/hot
-public_html/storage
-public_html/hot
-storage/*.key
-.env
-
-# Database directories
-database/Factories_
-database/Factories_old
-database/Migrations_old
-
-# Local configurations
-Homestead.yaml
-Homestead.json
-/.vagrant
-
-# IDE specific
-/.idea
-.phpintel
-
-# Git specific
-.git-blame-ignore-revs
-.git-rewrite/
-.git-rewrite
-
-# Temporary and system files
+# ==============================================
+# CACHE & TEMPORARY FILES
+# ==============================================
+*.cache
+*.lock
+*.phar
+*.jar
 *.tmp
 *.swp
 *.swo
 *.stackdump
-*.exe
 *:Zone.Identifier
-.DS_Store
-*.old
-*.old1
-*.backup
-*.backup.*
-*.bak
-*.new
+v8-compile-cache-*
+.php-cs-fixer.cache
+.phpunit.result.cache
 
-# Documentation and cache
-docs/phpstan/
-docs/cache/
-cache/
+# ==============================================
+# LOG FILES
+# ==============================================
+*.log
+error_log
+npm-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
-# Development tools
-.windsurf/
-.cursor/
-/vendor
-*.lock
-/build
-*.lock
-*.lock
-*.lock
-package-lock.json
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Laravel 4 specific
+# ==============================================
+# LARAVEL SPECIFIC
+# ==============================================
 bootstrap/compiled.php
 app/storage/
-
-# Laravel 5 & Lumen specific
 public/storage
 public/hot
-
-# Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
-
 storage/*.key
 .env
+.env.*
+!.env.example
+
+# ==============================================
+# ENVIRONMENT & CONFIGURATION
+# ==============================================
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
-*.cache
-.git-blame-ignore-revs
-.git-rewrite
+/.idea
+.phpintel
 
-.git-blame-ignore-revs
-*.phar
-.php-cs-fixer.cache
-*.phar
-*.cache
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
+# ==============================================
+# GIT SPECIFIC
+# ==============================================
 .git-rewrite/
-.php-cs-fixer.cache
-node_modules
+.git-rewrite
 .git-blame-ignore-revs
-.git-blame-ignore-revs
-node_modules
-vendor
-build/
-vendor/
-build/
-node_modules
-docs/cache/
-cache/
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-node_modules/
-*:Zone.Identifier
 
-# Backup files
+# ==============================================
+# SYSTEM FILES
+# ==============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==============================================
+# BACKUP FILES
+# ==============================================
+*.old
+*.old1
+*.old2
+*.backup
+*.backup.*
 *.bak
-# PHPStan documentation
+*.bakcup
+*.new
+
+# ==============================================
+# DEVELOPMENT TOOLS
+# ==============================================
+.windsurf/
+.cursor/
+.phpstorm.meta.php
+
+# ==============================================
+# DOCUMENTATION CACHE
+# ==============================================
 docs/phpstan/
+docs/cache/
+
+# ==============================================
+# LANGUAGE FILES
+# ==============================================
+lang/lang/
+resources/lang/
+
+# ==============================================
+# OLD DIRECTORIES (LEGACY CLEANUP)
+# ==============================================
+resources/views/Components_old/
+database/Migrations_old/
+database/Seeders_old/
+database/Factories_old/
+database_old/
+
+# ==============================================
+# MODULE SPECIFIC - SETTING
+# ==============================================
+# File di configurazione locale
+config/local.php
+config/development.php
+
+# Cache settings
+storage/settings/
+storage/config/
+
+# File di test settings
+settings_test_data.json
+test_settings.sql
+
+# ==============================================
+# END OF SETTING .GITIGNORE
+# ==============================================
+
+# 🚫 File specifici del progetto
+*.fila2
+laravel
+public_html
