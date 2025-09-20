@@ -1,107 +1,160 @@
-# Dependencies
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+# ==============================================
+# LARAXOT MODULE CHART - .GITIGNORE
+# ==============================================
+# Modulo Chart Laraxot - Template standardizzato
+# Ultimo aggiornamento: 2025-01-31
+# ==============================================
 
-# Laravel specific
+# ==============================================
+# DEPENDENCIES & PACKAGES
+# ==============================================
+/vendor/
+/vendor
+/node_modules/
+/node_modules
+/docs/vendor/
+package-lock.json
+yarn.lock
+composer.lock
+yarn-error.log
+npm-debug.log
+
+# ==============================================
+# BUILD & COMPILED FILES
+# ==============================================
+/build
+/build/
+build/
+dist/
+docs/cache/
+cache/
+
+# ==============================================
+# CACHE & TEMPORARY FILES
+# ==============================================
+*.cache
+*.lock
+*.phar
+*.jar
+*.tmp
+*.swp
+*.swo
+*.stackdump
+*:Zone.Identifier
+v8-compile-cache-*
+.php-cs-fixer.cache
+.phpunit.result.cache
+
+# ==============================================
+# LOG FILES
+# ==============================================
+*.log
+error_log
+npm-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# ==============================================
+# LARAVEL SPECIFIC
+# ==============================================
 bootstrap/compiled.php
 app/storage/
 public/storage
 public/hot
 public_html/storage
 public_html/hot
-
-# Security & Environment
 storage/*.key
 .env
+.env.*
+!.env.example
+
+# ==============================================
+# ENVIRONMENT & CONFIGURATION
+# ==============================================
 Homestead.yaml
 Homestead.json
 /.vagrant
+/.idea
+.phpintel
 
-# Cache & Generated files
-.phpunit.result.cache
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-*.phar
-*.lock
-
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
+# ==============================================
+# GIT SPECIFIC
+# ==============================================
 .git-rewrite/
-.php-cs-fixer.cache
-node_modules
-build
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-.php-cs-fixer.cache
+.git-rewrite
 .git-blame-ignore-revs
-.php-cs-fixer.cache
-.git-blame-ignore-revs
-.git-blame-ignore-revs
-.php-cs-fixer.cache
 
-*:Zone.Identifier
-.php-cs-fixer.cache
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+# ==============================================
+# SYSTEM FILES
+# ==============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+# ==============================================
+# BACKUP FILES
+# ==============================================
+*.old
+*.old1
+*.old2
+*.backup
+*.backup.*
+*.bak
+*.bakcup
+*.new
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
+# ==============================================
+# DEVELOPMENT TOOLS
+# ==============================================
+.windsurf/
+.cursor/
+.phpstorm.meta.php
 
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-*.phar
-*.lock
-.git-blame-ignore-revs
-package-lock.json
-.php-cs-fixer.cache
-package-lock.json
-.git-rewrite/
-.php-cs-fixer.cache
-node_modules
-build
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-.php-cs-fixer.cache
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-.git-blame-ignore-revs
-.git-blame-ignore-revs
-.php-cs-fixer.cache
-
-# File di log
-*.log
-package-lock.json
-.git-rewrite/
-build
-
-# OS specific
-*:Zone.Identifier
-
-# Log files
-*.log
-# PHPStan documentation
+# ==============================================
+# DOCUMENTATION CACHE
+# ==============================================
 docs/phpstan/
+docs/cache/
 
+# ==============================================
+# LANGUAGE FILES
+# ==============================================
+lang/lang/
+resources/lang/
+
+# ==============================================
+# OLD DIRECTORIES (LEGACY CLEANUP)
+# ==============================================
+resources/views/Components_old/
+database/Migrations_old/
+database/Seeders_old/
+database/Factories_old/
+database_old/
+
+# ==============================================
+# MODULE SPECIFIC - CHART
+# ==============================================
+# File di configurazione locale
+config/local.php
+config/development.php
+
+# Cache grafici
+storage/charts/
+storage/graphics/
+
+# File di test grafici
+chart_test_data.json
+test_charts.sql
+
+# ==============================================
+# END OF CHART .GITIGNORE
+# ==============================================
+
+# 🚫 File specifici del progetto
+*.fila2
+laravel
+public_html
