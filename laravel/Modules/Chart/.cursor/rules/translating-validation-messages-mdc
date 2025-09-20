@@ -1,7 +1,0 @@
-# Traduzione dei Messaggi di Validazione
-
-Questa regola copre la personalizzazione e traduzione dei messaggi di validazione nel progetto `<nome progetto>`:
-- Usare `attributes()` nelle classi di richiesta per personalizzare i nomi dei campi, traducendoli con `__()`.
-- Usare `messages()` per definire messaggi di validazione personalizzati, con placeholder come `:position` per array.
-- Aggiungere traduzioni per nomi dei campi e messaggi nei file di lingua (es. `lang/it/general.php`).
-- Seguire le convenzioni di localizzazione esistenti con `mcamara/laravel-localization`.
