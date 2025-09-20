@@ -1,0 +1,41 @@
+# Regola: Traduzioni doctor_availability_calendar.php (SaluteOra)
+
+## Filosofia
+- Struttura espansa obbligatoria per tutti i campi, azioni, messaggi
+- Sintassi breve [] e declare(strict_types=1) sempre
+- help diverso da placeholder (se uguale, help = '')
+- Nessuna stringa hardcoded nelle view
+- Tutte le chiavi in inglese, valori in italiano
+- Documentazione e motivazione sempre aggiornata
+
+## Prototipo
+```php
+'fields' => [
+    'doctor' => [
+        'label' => 'Medico',
+        'placeholder' => 'Seleziona il medico',
+        'help' => 'Medico per cui gestire la disponibilità',
+    ],
+],
+```
+
+## Motivazione
+La struttura espansa garantisce coerenza, automazione, refactoring sicuro e onboarding rapido. La sintassi [] e declare(strict_types=1) sono obbligatorie per portabilità e compatibilità.
+
+## Collegamenti
+- [Modules/SaluteOra/docs/doctor_availability_calendar_traduzioni.md](../../laravel/Modules/SaluteOra/docs/doctor_availability_calendar_traduzioni.md)
+- [filament-best-practices.mdc](filament-best-practices.mdc)
+- [doctor_availability.php](../../laravel/Modules/SaluteOra/lang/it/doctor_availability.php)
+- [appointment.php](../../laravel/Modules/SaluteOra/lang/it/appointment.php)
+- [doctor.php](../../laravel/Modules/SaluteOra/lang/it/doctor.php)
+- [doctor-resource.php](../../laravel/Modules/SaluteOra/lang/it/doctor-resource.php)
+- [widgets.php](../../laravel/Modules/SaluteOra/lang/it/widgets.php)
+
+## Checklist
+- [x] Sintassi []
+- [x] declare(strict_types=1)
+- [x] help diverso da placeholder
+- [x] Struttura espansa
+- [x] Documentazione aggiornata
+- [x] Collegamenti bidirezionali
+- [x] Motivazione e filosofia esplicite

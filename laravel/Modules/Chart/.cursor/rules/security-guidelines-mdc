@@ -1,0 +1,12 @@
+# Security Guidelines
+
+**When** you are implementing authentication, data handling, or any security-related features
+
+**Then** use multi-tenant authentication, roles and permissions with `spatie/laravel-permission`, secure sessions, and 2FA for admin users. Encrypt sensitive data, log modifications, ensure GDPR compliance, and schedule automatic backups.
+
+**Because** this protects user data, prevents unauthorized access, and ensures compliance with legal standards.
+
+**Examples**
+
+- Correct: Implement role-based access with `spatie/laravel-permission` and encrypt sensitive fields in the database.
+- Incorrect: Use plain text for sensitive data or skip role-based access control.

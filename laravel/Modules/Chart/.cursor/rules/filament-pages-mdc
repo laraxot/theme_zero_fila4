@@ -1,0 +1,49 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Filament Pages Best Practices
+
+## Regole Fondamentali
+- Ogni pagina deve essere una classe dedicata
+- Estendere `Filament\Pages\Page`
+- Implementare i metodi obbligatori
+- Documentare la pagina
+- Testare la pagina
+
+## Struttura
+- Namespace: `App\Filament\Pages` o `Modules\{Module}\Filament\Pages`
+- Nome classe: PascalCase senza suffisso `Page` (es. `Dashboard`)
+- Metodi obbligatori: `getNavigationLabel()`, `getTitle()`, `getHeaderWidgets()`, `getFooterWidgets()`
+
+## Esempio Corretto
+```php
+class Dashboard extends Page
+{
+    public function getTitle(): string
+    {
+        return __('dashboard.title');
+    }
+}
+```
+
+## Best Practices
+- Classi dedicate
+- Layout ottimizzato
+- Traduzioni per tutte le label
+- Test di feature e accessibilità
+
+## Checklist
+- [ ] Classe dedicata
+- [ ] Layout ottimizzato
+- [ ] Traduzioni presenti
+- [ ] Test scritti
+- [ ] Documentazione aggiornata
+
+## Collegamenti correlati
+- [Filament Best Practices](./filament-best-practices.mdc)
+- [Validation Rules](./validation.mdc)
+- [Migration Best Practices](./migrations.mdc)
+- [Error Handling](./error-handling.mdc)
+- [Checklist di Ripartenza](../docs/checklist-di-ripartenza.md)

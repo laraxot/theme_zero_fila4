@@ -1,0 +1,49 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Filament Widgets Best Practices
+
+## Regole Fondamentali
+- Ogni widget deve essere una classe dedicata
+- Estendere `Filament\Widgets\Widget`
+- Implementare i metodi obbligatori
+- Documentare il widget
+- Testare il widget
+
+## Struttura
+- Namespace: `App\Filament\Widgets` o `Modules\{Module}\Filament\Widgets`
+- Nome classe: PascalCase senza suffisso `Widget` (es. `StatsOverview`)
+- Metodi obbligatori: `getColumns()`, `getCards()`, `getTableColumns()`, `getTableData()`
+
+## Esempio Corretto
+```php
+class StatsOverview extends Widget
+{
+    public function getColumns(): int
+    {
+        return 4;
+    }
+}
+```
+
+## Best Practices
+- Classi dedicate
+- Layout ottimizzato
+- Traduzioni per tutte le label
+- Test di feature e performance
+
+## Checklist
+- [ ] Classe dedicata
+- [ ] Layout ottimizzato
+- [ ] Traduzioni presenti
+- [ ] Test scritti
+- [ ] Documentazione aggiornata
+
+## Collegamenti correlati
+- [Filament Best Practices](./filament-best-practices.mdc)
+- [Validation Rules](./validation.mdc)
+- [Migration Best Practices](./migrations.mdc)
+- [Error Handling](./error-handling.mdc)
+- [Checklist di Ripartenza](../docs/checklist-di-ripartenza.md)

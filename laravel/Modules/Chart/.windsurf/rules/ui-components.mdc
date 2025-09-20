@@ -1,0 +1,53 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# UI Components
+
+> **Nota**: Per una documentazione completa, vedere:
+> - [/docs/implementazione/standard_ui_components.md](../../docs/implementazione/standard_ui_components.md)
+> - [/laravel/Modules/Cms/docs/standard_ui_components.md](../../laravel/Modules/Cms/docs/standard_ui_components.md)
+
+## Standard Filament
+
+### Componenti da Utilizzare
+- Utilizzare sempre i componenti Filament quando disponibili
+- Evitare componenti personalizzati quando esiste un equivalente Filament
+
+### Esempi di Componenti
+```blade
+# ✅ Corretto
+<x-filament::button size="sm" href="{{ route('example') }}" tag="a">
+    Testo
+</x-filament::button>
+
+# ❌ Non Corretto
+<a href="{{ route('example') }}">
+    <x-ui.button>Testo</x-ui.button>
+</a>
+```
+
+## Regole per i Componenti UI
+
+### Quando si creano o si modificano elementi dell'interfaccia utente dell'applicazione
+
+### Allora si utilizzano sempre i componenti nativi di Filament come `x-filament::icon`, `x-filament::button`, `x-filament::dropdown` e `x-filament::avatar`. Per i separatori nei dropdown, si utilizza `div` con classe `border-t border-gray-200 dark:border-gray-700 my-1`. Evitare l'uso di componenti non esistenti.
+
+### Perché ciò garantisce la coerenza nell'interfaccia utente, sfrutta l'accessibilità integrata di Filament e mantiene un aspetto coerente in tutta l'applicazione.
+
+### Esempi
+
+- Corretto: Utilizzare `<x-filament::button>Clicca qui</x-filament::button>` per i pulsanti.
+- Non Corretto: Utilizzare componenti personalizzati o non esistenti al posto di quelli nativi di Filament.
+
+## Motivi per Usare Filament
+1. Coerenza nell'interfaccia utente
+2. Accessibilità integrata
+3. Supporto per temi
+4. Manutenibilità del codice
+5. Documentazione ufficiale
+
+## Riferimenti
+- [Documentazione Filament](https://filamentphp.com/docs/3.x/support/blade-components/overview)
+- [Memoria UI in Cursor](../memories/ui-components.mdc)

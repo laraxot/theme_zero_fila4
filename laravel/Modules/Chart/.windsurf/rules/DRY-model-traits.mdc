@@ -1,0 +1,34 @@
+# DRY Model Traits: HasFactory e Catena di Ereditarietà
+
+## Regola
+Non dichiarare mai il trait `HasFactory` nei modelli che lo ereditano già da una classe base (es. `BaseUser`, `BaseModel`).
+
+## Motivazione
+- Evita duplicazione e warning
+- Rispetta il principio DRY
+- Mantiene la codebase pulita e coerente
+
+## Esempio
+```php
+// BaseUser.php
+abstract class BaseUser extends Authenticatable {
+    use HasFactory;
+}
+
+// Admin.php
+class Admin extends User {
+    // NON serve: use HasFactory;
+}
+```
+
+## Checklist
+- [ ] Nessun modello figlio dichiara HasFactory se già presente nella base
+- [ ] Aggiorna la docstring della classe per segnalare la motivazione
+- [ ] Documenta la regola in docs e .mdc
+
+## Collegamenti
+- `Modules/<nome progetto>/docs/DRY-model-traits.md`
+- `.cursor/rules/DRY-model-traits.mdc`
+
+---
+Ultimo aggiornamento: 2025-06-04

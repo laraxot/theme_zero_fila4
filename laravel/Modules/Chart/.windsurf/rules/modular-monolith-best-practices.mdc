@@ -1,0 +1,64 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Modular Monolith Best Practices (Laravel)
+
+## Descrizione
+Questa regola definisce le best practice per la progettazione di monoliti modulari in Laravel, ispirate all'articolo di Mohamad Shahkhajeh e integrate nella documentazione Tenant/Xot. Ogni modulo deve essere isolato, a livelli, comunicare solo tramite contracts/eventi, e rispettare PSR-4.
+
+## Struttura Modulo Esempio
+```
+Modules/NomeModulo
+├── Domain
+├── Application
+├── Infrastructure
+├── UI
+```
+
+## Regole Fondamentali
+- Ogni modulo ha uno scopo chiaro e isolato
+- Struttura a livelli: Domain, Application, Infrastructure, UI
+- Internals nascosti: esporre solo contracts/eventi
+- Dipendere da astrazioni, mai da dettagli di altri moduli
+- Service provider per ogni modulo
+- Comunicazione solo tramite eventi/contracts
+- Shared kernel minimale, stabile, astratto
+- Test di dominio in puro PHP
+
+## Esempio di Comunicazione
+```php
+// Evento
+class TenantCreated { ... }
+event(new TenantCreated($tenant));
+// Listener
+Event::listen(TenantCreated::class, fn($event) => ...);
+```
+
+## Errori Comuni
+- Chiamate statiche tra moduli
+- Dipendenze circolari
+- Shared kernel come "junk drawer"
+- Logica di dominio nei controller/model
+- Override di internals di altri moduli
+
+## Checklist
+- [ ] Struttura a livelli rispettata
+- [ ] Nessun accesso diretto agli internals di altri moduli
+- [ ] Comunicazione solo tramite contracts/eventi
+- [ ] Service provider per ogni modulo
+- [ ] Shared kernel piccolo e stabile
+- [ ] Test di dominio in puro PHP
+- [ ] Documentazione aggiornata e linkata
+
+## Filosofia
+- DRY, KISS, sicurezza, accessibilità, modularità, evolvibilità
+
+## Collegamenti
+- [modular-monolith-architecture.mdc](mdc:modular-monolith-architecture.mdc)
+- [modular_monolith_guidelines.mdc](mdc:modular_monolith_guidelines.mdc)
+- [Tenant/docs/README.md](mdc:../../laravel/Modules/Tenant/docs/README.md)
+- [Xot/docs/structure.md](mdc:../../laravel/Modules/Xot/docs/structure.md)
+- [User/docs/structure.md](mdc:../../laravel/Modules/User/docs/structure.md)
+- [Articolo di riferimento](mdc:https:/medium.com/@mohamadshahkhajeh/architecting-laravel-the-right-way-modular-monoliths-done-right-%EF%B8%8F-62d30a8b0efd)
