@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
-use Modules\TechPlanner\Models\Profile;
+
 use Modules\User\Models\Traits\HasAuthenticationLogTrait;
 use Throwable;
 use Override;
@@ -263,16 +263,11 @@ abstract class BaseUser extends Authenticatable implements HasName, HasTenants, 
     #[Override]
     public function profile(): HasOne
     {
-        try {
-            /** @var class-string<Model> */
-            $profileClass = XotData::make()->getProfileClass();
+        /** @var class-string<Model> $profileClass */
+        $profileClass = XotData::make()->getProfileClass();
 
-            return $this->hasOne($profileClass);
-        } catch (Exception $e) {
-            // Fallback: se non riesce a ottenere la classe Profile, usa una relazione generica
-            // Questo evita l'errore "Target [Illuminate\Database\Eloquent\Model] is not instantiable"
-            return $this->hasOne(Profile::class);
-        }
+        /** @var HasOne<Model, $this> */
+        return $this->hasOne($profileClass);
     }
 
     /**

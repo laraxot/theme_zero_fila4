@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -66,7 +65,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # base_quaeris_fila4_mono
-=======
 # Quaeris Fila3 Mono Project
 
 ## Overview
@@ -238,6 +236,5 @@ This project is proprietary software. All rights reserved.
 For support and questions, please refer to the project documentation or contact the development team.
 
 *Last updated: January 2025*
->>>>>>> 96ae718 (.)
 # base_quaeris_fila4_mono
 # base_quaeris_fila4_mono
