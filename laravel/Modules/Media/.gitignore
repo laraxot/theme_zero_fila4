@@ -142,24 +142,26 @@ database_old/
 config/local.php
 config/development.php
 
-# File media temporanei
-media/temp/
-media/uploads/temp/
-media/thumbnails/temp/
-
-# Cache media
+# File media
 storage/media/
+storage/uploads/
 storage/thumbnails/
+storage/conversions/
+
+# File temporanei di media
+media/temp/
+media/cache/
+media/drafts/
 
 # File di test media
 media_test_data.json
-test_media_files/
+test_media.sql
 
 # ==============================================
 # END OF MEDIA .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html

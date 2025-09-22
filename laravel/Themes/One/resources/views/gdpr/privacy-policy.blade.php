@@ -1,1 +1,0 @@
-@include('pub_theme::gdpr.privacy-policy-'.$lang)
