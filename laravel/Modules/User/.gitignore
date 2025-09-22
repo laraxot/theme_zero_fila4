@@ -142,12 +142,12 @@ database_old/
 config/local.php
 config/development.php
 
-# Cache autenticazione
-storage/framework/cache/
-storage/framework/sessions/
-storage/framework/views/
+# Cache utenti
+storage/users/
+storage/profiles/
+storage/avatars/
 
-# File di test temporanei
+# File di test utenti
 test_users.json
 user_test_data.csv
 
@@ -155,7 +155,7 @@ user_test_data.csv
 # END OF USER .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html
