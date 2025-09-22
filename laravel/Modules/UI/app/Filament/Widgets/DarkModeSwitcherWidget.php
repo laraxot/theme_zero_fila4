@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Filament\Widgets;
 
-use Filament\Schemas\Components\Component;
+use Filament\Forms\Components\Component;
 use Override;
+use Filament\Forms\Form;
 use Filament\Forms\Form;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cookie;
