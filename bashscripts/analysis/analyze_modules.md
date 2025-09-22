@@ -2,15 +2,7 @@
 
 ## Descrizione
 Lo script `analyze_modules.sh` esegue l'analisi PHPStan su tutti i moduli Laravel presenti nella cartella `laravel/Modules/`. Per ogni modulo, esegue l'analisi a tutti i livelli di PHPStan (da 1 a max) e salva i risultati in formato JSON nella cartella `docs/phpstan` di ogni modulo.
-<<<<<<< HEAD
-## Posizione
-`/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/analyze_modules.sh`
-## Utilizzo
-```bash
-cd /var/www/html/_bases/base_fixcity_fila4_mono
-./bashscripts/analyze_modules.sh
-```
-=======
+
 
 ## Posizione
 `/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/analyze_modules.sh`
@@ -21,22 +13,19 @@ cd /var/www/html/_bases/base_ptvx_fila3_mono
 ./bashscripts/analyze_modules.sh
 ```
 
->>>>>>> ef8dc24 (.)
+
 ## Funzionalità
 1. Analizza tutti i moduli presenti in `laravel/Modules/`
 2. Per ogni modulo:
    - Crea la cartella `docs/phpstan` se non esiste
    - Esegue PHPStan ai livelli: 1, 2, 3, 4, 5, 6, 7, 8, 9, max
    - Salva i risultati in `docs/phpstan/level_<n>.json`
-<<<<<<< HEAD
-## Struttura dei File di Output
-Per ogni modulo, vengono creati i seguenti file:
-=======
+
 
 ## Struttura dei File di Output
 Per ogni modulo, vengono creati i seguenti file:
 ```
->>>>>>> ef8dc24 (.)
+
 Modules/<NomeModulo>/docs/phpstan/
 ├── level_1.json
 ├── level_2.json
@@ -48,15 +37,7 @@ Modules/<NomeModulo>/docs/phpstan/
 ├── level_8.json
 ├── level_9.json
 └── level_max.json
-<<<<<<< HEAD
-## Dipendenze
-- PHPStan installato in `laravel/vendor/bin/phpstan`
-- Configurazione PHPStan in `laravel/phpstan.neon`
-## Variabili di Ambiente
-- `BASE_DIR`: Directory base del progetto (`/var/www/html/_bases/base_fixcity_fila4_mono/laravel`)
-- `MODULES_DIR`: Directory dei moduli (`$BASE_DIR/Modules`)
-- `LEVELS`: Array dei livelli PHPStan da analizzare
-=======
+
 ```
 
 ## Dipendenze
@@ -68,25 +49,19 @@ Modules/<NomeModulo>/docs/phpstan/
 - `MODULES_DIR`: Directory dei moduli (`$BASE_DIR/Modules`)
 - `LEVELS`: Array dei livelli PHPStan da analizzare
 
->>>>>>> ef8dc24 (.)
+
 ## Best Practices
 1. Eseguire lo script dalla root del progetto
 2. Verificare che PHPStan sia installato correttamente
 3. Assicurarsi di avere i permessi necessari per creare le cartelle
 4. Monitorare lo spazio su disco durante l'esecuzione
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ## Note
 - Lo script crea automaticamente le cartelle necessarie
 - I risultati sono in formato JSON per facilitare l'analisi successiva
 - Ogni livello di analisi può richiedere tempo diverso
 - I file di output possono essere utilizzati per generare report dettagliati
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ## Esempio di Output
 ```json
 {
@@ -97,66 +72,46 @@ Modules/<NomeModulo>/docs/phpstan/
     "files": [],
     "errors": []
 }
-<<<<<<< HEAD
-=======
 ```
 
->>>>>>> ef8dc24 (.)
+
+
 ## Troubleshooting
 1. Se lo script fallisce, verificare:
    - Permessi delle cartelle
    - Installazione di PHPStan
    - Configurazione di PHPStan
    - Spazio su disco disponibile
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 2. Errori comuni:
    - Directory non trovata
    - Permessi insufficienti
    - PHPStan non installato
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ## Gestione dei Conflitti
 In caso di conflitti durante l'analisi dei moduli:
 1. Verificare che non ci siano modifiche non committate
 2. Eseguire `git status` per identificare i file in conflitto
 3. Risolvere i conflitti manualmente seguendo le linee guida in [CONFLICT_RESOLUTION.md](../../docs/development/CONFLICT_RESOLUTION.md)
 4. Dopo la risoluzione, rieseguire l'analisi PHPStan
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ## Collegamenti
 - [Documentazione PHPStan](../../docs/phpstan/PHPSTAN_WORKFLOW.md)
 - [Linee Guida Moduli](../../docs/MODULES.md)
 - [Risoluzione Conflitti](../../docs/development/CONFLICT_RESOLUTION.md)
    - Configurazione PHPStan errata
-<<<<<<< HEAD
-## Pattern di Risoluzione Errori
-Durante l'analisi PHPStan potrebbero emergere errori ricorrenti. Ecco le soluzioni più comuni:
-=======
+
 
 ## Pattern di Risoluzione Errori
 Durante l'analisi PHPStan potrebbero emergere errori ricorrenti. Ecco le soluzioni più comuni:
 
->>>>>>> ef8dc24 (.)
+
 ### 1. Tipizzazione nelle Collection
 Utilizzare annotazioni PHPDoc appropriate per specificare il tipo di elementi in una Collection:
 ```php
 /** @var Collection<int, User> $users */
 $users = User::all();
-<<<<<<< HEAD
-### 2. Tipi Nullable
-Quando una proprietà o un parametro può essere null, specificarlo esplicitamente:
-public function findUser(?int $id): ?User
-    // Implementazione
-### 3. Cast nei Modelli
-Assicurarsi che la proprietà `$casts` nei modelli sia correttamente tipizzata:
-=======
+
 ```
 
 ### 2. Tipi Nullable
@@ -171,22 +126,14 @@ public function findUser(?int $id): ?User
 ### 3. Cast nei Modelli
 Assicurarsi che la proprietà `$casts` nei modelli sia correttamente tipizzata:
 ```php
->>>>>>> ef8dc24 (.)
+
 /**
  * @var array<string, string>
  */
 protected $casts = [
     'email_verified_at' => 'datetime',
 ];
-<<<<<<< HEAD
-### 4. Verifiche di Nullità
-Quando si accede a proprietà o metodi di oggetti potenzialmente null, verificare prima che non siano null:
-if ($user !== null) {
-    $email = $user->email;
-## Integrazione con CI/CD
-Lo script può essere integrato in pipeline CI/CD per automatizzare l'analisi del codice:
-```yaml
-=======
+
 ```
 
 ### 4. Verifiche di Nullità
@@ -202,14 +149,45 @@ Lo script può essere integrato in pipeline CI/CD per automatizzare l'analisi de
 
 ```yaml
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> 9c02579 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
 >>>>>>> e0c964a3 (first)
->>>>>>> ef8dc24 (.)
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
+>>>>>>> e0c964a3 (first)
+
+
 # Esempio di configurazione GitHub Actions
 name: PHPStan Analysis
 on: [push, pull_request]
@@ -226,13 +204,7 @@ jobs:
         run: composer install --no-progress
       - name: Run Module Analysis
         run: ./bashscripts/analyze_modules.sh
-<<<<<<< HEAD
-## Collegamenti Bidirezionali
-- [Configurazione PHPStan](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/docs/phpstan.md)
-- [Struttura dei Moduli](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
-- [Best Practices PHPStan](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
-- [Script di Automazione](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/scripts.md)
-=======
+
 ```
 
 ## Collegamenti Bidirezionali
@@ -240,4 +212,4 @@ jobs:
 - [Struttura dei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
 - [Best Practices PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
 - [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
->>>>>>> ef8dc24 (.)
+

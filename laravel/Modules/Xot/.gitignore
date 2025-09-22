@@ -133,6 +133,7 @@ resources/views/Components_old/
 database/Migrations_old/
 database/Seeders_old/
 database/Factories_old/
+database/Factories_
 database_old/
 
 # ==============================================
@@ -142,7 +143,7 @@ database_old/
 config/local.php
 config/development.php
 
-# Cache specifiche del modulo
+# File temporanei
 packages/cache/
 packages/temp/
 
@@ -154,7 +155,7 @@ testbench.yaml
 # END OF XOT .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html

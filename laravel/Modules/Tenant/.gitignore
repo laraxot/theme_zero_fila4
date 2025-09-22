@@ -143,8 +143,8 @@ config/local.php
 config/development.php
 
 # Cache tenant
-storage/tenant/
-storage/multi-tenant/
+storage/tenants/
+storage/domains/
 
 # File di test tenant
 tenant_test_data.json
@@ -154,7 +154,7 @@ test_tenants.sql
 # END OF TENANT .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html

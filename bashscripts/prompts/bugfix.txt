@@ -1,16 +1,83 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 <<<<<<< HEAD
 >>>>>>> 574afe9e (.)
 
 =======
 <<<<<<< HEAD
 >>>>>>> 9c02579 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -38,6 +105,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 # Guida Completa per Bug Fixing - Laraxot SaluteOra
 
 ## Principi Fondamentali
@@ -169,10 +237,39 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 ### Esempio Corretto
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -184,6 +281,7 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
 <<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
 # Linee Guida per il Bug Fixing e Best Practices
 
 ## Principi Fondamentali
@@ -240,15 +338,21 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
+=======
 =======
 >>>>>>> 9c02579 (.)
 <<<<<<< HEAD
 =======
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 # Linee Guida per il Bug Fixing e Best Practices
 
 ## Principi Fondamentali
@@ -374,6 +478,9 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
+=======
+<<<<<<< HEAD
 >>>>>>> 3c18aa7e (.)
 >>>>>>> 9c02579 (.)
 =======
@@ -383,6 +490,39 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 >>>>>>> 9c02579 (.)
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -395,6 +535,7 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ```php
 class Example {
     public function foo() {}
@@ -404,6 +545,15 @@ class Example {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -414,6 +564,53 @@ class Example {
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -434,6 +631,7 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ## Processo di Revisione
 
 ### Auto-Revisione
@@ -485,15 +683,51 @@ class Example {
 *Compatibilità: Laraxot SaluteOra, PHP 8.2+, Laravel 12+, Filament 3.4+*
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+=======
+>>>>>>> e0c964a3 (first)
+=======
+>>>>>>> 0bef3e9 (.)
 >>>>>>> 9c02579 (.)
 <<<<<<< HEAD
 =======
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -509,6 +743,7 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ### Caso Reale
 - Errore su `Modules/User/app/Filament/Widgets/Auth/RegisterWidget.php` risolto spostando la funzione orfana all'interno della classe o eliminandola se non più necessaria
 
@@ -587,6 +822,9 @@ class Example {
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
+=======
+<<<<<<< HEAD
 >>>>>>> 3c18aa7e (.)
 >>>>>>> 9c02579 (.)
 =======
@@ -596,6 +834,39 @@ class Example {
 >>>>>>> 9c02579 (.)
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -608,3 +879,4 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
