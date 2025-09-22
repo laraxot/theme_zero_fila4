@@ -1,12 +1,7 @@
 # Risoluzione Conflitti Git
 
 ## Panoramica
-<<<<<<< HEAD
-Questo documento descrive le strategie e le best practices per la risoluzione dei conflitti Git nel progetto Laraxot PTVX. La corretta gestione dei conflitti è essenziale per mantenere l'integrità del codice e garantire un flusso di lavoro efficiente.
-## Tipi di Conflitti
-### 1. Conflitti di Contenuto
-Questi conflitti si verificano quando le stesse righe di codice sono state modificate in modi diversi in diverse versioni.
-=======
+
 
 Questo documento descrive le strategie e le best practices per la risoluzione dei conflitti Git nel progetto Laraxot PTVX. La corretta gestione dei conflitti è essenziale per mantenere l'integrità del codice e garantire un flusso di lavoro efficiente.
 
@@ -15,24 +10,14 @@ Questo documento descrive le strategie e le best practices per la risoluzione de
 ### 1. Conflitti di Contenuto
 Questi conflitti si verificano quando le stesse righe di codice sono state modificate in modi diversi in diverse versioni.
 
->>>>>>> ef8dc24 (.)
+
 **Esempio**:
 ```
 function processData(data) {
   // Versione HEAD
   return data.map(item => item.value * 2);
 }
-<<<<<<< HEAD
-  // Versione branch
-  return data.filter(item => item.value > 0).map(item => item.value);
-### 2. Conflitti di Struttura
-Questi conflitti riguardano modifiche strutturali, come lo spostamento di file o cartelle o la rinomina di elementi.
-### 3. Conflitti di Namespace
-Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei namespace secondo le convenzioni stabilite.
-## Processo di Risoluzione
-## Note Importanti
-- Tutti i file sono stati mantenuti nella versione<!-- REVISIONE MANUALE: File aggiornato per chiarezza e tracciabilità. Vedi anche [README globale](/docs/README.md) e gli altri file di risoluzione conflitti. -->
-=======
+
 function processData(data) {
   // Versione branch
   return data.filter(item => item.value > 0).map(item => item.value);
@@ -50,7 +35,7 @@ Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei n
 ## Note Importanti
 - Tutti i file sono stati mantenuti nella versione<!-- REVISIONE MANUALE: File aggiornato per chiarezza e tracciabilità. Vedi anche [README globale](/docs/README.md) e gli altri file di risoluzione conflitti. -->
 
->>>>>>> ef8dc24 (.)
+
 [Backlink: Documentazione Globale](/docs/README.md)
 [Backlink: scripts_conflict_resolution.md](scripts_conflict_resolution.md)
 [Backlink: fix_all_git_conflicts.md](fix_all_git_conflicts.md)
@@ -58,44 +43,95 @@ Particolarmente comuni nel progetto, riguardano l'implementazione corretta dei n
 - I namespace sono stati mantenuti corretti secondo la struttura del modulo
 - Sono stati rimossi solo i marcatori di conflitto, mantenendo il codice funzionale
 - I file di backup sono stati creati con il timestamp per sicurezza
-<<<<<<< HEAD
 ### Fase 1: Identificazione
 ```bash
 # Visualizzare tutti i file con conflitti
 git status
 # Trovare i marker di conflitto
+
 =======
 
 ### Fase 1: Identificazione
 ```bash
 ### Fase 1: Identificazione
 ```bash
+=======
+
+=======
+
+=======
+=======
+
+=======
+
+### Fase 1: Identificazione
+```bash
+
+=======
+### Fase 1: Identificazione
+```bash
+>>>>>>> e0c964a3 (first)
+=======
+
+
+=======
+
+=======
+### Fase 1: Identificazione
+```bash
 ### Fase 1: Identificazione
 ```bash
 >>>>>>> e0c964a3 (first)
 
->>>>>>> ec52a6b4 (.)
+
+
 
 ### Fase 1: Identificazione
 ```bash
 
->>>>>>> f52d0712 (.)
->>>>>>> ec52a6b4 (.)
+>>>>>>> e0c964a3 (first)
 ### Fase 1: Identificazione
 ```bash
->>>>>>> 3c18aa7e (.)
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+=======
+### Fase 1: Identificazione
+```bash
+=======
+=======
+>>>>>>> e0c964a3 (first)
+
+
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+=======
+=======
+
+=======
+
+
+### Fase 1: Identificazione
+```bash
+
+
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Visualizzare tutti i file con conflitti
 git status
 
 # Trovare i marker di conflitto
 
->>>>>>> ef8dc24 (.)
+
 ## Verifica Post-Risoluzione
 Si consiglia di:
 1. Eseguire i test del modulo
@@ -105,20 +141,16 @@ Si consiglia di:
 5. Testare le traduzioni
 6. Verificare il funzionamento delle factory nei test
 7. Testare il modulo in ambiente di sviluppo
-<<<<<<< HEAD
-=======
 ```
 
->>>>>>> ef8dc24 (.)
+
+
 ### Fase 2: Analisi
 Per ogni file in conflitto:
 1. Comprendere il contesto delle modifiche
 2. Determinare quali modifiche devono essere mantenute
 3. Considerare le dipendenze e gli impatti delle modifiche
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ## Prossimi Passi
 1. Eseguire `composer dump-autoload` per aggiornare l'autoloader
 2. Eseguire `php artisan config:clear` per pulire la cache
@@ -127,50 +159,69 @@ Per ogni file in conflitto:
 - `Modules\Predict\Providers` per i service provider
 - `Modules\Predict\Database\Factories` per le factory
 - `Modules\Predict\lang\it` per i file di traduzione
-<<<<<<< HEAD
+
+=======
+>>>>>>> e0c964a3 (first)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
 ### Fase 3: Risoluzione
 Scegliere una delle seguenti strategie:
 =======
 
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 ### Fase 3: Risoluzione
 Scegliere una delle seguenti strategie:
 
->>>>>>> ef8dc24 (.)
+
 1. **Mantenere la versione HEAD**: Se la versione corrente è corretta
 2. **Mantenere la versione incoming**: Se la versione del branch è corretta
 3. **Fusione manuale**: Integrare le modifiche di entrambe le versioni
 4. **Approccio per i file .md**: Per i file di documentazione, mantenere entrambe le versioni
-<<<<<<< HEAD
-Per i file di codice PHP, verificare sempre la compatibilità con PHPStan livello 9 dopo la risoluzione.
-=======
 
 Per i file di codice PHP, verificare sempre la compatibilità con PHPStan livello 9 dopo la risoluzione.
 
->>>>>>> ef8dc24 (.)
+
+
 ### Fase 4: Test
 1. Eseguire PHPStan: `cd laravel && ./vendor/bin/phpstan analyse`
 2. Verificare il corretto funzionamento delle funzionalità modificate
 3. Assicurarsi che non ci siano errori sintattici
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ### Fase 5: Documentazione
 1. Aggiornare la documentazione del modulo
 2. Creare collegamenti bidirezionali con la documentazione principale
 3. Documentare le decisioni prese durante la risoluzione
-<<<<<<< HEAD
-## Convenzioni di Namespace
-Una delle cause più comuni di conflitti nel progetto sono le incoerenze nei namespace. Seguire queste regole:
-### Regola Fondamentale
-I namespace dei moduli **NON** devono includere il segmento `app` anche se i file sono fisicamente posizionati nella directory `app`.
-=======
+
 
 ## Convenzioni di Namespace
 
@@ -180,19 +231,13 @@ Una delle cause più comuni di conflitti nel progetto sono le incoerenze nei nam
 
 I namespace dei moduli **NON** devono includere il segmento `app` anche se i file sono fisicamente posizionati nella directory `app`.
 
->>>>>>> ef8dc24 (.)
+
 #### ✅ CORRETTO
 ```php
 namespace Modules\NomeModulo\Models;
 namespace Modules\NomeModulo\Http\Controllers;
 namespace Modules\NomeModulo\Filament;
-<<<<<<< HEAD
-#### ❌ ERRATO
-namespace Modules\NomeModulo\App\Models;
-namespace Modules\NomeModulo\App\Http\Controllers;
-namespace Modules\NomeModulo\App\Filament;
-## Best Practices per Evitare Conflitti
-=======
+
 ```
 
 #### ❌ ERRATO
@@ -204,82 +249,163 @@ namespace Modules\NomeModulo\App\Filament;
 
 ## Best Practices per Evitare Conflitti
 
->>>>>>> ef8dc24 (.)
+
 1. **Pull Frequenti**: Eseguire pull frequenti dal branch principale
 2. **Comunicazione**: Coordinare le modifiche a file critici
 3. **Branch Isolati**: Lavorare su branch isolati per feature specifiche
 4. **Commit Atomici**: Effettuare commit piccoli e atomici
 5. **Documentare**: Mantenere aggiornata la documentazione
 6. **Seguire le Convenzioni**: Rispettare sempre le convenzioni di namespace e tipizzazione
-<<<<<<< HEAD
-4. Testare il modulo in ambiente di sviluppo 
-4. Testare il modulo in ambiente di sviluppo
-## Risoluzione di Casi Specifici
-### Conflitti in File PHP
-=======
+
 
 ## Prossimi Passi
 1. Eseguire `composer dump-autoload` per aggiornare l'autoloader
 2. Eseguire `php artisan config:clear` per pulire la cache
 3. Verificare che tutte le risorse Filament siano registrate correttamente
 4. Testare il modulo in ambiente di sviluppo 
+=======
 >>>>>>> e0c964a3 (first)
 4. Testare il modulo in ambiente di sviluppo
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
+=======
+4. Testare il modulo in ambiente di sviluppo 
+=======
 4. Testare il modulo in ambiente di sviluppo
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+
+
+
+=======
+=======
+4. Testare il modulo in ambiente di sviluppo 
+=======
+
+
+4. Testare il modulo in ambiente di sviluppo
+=======
+=======
+4. Testare il modulo in ambiente di sviluppo
+=======
+=======
+4. Testare il modulo in ambiente di sviluppo
+=======
+4. Testare il modulo in ambiente di sviluppo 
+=======
+=======
+>>>>>>> develop
+
+
+=======
+4. Testare il modulo in ambiente di sviluppo 
+
+=======
+=======
+
+=======
+4. Testare il modulo in ambiente di sviluppo 
+>>>>>>> e0c964a3 (first)
+4. Testare il modulo in ambiente di sviluppo
+
+
+
+
+4. Testare il modulo in ambiente di sviluppo
+
+
+
 >>>>>>> e0c964a3 (first)
 
 ## Risoluzione di Casi Specifici
 
 ### Conflitti in File PHP
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+=======
+
+
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
 >>>>>>> e0c964a3 (first)
->>>>>>> ef8dc24 (.)
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
+
+>>>>>>> e0c964a3 (first)
+
+
 1. Verificare la compatibilità con PHPStan
 2. Mantenere le annotazioni PHPDoc complete
 3. Seguire le convenzioni di namespace
 4. Assicurarsi che tutte le dipendenze siano correttamente importate
-<<<<<<< HEAD
-### Conflitti in File di Documentazione
-1. In genere, mantenere entrambe le versioni
-2. Organizzare il contenuto in modo logico
-3. Aggiornare tutti i collegamenti
-### Conflitti in File di Configurazione
-1. Confrontare attentamente le configurazioni
-2. Verificare l'impatto delle modifiche
-3. Documentare le decisioni prese
-## Script di Supporto
-Il progetto include alcuni script per facilitare la gestione dei conflitti:
-- `bashscripts/utils/resolve_conflicts.sh`: Rileva e aiuta a risolvere i conflitti
-- `bashscripts/git/find_conflicts.sh`: Trova tutti i file con conflitti
-## Collegamenti Bidirezionali
-- [Conflitti Merge Risolti Xot](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
-- [Script di Risoluzione Automatica](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/fix_all_git_conflicts.md)
-- [Conflitti nei File di Configurazione](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/config_file_conflicts.md)
-- [Convenzioni Namespace](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
+
+=======
+>>>>>>> e0c964a3 (first)
+=======
 =======
 
+
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
 ### Conflitti in File di Documentazione
 
 >>>>>>> e0c964a3 (first)
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+
+
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 1. In genere, mantenere entrambe le versioni
 2. Organizzare il contenuto in modo logico
@@ -287,13 +413,46 @@ Il progetto include alcuni script per facilitare la gestione dei conflitti:
 
 ### Conflitti in File di Configurazione
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+=======
+
+
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 1. Confrontare attentamente le configurazioni
 2. Verificare l'impatto delle modifiche
@@ -312,10 +471,39 @@ Il progetto include alcuni script per facilitare la gestione dei conflitti:
 - [Script di Risoluzione Automatica](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/fix_all_git_conflicts.md)
 - [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
 - [Convenzioni Namespace](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
->>>>>>> 574afe9e (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 59901687 (.)
->>>>>>> f198176d (.)
+
+=======
+
+=======
+
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+=======
+
+=======
+
+
+=======
+
+=======
+
+
 >>>>>>> e0c964a3 (first)
->>>>>>> ef8dc24 (.)
+=======
+
+
+
+
+
+>>>>>>> e0c964a3 (first)
+
+

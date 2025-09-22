@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Resources\UserResource\RelationManagers;
 
-use Filament\Schemas\Components\Component;
+use Filament\Forms\Components\Component;
 use Override;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\Column;
 use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Modules\User\Filament\Resources\TenantResource\Pages\ListTenants;
