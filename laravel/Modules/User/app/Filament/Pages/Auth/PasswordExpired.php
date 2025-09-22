@@ -7,11 +7,12 @@ namespace Modules\User\Filament\Pages\Auth;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 use Modules\Xot\Contracts\UserContract;
-use Filament\Schemas\Components\Component;
+use Filament\Forms\Components\Component;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
@@ -19,7 +20,6 @@ use Filament\Pages\Page;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 use Modules\User\Datas\PasswordData;
 use Modules\User\Events\NewPasswordSet;
@@ -102,7 +102,6 @@ class PasswordExpired extends Page implements HasForms
         }
 
         // check if both required columns exist in the database
-        if (!Schema::hasColumn('users', 'password_expires_at')) {
             Notification::make()
                 ->title(__('user::otp.notifications.column_not_found.title'))
                 ->body(__('user::otp.notifications.column_not_found.body', [
