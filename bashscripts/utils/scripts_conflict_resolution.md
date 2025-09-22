@@ -1,13 +1,7 @@
 # Script di Risoluzione dei Conflitti
 
 ## Panoramica
-<<<<<<< HEAD
-Questo documento fornisce una guida completa agli script di automazione per la risoluzione dei conflitti git nel progetto Laraxot PTVX. Gli script descritti sono progettati per aiutare gli sviluppatori a identificare, analizzare e risolvere i conflitti di merge in modo efficiente.
-## Script Disponibili
-### 1. find_conflicts.sh
-#### Descrizione
-Identifica e elenca tutti i file con conflitti git non risolti nel repository.
-=======
+
 
 Questo documento fornisce una guida completa agli script di automazione per la risoluzione dei conflitti git nel progetto Laraxot PTVX. Gli script descritti sono progettati per aiutare gli sviluppatori a identificare, analizzare e risolvere i conflitti di merge in modo efficiente.
 
@@ -18,29 +12,22 @@ Questo documento fornisce una guida completa agli script di automazione per la r
 #### Descrizione
 Identifica e elenca tutti i file con conflitti git non risolti nel repository.
 
->>>>>>> ef8dc24 (.)
+
 #### Utilizzo
 ```bash
 ./bashscripts/git/find_conflicts.sh
 ```
-<<<<<<< HEAD
-#### Output
-Un elenco di file che contengono marcatori di conflitto git.
-=======
+
 
 #### Output
 Un elenco di file che contengono marcatori di conflitto git.
 
->>>>>>> ef8dc24 (.)
+
 #### Come Funziona
 1. Utilizza `git grep` per cercare i marcatori  in tutti i file
 2. Organizza i risultati per tipo di file (PHP, MD, JSON, ecc.)
 3. Mostra un riepilogo della quantità di conflitti per tipo
-<<<<<<< HEAD
-### 2. resolve_conflicts.sh
-Uno script interattivo che aiuta a risolvere i conflitti di merge proponendo varie strategie di risoluzione.
-./bashscripts/utils/resolve_conflicts.sh [percorso_file]
-=======
+
 
 ### 2. resolve_conflicts.sh
 
@@ -52,7 +39,7 @@ Uno script interattivo che aiuta a risolvere i conflitti di merge proponendo var
 ./bashscripts/utils/resolve_conflicts.sh [percorso_file]
 ```
 
->>>>>>> ef8dc24 (.)
+
 #### Funzionalità
 1. Visualizza il contenuto del file con conflitti
 2. Propone diverse strategie di risoluzione:
@@ -62,11 +49,7 @@ Uno script interattivo che aiuta a risolvere i conflitti di merge proponendo var
    - Aprire il file in un editor
 3. Applica la strategia selezionata e rimuove i marcatori di conflitto
 4. Crea backup dei file prima delle modifiche
-<<<<<<< HEAD
-### 3. fix_all_git_conflicts.sh
-Script di risoluzione automatica che mantiene la versione HEAD per tutti i conflitti.
-./bashscripts/utils/fix_all_git_conflicts.sh
-=======
+
 
 ### 3. fix_all_git_conflicts.sh
 
@@ -79,34 +62,13 @@ Script di risoluzione automatica che mantiene la versione HEAD per tutti i confl
 ```
 
 #### Funzionalità
->>>>>>> ef8dc24 (.)
+
 1. Identifica tutti i file con conflitti
 2. Crea backup dei file originali
 3. Mantiene automaticamente la versione HEAD
 4. Rimuove i marcatori di conflitto
 5. Produce un report delle modifiche
-<<<<<<< HEAD
-#### Limitazioni
-- Non adatto per conflitti complessi che richiedono fusione manuale
-- Può perdere modifiche importanti dalla versione non-HEAD
-### 4. check_namespaces.sh
-Verifica e corregge i problemi comuni di namespace nei file PHP, che sono spesso causa di conflitti.
-./bashscripts/utils/check_namespaces.sh [directory]
-1. Cerca i namespace che includono incorrettamente il segmento 'app'
-2. Suggerisce correzioni secondo le convenzioni del progetto
-3. Può applicare automaticamente le correzioni se richiesto
-### 5. conflict_analyzer.sh
-Analizza i conflitti e fornisce statistiche e suggerimenti per la risoluzione.
-### sync_to_disk.sh
-Il file presenta un conflitto tra due approcci distinti:
-1. **Versione avanzata**: Utilizza tar.gz con esclusioni dettagliate ed emoji per il feedback
-2. **Versione semplice**: Utilizza rsync con un numero minore di esclusioni
-## Strategia di Risoluzione
-La strategia di risoluzione si basa sui seguenti principi:
-1. **Comprensione del contesto**:
-   - Identificare la funzionalità principale di ogni script
-   - Comprendere le dipendenze e l'integrazione con il resto del sistema
-=======
+
 
 #### Limitazioni
 - Non adatto per conflitti complessi che richiedono fusione manuale
@@ -147,22 +109,12 @@ La strategia di risoluzione si basa sui seguenti principi:
    - Identificare la funzionalità principale di ogni script
    - Comprendere le dipendenze e l'integrazione con il resto del sistema
 
->>>>>>> ef8dc24 (.)
+
 2. **Selezione della versione ottimale**:
    - Privilegiare la versione più robusta e completa
    - Valutare la gestione degli errori e il logging
    - Verificare la coerenza con le convenzioni del progetto
-<<<<<<< HEAD
-3. **Integrazione di miglioramenti**:
-   - Incorporare miglioramenti presenti nelle diverse versioni
-   - Mantenere la retrocompatibilità
-4. **Documentazione**:
-   - Aggiornare la documentazione con le modifiche apportate
-   - Creare collegamenti bidirezionali tra la documentazione del modulo e quella principale
-## Implementazione della Soluzione
-Per ogni script in conflitto, sarà implementata la seguente soluzione:
-### fix_structure.sh
-=======
+
 
 3. **Integrazione di miglioramenti**:
    - Incorporare miglioramenti presenti nelle diverse versioni
@@ -178,73 +130,57 @@ Per ogni script in conflitto, sarà implementata la seguente soluzione:
 
 ### fix_structure.sh
 
->>>>>>> ef8dc24 (.)
+
 Mantenere la versione più avanzata con funzioni di logging colorate, migliorando:
 - Gestione errori
 - Compatibilità tra sistemi
 - Documentazione interna
-<<<<<<< HEAD
-### git_pull_org.sh
-=======
 
 ### git_pull_org.sh
 
->>>>>>> ef8dc24 (.)
+
+
 Mantenere la versione con error handling più robusto e logging avanzato, incorporando:
 - Migliori pratiche per il rebase
 - Gestione automatica dei conflitti
 - Ripristino sicuro in caso di errori
-<<<<<<< HEAD
-### git_push_subtree_org.sh
-=======
 
 ### git_push_subtree_org.sh
 
->>>>>>> ef8dc24 (.)
+
+
 Mantenere la versione con l'implementazione più completa, assicurando:
 - Corretta validazione dei parametri
 - Gestione robusta degli errori
 - Feedback chiaro durante l'esecuzione
-<<<<<<< HEAD
-### git_pull_subtree_org.sh
-=======
 
 ### git_pull_subtree_org.sh
 
->>>>>>> ef8dc24 (.)
+
+
 Integrazione dei due approcci per rendere il terzo parametro (branch) opzionale:
 - Parametro branch viene reso opzionale con valore predefinito "main"
 - Migliorata la validazione dei parametri
 - Mantenuta compatibilità con entrambe le versioni
-<<<<<<< HEAD
-### git_sync_subtree.sh.old
-=======
 
 ### git_sync_subtree.sh.old
 
->>>>>>> ef8dc24 (.)
+
+
 Rimozione di tutti i conflitti e duplicazioni mantenendo la versione più recente:
 - Eliminate tutte le duplicazioni dello script causate dai marker di conflitto nidificati
 - Rimossi i messaggi di sistema relativi alla risoluzione automatica
 - Mantenuto il core funzionale dello script
-<<<<<<< HEAD
-=======
 
 ### sync_to_disk.sh
 
->>>>>>> ef8dc24 (.)
+
+
 Mantenuta la versione più avanzata con tar.gz ed emoji:
 - Conservata la versione con emoji e feedback visivo
 - Mantenuta la gestione dettagliata delle esclusioni
 - Ottimizzata l'opzione --warning=no-file-changed
-<<<<<<< HEAD
-## Verifiche Post-Risoluzione
-Dopo la risoluzione dei conflitti, verranno eseguite le seguenti verifiche:
-1. **Controllo sintassi**: Verifica della correttezza sintattica degli script
-2. **Test di esecuzione**: Test di funzionamento in un ambiente controllato
-3. **Verifica integrazione**: Controllo della corretta integrazione con il resto del sistema
-## Collegamenti
-=======
+
 
 ## Verifiche Post-Risoluzione
 
@@ -256,45 +192,65 @@ Dopo la risoluzione dei conflitti, verranno eseguite le seguenti verifiche:
 
 ## Collegamenti
 
->>>>>>> ef8dc24 (.)
+
 - [Documentazione Generale sulla Risoluzione dei Conflitti](../../docs/bashscripts_conflict_resolution.md)
 - [Linee Guida per la Scrittura di Script Bash](./git_scripts.md)
 - [Principio DRY negli Script Bash](./NO_DUPLICATE_FUNCTIONS_IN_SOURCED_SCRIPTS.md)
 - [Risoluzione dei Conflitti Bash](./CONFLICT_RESOLUTION_BASH.md)
-<<<<<<< HEAD
-## Risoluzioni recenti (Aprile 2025)
-I seguenti file sono stati recentemente risolti:
-=======
+
 
 ## Risoluzioni recenti (Aprile 2025)
 
 I seguenti file sono stati recentemente risolti:
 
->>>>>>> ef8dc24 (.)
+
 - `git_pull_subtree_org.sh`: Integrati diversi approcci rendendo il parametro branch opzionale
 - `git_sync_subtree.sh.old`: Eliminati conflitti nidificati mantenendo la versione funzionale
 - `sync_to_disk.sh`: Mantenuta versione avanzata con migliore feedback e gestione esclusioni
 - `fix_merge_conflicts.sh`: Corretta la logica di individuazione e rimozione dei marker di conflitto per garantire la pulizia completa di tutti i tre tipi di marker 
-<<<<<<< HEAD
+
+
 ##<!-- REVISIONE MANUALE: File aggiornato per chiarezza architetturale e tracciabilità delle scelte. Vedi anche [README globale](/docs/README.md) e gli script citati in questa documentazione. -->
+
 [Backlink: Documentazione Globale](/docs/README.md)
 [Backlink: fix_all_git_conflicts.md](fix_all_git_conflicts.md)
 [Backlink: git_conflicts_resolution.md](git_conflicts_resolution.md)
-Questa documentazione è collegata bidirezionalmente con la [documentazione principale sulla risoluzione dei conflitti](../../docs/bashscripts_conflict_resolution.md) nella root del progetto. 
-./bashscripts/utils/conflict_analyzer.sh
+
+=======
+>>>>>>> e0c964a3 (first)
 =======
 
-##<!-- REVISIONE MANUALE: File aggiornato per chiarezza architetturale e tracciabilità delle scelte. Vedi anche [README globale](/docs/README.md) e gli script citati in questa documentazione. -->
+=======
+=======
 
-[Backlink: Documentazione Globale](/docs/README.md)
-[Backlink: fix_all_git_conflicts.md](fix_all_git_conflicts.md)
-[Backlink: git_conflicts_resolution.md](git_conflicts_resolution.md)
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
 
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 ### fix_structure.sh
 
@@ -364,10 +320,45 @@ I seguenti file sono stati recentemente risolti:
 
 Questa documentazione è collegata bidirezionalmente con la [documentazione principale sulla risoluzione dei conflitti](../../docs/bashscripts_conflict_resolution.md) nella root del progetto. 
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+
+=======
+=======
+=======
+=======
+=======
+
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
 >>>>>>> e0c964a3 (first)
 #### Utilizzo
 ```bash
@@ -375,34 +366,53 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ```
 
 #### Output
->>>>>>> ef8dc24 (.)
+
 1. Statistiche sulla quantità e tipi di conflitti
 2. Analisi dei file più frequentemente in conflitto
 3. Suggerimenti su quali file dovrebbero essere risolti per primi
 4. Identificazione dei conflitti più critici
-<<<<<<< HEAD
-## Metodologia di Risoluzione Guidata
-### Fase 1: Identificazione
-# Trova tutti i file con conflitti
-### Fase 2: Analisi
-# Analizza i conflitti trovati
-### Fase 3: Risoluzione Mirata
-# Risolvi manualmente i conflitti più critici
-./bashscripts/utils/resolve_conflicts.sh [file_critico]
-### Fase 4: Risoluzione Automatica
-# Risolvi automaticamente i conflitti rimanenti meno critici
-=======
+
 
 ## Metodologia di Risoluzione Guidata
 
 ### Fase 1: Identificazione
 ```bash
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Trova tutti i file con conflitti
 ./bashscripts/git/find_conflicts.sh
@@ -411,11 +421,41 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 2: Analisi
 ```bash
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Analizza i conflitti trovati
 ./bashscripts/utils/conflict_analyzer.sh
@@ -424,11 +464,41 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 3: Risoluzione Mirata
 ```bash
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Risolvi manualmente i conflitti più critici
 ./bashscripts/utils/resolve_conflicts.sh [file_critico]
@@ -437,41 +507,62 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 4: Risoluzione Automatica
 ```bash
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Risolvi automaticamente i conflitti rimanenti meno critici
 ./bashscripts/utils/fix_all_git_conflicts.sh
 ```
 
->>>>>>> ef8dc24 (.)
+
 ### Fase 5: Verifica
 1. Eseguire PHPStan per verificare la compatibilità
 2. Verificare il funzionamento del codice
 3. Controllare la documentazione
-<<<<<<< HEAD
-## Best Practices per l'Utilizzo degli Script
-=======
 
 ## Best Practices per l'Utilizzo degli Script
 
->>>>>>> ef8dc24 (.)
+
+
 1. **Analizzare Prima, Risolvere Dopo**: Utilizzare gli script di analisi prima di procedere con la risoluzione
 2. **Backup Sistematici**: Assicurarsi di avere backup prima di applicare modifiche automatiche
 3. **Risoluzione Manuale dei File Critici**: Risolvere manualmente i file più importanti o complessi
 4. **Documentazione delle Decisioni**: Documentare le scelte fatte durante la risoluzione
 5. **Verifica Post-Risoluzione**: Testare sempre il codice dopo la risoluzione
-<<<<<<< HEAD
-## Sviluppo e Manutenzione degli Script
-### Contribuire agli Script
-Gli script possono essere migliorati e personalizzati. Per contribuire:
-1. Testare lo script in un ambiente sicuro
-2. Documentare le modifiche proposte
-3. Creare una pull request
-=======
+
 
 ## Sviluppo e Manutenzione degli Script
 
@@ -482,57 +573,96 @@ Gli script possono essere migliorati e personalizzati. Per contribuire:
 2. Documentare le modifiche proposte
 3. Creare una pull request
 
->>>>>>> ef8dc24 (.)
+
 ### Regole di Naming
 - Script di utilità: `utils/nome_script.sh`
 - Script git: `git/nome_script.sh`
 - Script di analisi: `analysis/nome_script.sh`
-<<<<<<< HEAD
-### Struttura Standard
-#!/bin/bash
-# Nome dello script
-# Descrizione: Breve descrizione dello script
-# Utilizzo: ./path/to/script.sh [argomenti]
-# Autore: Nome dell'autore
-# Dichiarazione delle costanti e variabili
-# Funzioni di utilità
-# Funzione principale
-# Esecuzione dello script
-## Casi d'Uso Comuni
-### 1. Risoluzione Post-Pull
-Quando un `git pull` fallisce a causa di conflitti:
-git pull origin main
-# Conflitti rilevati
-./bashscripts/utils/resolve_conflicts.sh [file_conflittuale]
-### 2. Controllo Pre-Commit
-Prima di eseguire un commit, verificare l'assenza di conflitti:
-# Se vengono trovati conflitti, risolverli
-git add .
-git commit -m "Messaggio del commit"
-### 3. Pulizia del Repository
-Per pulire un repository con molti conflitti non risolti:
-## Troubleshooting
-=======
+
 
 ### Struttura Standard
 ```bash
 #!/bin/bash
 
 # =======================
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+=======
+>>>>>>> e0c964a3 (first)
+
+# Nome dello script
+
+# =======================
+
+# Descrizione: Breve descrizione dello script
+
+# Utilizzo: ./path/to/script.sh [argomenti]
+
+# Autore: Nome dell'autore
+
+=======
+=======
+
+=======
+=======
+
+
+=======
+=======
+=======
+=======
+=======
+
+
+=======
+=======
+
+=======
+=======
+
+=======
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Nome dello script
 # =======================
 # Descrizione: Breve descrizione dello script
 # Utilizzo: ./path/to/script.sh [argomenti]
 # Autore: Nome dell'autore
->>>>>>> 7de7063d (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> f198176d (.)
+=======
+=======
+
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+=======
+
+=======
+
+=======
+=======
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # =======================
 
@@ -552,11 +682,41 @@ Quando un `git pull` fallisce a causa di conflitti:
 ```bash
 git pull origin main
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Conflitti rilevati
 ./bashscripts/utils/conflict_analyzer.sh
@@ -568,11 +728,41 @@ Prima di eseguire un commit, verificare l'assenza di conflitti:
 ```bash
 ./bashscripts/git/find_conflicts.sh
 
+=======
 >>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+=======
+=======
+
+=======
+
+
+=======
+=======
+
+=======
+
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+
+=======
+=======
+
+=======
+
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
 >>>>>>> e0c964a3 (first)
 # Se vengono trovati conflitti, risolverli
 git add .
@@ -588,27 +778,17 @@ Per pulire un repository con molti conflitti non risolti:
 
 ## Troubleshooting
 
->>>>>>> ef8dc24 (.)
+
 ### Errori Comuni
 1. **Script Non Eseguibile**: `chmod +x script.sh`
 2. **Percorsi Errati**: Eseguire gli script dalla root del progetto
 3. **Permessi Insufficienti**: Verificare i permessi di scrittura
-<<<<<<< HEAD
-=======
 
->>>>>>> ef8dc24 (.)
 ### Risoluzione dei Problemi
 1. Controllare i log generati dagli script
 2. Utilizzare le opzioni di debug se disponibili
 3. Consultare la documentazione specifica dello script
-<<<<<<< HEAD
-## Collegamenti Bidirezionali
-- [Gestione dei Conflitti Git](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/git_conflicts_resolution.md)
-- [Risoluzione Automatica dei Conflitti](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/fix_all_git_conflicts.md)
-- [Conflitti nei File di Configurazione](/var/www/html/_bases/base_fixcity_fila4_mono/bashscripts/docs/config_file_conflicts.md)
-- [Convenzioni di Namespace](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
-- [Risoluzione Conflitti nei Moduli](/var/www/html/_bases/base_fixcity_fila4_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
-=======
+
 
 ## Collegamenti Bidirezionali
 
@@ -617,12 +797,38 @@ Per pulire un repository con molti conflitti non risolti:
 - [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
 - [Convenzioni di Namespace](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
 - [Risoluzione Conflitti nei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
+=======
+
 >>>>>>> e0c964a3 (first)
->>>>>>> d83fe8da (.)
->>>>>>> 3c18aa7e (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
+=======
+
+
+=======
+
+
+=======
+=======
+=======
+=======
+=======
+=======
+>>>>>>> develop
+
+
+=======
+
+=======
+=======
+
 >>>>>>> e0c964a3 (first)
->>>>>>> ef8dc24 (.)
+=======
+>>>>>>> e0c964a3 (first)
+
+
+
+
+
+
+>>>>>>> e0c964a3 (first)
+
+

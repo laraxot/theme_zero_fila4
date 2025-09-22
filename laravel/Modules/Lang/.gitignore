@@ -159,7 +159,7 @@ test_translations.sql
 # END OF LANG .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html

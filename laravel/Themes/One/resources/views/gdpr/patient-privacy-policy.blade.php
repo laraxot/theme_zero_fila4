@@ -1,1 +1,0 @@
-@include('pub_theme::gdpr.patient-privacy-policy-'.$lang)
