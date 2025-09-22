@@ -76,6 +76,7 @@ Homestead.json
 /.vagrant
 /.idea
 .phpintel
+.vscode/
 
 # ==============================================
 # GIT SPECIFIC
@@ -94,6 +95,7 @@ Homestead.json
 .Trashes
 ehthumbs.db
 Thumbs.db
+*~
 
 # ==============================================
 # BACKUP FILES
@@ -154,7 +156,7 @@ test_activity_logs.sql
 # END OF ACTIVITY .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html
