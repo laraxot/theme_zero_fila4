@@ -9,11 +9,12 @@ declare(strict_types=1);
 namespace Modules\User\Filament\Resources;
 
 use Override;
-use Filament\Schemas\Components\Section;
+use Filament\Forms\Components\Section;
 use Modules\User\Filament\Resources\TenantResource\RelationManagers\UsersRelationManager;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;

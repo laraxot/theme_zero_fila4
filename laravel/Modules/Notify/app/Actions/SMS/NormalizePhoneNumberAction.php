@@ -16,8 +16,13 @@ use function Safe\preg_replace;
  */
 class NormalizePhoneNumberAction
 {
-    public function execute(string $phoneNumber): string
+    public function execute(string|array $phoneNumber): string
     {
+        // Convert array to string if needed
+        if (is_array($phoneNumber)) {
+            $phoneNumber = implode('', $phoneNumber);
+        }
+        
         // Rimuove parentesi e il loro contenuto
         $phoneNumber = preg_replace("/\([0-9]+?\)/", '', $phoneNumber);
 

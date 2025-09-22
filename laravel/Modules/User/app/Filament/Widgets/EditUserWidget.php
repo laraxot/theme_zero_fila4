@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Filament\Widgets;
 
-use Filament\Schemas\Components\Component;
+use Filament\Forms\Components\Component;
 use Override;
 use Exception;
 use BackedEnum;
@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Forms\Form;
 use Filament\Widgets\Widget;
 use Illuminate\Database\Eloquent\Model;

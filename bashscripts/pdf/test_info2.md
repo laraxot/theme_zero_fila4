@@ -2,10 +2,14 @@
 
 ## 📋 Informazioni Generali
 - **File analizzato**: `/var/www/html/saluteora/bashscripts/pdf/test.pdf`
-<<<<<<< HEAD
+
 =======
->>>>>>> ea169dcc (.)
+- **File analizzato**: `/var/www/html/saluteora/bashscripts/pdf/test.pdf`
+>>>>>>> e0c964a3 (first)
+=======
+- **File analizzato**: `/var/www/html/saluteora/bashscripts/pdf/test.pdf`
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 - **Data analisi**: 2025-05-19 15:04:13
 - **Pagine totali**: 215
 - **Protetto da password**: No
@@ -22,7 +26,6 @@
 - **Parole uniche**: 1,030
 - **Lunghezza media parola**: 4.8 caratteri
 - **Blocchi di codice**: 0
-
 
 ### Parole Chiave Rilevate
 - **Chapter**: 3 occorrenze
@@ -54,8 +57,6 @@ By Brent Roose
 
 EVENT-SOURCING-LARAVEL.COM | sparc |
 
-
-
 --- Pagina 2 ---
 EVENT SOURCING
 IN LARAVEL BY SPATIE
@@ -64,7 +65,6 @@ A hands-on course to start using
 event sourcing in large apps.
 
 Brent Roose
-
 
 --- Pagina 3 ---
 Published 2021 by Spatie.
@@ -79,7 +79,6 @@ Version 12a70f4-1
 To report errors, please send a note to info@spatie.be.
 
 Created in Belgium.
-
 
 --- Pagina 4 ---
 TABLE OF CONTENTS
