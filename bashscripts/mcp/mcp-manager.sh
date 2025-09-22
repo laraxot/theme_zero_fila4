@@ -4,7 +4,7 @@
 # Autore: Cascade AI Assistant
 # Data: 2025-05-13
 
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 
 # Crea la directory dei log se non esiste
