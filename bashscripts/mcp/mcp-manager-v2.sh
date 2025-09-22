@@ -5,33 +5,33 @@
 # Autore: Cascade AI Assistant
 # Data: 2025-05-13
 
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 =======
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
-MYSQL_CONNECTOR="$PROJECT_DIR/scripts/mysql-db-connector.js"
+MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
 =======
-MYSQL_CONNECTOR="$PROJECT_DIR/scripts/mysql-db-connector.js"
+MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
 >>>>>>> e0c964a3 (first)
 =======
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 =======
-PROJECT_DIR="$(pwd)/.."
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
+PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-MYSQL_CONNECTOR="$PROJECT_DIR/scripts/mysql-db-connector.js"
-MYSQL_CONNECTOR="$PROJECT_DIR/scripts/mysql-db-connector.js"
+MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
+MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
 
 
@@ -44,20 +44,20 @@ show_help() {
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
 =======
-    echo "Utilizzo: /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
+    echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
 =======
-    echo "Utilizzo: /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
+    echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
 >>>>>>> e0c964a3 (first)
 =======
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 =======
-    echo "Utilizzo: /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
+    echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
-    echo "Utilizzo: /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
-    echo "Utilizzo: /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
+    echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
+    echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
 
     echo ""
@@ -109,12 +109,12 @@ show_help() {
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
 =======
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
 
 >>>>>>> e0c964a3 (first)
 =======
@@ -124,12 +124,12 @@ show_help() {
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
-    echo "  /var/www/html/_bases/base_predict_fila3_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
+    echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
 
 
 }
@@ -623,7 +623,7 @@ logs_server() {
 }
 
 # Array di tutti i server MCP disponibili
-ALL_SERVERS=("mysql")
+ALL_SERVERS=("mysql" "postgres" "redis")
 
 =======
 ALL_SERVERS=("sequential-thinking" "memory" "fetch" "filesystem" "postgres" "redis" "puppeteer" "mysql")
