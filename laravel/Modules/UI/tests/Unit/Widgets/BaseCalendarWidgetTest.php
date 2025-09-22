@@ -59,9 +59,6 @@ beforeEach(function () {
 });
 
 describe('BaseCalendarWidget Inheritance', function () {
-    // it('extends FullCalendarWidget', function () {
-    //     expect($this->widget)->toBeInstanceOf(FullCalendarWidget::class);
-    // }); // Temporaneamente disabilitato per Filament v4
 
     it('extends BaseCalendarWidget', function () {
         expect($this->widget)->toBeInstanceOf(BaseCalendarWidget::class);
@@ -70,6 +67,10 @@ describe('BaseCalendarWidget Inheritance', function () {
     it('has model property set', function () {
         expect($this->widget->model)->toBe(MockEventModel::class);
     });
+
+    // it('extends FullCalendarWidget', function () {
+    //     expect($this->widget)->toBeInstanceOf(FullCalendarWidget::class);
+    // }); // Temporaneamente disabilitato per Filament v4
 });
 
 describe('BaseCalendarWidget Configuration', function () {

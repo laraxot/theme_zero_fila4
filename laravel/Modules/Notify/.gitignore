@@ -142,9 +142,10 @@ database_old/
 config/local.php
 config/development.php
 
-# Queue e notifiche
+# Cache notifiche
 storage/notifications/
-storage/queue/
+storage/templates/
+storage/mail/
 
 # File di test notifiche
 notification_test_data.json
@@ -154,7 +155,7 @@ test_notifications.sql
 # END OF NOTIFY .GITIGNORE
 # ==============================================
 
-# 🚫 File specifici del progetto
+# File specifici del progetto
 *.fila2
 laravel
 public_html

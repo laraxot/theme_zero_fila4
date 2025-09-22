@@ -60,7 +60,8 @@ for ((i=0; i<total; i++)); do
     echo "🌐 URL: $url"
     git config --global --add safe.directory "$curr_dir/$path"
     git checkout "$BRANCH" -- || git checkout -b "$BRANCH"
-    
+    git remote add "$origin" "$url"
+    git remote set-url "$origin" "$url"
     git_config_setup
     #git stash || echo "🔄 Non ci sono modifiche da salvare"
     dummy_push "$origin" "$BRANCH" "."
