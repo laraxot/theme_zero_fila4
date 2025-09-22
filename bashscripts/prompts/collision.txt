@@ -1,5 +1,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -10,6 +19,53 @@
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -30,21 +86,58 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 # Guida per la Risoluzione dei Conflitti Git - Laraxot
 
 ## Obiettivo
 Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale approfondita, aggiornamento della documentazione e implementazione di soluzioni coerenti con l'architettura Laraxot.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+=======
+>>>>>>> e0c964a3 (first)
+=======
+>>>>>>> 0bef3e9 (.)
 >>>>>>> 9c02579 (.)
 <<<<<<< HEAD
 =======
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -60,6 +153,7 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 # Guida per la Risoluzione dei Conflitti Git
 
 ## Obiettivo
@@ -68,6 +162,9 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
+=======
+<<<<<<< HEAD
 >>>>>>> 3c18aa7e (.)
 >>>>>>> 9c02579 (.)
 =======
@@ -77,6 +174,39 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 >>>>>>> 9c02579 (.)
 >>>>>>> 1420e3b683 (.)
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -89,6 +219,7 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 
 ## Principi Fondamentali
 - **Analisi manuale obbligatoria**: Ogni conflitto deve essere analizzato e risolto manualmente
@@ -97,11 +228,82 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 - **Documentazione completa**: Aggiornare sempre la documentazione correlata
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 - **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 - **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+- **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+>>>>>>> e9356a3a (.)
+=======
+- **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+- **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
 =======
 >>>>>>> 3c18aa7e (.)
 =======
@@ -135,6 +337,7 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 <<<<<<< HEAD
 - **Convenzioni naming**: Tutti i file e cartelle in docs/ devono essere in minuscolo (eccetto README.md)
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 
 ## Workflow Sistematico
 
@@ -143,10 +346,51 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 # Trova tutti i file con conflitti Git
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+<<<<<<< HEAD
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> e0c964a3 (first)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -165,18 +409,83 @@ Risolvere tutti i conflitti Git presenti nel progetto mediante analisi manuale a
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 git status --porcelain | grep "^UU\|^AA\|^DD"
 
 # Lista dettagliata dei conflitti
 git diff --name-only --diff-filter=U
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 
 >>>>>>> 3c18aa7e (.)
 =======
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -198,6 +507,7 @@ git diff --name-only --diff-filter=U
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ```
 
 **Criteri di priorità:**
@@ -225,17 +535,98 @@ Per ogni file conflittuale:
 - Impatto sulla funzionalità esistente
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 - Compatibilità con l'architettura Laraxot
 =======
+>>>>>>> ec52a6b4 (.)
+=======
+- Compatibilità con l'architettura Laraxot
+=======
+>>>>>>> 0bef3e9 (.)
 <<<<<<< HEAD
 <<<<<<< HEAD
 - Compatibilità con l'architettura Laraxot
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+- Compatibilità con l'architettura Laraxot
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ec52a6b4 (.)
+=======
+- Compatibilità con l'architettura Laraxot
+=======
+>>>>>>> e0c964a3 (first)
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+- Compatibilità con l'architettura Laraxot
+=======
+<<<<<<< HEAD
+=======
+- Compatibilità con l'architettura Laraxot
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
+>>>>>>> 0bef3e9 (.)
 - Compatibilità con l'architettura del progetto
 >>>>>>> 3c18aa7e (.)
 =======
 - Compatibilità con l'architettura del progetto
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+- Compatibilità con l'architettura Laraxot
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+- Compatibilità con l'architettura Laraxot
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -271,6 +662,7 @@ Per ogni file conflittuale:
 <<<<<<< HEAD
 - Compatibilità con l'architettura Laraxot
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 - Effetti sui moduli dipendenti
 
 ### 3. Risoluzione del Conflitto
@@ -282,11 +674,82 @@ Per ogni file conflittuale:
 - Controllare documentazione PHPDoc
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 - Utilizzare `declare(strict_types=1);`
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 - Utilizzare `declare(strict_types=1);`
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- Utilizzare `declare(strict_types=1);`
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- Utilizzare `declare(strict_types=1);`
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+- Utilizzare `declare(strict_types=1);`
+>>>>>>> e9356a3a (.)
+=======
+- Utilizzare `declare(strict_types=1);`
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+- Utilizzare `declare(strict_types=1);`
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
 =======
 >>>>>>> 3c18aa7e (.)
 =======
@@ -320,6 +783,7 @@ Per ogni file conflittuale:
 <<<<<<< HEAD
 - Utilizzare `declare(strict_types=1);`
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 
 **Per file Markdown (.md):**
 - Mantenere entrambe le versioni quando possibile
@@ -327,11 +791,82 @@ Per ogni file conflittuale:
 - Preservare i backlink esistenti
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 - Rispettare convenzioni naming (minuscolo)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 - Rispettare convenzioni naming (minuscolo)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- Rispettare convenzioni naming (minuscolo)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+- Rispettare convenzioni naming (minuscolo)
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+- Rispettare convenzioni naming (minuscolo)
+>>>>>>> e9356a3a (.)
+=======
+- Rispettare convenzioni naming (minuscolo)
+=======
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+- Rispettare convenzioni naming (minuscolo)
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
 =======
 >>>>>>> 3c18aa7e (.)
 =======
@@ -365,6 +900,7 @@ Per ogni file conflittuale:
 <<<<<<< HEAD
 - Rispettare convenzioni naming (minuscolo)
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 
 **Per file di configurazione:**
 - Privilegiare le configurazioni più recenti
@@ -477,10 +1013,51 @@ Al termine del processo, fornire:
 # Trova file con conflitti Git
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+<<<<<<< HEAD
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> e0c964a3 (first)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -499,14 +1076,46 @@ Al termine del processo, fornire:
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 git status --porcelain | grep "^UU\|^AA\|^DD"
 
 # Lista file con conflitti per tipo
 git diff --name-only --diff-filter=U
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+=======
+>>>>>>> 0bef3e9 (.)
 
 
 # Lista file con conflitti per tipo
@@ -516,6 +1125,39 @@ git diff --name-only --diff-filter=U
 
 # Lista file con conflitti per tipo
 >>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 >>>>>>> 7de7063d (.)
 =======
 <<<<<<< HEAD
@@ -542,6 +1184,7 @@ git diff --name-only --diff-filter=U
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ```
 
 ### Verifica PHPStan
@@ -632,10 +1275,51 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 - **PHPStan**: Mirare sempre al livello 10 per tutto il codice PHP
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0bef3e9 (.)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+<<<<<<< HEAD
+>>>>>>> f198176d (.)
+<<<<<<< HEAD
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> e0c964a3 (first)
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -654,6 +1338,7 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 - **Documentation Naming**: Tutti i file e cartelle in docs/ in minuscolo (eccetto README.md)
 
 ## Regole Critiche per Progetti Laraxot
@@ -682,6 +1367,38 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 - **Responsabilità**: Rispettare i confini e le responsabilità dei moduli
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e0c964a3 (first)
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> 42ab2308 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> f52d0712 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> e0c964a3 (first)
+=======
+>>>>>>> 574afe9e (.)
+=======
 =======
 =======
 =======
@@ -698,11 +1415,48 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 
 
 Dentro le cartelle docs , i files e le sottocartelle non devono contenere caratteri maiuscoli ad eccezzione di README.md
 Procedi a risolvere tutti i conflitti git nei file PHP rilevati, uno dopo l’altro, senza chiedere nulla e senza fermarmi !
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3c18aa7e (.)
+=======
+>>>>>>> 574afe9e (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 <<<<<<< HEAD
 >>>>>>> 3c18aa7e (.)
 =======
@@ -717,3 +1471,4 @@ Procedi a risolvere tutti i conflitti git nei file PHP rilevati, uno dopo l’al
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
