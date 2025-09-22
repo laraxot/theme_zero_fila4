@@ -3,6 +3,8 @@
 ## 🔧 Problemi di Interprete Bash
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 
 ### Fix "bad interpreter: No such file or directory"
 ```bash
@@ -20,6 +22,7 @@ chmod +x nomefile.sh
 
 ### Setup Repository e Remote
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 ```bash
 # Fix per "bad interpreter: No such file or directory"
 sed -i -e 's/\r$//' nomefile.sh
@@ -71,6 +74,8 @@ git init
 git add .
 git commit -m "Initial commit"
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -384,6 +389,7 @@ git mergetool
 - **Commit frequenti** con messaggi descrittivi
 - **Pull prima** di ogni push su branch condivisi
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)
 # Configura remote
 git remote add origin <url>
 git push -u origin main
@@ -439,6 +445,28 @@ Soluzione: sudo chmod 777 -R .
 sudo update-alternatives --config php
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> ec52a6b4 (.)
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> 42ab2308 (.)
+=======
+=======
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -448,6 +476,7 @@ sudo update-alternatives --config php
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> 0bef3e9 (.)
 
 ## 🔄 Se menù o altri elementi frontend non si aggiornano
 ```bash
@@ -458,5 +487,30 @@ composer go
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+=======
+>>>>>>> e9356a3a (.)
+=======
+>>>>>>> 42ab2308 (.)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f52d0712 (.)
+=======
+>>>>>>> develop
+>>>>>>> 71ff9e32 (.)
+>>>>>>> ec52a6b4 (.)
+=======
+>>>>>>> ea169dcc (.)
+=======
+>>>>>>> 59901687 (.)
+=======
+>>>>>>> f198176d (.)
+>>>>>>> e0c964a3 (first)
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> ef8dc24 (.)
+>>>>>>> 0bef3e9 (.)

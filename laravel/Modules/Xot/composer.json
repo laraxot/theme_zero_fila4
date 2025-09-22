@@ -25,8 +25,8 @@
         "coolsam/panel-modules": "*",
         "doctrine/dbal": "*",
         "fidum/laravel-eloquent-morph-to-one": "*",
-        "filament/filament": "^4.0",
-        "filament/spatie-laravel-media-library-plugin": "^4.0",
+        "filament/filament": "*",
+        "filament/spatie-laravel-media-library-plugin": "*",
         
         "guzzlehttp/guzzle": "*",
         "laravel/folio": "^1.1",
