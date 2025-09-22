@@ -9,50 +9,24 @@ PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
 
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-=======
-PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
-LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
-=======
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
->>>>>>> e0c964a3 (first)
-=======
-PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
-LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-=======
-PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
-PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
-LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-PROJECT_DIR="/var/www/_bases/base_quaeris_fila4_mono"
-LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
-MYSQL_CONNECTOR="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 
 
 
 # Crea la directory dei log se non esiste
 mkdir -p "$LOGS_DIR"
-chmod -R 777 "$LOGS_DIR"
+chmod -R 0777 "$LOGS_DIR"
 
 # Funzione per mostrare l'aiuto
 show_help() {
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
-=======
     echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
-=======
     echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
 
->>>>>>> e0c964a3 (first)
-=======
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
-=======
     echo "Utilizzo: /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
     echo "Utilizzo: ./bashscripts/mcp/mcp-manager-v2.sh [comando] [server]"
@@ -75,17 +49,12 @@ show_help() {
     echo "  fetch              - Server per le richieste HTTP"
     echo "  filesystem         - Server per le operazioni sul filesystem"
 
-=======
     echo "  postgres           - Server per database PostgreSQL"
     echo "  redis              - Server per Redis"
 
-=======
     echo "  postgres           - Server per database PostgreSQL"
     echo "  redis              - Server per Redis"
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     echo "  postgres           - Server per database PostgreSQL"
     echo "  redis              - Server per Redis"
     echo "  postgres           - Server per database PostgreSQL"
@@ -103,12 +72,10 @@ show_help() {
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
 
-=======
 
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
-=======
     echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
     echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
@@ -116,8 +83,6 @@ show_help() {
     echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  /var/www/_bases/base_quaeris_fila4_mono/bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
 
->>>>>>> e0c964a3 (first)
-=======
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start mysql    - Avvia il server MCP MySQL"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh start          - Avvia tutti i server MCP"
     echo "  ./bashscripts/mcp/mcp-manager-v2.sh status         - Mostra lo stato di tutti i server MCP"
@@ -138,15 +103,10 @@ show_help() {
 get_pid() {
     local server_name=$1
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -168,17 +128,13 @@ install_server() {
         echo "📦 Installazione delle dipendenze per il server MySQL personalizzato..."
         cd "$PROJECT_DIR" && npm install --save mysql2 dotenv
 
-=======
 
->>>>>>> e0c964a3 (first)
-=======
 
     
     if [ "$server_name" = "mysql" ]; then
         echo "📦 Installazione delle dipendenze per il server MySQL personalizzato..."
         cd "$PROJECT_DIR" && npm install --save mysql2 dotenv
         
-=======
 
 
     if [ "$server_name" = "mysql" ]; then
@@ -186,8 +142,6 @@ install_server() {
         cd "$PROJECT_DIR" && npm install --save mysql2 dotenv
 
 
->>>>>>> e0c964a3 (first)
-=======
 
 
         if [ $? -eq 0 ]; then
@@ -200,15 +154,10 @@ install_server() {
     else
         echo "📦 Installazione del server MCP $server_name..."
 
-=======
         
 
-=======
         
 
->>>>>>> e0c964a3 (first)
-=======
-=======
         
         
         
@@ -221,15 +170,10 @@ install_server() {
             echo "🔄 Installazione globale di @modelcontextprotocol/server-$server_name..."
             npm install -g @modelcontextprotocol/server-$server_name
 
-=======
             
 
-=======
             
 
->>>>>>> e0c964a3 (first)
-=======
-=======
             
             
             
@@ -239,28 +183,6 @@ install_server() {
                 echo "✅ Server MCP $server_name installato globalmente con successo"
             else
                 echo "❌ Errore nell'installazione globale del server MCP $server_name"
-=======
-
-                
-                # Prova con installazione locale
-                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
-                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
-                
-=======
-
-
-
-                # Prova con installazione locale
-                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
-                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
-
-                # Prova con installazione locale
-                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
-                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
-
-=======
-
-=======
 
                 
                 # Prova con installazione locale
@@ -268,8 +190,24 @@ install_server() {
                 cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
                 
 
->>>>>>> e0c964a3 (first)
-=======
+
+
+                # Prova con installazione locale
+                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
+                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
+
+                # Prova con installazione locale
+                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
+                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
+
+
+
+                
+                # Prova con installazione locale
+                echo "🔄 Tentativo di installazione locale di @modelcontextprotocol/server-$server_name..."
+                cd "$PROJECT_DIR" && npm install @modelcontextprotocol/server-$server_name
+                
+
 
 
                 if [ $? -eq 0 ]; then
@@ -282,15 +220,10 @@ install_server() {
         fi
     fi
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -304,15 +237,10 @@ start_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -323,17 +251,12 @@ start_server() {
         return 0
     fi
 
-=======
     
     # Gestione speciale per il server MySQL personalizzato
 
-=======
     
     # Gestione speciale per il server MySQL personalizzato
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     # Gestione speciale per il server MySQL personalizzato
     
@@ -347,7 +270,6 @@ start_server() {
             echo "❌ Script connector MySQL non trovato: $MYSQL_CONNECTOR"
             return 1
         fi
-=======
 
         
         echo "🚀 Avvio del server MCP MySQL personalizzato..."
@@ -366,7 +288,6 @@ start_server() {
     # Attendi che il server si avvii
     sleep 3
     
-=======
 
 
         echo "🚀 Avvio del server MCP MySQL personalizzato..."
@@ -395,11 +316,7 @@ start_server() {
         return 1
     fi
     sleep 3
-=======
-=======
 
-=======
-=======
 
         
         echo "🚀 Avvio del server MCP MySQL personalizzato..."
@@ -419,8 +336,6 @@ start_server() {
     sleep 3
     
 
->>>>>>> e0c964a3 (first)
-=======
 
 
     pid=$(get_pid "$server_name")
@@ -432,8 +347,6 @@ start_server() {
         if [ "$server_name" = "mysql" ]; then
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/mysql.log"
-=======
-=======
         else
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/$server_name.log"
@@ -445,9 +358,7 @@ start_server() {
         elif [ "$server_name" = "redis" ]; then
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/redis.log"
-=======
 
-=======
         else
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/$server_name.log"
@@ -455,8 +366,6 @@ start_server() {
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/$server_name.log"
 
->>>>>>> e0c964a3 (first)
-=======
         else
             echo "📋 Ultimi log:"
             tail -n 10 "$LOGS_DIR/$server_name.log"
@@ -472,15 +381,10 @@ stop_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -490,28 +394,6 @@ stop_server() {
         echo "⚠️ Il server MCP $server_name non è in esecuzione"
         return 0
     fi
-=======
-
-    
-    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
-    kill -9 "$pid" 2>/dev/null
-    sleep 2
-    
-=======
-
-
-
-    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
-    kill -9 "$pid" 2>/dev/null
-    sleep 2
-
-    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
-    kill -9 "$pid" 2>/dev/null
-    sleep 2
-
-=======
-
-=======
 
     
     echo "🛑 Arresto del server MCP $server_name con PID $pid..."
@@ -519,8 +401,24 @@ stop_server() {
     sleep 2
     
 
->>>>>>> e0c964a3 (first)
-=======
+
+
+    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
+    kill -9 "$pid" 2>/dev/null
+    sleep 2
+
+    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
+    kill -9 "$pid" 2>/dev/null
+    sleep 2
+
+
+
+    
+    echo "🛑 Arresto del server MCP $server_name con PID $pid..."
+    kill -9 "$pid" 2>/dev/null
+    sleep 2
+    
+
 
 
     pid=$(get_pid "$server_name")
@@ -533,15 +431,10 @@ stop_server() {
         kill -9 "$pid" 2>/dev/null
         sleep 1
 
-=======
         
 
-=======
         
 
->>>>>>> e0c964a3 (first)
-=======
-=======
         
         
         
@@ -563,15 +456,10 @@ status_server() {
     local server_name=$1
     local pid=$(get_pid "$server_name")
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -599,15 +487,10 @@ logs_server() {
     local server_name=$1
     local log_file="$LOGS_DIR/$server_name.log"
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -625,16 +508,11 @@ logs_server() {
 # Array di tutti i server MCP disponibili
 ALL_SERVERS=("mysql" "postgres" "redis")
 
-=======
 ALL_SERVERS=("sequential-thinking" "memory" "fetch" "filesystem" "postgres" "redis" "puppeteer" "mysql")
 
-=======
 ALL_SERVERS=("sequential-thinking" "memory" "fetch" "filesystem" "postgres" "redis" "puppeteer" "mysql")
 
->>>>>>> e0c964a3 (first)
-=======
 ALL_SERVERS=("mysql")
-=======
 ALL_SERVERS=("sequential-thinking" "memory" "fetch" "filesystem" "postgres" "redis" "puppeteer" "mysql")
 ALL_SERVERS=("mysql")
 ALL_SERVERS=("mysql")
@@ -649,15 +527,10 @@ all_servers() {
     local success=0
     local total=0
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
@@ -687,15 +560,10 @@ all_servers() {
         esac
     done
 
-=======
     
 
-=======
     
 
->>>>>>> e0c964a3 (first)
-=======
-=======
     
     
     
