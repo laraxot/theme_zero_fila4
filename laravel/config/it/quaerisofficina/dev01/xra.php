@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\Quaeris\Models\Customer;
+
 return [
     'adm_theme' => 'AdminLTE',
     'enable_ads' => '1',
@@ -25,5 +27,5 @@ return [
 
     //  'home' => 'disservizi.tutte_segnalazioni_trovare_informazioni'
     //  'home' => 'disservizi.tutte_segnalazioni_trovare_informazioni'
-    'tenant_class' => \Modules\Quaeris\Models\Customer::class,
+    'tenant_class' => Customer::class,
 ];
