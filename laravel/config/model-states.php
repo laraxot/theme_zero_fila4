@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
+
+use Spatie\ModelStates\DefaultTransition;
 return [
 
     /*
      * The fully qualified class name of the default transition.
      */
-    'default_transition' => Spatie\ModelStates\DefaultTransition::class,
+    'default_transition' => DefaultTransition::class,
 
 ];
