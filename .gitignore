@@ -68,3 +68,5 @@ laravel/database/migrations/
 logs
 docs
 bashscripts/
+laravel/
+public_html/
