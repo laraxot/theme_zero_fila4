@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Tests\Feature\Modules\UI;
 
+use ReflectionClass;
 use Modules\UI\Filament\Forms\Components\AddressField;
 use Tests\TestCase;
 
@@ -34,7 +35,7 @@ class AddressFieldTest extends TestCase
         $this->assertInstanceOf(AddressField::class, $field);
 
         // Utilizzo reflection per accedere alla proprietà privata
-        $reflection = new \ReflectionClass($field);
+        $reflection = new ReflectionClass($field);
         $property = $reflection->getProperty('relationship');
         $property->setAccessible(true);
 
