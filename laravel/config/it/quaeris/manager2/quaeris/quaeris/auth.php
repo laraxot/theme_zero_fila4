@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\User\Models\User;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +72,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             //'model' => App\User::class,
-            'model' => Modules\User\Models\User::class,
+            'model' => User::class,
         ],
 
         // 'users' => [

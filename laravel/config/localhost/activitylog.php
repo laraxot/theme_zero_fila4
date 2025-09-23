@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\Activity\Models\Activity;
+
 return [
     /*
      * If set to false, no activities will be saved to the database.
@@ -36,7 +38,7 @@ return [
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'activity_model' => \Modules\Activity\Models\Activity::class,
+    'activity_model' => Activity::class,
 
     /*
      * This is the name of the table that will be created by the migration and
