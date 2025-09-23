@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\Quaeris\Models\Customer;
+
 return [
     'adm_home' => '01',
     'adm_theme' => 'AdminLTE',
@@ -21,5 +23,5 @@ return [
     'super_admin' => 'marco.sottana@gmail.com',
 
     //'team_class' => \Modules\Quaeris\Models\Customer::class,
-    'tenant_class' => \Modules\Quaeris\Models\Customer::class,
+    'tenant_class' => Customer::class,
 ];
