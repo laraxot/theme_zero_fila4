@@ -1,12 +1,14 @@
 <?php
 
+use Illuminate\Contracts\Console\Kernel;
+
 require_once __DIR__ . '/../../laravel/vendor/autoload.php';
 
 use Illuminate\Support\Facades\File;
 
 // Bootstrap Laravel
 $app = require_once __DIR__ . '/../../laravel/bootstrap/app.php';
-$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$app->make(Kernel::class)->bootstrap();
 
 echo "Starting translation sync from Italian to English and German...\n";
 
@@ -32,21 +34,21 @@ $totalTranslations = 0;
 
 foreach ($modules as $module) {
     echo "Processing module: {$module}\n";
-    
+
     $moduleLangPath = "{$modulesPath}/{$module}/lang";
     $sourcePath = "{$moduleLangPath}/{$sourceLang}";
-    
+
     if (!File::exists($sourcePath)) {
         echo "  Source language {$sourceLang} not found, skipping...\n";
         continue;
     }
-    
+
     $sourceFiles = File::glob("{$sourcePath}/*.php");
-    
+
     foreach ($sourceFiles as $sourceFile) {
         $fileName = basename($sourceFile);
         echo "  Processing file: {$fileName}\n";
-        
+
         // Load source translations
         $sourceTranslations = [];
         try {
@@ -59,26 +61,26 @@ foreach ($modules as $module) {
             echo "    Error loading file: " . $e->getMessage() . "\n";
             continue;
         }
-        
+
         if (empty($sourceTranslations)) {
             echo "    No translations found, skipping...\n";
             continue;
         }
-        
+
         $totalFiles++;
         $fileTranslations = 0;
-        
+
         // Sync to target languages
         foreach ($targetLangs as $targetLang) {
             $targetPath = "{$moduleLangPath}/{$targetLang}";
             $targetFile = "{$targetPath}/{$fileName}";
-            
+
             // Create target directory if it doesn't exist
             if (!File::exists($targetPath)) {
                 File::makeDirectory($targetPath, 0755, true);
                 echo "    Created directory: {$targetPath}\n";
             }
-            
+
             // Load existing target translations
             $targetTranslations = [];
             if (File::exists($targetFile)) {
@@ -93,7 +95,7 @@ foreach ($modules as $module) {
                     $targetTranslations = [];
                 }
             }
-            
+
             // Merge translations (source takes precedence for missing keys)
             try {
                 $mergedTranslations = mergeTranslations($sourceTranslations, $targetTranslations);
@@ -101,20 +103,20 @@ foreach ($modules as $module) {
                 echo "    Error merging translations: " . $e->getMessage() . ", skipping...\n";
                 continue;
             }
-            
+
             // Save merged translations
             saveTranslations($targetFile, $mergedTranslations);
-            
+
             $newKeys = count($mergedTranslations) - count($targetTranslations);
             if ($newKeys > 0) {
                 echo "    Added {$newKeys} new translations to {$targetLang}\n";
                 $fileTranslations += $newKeys;
             }
         }
-        
+
         $totalTranslations += $fileTranslations;
     }
-    
+
     echo "\n";
 }
 
@@ -125,7 +127,7 @@ echo "Total new translations added: {$totalTranslations}\n";
 function mergeTranslations(array $source, array $target): array
 {
     $merged = $target;
-    
+
     foreach ($source as $key => $value) {
         if (is_array($value)) {
             $targetValue = $target[$key] ?? [];
@@ -139,7 +141,7 @@ function mergeTranslations(array $source, array $target): array
             }
         }
     }
-    
+
     return $merged;
 }
 
@@ -148,7 +150,7 @@ function saveTranslations(string $filePath, array $translations): void
     $content = "<?php\n\nreturn [\n";
     $content .= arrayToPhp($translations, 1);
     $content .= "];\n";
-    
+
     File::put($filePath, $content);
 }
 
@@ -156,10 +158,10 @@ function arrayToPhp(array $array, int $indent = 0): string
 {
     $content = '';
     $indentStr = str_repeat('    ', $indent);
-    
+
     foreach ($array as $key => $value) {
         $content .= $indentStr . "'" . addslashes($key) . "' => ";
-        
+
         if (is_array($value)) {
             $content .= "[\n";
             $content .= arrayToPhp($value, $indent + 1);
@@ -168,6 +170,6 @@ function arrayToPhp(array $array, int $indent = 0): string
             $content .= "'" . addslashes((string) $value) . "',\n";
         }
     }
-    
+
     return $content;
 } 

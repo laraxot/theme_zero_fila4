@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\Quaeris\Models\Customer;
+
 return [
     'adm_theme' => 'AdminLTE',
     'enable_ads' => '1',
@@ -14,5 +16,5 @@ return [
     'register_adm_theme' => false,
     'register_pub_theme' => false,
     //team_class' => \Modules\Quaeris\Models\Customer::class,
-    'tenant_class' => \Modules\Quaeris\Models\Customer::class,
+    'tenant_class' => Customer::class,
 ];
