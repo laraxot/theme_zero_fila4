@@ -1,6 +1,0 @@
----
-trigger: always_on
-description:
-globs:
----
-# Best Practice: ActivityLog per la Moderazione Utenti
