@@ -7,12 +7,15 @@
 PROJECT_DIR="/var/www/html/_bases/base_predict_fila3_mono"
 LOGS_DIR="$PROJECT_DIR/storage/logs/mcp"
 CONNECTOR_SCRIPT="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
+<<<<<<< HEAD
+=======
 CONNECTOR_SCRIPT="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 CONNECTOR_SCRIPT="$PROJECT_DIR/scripts/mysql-db-connector.js"
 CONNECTOR_SCRIPT="$PROJECT_DIR/scripts/mysql-db-connector.js"
 CONNECTOR_SCRIPT="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
 CONNECTOR_SCRIPT="$PROJECT_DIR/scripts/mysql-db-connector.js"
 CONNECTOR_SCRIPT="$PROJECT_DIR/bashscripts/mcp/mysql-db-connector.js"
+>>>>>>> ef8dc24 (.)
 
 # Crea la directory dei log se non esiste
 mkdir -p "$LOGS_DIR"

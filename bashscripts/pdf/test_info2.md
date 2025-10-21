@@ -2,7 +2,10 @@
 
 ## 📋 Informazioni Generali
 - **File analizzato**: `/var/www/html/saluteora/bashscripts/pdf/test.pdf`
+<<<<<<< HEAD
+=======
 >>>>>>> ea169dcc (.)
+>>>>>>> ef8dc24 (.)
 - **Data analisi**: 2025-05-19 15:04:13
 - **Pagine totali**: 215
 - **Protetto da password**: No

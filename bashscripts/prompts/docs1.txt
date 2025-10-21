@@ -833,6 +833,7 @@ protected function casts(): array
 **Compatibilità**: Laravel 12.x, Filament 3.x, PHP 8.2+
 **Autore**: Analisi approfondita del codice Laraxot
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -844,11 +845,14 @@ protected function casts(): array
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 
 
 facciamo un recfactor radicale di tutte le cartelle docs, in ottica dry + kiss, ti ricordo che dentro le cartelle docs, ne i nomi dei files ne i nomi delle cartelle devono contenere caratteri maiuscoli ad eccezzione di README.md
 dentro le cartelle "docs" ne i nomi dei files ne i nomi delle sottocartelle di "docs" devono contenere caratteri maiuscoli , ad eccezzione di README.md , e non deve esistere readme.md scritto in minuscolo ! questa e' una regola che devi sempre ricordare, adesso va a controllare tutte le cartelle docs e sistemale
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -863,3 +867,5 @@ dentro le cartelle "docs" ne i nomi dei files ne i nomi delle sottocartelle di "
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
