@@ -1,3 +1,103 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     fill="none" 
+     viewBox="0 0 24 24" 
+     stroke="currentColor"
+     stroke-width="1.5"
+     aria-hidden="true" 
+     role="img"
+     aria-label="Multi-Tenant System Logo">
+    <style>
+        .tenant-building { 
+            animation: building-glow 3s ease-in-out infinite alternate;
+            transform-origin: 12px 12px;
+        }
+        .tenant-network { 
+            animation: network-pulse 2s ease-in-out infinite;
+        }
+        .tenant-connections { 
+            animation: connection-flow 4s ease-in-out infinite;
+        }
+        .tenant-isolation { 
+            animation: isolation-shield 5s ease-in-out infinite;
+        }
+        
+        @keyframes building-glow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes network-pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.05); }
+        }
+        
+        @keyframes connection-flow {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 12; }
+        }
+        
+        @keyframes isolation-shield {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        svg:hover .tenant-building { 
+            animation-duration: 1.5s; 
+        }
+        svg:hover .tenant-network { 
+            animation-duration: 1s; 
+        }
+        svg:hover .tenant-connections { 
+            animation-duration: 2s; 
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .tenant-building { opacity: 0.95; }
+            .tenant-network { opacity: 0.9; }
+            .tenant-connections { opacity: 0.8; }
+            .tenant-isolation { opacity: 0.7; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .tenant-building, .tenant-network, .tenant-connections, .tenant-isolation { animation: none; }
+        }
+    </style>
+    
+    <!-- Main building/organization -->
+    <rect class="tenant-building" x="4" y="6" width="16" height="14" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Tenant divisions -->
+    <path class="tenant-building" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M12 6v14" opacity="0.7" />
+    
+    <!-- Network connections -->
+    <g class="tenant-network">
+        <circle cx="8" cy="9" r="1.5" stroke-width="1" opacity="0.8" />
+        <circle cx="16" cy="9" r="1.5" stroke-width="1" opacity="0.8" />
+        <circle cx="8" cy="15" r="1.5" stroke-width="1" opacity="0.8" />
+        <circle cx="16" cy="15" r="1.5" stroke-width="1" opacity="0.8" />
+    </g>
+    
+    <!-- Data flow connections -->
+    <g class="tenant-connections">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M8 9h8M8 15h8" stroke-width="0.5" 
+              stroke-dasharray="2 3" opacity="0.6" />
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M8 9v6M16 9v6" stroke-width="0.5" 
+              stroke-dasharray="2 3" opacity="0.6" />
+    </g>
+    
+    <!-- Security/Isolation indicators -->
+    <g class="tenant-isolation">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M12 3v1M12 20v1M3 12h1M20 12h1" stroke-width="1" opacity="0.4" />
+        <circle cx="12" cy="12" r="10" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 8" />
+    </g>
+    
+    <!-- Tenant status indicators -->
+    <circle cx="6" cy="4" r="0.5" fill="currentColor" opacity="0.7" />
+    <circle cx="18" cy="4" r="0.5" fill="currentColor" opacity="0.7" />
+    <circle cx="6" cy="20" r="0.5" fill="currentColor" opacity="0.7" />
+    <circle cx="18" cy="20" r="0.5" fill="currentColor" opacity="0.7" />
 </svg>
