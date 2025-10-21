@@ -11,11 +11,13 @@ class CustomerUser extends TenantUser
     /** @var string */
     protected $connection = 'quaeris';
 
-    //protected $table = 'tenant_user';
+    /** @var string */
+    protected $table = 'customer_user';
 
     /** @var list<string> */
     protected $fillable = [
         'customer_id',
+        'tenant_id',
         'user_id',
     ];
 }

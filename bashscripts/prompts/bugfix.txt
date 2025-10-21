@@ -1,5 +1,19 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 574afe9e (.)
+
+=======
+<<<<<<< HEAD
+>>>>>>> 9c02579 (.)
+>>>>>>> 7de7063d (.)
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -23,6 +37,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 # Guida Completa per Bug Fixing - Laraxot SaluteOra
 
 ## Principi Fondamentali
@@ -154,6 +169,8 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 ### Esempio Corretto
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -164,6 +181,8 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 <<<<<<< HEAD
 # Linee Guida per il Bug Fixing e Best Practices
 
@@ -220,6 +239,16 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
    - Analizzare classi estese e traits correlati
 
 <<<<<<< HEAD
+=======
+=======
+>>>>>>> 9c02579 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> 1420e3b683 (.)
+>>>>>>> 574afe9e (.)
+=======
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 # Linee Guida per il Bug Fixing e Best Practices
 
 ## Principi Fondamentali
@@ -343,6 +372,19 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 ### Esempio (Corretto)
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3c18aa7e (.)
+>>>>>>> 9c02579 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 3c18aa7e (.)
+>>>>>>> 9c02579 (.)
+>>>>>>> 1420e3b683 (.)
+>>>>>>> 574afe9e (.)
+>>>>>>> 7de7063d (.)
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -351,6 +393,8 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 ```php
 class Example {
     public function foo() {}
@@ -360,6 +404,15 @@ class Example {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 574afe9e (.)
+>>>>>>> 7de7063d (.)
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -379,6 +432,8 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 ## Processo di Revisione
 
 ### Auto-Revisione
@@ -430,6 +485,16 @@ class Example {
 *Compatibilità: Laraxot SaluteOra, PHP 8.2+, Laravel 12+, Filament 3.4+*
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9c02579 (.)
+<<<<<<< HEAD
+=======
+>>>>>>> 1420e3b683 (.)
+>>>>>>> 574afe9e (.)
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -442,6 +507,8 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)
 ### Caso Reale
 - Errore su `Modules/User/app/Filament/Widgets/Auth/RegisterWidget.php` risolto spostando la funzione orfana all'interno della classe o eliminandola se non più necessaria
 
@@ -518,6 +585,19 @@ class Example {
 - Rispettare principi di economia circolare del software
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3c18aa7e (.)
+>>>>>>> 9c02579 (.)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 3c18aa7e (.)
+>>>>>>> 9c02579 (.)
+>>>>>>> 1420e3b683 (.)
+>>>>>>> 574afe9e (.)
+>>>>>>> 7de7063d (.)
+=======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -526,3 +606,5 @@ class Example {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef8dc24 (.)

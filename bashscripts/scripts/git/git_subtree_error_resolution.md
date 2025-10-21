@@ -33,7 +33,11 @@ git fetch --all
 # 3. Commit e push
 git add -A
 git commit -am "🔧 Aggiornamento subtree"
+<<<<<<< HEAD
+git merge origin/"$BRANCH" --allow-unrelated-histories"
+=======
 git merge origin/"$BRANCH" --allow-unrelated-histories
+>>>>>>> ef8dc24 (.)
 git push -u origin "$BRANCH"
 ```
 
@@ -48,6 +52,10 @@ git subtree pull -P "$LOCAL_PATH" "$REMOTE_REPO" "$BRANCH"
 # 3. Fallback 2
 git fetch "$REMOTE_REPO" "$BRANCH" --depth=1
 git merge -s subtree FETCH_HEAD --allow-unrelated-histories
+<<<<<<< HEAD
+```
+=======
+>>>>>>> ef8dc24 (.)
 
 Esegue una sequenza complessa di operazioni:
 ```bash
@@ -62,7 +70,10 @@ Esegue una sequenza complessa di operazioni:
 9. git rebase --rebase-merges --strategy subtree $REMOTE_BRANCH
 ```
 
+<<<<<<< HEAD
+=======
 ### 3. Pull Script (`git_pull_subtree.sh`)
+>>>>>>> ef8dc24 (.)
 Esegue una sequenza con fallback:
 ```bash
 1. git subtree pull -P $LOCAL_PATH $REMOTE_REPO $REMOTE_BRANCH --squash
@@ -71,7 +82,10 @@ Esegue una sequenza con fallback:
    - git fetch $REMOTE_REPO $REMOTE_BRANCH --depth=1
    - git merge -s subtree FETCH_HEAD --allow-unrelated-histories
 4. git rebase --rebase-merges --strategy subtree $REMOTE_BRANCH
+<<<<<<< HEAD
+=======
  43df3e0 (.)
+>>>>>>> ef8dc24 (.)
 ```
 
 ## 🚨 Analisi Errori Comuni
@@ -97,14 +111,21 @@ fi
 ! [rejected] dev -> dev (non-fast-forward)
 ```
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 **Causa**: Divergenze tra repository locale e remoto
 
 **Soluzione**:
 ```bash
 # Aggiorna repository locale
 git fetch origin "$BRANCH"
+<<<<<<< HEAD
+git merge origin/"$BRANCH" --allow-unrelated-histories"
+=======
 git merge origin/"$BRANCH" --allow-unrelated-histories
+>>>>>>> ef8dc24 (.)
 
 # Riprova push
 if ! git push -u origin "$BRANCH"; then
@@ -172,6 +193,8 @@ fi
 <div align="center">
   <sub>Built with ❤️ by the development team</sub>
 </div>
+<<<<<<< HEAD
+=======
 
 **Causa**: Questo errore si verifica nella sequenza di push quando ci sono divergenze tra il repository locale e remoto.
 
@@ -219,3 +242,4 @@ fi
 2. Implementare logging più dettagliato
 3. Verificare i permessi degli script
  43df3e0 (.)
+>>>>>>> ef8dc24 (.)

@@ -17,7 +17,7 @@ return new class () extends XotBaseMigration {
             static function (Blueprint $table): void {
                 // $table->uuid('id')->primary();
                 $table->id();
-                $table->foreignId('tenant_id');
+                //$table->foreignId('tenant_id');
                 //$table->uuid('user_id')->nullable()->index();
                 $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id');
                 $table->foreignId('customer_id');
@@ -38,8 +38,9 @@ return new class () extends XotBaseMigration {
                 //    $table->string('updated_by')->nullable();
                 // }
 
-                if ($this->hasColumn('tenant_id')) {
-                    $table->renameColumn('tenant_id', 'customer_id');
+                if (!$this->hasColumn('customer_id')) {
+                    //$table->renameColumn('tenant_id', 'customer_id');
+                    $table->foreignId('customer_id');
                 }
 
                 // $this->updateUser($table);
