@@ -56,6 +56,10 @@ dist/
 out/
 coverage/
 docs/cache/
+<<<<<<< HEAD
+docs/
+=======
+>>>>>>> ef8dc24 (.)
 cache/
 tmp/
 tmp*/
@@ -113,6 +117,8 @@ junit.xml
 test-output/
 .nyc_output/
 coverage/
+<<<<<<< HEAD
+=======
 
 # ───────────────────────────────────────────────────────
 # Backup files e temporary
@@ -142,3 +148,4 @@ logs/
 *.rar
 *.7z
 *.gz
+>>>>>>> ef8dc24 (.)

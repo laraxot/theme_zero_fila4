@@ -736,7 +736,8 @@ if (!function_exists('getRelationships')) {
                     $data[] = $msg;
                 }
                     */
-            } catch (ErrorException) {
+            } catch (Exception|Throwable) {
+                // Ignore reflection invocation errors
             }
         }
 

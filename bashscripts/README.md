@@ -1,4 +1,10 @@
 
+<<<<<<< HEAD
+# BashScripts - Organizzazione Script
+## Regola Fondamentale
+**TUTTI gli script** (PHP, Bash, Python, etc.) devono essere posizionati **SEMPRE** in questa cartella `bashscripts`, **MAI** nella directory Laravel o in altre posizioni.
+## Struttura Organizzativa
+=======
 >>>>>>> e0c964a3 (first)
 # 🚀 Toolkit di Automazione Git per Laraxot PTVX
 
@@ -195,6 +201,7 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 
 ## Struttura Organizzativa
 
+>>>>>>> ef8dc24 (.)
 ```bashscripts/
 ├── README.md                    # Questo file
 ├── database/                    # Script relativi al database
@@ -219,6 +226,15 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
     ├── monitoring/              # Script di monitoraggio
     └── reporting/               # Script di reporting
 ```
+<<<<<<< HEAD
+## Script di Seeding Database
+### 🎯 **Script Principale: 1000 Record per Modello**
+- **`saluteora-1000-records.php`**: Genera esattamente 1000 doctor, 1000 patients, 1000 studios e 500 appointments
+- **`tinker-1000-records.php`**: Versione semplificata per Tinker
+### 🆕 **Script Specializzato: 20 Studi con Postal Code 66010**
+- **`saluteora-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
+- **`tinker-20-studios-66010.php`**: Versione Tinker per 20 studi + dottori
+=======
 
 ## Script di Seeding Database
 
@@ -230,6 +246,7 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 - **`saluteora-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
 - **`tinker-20-studios-66010.php`**: Versione Tinker per 20 studi + dottori
 
+>>>>>>> ef8dc24 (.)
 **Caratteristiche principali:**
 - 🎯 **20 studi medici** con postal_code fisso 66010 (Chieti, Abruzzo)
 - 👨‍⚕️ **Almeno 1 dottore** per ogni studio (garantito)
@@ -237,11 +254,23 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 - 📍 **Indirizzi realistici** nella zona di Chieti
 - 🔗 **Relazioni automatiche** tra studi e dottori
 - ✅ **Verifica finale** che ogni studio abbia dottori
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 ### **Script Generali**
 - **`saluteora-mass-seeding.php`**: Popolamento massivo generale
 - **`salutemo-database-seeding.php`**: Popolamento modulo SaluteMo
 - **`tinker-commands.php`**: Comandi generali per Tinker
+<<<<<<< HEAD
+## Utilizzo degli Script
+### Esecuzione Diretta (Raccomandata)
+```bash
+# Dalla root del progetto
+cd /var/www/html/_bases/base_saluteora
+# Script per 20 studi con dottori (RACCOMANDATO per iniziare)
+php bashscripts/database/seeding/saluteora-20-studios-66010.php
+=======
 
 ## Utilizzo degli Script
 
@@ -255,10 +284,24 @@ cd /var/www/html/_bases/base_saluteora
 # Script per 20 studi con dottori (RACCOMANDATO per iniziare)
 php bashscripts/database/seeding/saluteora-20-studios-66010.php
 
+>>>>>>> ef8dc24 (.)
 # Script per 1000 record per modello
 php bashscripts/database/seeding/saluteora-1000-records.php
 # Rendi gli script eseguibili
 chmod +x *.sh
+<<<<<<< HEAD
+chmod +x scripts/**/*.sh
+### Esecuzione via Tinker
+# Dalla directory Laravel
+cd laravel
+# Avvia Tinker
+php artisan tinker
+# Incolla il contenuto dello script desiderato
+# Lo script si eseguirà automaticamente
+./git_sync_subtree.sh <path> <remote_repo>
+./scripts/git/git_sync_subtree.sh <path> <remote_repo>
+## Caratteristiche degli Script
+=======
 >>>>>>> 574afe9e (.)
 chmod +x scripts/**/*.sh
 >>>>>>> 7de7063d (.)
@@ -284,34 +327,50 @@ php artisan tinker
 
 ## Caratteristiche degli Script
 
+>>>>>>> ef8dc24 (.)
 ### Gestione Relazioni Garantite
 - **Studio ↔ Doctor**: Ogni studio ha almeno un dottore
 - **Doctor ↔ Appointment**: Appuntamenti collegati ai dottori
 - **Patient ↔ Appointment**: Pazienti collegati agli appuntamenti
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 ### Dati Realistici e Specializzati
 - **Nomi italiani** per dottori e pazienti
 - **Indirizzi reali** nella zona di Chieti (66010)
 - **Specializzazioni mediche** specifiche per ogni studio
 - **Contatti e orari** realistici per studi medici
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 ### Performance e Sicurezza
 - **Creazione in batch** per grandi volumi
 - **Disabilitazione foreign key** durante il seeding
 - **Transazioni ottimizzate** per consistenza
 - **Verifica automatica** dell'integrità dei dati
+<<<<<<< HEAD
+## Esempi di Output
+### Script 20 Studi con Dottori
+=======
 
 ## Esempi di Output
 
 ### Script 20 Studi con Dottori
 
 ```bash
+>>>>>>> ef8dc24 (.)
 🏥 Creazione 20 studi medici con postal_code = 66010 e dottori collegati...
 ✅ Studio creato: Centro Medico Chieti Centro (ID: 1)
 ✅ Studio creato: Studio Dentistico Chieti Nord (ID: 2)
 ...
 👨‍⚕️ Dottore creato: Dr. Mario Rossi - Cardiologia per studio Centro Medico Chieti Centro
 👨‍⚕️ Dottore creato: Dr. Anna Bianchi - Dermatologia per studio Studio Dentistico Chieti Nord
+<<<<<<< HEAD
+✅ SUCCESSO: Tutti gli studi hanno almeno un dottore collegato!
+### Script 1000 Record
+=======
 ...
 ✅ SUCCESSO: Tutti gli studi hanno almeno un dottore collegato!
 ```
@@ -320,12 +379,28 @@ php artisan tinker
 
 ```bash
 >>>>>>> ea169dcc (.)
+>>>>>>> ef8dc24 (.)
 🚀 Inizializzazione seeding massivo SaluteOra - 1000 record per modello...
 📊 RISULTATO FINALE:
   - Studi creati: 1000
   - Dottori totali: 1000
   - Pazienti totali: 1000
   - Appuntamenti totali: 500
+<<<<<<< HEAD
+# Sincronizza un modulo specifico
+./git_sync_subtree.sh modules/users git@github.com:org/users.git
+# Sincronizza con branch specifico
+REMOTE_BRANCH=develop ./git_sync_subtree.sh modules/auth git@github.com:org/auth.git
+./scripts/git/git_sync_subtree.sh modules/users git@github.com:org/users.git
+REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
+# Genera riassunto PHPStan
+./scripts/phpstan/generate_phpstan_summary.sh
+## Documentazione Correlata
+- [Database Seeding](../docs/database-seeding.md) - Documentazione completa seeding
+- [Organizzazione Script](../docs/script-organization.md) - Regole generali script
+- [Quick Start Seeding](database/seeding/QUICK_START.md) - Guida rapida all'utilizzo
+## Best Practices
+=======
 
 ## Regola Fondamentale
 
@@ -477,38 +552,54 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 
 ## Best Practices
 
+>>>>>>> ef8dc24 (.)
 ### Prima dell'Esecuzione
 - Backup del database esistente
 - Verifica spazio disco disponibile
 - Controllo configurazione ambiente
 - Test su ambiente di sviluppo
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 ### Durante l'Esecuzione
 - Monitorare output e progressi
 - Verificare statistiche intermedie
 - Controllare utilizzo risorse
 - Gestire eventuali errori
+<<<<<<< HEAD
+=======
 
+>>>>>>> ef8dc24 (.)
 ### Dopo l'Esecuzione
 - Verificare integrità relazioni
 - Controllare statistiche finali
 - Testare funzionalità applicazione
 - Documentare modifiche effettuate
+<<<<<<< HEAD
+## Troubleshooting
+=======
 
 ## Troubleshooting
 
+>>>>>>> ef8dc24 (.)
 ### Errori Comuni
 1. **Modulo non trovato**: Verificare installazione modulo SaluteOra
 2. **Factory non trovato**: Controllare esistenza factory nel modulo
 3. **Errore database**: Verificare migrazioni e configurazione
 4. **Memoria insufficiente**: Utilizzare script in batch più piccoli
+<<<<<<< HEAD
+=======
 
 >>>>>>> ea169dcc (.)
+>>>>>>> ef8dc24 (.)
 ### Soluzioni
 1. **Eseguire migrazioni**: `php artisan migrate`
 2. **Verificare autoload**: `composer dump-autoload`
 3. **Controllare namespace**: Verificare struttura moduli
 4. **Testare connessione**: Verificare configurazione database
+<<<<<<< HEAD
+=======
 >>>>>>> 71ff9e32 (.)
 ```
 
@@ -1003,11 +1094,27 @@ REMOTE_BRANCH=develop ./git_sync_subtree.sh modules/auth git@github.com:org/auth
 
 ### Errori Comuni
 
+>>>>>>> ef8dc24 (.)
 1. **Prefix Option Mancante**
    ```bash
    fatal: you must provide the --prefix option
    ```
    ✅ **Soluzione:** Verifica il path del subtree
+<<<<<<< HEAD
+2. **Push Rejected**
+   ! [rejected] dev -> dev (non-fast-forward)
+   ✅ **Soluzione:** Esegui prima un pull
+   **Soluzione**: Verifica che il path del subtree sia corretto
+## Note Importanti
+- **Regola fondamentale**: Script SEMPRE in `bashscripts/`, MAI in `laravel/`
+- **Categorizzazione**: Organizzare script per funzionalità e modulo
+- **Documentazione**: Aggiornare sempre docs e README
+- **Testing**: Testare sempre in ambiente di sviluppo prima della produzione
+---
+**Ultimo aggiornamento**: Gennaio 2025
+**Versione**: 2.0
+**Compatibilità**: Laravel 10+, Moduli SaluteOra/SaluteMo
+=======
 
 2. **Push Rejected**
    ```bash
@@ -1247,3 +1354,4 @@ This toolkit addresses these challenges by providing automated tools that simpli
 >>>>>>> 71ff9e32 (.)
 >>>>>>> ec52a6b4 (.)
 >>>>>>> e0c964a3 (first)
+>>>>>>> ef8dc24 (.)

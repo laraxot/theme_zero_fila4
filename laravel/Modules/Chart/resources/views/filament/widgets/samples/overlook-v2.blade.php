@@ -1,14 +1,7 @@
 <x-filament-widgets::widget id="overlook-widget" @class(['hidden' => ! $data])>
-    <x-filament::grid
-        :default="$grid['default'] ?? 1"
-        :sm="$grid['sm'] ?? null"
-        :md="$grid['md'] ?? null"
-        :lg="$grid['lg'] ?? null"
-        :xl="$grid['xl'] ?? null"
-        class="gap-6"
-    >
+    <div class="grid gap-6 grid-cols-{{ $grid['default'] ?? 1 }} {{ isset($grid['sm']) ? 'sm:grid-cols-' . $grid['sm'] : '' }} {{ isset($grid['md']) ? 'md:grid-cols-' . $grid['md'] : '' }} {{ isset($grid['lg']) ? 'lg:grid-cols-' . $grid['lg'] : '' }} {{ isset($grid['xl']) ? 'xl:grid-cols-' . $grid['xl'] : '' }}">
         @foreach ($data as $resource)
-            <x-filament::grid.column>
+            <div>
                 <a
                     href="{{ $resource['url'] }}"
                     @if ($this->shouldShowTooltips($resource['raw_count']))
@@ -48,13 +41,12 @@
                         @if ($resource['icon'])
                             <x-filament::icon
                                 :icon="$resource['icon']"
-                                :size="24"
                                 class="absolute w-auto transition left-2 text-primary-500 h-36 z-1 overlook-icon -bottom-12 opacity-10 dark:opacity-10 group-hover:scale-110 group-hover:-rotate-12 group-hover:opacity-30"
                             />
                         @endif
                     </x-filament::section>
                 </a>
-            </x-filament::grid.column>
+            </div>
         @endforeach
-    </x-filament::grid>
+    </div>
 </x-filament-widgets::widget>

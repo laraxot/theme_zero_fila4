@@ -1,9 +1,0 @@
----
-description:
-globs:
-alwaysApply: false
----
-## Console Commands Filosofia
-- La responsabilità della registrazione dei comandi console è della base, non del modulo
-- Ogni modulo si occupa solo della propria logica di dominio
-- Chiarezza e separazione delle responsabilità = codice più pulito
