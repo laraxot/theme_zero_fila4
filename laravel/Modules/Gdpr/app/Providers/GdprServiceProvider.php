@@ -36,6 +36,4 @@ class GdprServiceProvider extends XotBaseServiceProvider
             $router->pushMiddlewareToGroup('web', CookieConsentMiddleware::class);
         }
     }
-
-    
 }

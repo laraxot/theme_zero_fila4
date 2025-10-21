@@ -1,6 +1,8 @@
 # 🛠️ Soluzioni Comuni per Problemi Git e Bash
 
 ## 🔧 Problemi di Interprete Bash
+<<<<<<< HEAD
+=======
 
 ### Fix "bad interpreter: No such file or directory"
 ```bash
@@ -17,6 +19,7 @@ chmod +x nomefile.sh
 ## 🔄 Configurazione Git Avanzata
 
 ### Setup Repository e Remote
+>>>>>>> ef8dc24 (.)
 ```bash
 # Fix per "bad interpreter: No such file or directory"
 sed -i -e 's/\r$//' nomefile.sh
@@ -68,6 +71,8 @@ git init
 git add .
 git commit -m "Initial commit"
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 # Configura remote principale
 git remote add origin <url>
@@ -378,6 +383,7 @@ git mergetool
 - **Test SSH** dopo ogni modifica configurazione
 - **Commit frequenti** con messaggi descrittivi
 - **Pull prima** di ogni push su branch condivisi
+>>>>>>> ef8dc24 (.)
 # Configura remote
 git remote add origin <url>
 git push -u origin main
@@ -433,6 +439,8 @@ Soluzione: sudo chmod 777 -R .
 sudo update-alternatives --config php
 ```
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -451,3 +459,4 @@ composer go
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+>>>>>>> ef8dc24 (.)

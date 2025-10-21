@@ -9,12 +9,13 @@
     ],
     "license": "MIT",
     "require": {
-        "laravel/framework": "^12.0",
-        "nwidart/laravel-modules": "*",
         "filament/filament": "^4.0",
+        "laravel/framework": "^12.0",
+        "livewire/flux": "^2.0",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.0",
-        "livewire/flux": "^2.0"
+        "nwidart/laravel-modules": "*",
+        "spatie/color": "^1.8"
     },
     "repositories": [
 
