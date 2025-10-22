@@ -1,0 +1,138 @@
+---
+description: Regole per mantenere la neutralità nella documentazione dei moduli, assicurando che la documentazione sia generica, riutilizzabile e priva di riferimenti specifici a progetti particolari.
+globs: *.md, docs/**/*.md, Modules/*/docs/**/*.md
+---
+
+# Regole per la Neutralità della Documentazione dei Moduli
+
+## When
+
+- Stai creando o modificando documentazione all'interno delle cartelle `docs` dei moduli
+- Stai documentando componenti, funzionalità o processi che potrebbero essere riutilizzati in progetti diversi
+- Stai scrivendo README o guide per moduli che sono progettati per essere riutilizzabili
+- Stai aggiornando documentazione esistente che contiene riferimenti specifici a progetti
+- Stai creando esempi di codice o casi d'uso per moduli
+
+## Then
+
+- MAI menzionare nomi di progetti specifici nella documentazione dei moduli
+- Utilizzare termini generici come 'l'applicazione', 'il sistema', 'questo modulo'
+- Mantenere la documentazione generica e riutilizzabile
+- Includere almeno 5 collegamenti bidirezionali ad altri documenti correlati
+- Strutturare la documentazione in modo coerente con sezioni standard
+- Fornire esempi di codice generici che non contengono riferimenti specifici a progetti
+- Utilizzare placeholder generici per nomi di database, domini, ecc.
+
+## Because
+
+- I moduli sono componenti riutilizzabili che vengono utilizzati in più progetti
+- La documentazione specifica per un progetto limita la riutilizzabilità dei moduli
+- I riferimenti a progetti specifici creano confusione quando il modulo viene utilizzato in contesti diversi
+- I collegamenti bidirezionali migliorano la navigabilità e la coerenza della documentazione
+- Una struttura coerente facilita la comprensione e l'utilizzo della documentazione
+- Gli esempi generici sono più facilmente adattabili a contesti diversi
+
+## Examples
+
+### Riferimenti Generici vs Specifici
+
+```markdown
+<!-- ERRATO -->
+# Modulo Patient
+
+Questo modulo gestisce i pazienti nel sistema e si integra con il database principale dell'applicazione.
+
+<!-- CORRETTO -->
+# Modulo Patient
+
+Questo modulo gestisce i pazienti nel sistema e si integra con il database principale dell'applicazione.
+```
+
+### Struttura Coerente della Documentazione
+
+```markdown
+# Nome del Modulo
+
+## Introduzione
+Breve descrizione del modulo e del suo scopo.
+
+## Collegamenti correlati
+- [Indice documentazione](/laravel/Modules/ModuloX/docs/INDEX.md)
+- [Documentazione correlata 1](/laravel/Modules/ModuloX/docs/RELATED1.md)
+- [Documentazione correlata 2](/laravel/Modules/ModuloX/docs/RELATED2.md)
+- [Documentazione correlata 3](/laravel/Modules/ModuloY/docs/RELATED3.md)
+- [Documentazione correlata 4](/laravel/Modules/ModuloZ/docs/RELATED4.md)
+
+## Funzionalità
+Descrizione delle funzionalità principali.
+
+## Installazione
+Istruzioni per l'installazione.
+
+## Configurazione
+Opzioni di configurazione disponibili.
+
+## Utilizzo
+Esempi di utilizzo.
+
+## API
+Documentazione dell'API.
+
+## Best Practices
+Consigli per l'utilizzo ottimale.
+```
+
+### Esempi di Codice Generici
+
+```php
+// ERRATO
+$config = [
+    'database' => '<nome progetto>_production',
+    'domain' => '<nome progetto>.com',
+    'admin_email' => 'admin@<nome progetto>.com',
+];
+
+// CORRETTO
+$config = [
+    'database' => 'app_production',
+    'domain' => 'example.com',
+    'admin_email' => 'admin@example.com',
+];
+```
+
+### Collegamenti Bidirezionali
+
+```markdown
+<!-- In /laravel/Modules/Patient/docs/Models/Doctor.md -->
+## Collegamenti correlati
+- [Indice documentazione Patient](/laravel/Modules/Patient/docs/INDEX.md)
+- [Modello Patient](/laravel/Modules/Patient/docs/Models/Patient.md)
+- [Workflow registrazione dottori](/laravel/Modules/Patient/docs/Models/DoctorRegistrationWorkflow.md)
+- [Enum DoctorStatus](/laravel/Modules/Patient/docs/Enums/DoctorStatus.md)
+- [Notifiche email](/laravel/Modules/Patient/docs/notifications/EMAIL_NOTIFICATIONS.md)
+
+<!-- In /laravel/Modules/Patient/docs/Models/Patient.md -->
+## Collegamenti correlati
+- [Indice documentazione Patient](/laravel/Modules/Patient/docs/INDEX.md)
+- [Modello Doctor](/laravel/Modules/Patient/docs/Models/Doctor.md)
+- [Workflow registrazione pazienti](/laravel/Modules/Patient/docs/Models/PatientRegistrationWorkflow.md)
+- [Enum PatientStatus](/laravel/Modules/Patient/docs/Enums/PatientStatus.md)
+- [Notifiche email](/laravel/Modules/Patient/docs/notifications/EMAIL_NOTIFICATIONS.md)
+```
+
+## Common Pitfalls
+
+- **Errore**: Includere nomi di progetti specifici nella documentazione
+  **Soluzione**: Utilizzare termini generici come 'l'applicazione', 'il sistema', 'questo modulo'
+
+- **Errore**: Hardcodare nomi di database, domini o email specifici negli esempi
+  **Soluzione**: Utilizzare placeholder generici come 'app_production', 'example.com', 'admin@example.com'
+
+- **Errore**: Creare documentazione isolata senza collegamenti ad altri documenti
+  **Soluzione**: Includere almeno 5 collegamenti bidirezionali ad altri documenti correlati
+
+- **Errore**: Utilizzare strutture di documentazione incoerenti tra moduli
+  **Soluzione**: Seguire una struttura standard con sezioni predefinite
+
+- **Errore**: Descrivere funzionalità specifiche di un progetto che non sono parte del modulo base
+  **Soluzione**: Concentrarsi sulle funzionalità core del modulo che sono riutilizzabili in qualsiasi contesto

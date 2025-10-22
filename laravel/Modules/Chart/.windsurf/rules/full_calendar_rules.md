@@ -1,0 +1,325 @@
+---
+trigger: always_on
+description: Regole per l'implementazione del componente FullCalendar di Saade per Filament in Laraxot <nome progetto>
+globs: ["**/Filament/Widgets/*Calendar*.php", "**/Models/Evento.php"]
+---
+
+# Regole per il Componente FullCalendar in Laraxot <nome progetto>
+
+## Struttura di Base
+
+### Estensione BaseCalendarWidget
+
+Tutti i widget di calendario in qualsiasi modulo **DEVONO** estendere la classe base `BaseCalendarWidget` del modulo UI:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Modules\UI\Filament\Widgets\BaseCalendarWidget;
+
+class MioCalendarioWidget extends BaseCalendarWidget
+{
+    // Implementazione
+}
+```
+
+## Modelli Eventi
+
+### ✅ DO - Utilizzare il modello appropriato del modulo
+
+```php
+/**
+ * Modello degli eventi.
+ *
+ * @var class-string<\Illuminate\Database\Eloquent\Model>
+ */
+public string $model = Evento::class;
+```
+
+### ❌ DON'T - Non utilizzare direttamente modelli generici o di altri moduli
+
+```php
+// NON FARE MAI QUESTO
+public string $model = \App\Models\Event::class;
+```
+
+## Configurazione Widget
+
+### ✅ DO - Configurare completamente nel metodo setUp
+
+```php
+/**
+ * Configurazione delle proprietà del widget.
+ *
+ * @return void
+ */
+public function setUp(): void
+{
+    parent::setUp(); // Importante chiamare il parent
+
+    $this->selectable(true)
+        ->editable(true)
+        ->timezone(config('app.timezone'))
+        ->locale('it')
+        ->plugins(['dayGrid', 'timeGrid', 'list', 'interaction']);
+}
+```
+
+### ❌ DON'T - Non configurare proprietà fuori da setUp
+
+```php
+// NON FARE MAI QUESTO
+public function __construct()
+{
+    $this->selectable = true;
+    $this->editable = true;
+}
+```
+
+## Schema Form
+
+### ✅ DO - Implementare getFormSchema con traduzioni
+
+```php
+/**
+ * Schema del form per la creazione/modifica degli eventi.
+ *
+ * @return array<int, Forms\Components\Component>
+ */
+public function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('titolo')
+            ->required(),
+        Forms\Components\Grid::make()
+            ->schema([
+                Forms\Components\DateTimePicker::make('data_inizio')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('data_fine')
+                    ->required(),
+            ]),
+    ];
+}
+```
+
+### ❌ DON'T - Non utilizzare etichette hardcoded
+
+```php
+// NON FARE MAI QUESTO
+public function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('titolo')
+            ->label('Titolo')
+            ->required(),
+    ];
+}
+```
+
+## Fetch Events
+
+### ✅ DO - Utilizzare EventData con tipizzazione corretta
+
+```php
+/**
+ * Recupera gli eventi da visualizzare nel calendario.
+ *
+ * @param array<string, mixed> $fetchInfo
+ * 
+ * @return array<int, array<string, mixed>>
+ */
+public function fetchEvents(array $fetchInfo): array
+{
+    return Evento::query()
+        ->where('data_inizio', '>=', $fetchInfo['start'])
+        ->where('data_fine', '<=', $fetchInfo['end'])
+        ->get()
+        ->map(
+            fn (Evento $evento) => EventData::make()
+                ->id($evento->id)
+                ->title($evento->titolo)
+                ->start($evento->data_inizio)
+                ->end($evento->data_fine)
+        )
+        ->toArray();
+}
+```
+
+### ❌ DON'T - Non usare array non tipizzati
+
+```php
+// NON FARE MAI QUESTO
+public function fetchEvents($fetchInfo)
+{
+    return Evento::all()->map(function($evento) {
+        return [
+            'title' => $evento->titolo,
+            'start' => $evento->data_inizio,
+            'end' => $evento->data_fine,
+        ];
+    })->toArray();
+}
+```
+
+## Azioni Calendario
+
+### ✅ DO - Implementare correttamente le azioni con tipizzazione
+
+```php
+/**
+ * Azioni del modale.
+ *
+ * @return array<Actions\EditAction|Actions\DeleteAction>
+ */
+protected function modalActions(): array
+{
+    return [
+        Actions\EditAction::make()
+            ->mountUsing(
+                function (Evento $record, Forms\Form $form, array $arguments) {
+                    $form->fill([
+                        'titolo' => $record->titolo,
+                        'data_inizio' => $arguments['event']['start'] ?? $record->data_inizio,
+                        'data_fine' => $arguments['event']['end'] ?? $record->data_fine,
+                    ]);
+                }
+            ),
+        Actions\DeleteAction::make(),
+    ];
+}
+```
+
+### ❌ DON'T - Non utilizzare tipizzazione debole o nomi inconsistenti
+
+```php
+// NON FARE MAI QUESTO
+protected function modalActions()
+{
+    return [
+        Actions\EditAction::make()
+            ->mountUsing(function ($record, $form, $arguments) {
+                $form->fill([
+                    'title' => $record->titolo,
+                ]);
+            }),
+    ];
+}
+```
+
+## Eventi JavaScript
+
+### ✅ DO - Implementare correttamente gli hook JavaScript
+
+```php
+/**
+ * Personalizzazione del comportamento JavaScript per il rendering degli eventi.
+ *
+ * @return string
+ */
+public function eventDidMount(): string
+{
+    return <<<JS
+function({ event, el }) {
+    el.setAttribute("x-tooltip", "tooltip");
+    el.setAttribute("x-data", "{ tooltip: '"+event.title+"' }");
+}
+JS;
+}
+```
+
+### ❌ DON'T - Non usare sintassi non valida o metodi non documentati
+
+```php
+// NON FARE MAI QUESTO
+public function eventMount()
+{
+    return "function(info) { console.log(info); }";
+}
+```
+
+## Traduzioni
+
+### ✅ DO - Utilizzare file di traduzione dedicati
+
+Le traduzioni devono essere in:
+1. `Modules/ModuleName/lang/it/calendario.php` per le traduzioni specifiche del modulo
+2. Struttura completa per azioni e campi
+
+```php
+// Modules/Ptv/lang/it/calendario.php
+return [
+    'widget' => [
+        'title' => 'Calendario Eventi',
+        'actions' => [
+            'create' => [
+                'label' => 'Nuovo Evento',
+                'modal' => [
+                    'heading' => 'Crea Evento',
+                ],
+                'messages' => [
+                    'success' => 'Evento creato con successo',
+                ],
+            ],
+        ],
+        'fields' => [
+            'titolo' => [
+                'label' => 'Titolo',
+                'placeholder' => 'Inserisci il titolo dell\'evento',
+            ],
+        ],
+    ],
+];
+```
+
+### ❌ DON'T - Non utilizzare traduzioni semplificate o hardcoded
+
+```php
+// NON FARE MAI QUESTO
+return [
+    'widget_title' => 'Calendario',
+    'new_event' => 'Nuovo Evento',
+    'event_title' => 'Titolo',
+];
+```
+
+## Documentazione
+
+La documentazione del componente FullCalendar deve essere mantenuta in:
+1. `Modules/UI/docs/components/full_calendar.md` (componente base)
+2. `Modules/ModuleName/docs/features/full_calendar.md` (implementazione specifica)
+
+Ogni modifica deve essere documentata in entrambi i luoghi con collegamenti bidirezionali.
+
+## PHPStan Compliance
+
+Tutte le implementazioni devono:
+1. Usare `declare(strict_types=1);`
+2. Avere tipi di ritorno espliciti
+3. Avere tipi di parametri
+4. Avere annotazioni PHPDoc complete
+5. Passare la validazione PHPStan livello 9+
+
+## Checklist Implementazione
+
+- [ ] Estende `BaseCalendarWidget` del modulo UI
+- [ ] Modello corretto nel modulo specifico
+- [ ] Configurazione completa in `setUp()`
+- [ ] Schema form con validazione appropriata
+- [ ] Metodo `fetchEvents()` correttamente tipizzato
+- [ ] Azioni modalità con tipizzazione corretta
+- [ ] Traduzioni complete nei file di lingua
+- [ ] Documentazione aggiornata in entrambi i moduli
+- [ ] PHPDoc completo per tutte le proprietà e metodi
+- [ ] Passaggio PHPStan livello 9+
+
+## Backlink e Riferimenti
+
+- [Documentazione Modulo UI](../../laravel/Modules/UI/docs/components/full_calendar.md)
+- [Documentazione Modulo Ptv](../../laravel/Modules/Ptv/docs/features/full_calendar.md)
+- [Documentazione Ufficiale Saade FullCalendar](https://github.com/saade/filament-fullcalendar)
+
+*Ultimo aggiornamento: giugno 2025*

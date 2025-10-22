@@ -1,0 +1,33 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+Please remember @Memory
+
+- Usare traduzioni in lang/{locale}
+- Convenzione naming chiavi: modulo::risorsa.fields.campo.label
+
+## Frontend
+- Frontoffice usa Folio+Volt+Livewire+Widget
+- Niente rotte in web.php
+- Template in Themes/{Theme}/resources/views/pages/
+- Widget devono estendere XotBaseWidget con HasForms
+- Non estendere direttamente classi Filament
+
+## Componenti UI
+- Usare sempre componenti nativi Filament:
+  - x-filament::icon
+  - x-filament::button
+  - x-filament::dropdown
+  - x-filament::avatar
+- MAI utilizzare componenti inesistenti
+- Per separatori nei dropdown: <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+
+## Volt e Folio
+- La direttiva @volt deve essere SEMPRE la prima cosa nel file Folio
+- NON utilizzare @volt all'interno del markup HTML
+- Utilizzare SEMPRE i layout corretti:
+  - <x-layouts.app>
+  - <x-layouts.guest>
+- MAI utilizzare layout inesistenti

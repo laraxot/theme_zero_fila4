@@ -1,0 +1,12 @@
+<?php
+
+namespace Modules\Quaeris\Providers;
+
+use Modules\Xot\Providers\XotBaseContextServiceProvider;
+
+class FilamentServiceProvider extends XotBaseContextServiceProvider
+{
+    public static string $name = 'quaeris-filament';
+    public static string $module = 'Quaeris';
+
+}

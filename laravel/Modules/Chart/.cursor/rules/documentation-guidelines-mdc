@@ -1,0 +1,12 @@
+# Documentation Guidelines
+
+**When** you are creating or updating documentation for the project
+
+**Then** ensure that all documentation is generic, reusable across projects, contains at least 5 bidirectional links to other documentation files, and adheres to project rules. Avoid project-specific references in module documentation.
+
+**Because** this maintains modularity, enhances usability, and ensures that documentation remains applicable in various contexts.
+
+**Examples**
+
+- Correct: Use generic terms like 'the application' or 'this module' in module documentation.
+- Incorrect: Mention specific project names like '<nome progetto>' in module documentation.

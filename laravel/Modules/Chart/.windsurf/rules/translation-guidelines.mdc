@@ -1,0 +1,15 @@
+# Translation Guidelines
+
+**When** you are adding or modifying text in Filament components or any user-facing elements
+
+**Then** use translations located in `lang/{locale}` directories, following the naming convention `modulo::risorsa.fields.campo.label` for keys.
+
+**Because** this ensures centralized management of translations, making the application consistent and maintainable across different languages.
+
+**Examples**
+
+- Correct: Use keys like `module::resource.fields.name.label` in language files.
+- Incorrect: Hardcode text or use `->label()` method directly in components.
+
+**See**:
+- [Localization Documentation](../Modules/Xot/docs/LOCALIZATION.md)

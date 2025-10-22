@@ -1,0 +1,157 @@
+---
+description: Regole specifiche per le Action Filament custom in Laraxot/<nome progetto>
+globs: ["**/*.php", "**/app/Filament/**/*.php", "**/Filament/**/*.php"]
+alwaysApply: true
+---
+
+# Regole per Action Filament Custom (2025-06)
+
+## Principi Fondamentali
+
+- **Configurazione via setUp():** Ogni action custom DEVE configurare tutte le proprietà tramite override di setUp()
+- **Traduzioni Obbligatorie:** Tutte le label e messaggi DEVONO provenire dai file di traduzione
+- **Documentazione Completa:** Ogni action DEVE essere documentata nella cartella docs del modulo
+- **Tipizzazione Rigorosa:** Tutti i metodi DEVONO avere tipi di ritorno e parametri espliciti
+- **Test di Regressione:** Ogni bugfix DEVE includere test di regressione
+
+## Configurazione Corretta
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Performance\Filament\Actions;
+
+use Filament\Actions\Action;
+use Illuminate\Database\Eloquent\Model;
+
+class ApprovaAction extends Action
+{
+    /**
+     * Configura l'azione.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this
+            ->label(trans('performance::actions.approva.label'))
+            ->icon('heroicon-o-check')
+            ->color('success')
+            ->requiresConfirmation()
+            ->modalHeading(trans('performance::actions.approva.modal_heading'))
+            ->modalDescription(trans('performance::actions.approva.modal_description'))
+            ->successNotificationTitle(trans('performance::actions.approva.success'));
+    }
+
+    /**
+     * @param Model $record
+     * @return void
+     */
+    public function handle(Model $record): void
+    {
+        // Implementazione
+    }
+}
+```
+
+## File di Traduzione
+
+```php
+// Modules/Performance/lang/it/actions.php
+return [
+    'approva' => [
+        'label' => 'Approva',
+        'modal_heading' => 'Conferma approvazione',
+        'modal_description' => 'Sei sicuro di voler approvare questo record?',
+        'success' => 'Record approvato con successo',
+        'error' => 'Si è verificato un errore durante l\'approvazione'
+    ],
+];
+```
+
+## ❌ Anti-pattern da Evitare
+
+```php
+// MAI fare questo
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->label('Approva')  // NO! Label hardcoded
+        ->icon('heroicon-o-check');
+}
+```
+
+## Inizializzazione e Nome
+
+- Usare un nome univoco e documentato:
+  ```php
+  public static function make(?string $name = null): static
+  {
+      $name = $name ?? 'approva-record';
+      return parent::make($name);
+  }
+  ```
+
+- Se l'azione è per un Table o Form, usare il metodo appropriato:
+  ```php
+  public static function getDefaultName(): ?string
+  {
+      return 'approva-record';
+  }
+  ```
+
+## Gestione Autorizzazioni
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->authorize('approve', fn (Model $record) => $record);
+}
+```
+
+## Documentazione Richiesta
+
+Ogni action custom deve essere documentata con:
+
+1. Scopo dell'action
+2. Parametri e tipi di ritorno
+3. Eventi generati
+4. Autorizzazioni richieste
+5. Esempi di utilizzo
+
+Aggiornare la documentazione sia nel modulo che nella root.
+
+## Validazione e Testing
+
+- Eseguire validazione PHPStan (livello 9+)
+- Implementare test per coprire:
+  - Autorizzazioni
+  - Funzionalità base
+  - Gestione errori
+  - Effetti collaterali
+  - Notifiche
+
+## Integrazione con Form/Table
+
+```php
+public function table(Table $table): Table
+{
+    return $table
+        ->actions([
+            ApprovaAction::make(),
+        ]);
+}
+```
+
+## Note Importanti
+
+- Mai usare stringhe hardcoded per label, messaggi o descrizioni
+- Ogni azione deve seguire il principio di responsabilità singola
+- Documentare sempre gli effetti collaterali delle azioni
+- Utilizzare tipizzazione rigorosa per tutti i metodi
+- Implementare autorizzazioni appropriate per ogni azione

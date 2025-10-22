@@ -1,0 +1,62 @@
+-- tutte le risposte avute email+sms
+SELECT 
+    lime_survey_892883.submitdate,
+    lime_tokens_892883.sent
+FROM 
+    lime_survey_892883
+INNER JOIN 
+    lime_tokens_892883
+    ON lime_tokens_892883.token = lime_survey_892883.token
+WHERE 
+    lime_survey_892883.submitdate >= '2022-11-11'
+    AND lime_survey_892883.submitdate <= '2025-01-01';
+    
+-- risposte email della dashboard v2
+SELECT 
+    lime_survey_892883.submitdate,
+    u.sent
+FROM 
+    `lime_survey_892883`
+INNER JOIN 
+    `lime_tokens_892883` AS `u`
+    ON `u`.`token` = `lime_survey_892883`.`token`
+WHERE 
+    `submitdate` IS NOT NULL
+    AND `u`.`sent` != 'N'
+    AND `u`.`sent` >= '2022-11-11'
+    AND `u`.`sent` <= '2025-01-01';
+    
+-- risposte sms della dashboard v2
+SELECT 
+    `lime_survey_892883`.`submitdate`,
+    `B`.`sms_sent_at`
+FROM 
+    `lime_survey_892883`
+INNER JOIN 
+    `geek_quaeris_backup_server_18_01_2025`.`contacts` AS `B`
+    ON `B`.`token` = `lime_survey_892883`.`token` 
+    AND `B`.`token` IS NOT NULL
+WHERE 
+    `lime_survey_892883`.`submitdate` IS NOT NULL
+    AND `B`.`sms_count` != '0'
+    AND `B`.`sms_sent_at` >= '2022-11-11'
+    AND `B`.`sms_sent_at` <= '2025-01-25';
+
+
+-- tutti gli inviti email della dashboard v2
+SELECT *
+FROM lime_tokens_892883
+WHERE 
+    `sent` != 'N'
+    AND `sent` >= '2022-11-11'
+    AND `sent` <= '2025-01-01';
+    
+-- inviti sms della dashboard v2
+SELECT *
+FROM 
+    `geek_quaeris_backup_server_18_01_2025`.`contacts`
+WHERE 
+    `survey_pdf_id` = 16
+    AND `sms_count` != '0'
+    AND `sms_sent_at` >= '2022-11-11'
+    AND `sms_sent_at` <= '2025-01-01';

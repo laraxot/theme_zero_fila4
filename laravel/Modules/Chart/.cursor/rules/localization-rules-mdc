@@ -1,0 +1,29 @@
+# Localization Rules
+
+**When**: Implementing localization or handling multilingual content in the application.
+
+**Then**:
+- Use `mcamara/laravel-localization` for localization.
+- Use methods `LaravelLocalization::getCurrentLocale()` and `getSupportedLocales()` to handle locale information.
+- URLs must include the language prefix: `/{locale}/{se#C3%83%E2%80%A6%E2%80%A6`.
+
+**Because**:
+- Provides a robust framework for managing multiple languages.
+- Ensures that the current locale and supported locales are dynamically handled.
+- Maintains SEO and usability by including locale in URLs.
+
+**Examples**:
+
+*Correct*:
+```php
+$locale = LaravelLocalization::getCurrentLocale();
+$url = url('/' . $locale . '/pages/about');
+```
+
+*Incorrect*:
+```php
+$url = url('/pages/about');
+```
+
+**See**:
+- [Localization Guidelines](../Modules/Xot/docs/LOCALIZATION_GUIDELINES.md)
