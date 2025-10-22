@@ -1,0 +1,21 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Regola Path File Moduli Laravel
+
+Tutti i file di codice (Actions, Models, ecc.) dei moduli Laravel DEVONO essere posizionati nella cartella `app/` del modulo:
+
+- **Path corretto:** Modules/NomeModulo/app/Actions/...
+- **Path errato:** Modules/NomeModulo/Actions/...
+
+Motivazione: PSR-4, autoload Composer, coerenza, manutenzione.
+
+Esempio:
+```php
+// Corretto
+Modules/<nome progetto>/app/Actions/Patient/Calendar/FetchEventsAction.php
+// Errato
+Modules/<nome progetto>/Actions/Patient/Calendar/FetchEventsAction.php
+```

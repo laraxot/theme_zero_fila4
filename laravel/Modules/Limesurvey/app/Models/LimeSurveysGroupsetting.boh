@@ -1,0 +1,118 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+/**
+ * Class LimeSurveysGroupsetting.
+ *
+ * @property int         $gsid
+ * @property int|null    $owner_id
+ * @property string|null $admin
+ * @property string|null $adminemail
+ * @property string      $anonymized
+ * @property string|null $format
+ * @property string      $savetimings
+ * @property string|null $template
+ * @property string      $datestamp
+ * @property string      $usecookie
+ * @property string      $allowregister
+ * @property string      $allowsave
+ * @property int|null    $autonumber_start
+ * @property string      $autoredirect
+ * @property string      $allowprev
+ * @property string      $printanswers
+ * @property string      $ipaddr
+ * @property string      $ipanonymize
+ * @property string      $refurl
+ * @property int|null    $showsurveypolicynotice
+ * @property string      $publicstatistics
+ * @property string      $publicgraphs
+ * @property string      $listpublic
+ * @property string      $htmlemail
+ * @property string      $sendconfirmation
+ * @property string      $tokenanswerspersistence
+ * @property string      $assessments
+ * @property string      $usecaptcha
+ * @property string|null $bounce_email
+ * @property string|null $attributedescriptions
+ * @property string|null $emailresponseto
+ * @property string|null $emailnotificationto
+ * @property int|null    $tokenlength
+ * @property string|null $showxquestions
+ * @property string|null $showgroupinfo
+ * @property string|null $shownoanswer
+ * @property string|null $showqnumcode
+ * @property string|null $showwelcome
+ * @property string|null $showprogress
+ * @property int|null    $questionindex
+ * @property int|null    $navigationdelay
+ * @property string|null $nokeyboard
+ * @property string|null $alloweditaftercompletion
+ */
+class LimeSurveysGroupsetting extends BaseModel {
+    protected $table = 'lime_surveys_groupsettings';
+    protected $primaryKey = 'gsid';
+    public $incrementing = false;
+    public $timestamps = false;
+
+    protected $casts = [
+        'gsid' => 'int',
+        'owner_id' => 'int',
+        'autonumber_start' => 'int',
+        'showsurveypolicynotice' => 'int',
+        'tokenlength' => 'int',
+        'questionindex' => 'int',
+        'navigationdelay' => 'int',
+    ];
+
+    protected $fillable = [
+        'owner_id',
+        'admin',
+        'adminemail',
+        'anonymized',
+        'format',
+        'savetimings',
+        'template',
+        'datestamp',
+        'usecookie',
+        'allowregister',
+        'allowsave',
+        'autonumber_start',
+        'autoredirect',
+        'allowprev',
+        'printanswers',
+        'ipaddr',
+        'ipanonymize',
+        'refurl',
+        'showsurveypolicynotice',
+        'publicstatistics',
+        'publicgraphs',
+        'listpublic',
+        'htmlemail',
+        'sendconfirmation',
+        'tokenanswerspersistence',
+        'assessments',
+        'usecaptcha',
+        'bounce_email',
+        'attributedescriptions',
+        'emailresponseto',
+        'emailnotificationto',
+        'tokenlength',
+        'showxquestions',
+        'showgroupinfo',
+        'shownoanswer',
+        'showqnumcode',
+        'showwelcome',
+        'showprogress',
+        'questionindex',
+        'navigationdelay',
+        'nokeyboard',
+        'alloweditaftercompletion',
+    ];
+}

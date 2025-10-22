@@ -1,0 +1,83 @@
+# Filament Resource Rules for <nome progetto> Project
+
+## Rule 1: Classes Extending XotBaseResource
+
+**Description**: When creating or updating Filament resource classes that extend `XotBaseResource`, certain properties and methods should not be explicitly defined as they are handled by the base class or through project-specific conventions.
+
+**Specific Guidelines**:
+- **Do NOT define** `protected static ?string $navigationGroup` in the resource class. Navigation grouping is managed by the framework or base class configurations.
+- **Do NOT define** `protected static ?string $navigationLabel` or `protected static ?string $pluralNavigationLabel` explicitly. Labels are likely managed through translation files or base class logic.
+- **Do NOT implement** `public static function table(Table $table): Table` unless explicitly required for custom column definitions not handled by the base class. Table configurations might be managed through other mechanisms in `XotBaseResource`.
+- **Do NOT implement** `public static function form(Form $form): Form` unless custom form fields are needed beyond what `getFormSchema()` provides.
+
+**Reasoning**:
+- The `XotBaseResource` class, part of the project's custom framework, likely provides default implementations or configurations for navigation properties and table/form definitions. Explicitly defining these can lead to conflicts or errors, as seen with class not found issues when the base class expects a different structure or namespace.
+- This rule prevents redundancy and ensures consistency with the project's architecture, avoiding unnecessary overrides that can cause maintenance issues or break expected functionality.
+- The error `Class 'App\Filament\Resources\XotBaseResource' not found` indicates that resources are expected to be in a specific namespace or structure managed by the `XotBasePanelProvider`, and explicit properties/methods might interfere with discovery or autoloading.
+
+**Examples**:
+```php
+// Incorrect Usage
+class MedicalHistoryResource extends XotBaseResource
+{
+    protected static ?string $navigationGroup = 'Patient Management';
+    protected static ?string $navigationLabel = 'Medical History';
+
+    public static function table(Table $table): Table
+    {
+        return $table->columns([
+            // column definitions
+        ]);
+    }
+}
+
+// Correct Usage
+class MedicalHistoryResource extends XotBaseResource
+{
+    protected static ?string $model = MedicalHistory::class;
+
+    public static function getFormSchema(): array
+    {
+        return [
+            // form field definitions
+        ];
+    }
+}
+```
+
+**Action Plan to Prevent Errors**:
+1. Always check if the resource class extends `XotBaseResource` before adding navigation properties or table/form methods.
+2. Use `getFormSchema()` for form definitions as it appears to be the preferred method in this project.
+3. If custom table configurations are needed, verify with project documentation or existing resources whether `table()` method is allowed or if there's a different approach (like a custom method or configuration file).
+4. Review existing resources in the `Modules/Xot/Filament/Resources` directory to understand the expected structure for resources extending `XotBaseResource`.
+5. Update autoloading with `composer dump-autoload` after making changes to ensure namespace issues are resolved.
+
+## Rule 2: Namespace Consistency for Filament Resources
+
+**Description**: Ensure all Filament resources are in the correct namespace as per project structure to prevent autoloading errors.
+
+**Specific Guidelines**:
+- Resources should be placed in `Modules/[ModuleName]/app/Filament/Resources/` directory.
+- Namespace should be `Modules\[ModuleName]\Filament\Resources`.
+- If custom base classes are used, ensure they are correctly referenced and autoloaded.
+
+**Reasoning**:
+- The error encountered suggests that the system couldn't find `App\Filament\Resources\XotBaseResource`, indicating a namespace mismatch or autoloading issue. Maintaining consistent namespaces ensures that the framework can locate and load all necessary classes.
+
+**Examples**:
+```php
+// Correct Namespace
+namespace Modules\<nome progetto>\Filament\Resources;
+
+use Modules\Xot\Filament\Resources\XotBaseResource;
+
+class UserModerationResource extends XotBaseResource
+{
+    // class definition
+}
+```
+
+**Action Plan to Prevent Errors**:
+1. Always verify the namespace of a resource matches the module structure.
+2. Check import statements for base classes to ensure they reference the correct namespace (`Modules\Xot\Filament\Resources\XotBaseResource`).
+3. Run `composer dump-autoload` after creating or moving resource files to update the autoloader.

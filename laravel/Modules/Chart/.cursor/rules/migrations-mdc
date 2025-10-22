@@ -1,0 +1,56 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Migration Best Practices
+
+## Regole Fondamentali
+- Ogni migrazione deve estendere `XotBaseMigration`
+- Implementare solo il metodo `up()`
+- Non implementare il metodo `down()`
+- Documentare la migrazione
+- Testare la migrazione
+
+## Struttura
+- Namespace corretto: `Database\Migrations` o `Modules\{Module}\Database\Migrations`
+- Nome classe in PascalCase con suffisso `Migration`
+- Metodi obbligatori: `up()`
+
+## Esempio Corretto
+```php
+// CORRETTO
+class CreateUsersTable extends XotBaseMigration
+{
+    public function up(): void
+    {
+        $this->schema->create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+    }
+}
+```
+
+## Best Practices
+- Migrazioni atomiche
+- Controllo esistenza colonne
+- Indici appropriati
+- Foreign key constraints
+- Test di rollback
+
+## Checklist
+- [ ] Migrazione documentata
+- [ ] Test scritti
+- [ ] Indici definiti
+- [ ] Foreign key definite
+- [ ] Performance ottimizzata
+
+## Collegamenti correlati
+- [Filament Best Practices](mdc:../.windsurf/rules/filament-best-practices.mdc)
+- [Validation Rules](mdc:../.windsurf/rules/validation.mdc)
+- [Error Handling](mdc:../.windsurf/rules/error-handling.mdc)
+- [Documentation Standards](mdc:../.windsurf/rules/documentation.mdc)
+- [Checklist di Ripartenza](mdc:../docs/checklist-di-ripartenza.md)

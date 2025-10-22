@@ -1,0 +1,42 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Memoria: Struttura Directory e Namespace
+
+## Regola Critica da Ricordare SEMPRE
+
+**TUTTI i file PHP devono essere in `app/` ma il namespace NON include `app`**
+
+### Mappatura Fondamentale
+- **File**: `Modules/<Nome>/app/Filament/Resources/UserResource.php`
+- **Namespace**: `Modules\<Nome>\Filament\Resources` (SENZA `app`)
+
+### Errori da NON Ripetere MAI
+- ❌ File fuori da `app/`: `Modules/<nome progetto>/Enums/UserType.php`
+- ❌ Namespace con `app`: `Modules\<nome progetto>\app\Filament\Resources`
+
+### Estensioni Obbligatorie
+- Filament Resources → `Modules\Xot\Filament\Resources\XotBaseResource`
+- Filament Pages → `Modules\Xot\Filament\Resources\Pages\XotBaseListRecords`
+- Filament Widgets → `Modules\Xot\Filament\Widgets\XotBaseWidget`
+
+### Proprietà/Metodi VIETATI in XotBaseResource
+- `protected static ?string $navigationGroup`
+- `protected static ?string $navigationLabel`
+- `protected static ?string $navigationIcon`
+- `public static function table(Table $table): Table`
+
+### Traduzioni
+- **MAI** usare `->label()` sui componenti
+- **SEMPRE** usare file di traduzione in `Modules/<Nome>/lang/`
+
+### Checklist Rapida
+- [ ] File in `app/`?
+- [ ] Namespace senza `app`?
+- [ ] Estende XotBase*?
+- [ ] Nessuna proprietà vietata?
+- [ ] Nessun `->label()`?
+
+**Questa memoria va consultata PRIMA di ogni modifica ai file PHP.**

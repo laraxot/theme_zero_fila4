@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+/**
+ * Class LimeUserInPermissionrole.
+ *
+ * @property int $ptid
+ * @property int $uid
+ */
+class LimeUserInPermissionrole extends BaseModel {
+    protected $fillable=[''];
+
+    protected $table = 'lime_user_in_permissionrole';
+    public $incrementing = false;
+    public $timestamps = false;
+
+    protected $casts = [
+        'ptid' => 'int',
+        'uid' => 'int',
+    ];
+}

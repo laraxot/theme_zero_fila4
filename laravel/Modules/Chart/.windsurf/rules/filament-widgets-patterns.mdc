@@ -1,0 +1,934 @@
+---
+description: Pattern e best practice per l'implementazione di Widget Filament in progetti Laraxot/<nome progetto>
+globs: ["**/Filament/Widgets/*.php"]
+alwaysApply: true
+---
+
+# Pattern per Widget Filament in Laraxot/<nome progetto>
+
+## Principi Fondamentali
+
+- **Namespace Corretto**: Usare `Modules\{ModuleName}\Filament\Widgets` (mai `App\Filament\Widgets`)
+- **Estensione**: Estendere widget base del modulo UI quando disponibili
+- **Traduzioni**: Tutte le label dai file di traduzione, mai stringhe hardcoded
+- **Tipizzazione**: Tipi di ritorno e parametri espliciti per ogni metodo
+- **Configurazione**: Centralizzare la configurazione in metodi dedicati e documentati
+
+## Struttura Base per i Widget
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Filament\Widgets\Widget;
+
+class CustomWidget extends Widget
+{
+    /**
+     * Vista del widget.
+     */
+    protected static string $view = 'modulename::filament.widgets.custom-widget';
+
+    /**
+     * Determina se il widget deve essere caricato in modo lazy.
+     */
+    protected static ?bool $isLazy = true;
+
+    /**
+     * Intervallo di polling per aggiornamenti automatici.
+     */
+    protected static ?string $pollingInterval = null;
+
+    /**
+     * Parametri da passare alla vista.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getViewData(): array
+    {
+        return [
+            'title' => __('modulename::widgets.custom_widget.title'),
+            'items' => $this->getItems(),
+        ];
+    }
+
+    /**
+     * Ottiene gli elementi da visualizzare nel widget.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, \Modules\ModuleName\Models\ModelName>
+     */
+    protected function getItems()
+    {
+        return \Modules\ModuleName\Models\ModelName::query()
+            ->latest()
+            ->limit(5)
+            ->get();
+    }
+}
+```
+
+## Pattern per Widget Specializzati
+
+### 1. StatsOverviewWidget
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Number;
+
+class StatsOverviewWidget extends BaseWidget
+{
+    /**
+     * Ordine di visualizzazione.
+     */
+    protected static ?int $sort = 1;
+
+    /**
+     * Ottiene le statistiche da visualizzare.
+     *
+     * @return array<Stat>
+     */
+    protected function getStats(): array
+    {
+        $totalCount = $this->getTotalCount();
+        $averageValue = $this->getAverageValue();
+        $completionRate = $this->getCompletionRate();
+
+        return [
+            $this->createTotalStat($totalCount),
+            $this->createAverageStat($averageValue),
+            $this->createCompletionStat($completionRate),
+        ];
+    }
+
+    /**
+     * Crea la statistica per il totale.
+     */
+    protected function createTotalStat(int $count): Stat
+    {
+        return Stat::make(
+            __('modulename::widgets.stats.total.label'),
+            Number::format($count)
+        )
+            ->description(__('modulename::widgets.stats.total.description'))
+            ->descriptionIcon('heroicon-m-arrow-trending-up')
+            ->chart($this->getTotalTrend())
+            ->color('success');
+    }
+
+    /**
+     * Crea la statistica per la media.
+     */
+    protected function createAverageStat(float $average): Stat
+    {
+        return Stat::make(
+            __('modulename::widgets.stats.average.label'),
+            Number::currency($average)
+        )
+            ->description(__('modulename::widgets.stats.average.description'))
+            ->descriptionIcon('heroicon-m-arrow-trending-down')
+            ->color('danger');
+    }
+
+    /**
+     * Crea la statistica per il tasso di completamento.
+     */
+    protected function createCompletionStat(float $rate): Stat
+    {
+        return Stat::make(
+            __('modulename::widgets.stats.completion.label'),
+            Number::percentage($rate)
+        )
+            ->description(__('modulename::widgets.stats.completion.description'))
+            ->color('warning');
+    }
+
+    /**
+     * Ottiene il conteggio totale.
+     */
+    protected function getTotalCount(): int
+    {
+        return \Modules\ModuleName\Models\ModelName::count();
+    }
+
+    /**
+     * Ottiene il valore medio.
+     */
+    protected function getAverageValue(): float
+    {
+        return (float) \Modules\ModuleName\Models\ModelName::avg('value') ?? 0;
+    }
+
+    /**
+     * Ottiene il tasso di completamento.
+     */
+    protected function getCompletionRate(): float
+    {
+        $total = \Modules\ModuleName\Models\ModelName::count();
+
+        if ($total === 0) {
+            return 0;
+        }
+
+        $completed = \Modules\ModuleName\Models\ModelName::where('is_completed', true)->count();
+
+        return $completed / $total;
+    }
+
+    /**
+     * Ottiene i dati di tendenza per il grafico.
+     *
+     * @return array<int, int>
+     */
+    protected function getTotalTrend(): array
+    {
+        return [7, 2, 10, 3, 15, 4, 17];
+    }
+}
+```
+
+### 2. ChartWidget Pattern Avanzato
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Carbon\Carbon;
+use Filament\Support\Colors\Color;
+use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+
+class ChartDataWidget extends ChartWidget
+{
+    /**
+     * Tipo di grafico.
+     */
+    protected static ?string $chartId = 'moduleNameChart';
+
+    /**
+     * Intervallo di aggiornamento.
+     */
+    protected static ?string $pollingInterval = '60s';
+
+    /**
+     * Filtro per intervallo temporale.
+     *
+     * @var string
+     */
+    public string $filter = 'month';
+
+    /**
+     * Filtri disponibili.
+     *
+     * @return array<string, string>
+     */
+    protected function getFilters(): array
+    {
+        return [
+            'day' => __('modulename::widgets.chart.filters.day'),
+            'week' => __('modulename::widgets.chart.filters.week'),
+            'month' => __('modulename::widgets.chart.filters.month'),
+            'year' => __('modulename::widgets.chart.filters.year'),
+        ];
+    }
+
+    /**
+     * Ottiene il titolo del widget.
+     */
+    protected function getHeading(): ?string
+    {
+        return __('modulename::widgets.chart.heading');
+    }
+
+    /**
+     * Ottiene la descrizione del widget.
+     */
+    protected function getDescription(): ?string
+    {
+        return __('modulename::widgets.chart.description');
+    }
+
+    /**
+     * Ottiene i dati per il grafico.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getData(): array
+    {
+        $data = $this->getChartData();
+
+        return [
+            'datasets' => [
+                [
+                    'label' => __('modulename::widgets.chart.datasets.primary.label'),
+                    'data' => $data->pluck('value')->toArray(),
+                    'backgroundColor' => 'rgba(59, 130, 246, 0.5)',
+                    'borderColor' => 'rgb(59, 130, 246)',
+                ],
+                [
+                    'label' => __('modulename::widgets.chart.datasets.secondary.label'),
+                    'data' => $data->pluck('secondary_value')->toArray(),
+                    'backgroundColor' => 'rgba(16, 185, 129, 0.5)',
+                    'borderColor' => 'rgb(16, 185, 129)',
+                ]
+            ],
+            'labels' => $data->pluck('label')->toArray(),
+        ];
+    }
+
+    /**
+     * Ottiene i dati per il grafico in base al filtro.
+     *
+     * @return \Illuminate\Support\Collection<int, array{label: string, value: int, secondary_value: int}>
+     */
+    protected function getChartData(): Collection
+    {
+        $dateFormat = $this->getDateFormat();
+        $dateColumn = 'created_at';
+        $startDate = $this->getStartDate();
+
+        return DB::table('model_name_table')
+            ->select(
+                DB::raw("DATE_FORMAT({$dateColumn}, '{$dateFormat}') as date"),
+                DB::raw('COUNT(*) as count'),
+                DB::raw('SUM(value) as total_value')
+            )
+            ->where($dateColumn, '>=', $startDate)
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'label' => $item->date,
+                    'value' => (int) $item->count,
+                    'secondary_value' => (int) $item->total_value,
+                ];
+            });
+    }
+
+    /**
+     * Ottiene il formato di data in base al filtro.
+     */
+    protected function getDateFormat(): string
+    {
+        return match ($this->filter) {
+            'day' => '%H:00',
+            'week' => '%a',
+            'month' => '%d %b',
+            'year' => '%b %Y',
+            default => '%d %b',
+        };
+    }
+
+    /**
+     * Ottiene la data di inizio in base al filtro.
+     */
+    protected function getStartDate(): Carbon
+    {
+        return match ($this->filter) {
+            'day' => now()->startOfDay(),
+            'week' => now()->subWeek(),
+            'month' => now()->subMonth()->startOfDay(),
+            'year' => now()->subYear()->startOfDay(),
+            default => now()->subMonth()->startOfDay(),
+        };
+    }
+
+    /**
+     * Tipo di grafico.
+     */
+    protected function getType(): string
+    {
+        return 'line';
+    }
+
+    /**
+     * Opzioni del grafico.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getOptions(): array
+    {
+        return [
+            'plugins' => [
+                'legend' => [
+                    'display' => true,
+                ],
+                'tooltip' => [
+                    'enabled' => true,
+                ],
+            ],
+            'scales' => [
+                'y' => [
+                    'beginAtZero' => true,
+                    'ticks' => [
+                        'precision' => 0,
+                    ],
+                ],
+            ],
+        ];
+    }
+}
+```
+
+### 3. Pattern per CalendarWidget
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Widgets;
+
+use Filament\Forms;
+use Modules\UI\Filament\Widgets\CalendarWidget as BaseCalendarWidget;
+use Modules\ModuleName\Models\EventModel;
+use Saade\FilamentFullCalendar\Actions;
+
+class ModuleCalendarWidget extends BaseCalendarWidget
+{
+    /**
+     * Modello per gli eventi.
+     *
+     * @var \Illuminate\Database\Eloquent\Model|string|null
+     */
+    public $model = EventModel::class;
+
+    /**
+     * Configurazione del calendario.
+     *
+     * @return array<string, mixed>
+     */
+    public function config(): array
+    {
+        return $this->mergeBaseConfig([
+            'firstDay' => 1,
+            'headerToolbar' => [
+                'left' => 'dayGridMonth,timeGridWeek,timeGridDay',
+                'center' => 'title',
+                'right' => 'prev,next today',
+            ],
+            'initialView' => 'dayGridMonth',
+            'dayMaxEvents' => true,
+            'navLinks' => true,
+            'editable' => $this->userCan('updateEvents'),
+            'selectable' => $this->userCan('createEvents'),
+            'eventTimeFormat' => [
+                'hour' => '2-digit',
+                'minute' => '2-digit',
+                'meridiem' => false,
+                'hour12' => false
+            ],
+        ]);
+    }
+
+    /**
+     * Unisce la configurazione base con quella personalizzata.
+     *
+     * @param array<string, mixed> $config
+     * @return array<string, mixed>
+     */
+    protected function mergeBaseConfig(array $config): array
+    {
+        $baseConfig = parent::config();
+
+        return array_merge($baseConfig, $config);
+    }
+
+    /**
+     * Schema del form per gli eventi.
+     *
+     * @return array<int, \Filament\Forms\Components\Component>
+     */
+    public function getFormSchema(): array
+    {
+        return [
+            Forms\Components\TextInput::make('title')
+                ->label(__('modulename::calendar.fields.title.label'))
+                ->placeholder(__('modulename::calendar.fields.title.placeholder'))
+                ->required()
+                ->maxLength(255),
+
+            Forms\Components\Textarea::make('description')
+                ->label(__('modulename::calendar.fields.description.label'))
+                ->placeholder(__('modulename::calendar.fields.description.placeholder'))
+                ->columnSpanFull(),
+
+            Forms\Components\DateTimePicker::make('starts_at')
+                ->label(__('modulename::calendar.fields.starts_at.label'))
+                ->seconds(false)
+                ->required(),
+
+            Forms\Components\DateTimePicker::make('ends_at')
+                ->label(__('modulename::calendar.fields.ends_at.label'))
+                ->seconds(false)
+                ->required(),
+
+            Forms\Components\ColorPicker::make('color')
+                ->label(__('modulename::calendar.fields.color.label'))
+                ->rgba(),
+
+            Forms\Components\Checkbox::make('is_all_day')
+                ->label(__('modulename::calendar.fields.is_all_day.label')),
+        ];
+    }
+
+    /**
+     * Azioni nell'header del calendario.
+     *
+     * @return array<\Filament\Actions\Action>
+     */
+    protected function headerActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+                ->label(__('modulename::calendar.actions.create.label'))
+                ->modalHeading(__('modulename::calendar.actions.create.modal_heading'))
+                ->mountUsing(function (Forms\Form $form, array $arguments) {
+                    $form->fill([
+                        'starts_at' => $arguments['start'] ?? null,
+                        'ends_at' => $arguments['end'] ?? null,
+                        'is_all_day' => $arguments['allDay'] ?? false,
+                    ]);
+                })
+                ->mutateFormDataUsing(function (array $data) {
+                    return $this->prepareEventData($data);
+                })
+                ->visible(fn () => $this->userCan('createEvents')),
+        ];
+    }
+
+    /**
+     * Azioni sugli eventi del calendario.
+     *
+     * @return array<\Filament\Actions\Action>
+     */
+    protected function eventActions(): array
+    {
+        return [
+            Actions\EditAction::make()
+                ->label(__('modulename::calendar.actions.edit.label'))
+                ->modalHeading(__('modulename::calendar.actions.edit.modal_heading'))
+                ->mutateFormDataUsing(function (array $data) {
+                    return $this->prepareEventData($data);
+                })
+                ->visible(fn (EventModel $record) => $this->userCan('updateEvents', $record)),
+
+            Actions\DeleteAction::make()
+                ->label(__('modulename::calendar.actions.delete.label'))
+                ->modalHeading(__('modulename::calendar.actions.delete.modal_heading'))
+                ->visible(fn (EventModel $record) => $this->userCan('deleteEvents', $record)),
+
+            Actions\ViewAction::make()
+                ->label(__('modulename::calendar.actions.view.label'))
+                ->modalHeading(__('modulename::calendar.actions.view.modal_heading')),
+        ];
+    }
+
+    /**
+     * Prepara i dati dell'evento prima del salvataggio.
+     *
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
+    protected function prepareEventData(array $data): array
+    {
+        // Normalizza l'orario per eventi giornalieri
+        if (isset($data['is_all_day']) && $data['is_all_day']) {
+            $data['starts_at'] = \Carbon\Carbon::parse($data['starts_at'])->startOfDay();
+            $data['ends_at'] = \Carbon\Carbon::parse($data['ends_at'])->endOfDay();
+        }
+
+        // Aggiungi metadati
+        $data['user_id'] = auth()->id();
+
+        return $data;
+    }
+
+    /**
+     * Controlla se l'utente ha il permesso specificato.
+     *
+     * @param string $permission
+     * @param mixed $record
+     */
+    protected function userCan(string $permission, $record = null): bool
+    {
+        if ($record) {
+            return auth()->user()->can($permission, $record);
+        }
+
+        return auth()->user()->can($permission);
+    }
+
+    /**
+     * Personalizzazione del rendering degli eventi.
+     */
+    public function eventClassNames(): string
+    {
+        return <<<JS
+        function(info) {
+            const classes = [];
+
+            if (info.event.extendedProps.is_all_day) {
+                classes.push('all-day-event');
+            }
+
+            if (info.event.extendedProps.status === 'cancelled') {
+                classes.push('cancelled-event');
+            }
+
+            return classes;
+        }
+        JS;
+    }
+
+    /**
+     * Personalizzazione del rendering del contenuto degli eventi.
+     */
+    public function eventContent(): string
+    {
+        return <<<JS
+        function(info) {
+            const timeText = info.timeText ? `<div class="fc-event-time">${info.timeText}</div>` : '';
+            return {
+                html: `
+                    ${timeText}
+                    <div class="fc-event-title">
+                        ${info.event.title}
+                        ${info.event.extendedProps.status === 'cancelled' ? ' (Annullato)' : ''}
+                    </div>
+                `
+            };
+        }
+        JS;
+    }
+}
+```
+
+## Personalizzazione Icone per Widget e Navigazione (con XotBaseServiceProvider)
+
+L'architettura Laraxot/<nome progetto> prevede che i Service Provider dei moduli estendano `Modules\Xot\Providers\XotBaseServiceProvider`. Questo provider di base gestisce automaticamente la registrazione di molte risorse, incluse le icone SVG personalizzate tramite il pacchetto `blade-ui-kit/blade-icons`.
+
+### Principi Chiave con XotBaseServiceProvider
+
+1.  **Estensione Corretta**: Il Service Provider del tuo modulo (es. `IndennitaCondizioniLavoroServiceProvider`) DEVE estendere `Modules\Xot\Providers\XotBaseServiceProvider`.
+2.  **Configurazione del Provider del Modulo**:
+    *   Definire la proprietà pubblica `$name` con il nome del modulo (es. `public string $name = 'IndennitaCondizioniLavoro';`). Il valore di `$name` verrà usato per derivare `$nameLower` (es. `indennitacondizionilavoro`), che a sua volta sarà usato come prefisso per le icone.
+    *   Assicurarsi che `$module_dir` (di solito `__DIR__`) e `$module_ns` (di solito `__NAMESPACE__`) siano impostati correttamente nel provider del modulo, poiché `XotBaseServiceProvider` potrebbe usarli per risolvere i percorsi.
+
+    ```php
+    <?php
+
+    declare(strict_types=1);
+
+    namespace Modules\ModuleName\Providers; // Es: Modules\IndennitaCondizioniLavoro\Providers
+
+    use Modules\Xot\Providers\XotBaseServiceProvider;
+
+    class ModuleNameServiceProvider extends XotBaseServiceProvider // Es: IndennitaCondizioniLavoroServiceProvider
+    {
+        // Nome del modulo, usato per prefissi e percorsi
+        public string $name = 'ModuleName'; // Es: 'IndennitaCondizioniLavoro'
+
+        // Directory base del ServiceProvider, per risolvere percorsi relativi
+        protected string $module_dir = __DIR__;
+
+        // Namespace base del ServiceProvider
+        protected string $module_ns = __NAMESPACE__;
+
+        public function boot(): void
+        {
+            parent::boot(); // ESSENZIALE: Chiama il boot del XotBaseServiceProvider
+            // Eventuali registrazioni specifiche del modulo che NON sono gestite dal XotBaseServiceProvider
+        }
+
+        public function register(): void
+        {
+            parent::register(); // ESSENZIALE: Chiama il register del XotBaseServiceProvider
+            // Eventuali registrazioni specifiche del modulo che NON sono gestite dal XotBaseServiceProvider
+        }
+    }
+    ```
+
+### Registrazione Automatica delle Icone SVG
+
+-   **Posizionamento SVG**: Collocare i file SVG personalizzati nella directory convenzionale del modulo, che `XotBaseServiceProvider` è configurato per scansionare. Tipicamente questa è:
+    `Modules/{ModuleName}/resources/svg/`
+    (Potrebbe anche essere `Modules/{ModuleName}/resources/icons/` - verificare le convenzioni specifiche di `XotBaseServiceProvider` o del progetto se necessario).
+-   **Convenzione di Naming Alias**: `XotBaseServiceProvider` (tramite `blade-ui-kit/blade-icons`) registrerà automaticamente queste icone. L'alias risultante sarà generalmente:
+    `{nameLower}-{nome-file-svg-senza-estensione}`
+    Ad esempio, se `$nameLower` per il modulo `IndennitaCondizioniLavoro` è `indennitacondizionilavoro` e il file SVG è `upload-custom.svg`, l'alias dell'icona sarà `indennitacondizionilavoro-upload-custom`.
+
+### Utilizzo delle Icone Auto-Registrate in Filament
+
+Una volta che l'SVG è nella posizione corretta e il Service Provider del modulo è configurato correttamente (con `$name` e chiamando i metodi `parent::boot()` e `parent::register()`):
+-   **Nessuna Registrazione Manuale con `FilamentIcon::register()`**: NON è necessario, e sarebbe ridondante, usare `FilamentIcon::register()` nel Service Provider del modulo per queste icone, poiché sono già rese disponibili come componenti Blade Icon.
+-   **Uso Diretto dell'Alias**: Le icone possono essere usate direttamente in Filament (navigazione, azioni, widget) e nei file di traduzione utilizzando l'alias generato (es. `prefix-nomeicona`). Filament è in grado di risolvere questi alias se configurato per riconoscere i componenti Blade Icon.
+
+```php
+// Esempio in un file di traduzione lang/it/navigation.php
+// per il modulo 'IndennitaCondizioniLavoro' con un file svg 'upload-special.svg'
+// (nameLower = 'indennitacondizionilavoro')
+return [
+    'items' => [
+        'upload_docs' => [
+            'label' => 'Carica Documenti Indennità',
+            'icon' => 'indennitacondizionilavoro-upload-special', // Alias auto-registrato
+            'sort' => 10,
+        ],
+    ],
+];
+```
+
+### Verifica e Debug
+
+- Se un'icona personalizzata non appare in Filament:
+    1.  Verificare che il Service Provider del modulo estenda `XotBaseServiceProvider`.
+    2.  Verificare che le chiamate a `parent::boot()` e `parent::register()` siano presenti nel Service Provider del modulo.
+    3.  Confermare che la proprietà `$name` sia definita correttamente nel Service Provider del modulo.
+    4.  Controllare la posizione esatta del file SVG (es. `Modules/IndennitaCondizioniLavoro/resources/svg/nomeicona.svg`).
+    5.  Verificare l'alias esatto generato (basato su `$nameLower` e il nome del file) e assicurarsi che corrisponda a quello usato.
+    6.  Assicurarsi che non ci siano configurazioni in conflitto per `blade-ui-kit/blade-icons` o per come Filament gestisce le icone.
+    7.  Verificare che il file SVG stesso sia valido e non corrotto.
+
+### Anti-Pattern Icone (nel contesto di XotBaseServiceProvider)
+
+- ❌ **Non estendere `Illuminate\Support\ServiceProvider`**: I provider dei moduli DEVONO estendere `XotBaseServiceProvider` per beneficiare delle registrazioni automatiche e delle convenzioni del framework Xot.
+- ❌ **Registrazione Manuale Duplicata con `FilamentIcon::register()`**: Evitare di usare `FilamentIcon::register()` per icone che `XotBaseServiceProvider` già registra automaticamente tramite Blade Icons. Questo può portare a conflitti o comportamenti inattesi.
+- ❌ **Omettere `parent::boot()` o `parent::register()`**: Non chiamare i metodi `boot` e `register` del genitore (`XotBaseServiceProvider`) nel Service Provider del modulo impedirà al provider base di eseguire le sue registrazioni automatiche, inclusa quella delle icone.
+- ❌ **Percorsi SVG Errati o Nomi File Incoerenti**: Non rispettare la struttura di directory o le convenzioni di naming attese da `XotBaseServiceProvider` per le icone SVG.
+- ❌ **Definizione Mancante o Errata della Proprietà `$name`**: Se la proprietà `$name` non è definita o è errata nel Service Provider del modulo, il prefisso per le icone non sarà generato correttamente.
+
+## Anti-pattern da Evitare
+
+### ❌ Configurazione Hardcoded
+
+```php
+// ❌ MAI hardcodare valori di configurazione
+public function config(): array
+{
+    return [
+        'firstDay' => 1,
+        'headerToolbar' => [
+            'left' => 'dayGridMonth,timeGridWeek,timeGridDay', // Hardcoded
+            'center' => 'title',
+            'right' => 'prev,next today',
+        ],
+    ];
+}
+
+// ✅ Utilizza costanti o configurazioni esterne
+protected const AVAILABLE_VIEWS = [
+    'dayGridMonth',
+    'timeGridWeek',
+    'timeGridDay'
+];
+
+public function config(): array
+{
+    return [
+        'firstDay' => config('modulename.calendar.first_day', 1),
+        'headerToolbar' => [
+            'left' => implode(',', self::AVAILABLE_VIEWS),
+            'center' => 'title',
+            'right' => 'prev,next today',
+        ],
+    ];
+}
+```
+
+### ❌ Logica Business nel Widget
+
+```php
+// ❌ MAI inserire logica di business nei widget
+protected function getStats(): array
+{
+    // Calcoli complessi direttamente nel widget
+    $totalAmount = DB::table('orders')->sum('amount');
+    $averageAmount = DB::table('orders')->avg('amount');
+
+    // ...
+}
+
+// ✅ Delega i calcoli complessi a classi o servizi dedicati
+/**
+ * @return array<Stat>
+ */
+protected function getStats(): array
+{
+    $statistics = app(OrderStatisticsService::class)->getOrderStatistics();
+
+    return [
+        Stat::make(
+            __('modulename::widgets.stats.total_amount.label'),
+            $statistics->formattedTotalAmount
+        ),
+        // ...
+    ];
+}
+```
+
+### ❌ Traduzioni Hardcoded
+
+```php
+// ❌ MAI hardcodare testi UI
+protected function getHeading(): ?string
+{
+    return 'Andamento Vendite'; // Hardcoded
+}
+
+// ✅ Usa sempre i file di traduzione
+protected function getHeading(): ?string
+{
+    return __('modulename::widgets.sales_chart.heading');
+}
+```
+
+## Lista di Controllo per Widget Completi
+
+Prima di considerare completo un widget Filament, verificare:
+
+1. **Configurazione e Namespace**
+   - [x] Namespace corretto (`Modules\{ModuleName}\Filament\Widgets`)
+   - [x] Widget estende la classe base appropriata
+   - [x] Widget configurato correttamente con lazy loading se necessario
+
+2. **Traduzioni**
+   - [x] Tutte le stringhe UI provengono dai file di traduzione
+   - [x] File di traduzione completo e strutturato
+   - [x] Nessuna stringa hardcoded
+
+3. **Tipizzazione**
+   - [x] Tipi di ritorno espliciti per tutti i metodi
+   - [x] Parametri tipizzati
+   - [x] PHPDoc completo con annotazioni generics
+   - [x] Compatibilità con PHPStan livello 9+
+
+4. **Permessi e Sicurezza**
+   - [x] Controlli di autorizzazione implementati
+   - [x] Visibilità condizionale in base ai permessi
+   - [x] Validazione input nei form
+
+5. **Performance**
+   - [x] Query ottimizzate
+   - [x] Lazy loading configurato per widget costosi
+   - [x] Caching implementato quando appropriato
+
+6. **Documentazione**
+   - [x] PHPDoc completo
+   - [x] Documentazione dedicata nel modulo
+   - [x] Collegamenti bidirezionali con documentazione correlata
+
+## Ottimizzazione delle Query
+
+```php
+/**
+ * Ottiene gli elementi in modo ottimizzato.
+ *
+ * @return \Illuminate\Database\Eloquent\Collection<int, \Modules\ModuleName\Models\ModelName>
+ */
+protected function getOptimizedItems()
+{
+    // Carica solo le relazioni necessarie
+    return \Modules\ModuleName\Models\ModelName::query()
+        ->with(['category', 'author'])
+        ->withCount('comments')
+        ->latest()
+        ->limit(5)
+        ->get();
+}
+```
+
+## Gestione Errori nei Widget
+
+```php
+/**
+ * Ottiene i dati in modo sicuro, gestendo eventuali errori.
+ *
+ * @return array<string, mixed>
+ */
+protected function getSafeData(): array
+{
+    try {
+        return [
+            'success' => true,
+            'data' => $this->fetchData(),
+        ];
+    } catch (\Exception $e) {
+        \Log::error('Errore nel widget: ' . $e->getMessage(), [
+            'widget' => static::class,
+            'exception' => $e,
+        ]);
+
+        return [
+            'success' => false,
+            'error' => __('modulename::widgets.errors.data_fetch_failed'),
+        ];
+    }
+}
+
+/**
+ * Vista personalizzata per gestire errori.
+ */
+protected static string $view = 'modulename::filament.widgets.safe-widget';
+
+// Vista Blade:
+// <div class="p-2 bg-white rounded-xl shadow">
+//     @if($success)
+//         <!-- Renderizza i dati normalmente -->
+//     @else
+//         <div class="p-4 text-red-600">
+//             <p>{{ $error }}</p>
+//         </div>
+//     @endif
+// </div>
+```
+
+## Registrazione Efficiente dei Widget
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Providers;
+
+use Filament\Facades\Filament;
+use Illuminate\Support\ServiceProvider;
+
+class FilamentServiceProvider extends ServiceProvider
+{
+    /**
+     * Widgets da registrare.
+     *
+     * @var array<class-string>
+     */
+    protected array $widgets = [
+        \Modules\ModuleName\Filament\Widgets\StatsOverviewWidget::class,
+        \Modules\ModuleName\Filament\Widgets\ChartDataWidget::class,
+        \Modules\ModuleName\Filament\Widgets\ModuleCalendarWidget::class,
+    ];
+
+    /**
+     * Bootstrap dei servizi dell'applicazione.
+     */
+    public function boot(): void
+    {
+        // Registra tutti i widget
+        Filament::registerWidgets($this->widgets);
+    }
+}
+```

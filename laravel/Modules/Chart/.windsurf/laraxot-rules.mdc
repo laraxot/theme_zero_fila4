@@ -1,0 +1,83 @@
+# Regole e Best Practices Laraxot - <nome progetto>
+
+## Regole Fondamentali Modelli e Namespace
+
+- I modelli devono **SEMPRE** estendere il `BaseModel` del loro modulo, mai `Illuminate\Database\Eloquent\Model` o `Modules\Xot\Models\XotBaseModel` direttamente
+- Il namespace corretto è sempre `Modules\<NomeModulo>\Models` senza segmento `app`
+- Tipizzazione rigorosa: dichiarare tutti i tipi di ritorno e parametri
+- Mai usare `mixed` quando è possibile specificare un tipo concreto
+- Documentare proprietà virtual con `@property-read`
+
+## Migrazioni e Database
+
+- Usare classi anonime per le migrazioni: `return new class extends XotBaseMigration { ... }`
+- Mai implementare il metodo `down()` in migrazioni che estendono `XotBaseMigration`
+- Per aggiungere colonne a tabelle esistenti:
+  - Copiare la migrazione originale con timestamp aggiornato
+  - Aggiungere la colonna con controllo `if (! $this->hasColumn(...))`
+  - Mai creare nuove migrazioni separate per aggiungere colonne
+- Tutte le proprietà array devono avere annotazione corretta:
+  ```php
+  /** @var list<string> */
+  protected $fillable = ['field1', 'field2'];
+  ```
+
+## PHPStan Compliance
+
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
+- Usare minimo livello 9 (`./vendor/bin/phpstan analyze --level=9`)
+- Mai usare `$casts` property, utilizzare il metodo `casts()`:
+  ```php
+  /**
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          // ...
+      ];
+  }
+  ```
+- Specificare tutti i tipi di array usando generics (`array<string, mixed>`, `list<string>`)
+
+## Filament Resources
+
+- Namespace corretto: `Modules\<NomeModulo>\Filament`
+- Mai usare `App\Filament`
+- Le label devono provenire da file di traduzione, mai hardcoded con `->label()`
+- Le azioni custom devono sovrascrivere `setUp()` per configurare proprietà
+- Nomi univoci e documentati passati a `parent::make()`
+- Tipizzazione rigorosa di tutti i metodi
+
+## Documentazione
+
+- Moduli: doc in `Modules/<NomeModulo>/docs/`
+- MAI usare `resources/views/docs/`
+- Aggiornare sempre la documentazione più vicina + root docs
+- Motivare ogni modifica strutturale e collegarla con link bidirezionali
+- Regole generali nel modulo Xot, moduli specifici con solo riferimenti
+
+## Traduzioni
+
+- Modulo-specifiche in `Modules/[ModuleName]/lang/[locale]/`
+- Globali in `resources/lang/[locale]/`
+- Struttura standard per campi:
+  ```php
+  'fields' => [
+      'campo_nome' => [
+          'label' => 'Etichetta',
+          'help' => 'Testo aiuto',
+          'placeholder' => 'Placeholder'
+      ]
+  ]
+  ```
+
+## Testing e Sicurezza
+
+- Validazione statica con phpstan
+- Test di regressione dopo bugfix
+- Documentare ogni correzione
+- Seguire best practices di sicurezza documentate
+
+Ultimo aggiornamento: 2025-06-03

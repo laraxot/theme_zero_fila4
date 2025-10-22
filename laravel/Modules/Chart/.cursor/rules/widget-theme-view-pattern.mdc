@@ -1,0 +1,226 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Regola: Widget Theme View Pattern - SaluteOra
+
+## Ambito
+- Globale (pattern per view custom di widget nei temi)
+- Specifico per widget Filament che necessitano personalizzazione UI avanzata
+
+## Motivazione
+- Separare logica widget (modulo) da presentazione (tema)
+- Permettere personalizzazione completa UI senza toccare logica
+- Mantenere coerenza architetturale Laraxot framework
+- Facilità di manutenzione e restyling per cliente
+
+## Regola Fondamentale
+- SEMPRE creare view custom per widget nel tema quando serve personalizzazione UI
+- SEMPRE utilizzare namespace `pub_theme::` per riferimento view tema
+- SEMPRE mantenere logica nel widget PHP, solo presentazione nella view
+- SEMPRE seguire pattern di wrapper Filament appropriati
+
+## Pattern Corretto
+
+### Struttura Files
+```php
+// Logica Widget (Modulo)
+Modules/{ModuleName}/app/Filament/Widgets/{WidgetName}.php
+
+// View Template (Tema)  
+laravel/Themes/One/resources/views/filament/widgets/{path}/{widget-name}.blade.php
+```
+
+### Widget Configuration
+```php
+class MyWidget extends XotBaseWidget
+{
+    // ✅ CORRETTO - View nel tema
+    protected static string $view = 'pub_theme::filament.widgets.my-widget';
+    
+    // Logica form/data nel widget
+    protected function getFormSchema(): array { /* ... */ }
+    protected function getViewData(): array { /* ... */ }
+}
+```
+
+### View Template Pattern
+```blade
+{{-- View nel tema: wrapper + {{ $this->form }} --}}
+<x-filament-widgets::widget>
+    <x-filament::section>
+        <div class="max-w-4xl mx-auto">
+            {{-- Header personalizzato tema --}}
+            <div class="mb-8 text-center">
+                <h2>{{ __('modulo::widget.title') }}</h2>
+                <p>{{ __('modulo::widget.description') }}</p>
+            </div>
+
+            {{-- Form Filament (logica nel widget) --}}
+            <form wire:submit.prevent="submit" class="space-y-6">
+                @csrf
+                {{ $this->form }}
+                
+                {{-- Loading personalizzato tema --}}
+                <div wire:loading wire:target="submit" class="...">
+                    <x-filament::loading-indicator />
+                    <span>{{ __('modulo::widget.processing') }}</span>
+                </div>
+            </form>
+        </div>
+    </x-filament::section>
+    
+    <x-filament-actions::modals />
+</x-filament-widgets::widget>
+```
+
+## Wrapper Components Corretti
+
+### Form-Based Widgets
+```blade
+<x-filament-widgets::widget>  {{-- Widget form-based --}}
+    <x-filament::section>
+        <form wire:submit.prevent="submit">
+            {{ $this->form }}
+        </form>
+    </x-filament::section>
+</x-filament-widgets::widget>
+```
+
+### Data Display Widgets
+```blade
+<x-filament::widget>  {{-- Widget display-only --}}
+    <x-filament::section>
+        {{-- Contenuto personalizzato --}}
+    </x-filament::section>
+</x-filament::widget>
+```
+
+## Traduzioni e Temi
+
+### File Traduzioni (Modulo)
+```php
+// Modules/{ModuleName}/lang/it/widgets.php
+'my_widget' => [
+    'title' => 'Titolo Widget',
+    'description' => 'Descrizione widget',
+    'processing' => 'Elaborazione in corso...',
+    'help_text' => 'Testo di aiuto',
+],
+```
+
+### Personalizzazione Tema
+```css
+/* Tema specifico CSS */
+.widget-custom {
+    /* Stili personalizzati tema */
+}
+```
+
+## Esempi Implementati
+
+### FindDoctorAndAppointmentWidget
+- **Widget**: `Modules\SaluteOra\Filament\Widgets\Patient\FindDoctorAndAppointmentWidget`
+- **View**: `laravel/Themes/One/resources/views/filament/widgets/patient/find-doctor-and-appointment-widget.blade.php`
+- **Namespace**: `pub_theme::filament.widgets.patient.find-doctor-and-appointment-widget`
+
+### Features Implementate
+- ✅ Form wizard multi-step con view personalizzata
+- ✅ Loading state fullscreen con overlay
+- ✅ Dark mode support integrato
+- ✅ Typography hierarchy personalizzata
+- ✅ Responsive design mobile-first
+- ✅ Modal support Filament
+- ✅ CSRF protection automatica
+
+## Anti-Pattern da Evitare
+
+### ❌ Logica nella View
+```blade
+{{-- ERRORE: logica business nella view --}}
+@php
+    $data = SomeModel::where('active', true)->get();
+    $processedData = $data->map(function($item) {
+        return $item->transform();
+    });
+@endphp
+```
+
+### ❌ Hardcoded Strings
+```blade
+{{-- ERRORE: stringhe hardcoded --}}
+<h2>Prenota Appuntamento</h2>  {{-- NO --}}
+
+{{-- CORRETTO: traduzioni --}}
+<h2>{{ __('modulo::widget.title') }}</h2>  {{-- YES --}}
+```
+
+### ❌ Form Logic Override
+```blade
+{{-- ERRORE: override logica form --}}
+<form>
+    {{-- Custom form invece di {{ $this->form }} --}}
+</form>
+
+{{-- CORRETTO: wrapper per form Filament --}}
+<form wire:submit.prevent="submit">
+    {{ $this->form }}
+</form>
+```
+
+## Best Practice
+
+### Separazione Responsabilità
+- **Widget PHP**: Form schema, validazione, submit logic, data processing
+- **View Tema**: Layout, styling, UX enhancements, loading states
+- **Traduzioni**: Modulo per testi, tema per UI strings
+
+### Performance
+- View minimali: solo wrapper e styling
+- Logica pesante nel widget PHP
+- Caching appropriato per data processing
+- Lazy loading per componenti grandi
+
+### Manutenibilità  
+- View auto-documentate con commenti
+- Pattern consistenti tra widget simili
+- Collegamenti bidirezionali documentazione
+- Versionamento separato modulo/tema
+
+## Checklist Implementazione
+
+### Pre-Development
+- [ ] Identificare necessità personalizzazione UI avanzata
+- [ ] Definire responsabilità widget vs view
+- [ ] Pianificare traduzioni necessarie
+
+### Development
+- [ ] Widget estende XotBaseWidget correttamente
+- [ ] View utilizza wrapper Filament appropriato
+- [ ] Tutte le stringhe utilizzano traduzioni
+- [ ] Form logic rimane nel widget PHP
+- [ ] Loading states implementati nella view
+
+### Post-Development
+- [ ] Documentazione aggiornata (modulo + root)
+- [ ] Test responsività e dark mode
+- [ ] Verifica performance rendering
+- [ ] Collegamenti documentazione bidirezionali
+
+## Collegamenti Documentazione
+
+- [FindDoctorAndAppointmentWidget Implementation](mdc:../../Modules/SaluteOra/docs/widgets/find-doctor-appointment-widget.md)
+- [Theme Structure Documentation](mdc:../../docs/theme-structure.md)
+- [Filament Widget Best Practices](mdc:../../docs/filament-widget-best-practices.md)
+
+## Ultimo Aggiornamento
+Gennaio 2025 - Pattern implementato per FindDoctorAndAppointmentWidget
+
+## Esempi Futuri
+Questo pattern può essere riutilizzato per:
+- Patient registration widgets  
+- Doctor availability widgets
+- Appointment management widgets
+- Complex form wizards
+- Dashboard widgets con UI custom

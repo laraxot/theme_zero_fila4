@@ -1,0 +1,50 @@
+# Regole per Service Providers
+
+## Principi Fondamentali
+
+1. MAI registrare manualmente i componenti Blade
+   - La registrazione è già gestita da XotBaseServiceProvider
+   - Non duplicare la logica di registrazione
+   - Usare solo le funzionalità specifiche del modulo
+
+2. Struttura Base
+   ```php
+   namespace Modules\ModuleName\Providers;
+   
+   use Modules\Xot\Providers\XotBaseServiceProvider;
+   
+   class ModuleNameServiceProvider extends XotBaseServiceProvider
+   {
+       public string $name = 'ModuleName';
+       public string $nameLower = 'modulename';
+       
+       public function boot(): void
+       {
+           parent::boot();
+           // Aggiungere solo inizializzazioni specifiche
+       }
+       
+       public function register(): void
+       {
+           parent::register();
+           // Registrare solo servizi specifici
+       }
+   }
+   ```
+
+3. Errori Comuni da Evitare
+   - ❌ Registrare manualmente i componenti Blade
+   - ❌ Duplicare la logica di XotBaseServiceProvider
+   - ❌ Modificare la visibilità dei metodi ereditati
+   - ❌ Non chiamare i metodi parent
+   - ❌ Registrare manualmente le viste (già gestito da XotBaseServiceProvider)
+   - ❌ Registrare manualmente le traduzioni (già gestito da XotBaseServiceProvider)
+   - ❌ Registrare manualmente le configurazioni (già gestito da XotBaseServiceProvider)
+
+4. Best Practices
+   - ✅ Estendere sempre XotBaseServiceProvider
+   - ✅ Mantenere la visibilità dei metodi ereditati
+   - ✅ Chiamare sempre i metodi parent
+   - ✅ Documentare le personalizzazioni
+   - ✅ Registrare solo le funzionalità specifiche del modulo
+   - ✅ Studiare sempre la documentazione di XotBaseServiceProvider prima di estenderlo 

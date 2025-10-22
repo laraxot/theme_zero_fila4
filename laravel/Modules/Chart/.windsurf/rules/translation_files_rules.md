@@ -1,0 +1,134 @@
+---
+trigger: always_on
+description: Rules for implementing and structuring translation files in Laraxot <nome progetto>
+globs: ["**/lang/**/*.php", "**/resources/lang/**/*.php"]
+---
+
+# Translation Files Implementation Rules in Laraxot <nome progetto>
+
+## Core Principles
+
+1. **Array Syntax**: ALWAYS use short array syntax `[]` instead of `array()` syntax
+
+2. **Structure**: ALWAYS organize translations hierarchically with complete structure including `label`, `placeholder`, and `help` keys for form fields
+
+3. **File Organization**: Translation files MUST be placed in `Modules/{ModuleName}/lang/{locale}/`
+
+4. **Strict Types**: ALWAYS include `declare(strict_types=1);` at the beginning of translation files
+
+5. **Key Naming**: Keys MUST be in English, values in the target language
+
+## Proper Translation File Structure
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+    'navigation' => [
+        'label' => 'Label in target language',
+        'group' => 'Group in target language',
+        'icon' => 'icon-name', // Do not translate icon names
+        'sort' => 50,
+    ],
+    
+    'page' => [
+        'title' => 'Title in target language',
+        'heading' => 'Heading in target language',
+        'description' => 'Description in target language',
+    ],
+    
+    'fields' => [
+        'field_name' => [
+            'label' => 'Field label in target language',
+            'placeholder' => 'Placeholder in target language',
+            'help' => 'Help text in target language',
+        ],
+        // Other fields...
+    ],
+    
+    'actions' => [
+        'action_name' => [
+            'label' => 'Action label in target language',
+            'success' => 'Success message in target language',
+            'error' => 'Error message in target language',
+            'confirmation' => 'Confirmation message in target language',
+        ],
+        // Other actions...
+    ],
+    
+    'validation' => [
+        'error_type' => 'Validation error message in target language',
+        // Other validation messages...
+    ],
+    
+    'messages' => [
+        'message_key' => 'Message in target language',
+        // Other messages...
+    ],
+];
+```
+
+## Icons in Translation Files
+
+When referencing icons:
+
+1. Use the proper prefixing convention
+   - For Heroicons: `heroicon-o-name` (outline) or `heroicon-s-name` (solid)
+   - For custom module icons: `{module-prefix}-icon-name`
+
+2. Never hardcode icon paths or SVG content directly in translation files
+
+3. Always register custom icons in the module's ServiceProvider before using them
+
+## Field Structure
+
+All form field translations MUST include:
+
+```php
+'field_name' => [
+    'label' => 'Label text',      // Required - shown above the field
+    'placeholder' => 'Placeholder', // Required - shown inside empty field
+    'help' => 'Help text',        // Required - shown below the field
+],
+```
+
+## Action Structure
+
+All action translations MUST include:
+
+```php
+'action_name' => [
+    'label' => 'Action button text', // Required
+    'success' => 'Success message',  // Required
+    'error' => 'Error message',      // Required
+    'confirmation' => 'Confirmation message', // Required for destructive actions
+],
+```
+
+## Common Errors to Avoid
+
+1. **❌ WRONG**: Using `array()` syntax
+   **✅ CORRECT**: Use `[]` syntax
+
+2. **❌ WRONG**: Incomplete field structure (missing placeholders or help text)
+   **✅ CORRECT**: Include all three keys: `label`, `placeholder`, `help`
+
+3. **❌ WRONG**: Placing translations outside the module's lang directory
+   **✅ CORRECT**: Use `Modules/{ModuleName}/lang/{locale}/`
+
+4. **❌ WRONG**: Omitting `declare(strict_types=1);`
+   **✅ CORRECT**: Always include strict types declaration
+
+5. **❌ WRONG**: Translating technical keys like icon names
+   **✅ CORRECT**: Keep technical keys intact, only translate user-facing content
+
+## Documentation and Consistency
+
+- Document all translation files in the module's docs folder
+- Maintain consistency in key naming across all translation files
+- Create bidirectional links between module docs and root docs
+- Ensure all user-facing text comes from translation files, never hardcoded
+
+*Last updated: June 2025*

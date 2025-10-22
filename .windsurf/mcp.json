@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "datapilot": {},
+    "fetch": {
+      "url": "http://localhost:3000/mcp",
+      "type": "http"
+    },
+    "mysql": {
+      "url": "mysql://user:password@localhost:3306/saluteora",
+      "type": "mysql"
+    },
+    "postgres": {
+      "url": "postgres://user:password@localhost:5432/saluteora",
+      "type": "postgres"
+    },
+    "redis": {
+      "url": "redis://localhost:6379",
+      "type": "redis"
+    },
+    "everything": {
+      "url": "http://localhost:3000/mcp",
+      "type": "http"
+    },
+    "memory": {
+      "url": "http://localhost:3003/mcp",
+      "type": "http"
+    },
+    "puppeteer": {
+      "url": "http://localhost:3006/mcp",
+      "type": "http"
+    },
+    "sequential-thinking": {
+      "url": "http://localhost:3008/mcp",
+      "type": "http"
+    },
+    "laravel-boost": {
+            "command": "php",
+            "args": ["./laravel/artisan", "boost:mcp"]
+        }
+  }
+}

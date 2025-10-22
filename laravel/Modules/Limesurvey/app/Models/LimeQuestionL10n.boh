@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+/**
+ * Class LimeQuestionL10n.
+ *
+ * @property int         $id
+ * @property int         $qid
+ * @property string      $question
+ * @property string|null $help
+ * @property string|null $script
+ * @property string      $language
+ */
+class LimeQuestionL10n extends BaseModel {
+    protected $table = 'lime_question_l10ns';
+    public $timestamps = false;
+
+    protected $casts = [
+        'qid' => 'int',
+    ];
+
+    protected $fillable = [
+        'qid',
+        'question',
+        'help',
+        'script',
+        'language',
+    ];
+}

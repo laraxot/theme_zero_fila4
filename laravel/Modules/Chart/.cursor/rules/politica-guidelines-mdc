@@ -1,0 +1,12 @@
+# Politica Guidelines (Policy Considerations)
+
+**When** you are making decisions or designing systems that impact users or stakeholders
+
+**Then** consider the ethical, legal, and social implications of your choices, ensuring alignment with organizational policies and cultural norms.
+
+**Because** this helps maintain trust, compliance, and social responsibility within the project ecosystem.
+
+**Examples**
+
+- Correct: Design features with data privacy laws (e.g., GDPR) in mind.
+- Incorrect: Ignore regulatory requirements when implementing user data handling.
