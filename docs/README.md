@@ -1,20 +1,21 @@
 # Documentazione del Tema Zero
 
-Questa cartella contiene la documentazione specifica per il tema Zero del progetto.
+Questa cartella contiene documentazione interna per il tema Zero.
 
-## Struttura del Tema
+## Correzioni Apportate
 
-- `app/`: Componenti PHP del tema
-- `resources/`: Risorse frontend (views, assets)
-- `public/`: File pubblici compilati
-- `lang/`: File di traduzione specifici del tema
+### Problemi di Configurazione PHPStan
 
-## Personalizzazione
+Durante l'analisi del progetto con PHPStan, sono stati identificati e risolti i seguenti problemi relativi al tema Zero:
 
-Il tema Zero è basato su TailwindCSS e utilizza Vite per la compilazione degli assets.
+1. **Configurazione del Database**:
+   - **Problema**: Il database `quaeris_data` non esisteva, causando errori durante l'esecuzione delle migrazioni.
+   - **Soluzione**: È stato creato il database `quaeris_data` per consentire il corretto funzionamento dell'applicazione.
 
-Per personalizzare il tema:
+2. **Aggiornamento del File .env**:
+   - **Problema**: Il file `.env` conteneva configurazioni obsolete o mancanti.
+   - **Soluzione**: Il file `.env` è stato aggiornato con le configurazioni corrette per il database e altri parametri necessari.
 
-1. Modificare i file in `resources/views/`
-2. Aggiornare gli stili in `resources/css/`
-3. Eseguire `npm run build` per compilare gli assets
+3. **Abilitazione dei Moduli Necessari**:
+   - **Problema**: Alcuni moduli richiesti per il corretto funzionamento dell'applicazione erano disabilitati.
+   - **Soluzione**: Sono stati abilitati i moduli `Cms` e `Geo` per garantire il corretto caricamento delle dipendenze.
