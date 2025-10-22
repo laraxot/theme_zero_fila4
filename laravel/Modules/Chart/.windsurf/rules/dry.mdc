@@ -1,0 +1,45 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# DRY Principle (Don't Repeat Yourself)
+
+## Regola AddressResource
+
+Quando un modulo (es. StudioResource, UserResource, ecc.) deve gestire indirizzi tramite Filament, deve sempre riutilizzare:
+
+```php
+'addresses' => Forms\Components\Repeater::make('addresses')
+    ->relationship('addresses')
+    ->schema(Modules\Geo\Filament\Resources\AddressResource::getFormSchema())
+```
+
+invece di duplicare la logica dei campi.
+
+## Regola collegamenti documentazione
+
+I collegamenti nei file .md devono essere sempre relativi, mai assoluti.
+
+### Motivazione filosofica
+- Un solo punto di verità per la UI degli indirizzi
+- Coerenza e manutenibilità
+- Facilità di refactoring e portabilità della documentazione
+- Zen: serenità nella manutenzione
+
+## Regola BaseModel
+
+Tutti i modelli di un modulo devono estendere il BaseModel del modulo stesso (es. `Modules\<nome progetto>\Models\BaseModel`), **mai** direttamente `Illuminate\Database\Eloquent\Model`.
+
+### Motivazione filosofica
+- Centralizzazione della logica comune (connessione, cast, factory, ecc.)
+- Coerenza architetturale tra tutti i moduli
+- Facilità di override e personalizzazione
+- DRY: nessuna duplicazione di logica tra modelli
+- Zen: "Un solo BaseModel per domarli tutti"
+
+### Checklist
+- [ ] Nessun modello estende direttamente `Model` di Laravel
+- [ ] Tutti i modelli estendono il BaseModel del modulo
+- [ ] La logica comune è centralizzata
+- [ ] La documentazione è aggiornata

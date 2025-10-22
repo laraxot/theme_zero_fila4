@@ -1,0 +1,71 @@
+# Regole per le Traduzioni
+
+## Principi Fondamentali
+
+1. MAI utilizzare il metodo `->label()` nei componenti Filament
+   - Le etichette sono gestite automaticamente dal LangServiceProvider
+   - L'uso di ->label() interferisce con il meccanismo di traduzione automatica
+   - Il LangServiceProvider intercetta la creazione dei componenti e applica le traduzioni
+
+2. MAI utilizzare il metodo `->description()` nei wizard steps
+   - Le descrizioni sono gestite tramite i file di traduzione
+   - Utilizzare la chiave `steps.nome_step.description` nei file di traduzione
+
+3. Struttura dei File di Traduzione
+   ```php
+   // resources/lang/it/resource.php
+   return [
+       'fields' => [
+           'nome_campo' => [
+               'label' => 'Etichetta Campo',
+               'tooltip' => 'Descrizione di aiuto per il campo',
+               'placeholder' => 'Esempio di input',
+               'help' => 'Testo di aiuto per il campo'
+           ],
+       ],
+       'steps' => [
+           'nome_step' => [
+               'label' => 'Etichetta Step',
+               'description' => 'Descrizione dello step',
+               'help' => 'Testo di aiuto per lo step'
+           ],
+       ],
+       'actions' => [
+           'nome_azione' => [
+               'label' => 'Etichetta Azione',
+               'icon' => 'heroicon-name',
+               'color' => 'primary|secondary|success|danger',
+               'tooltip' => 'Descrizione dell\'azione'
+           ],
+       ],
+   ];
+   ```
+
+4. Convenzioni di Naming
+   - Utilizzare il formato `modulo::risorsa.fields.campo.label`
+   - Mantenere coerenza tra le diverse lingue
+   - Usare nomi descrittivi e significativi
+   - Evitare abbreviazioni non standard
+
+5. Gestione Automatica
+   - Il LangServiceProvider gestisce automaticamente le traduzioni
+   - Non è necessario specificare manualmente le label
+   - Le traduzioni vengono applicate in base al contesto del componente
+
+6. Best Practices
+   - Centralizzare tutte le traduzioni nei file di lingua
+   - Evitare testo hardcoded nel codice
+   - Mantenere una struttura coerente tra i moduli
+   - Documentare le chiavi di traduzione
+
+7. Errori Comuni da Evitare
+   - ❌ Usare ->label() direttamente nei componenti
+   - ❌ Hardcodare le traduzioni nel codice
+   - ❌ Duplicare le traduzioni in più file
+   - ❌ Usare nomi non descrittivi per le chiavi
+
+8. Verifica e Manutenzione
+   - Verificare che il LangServiceProvider sia registrato
+   - Controllare periodicamente la coerenza delle traduzioni
+   - Mantenere aggiornata la documentazione
+   - Testare le traduzioni in tutte le lingue supportate

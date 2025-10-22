@@ -1,0 +1,5 @@
+*.pdf
+*.png
+*.txt
+venv/
+ocr_tmp/

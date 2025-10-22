@@ -1,0 +1,32 @@
+# View Path Naming Convention
+
+## Rule
+All Filament widget view paths must include the `filament` segment in their namespace.
+
+## Correct Pattern
+```php
+protected static string $view = 'modulename::filament.widgets.view-name';
+```
+
+## Rationale
+1. Maintains consistency with Filament's view organization
+2. Prevents namespace conflicts
+3. Makes view location more predictable
+
+## Examples
+
+### Correct
+```php
+protected static string $view = '<nome progetto>::filament.widgets.find-doctor';
+```
+
+### Incorrect
+```php
+// Missing 'filament' segment
+protected static string $view = '<nome progetto>::widgets.find-doctor';
+```
+
+## How to Fix
+1. Ensure your view files are in `resources/views/filament/widgets/`
+2. Update the view path to include the `filament` segment
+3. Run tests to verify the view is found correctly

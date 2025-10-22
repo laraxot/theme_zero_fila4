@@ -1,0 +1,12 @@
+# Routing and Controller Guidelines
+
+**When** you are defining routes and controllers in the application
+
+**Then** place routes in `routes/web.php` with prefixes like `/{locale}/admin` for admin routes. Ensure controllers are named with the suffix `Controller` and are located in `app/Http/Controllers/`.
+
+**Because** this maintains a clear structure for routing and controller logic, making the application easier to navigate and maintain.
+
+**Examples**
+
+- Correct: Define admin routes as `/{locale}/admin/dashboard` in `routes/web.php`.
+- Incorrect: Scatter routes across different files or omit the `Controller` suffix in controller names.

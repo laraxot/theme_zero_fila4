@@ -1,0 +1,1800 @@
+PHPUnit 10.3.5 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.9
+Configuration: D:\var\www\_bases\base_quaeris_fila3\laravel\phpunit.xml
+
+Illuminate\Testing\AssertableJsonString {#3601 // Modules\Quaeris\Tests\Feature\AddContactTest.php:138
+  +json: """
+    {\n
+        "message": "Class \"Modules\\Limesurvey\\Models\\LimeTokens0\" not found",\n
+        "exception": "Error",\n
+        "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasRelationships.php",\n
+        "line": 793,\n
+        "trace": [\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasRelationships.php",\n
+                "line": 225,\n
+                "function": "newRelatedInstance",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Quaeris\\Models\\Contact.php",\n
+                "line": 335,\n
+                "function": "belongsTo",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php",\n
+                "line": 576,\n
+                "function": "participant",\n
+                "class": "Modules\\Quaeris\\Models\\Contact",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php",\n
+                "line": 528,\n
+                "function": "getRelationshipFromMethod",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\HasAttributes.php",\n
+                "line": 453,\n
+                "function": "getRelationValue",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php",\n
+                "line": 2225,\n
+                "function": "getAttribute",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\spatie\\laravel-model-status\\src\\HasStatuses.php",\n
+                "line": 180,\n
+                "function": "__get",\n
+                "class": "Illuminate\\Database\\Eloquent\\Model",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Quaeris\\Models\\Contact.php",\n
+                "line": 607,\n
+                "function": "__get",\n
+                "class": "Modules\\Quaeris\\Models\\Contact",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Notify\\Notifications\\ThemeNotification.php",\n
+                "line": 57,\n
+                "function": "sendEmailCallback",\n
+                "class": "Modules\\Quaeris\\Models\\Contact",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\Channels\\MailChannel.php",\n
+                "line": 55,\n
+                "function": "toMail",\n
+                "class": "Modules\\Notify\\Notifications\\ThemeNotification",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\NotificationSender.php",\n
+                "line": 148,\n
+                "function": "send",\n
+                "class": "Illuminate\\Notifications\\Channels\\MailChannel",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\NotificationSender.php",\n
+                "line": 106,\n
+                "function": "sendToNotifiable",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\Localizable.php",\n
+                "line": 19,\n
+                "function": "Illuminate\\Notifications\\{closure}",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\NotificationSender.php",\n
+                "line": 101,\n
+                "function": "withLocale",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\ChannelManager.php",\n
+                "line": 54,\n
+                "function": "sendNow",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\SendQueuedNotifications.php",\n
+                "line": 112,\n
+                "function": "sendNow",\n
+                "class": "Illuminate\\Notifications\\ChannelManager",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 36,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Notifications\\SendQueuedNotifications",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",\n
+                "line": 41,\n
+                "function": "Illuminate\\Container\\{closure}",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 93,\n
+                "function": "unwrapIfClosure",\n
+                "class": "Illuminate\\Container\\Util",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 35,\n
+                "function": "callBoundMethod",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",\n
+                "line": 662,\n
+                "function": "call",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 128,\n
+                "function": "call",\n
+                "class": "Illuminate\\Container\\Container",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Bus\\{closure}",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 132,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 123,\n
+                "function": "dispatchNow",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Queue\\{closure}",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 122,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 70,\n
+                "function": "dispatchThroughMiddleware",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\Jobs\\Job.php",\n
+                "line": 98,\n
+                "function": "call",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\SyncQueue.php",\n
+                "line": 43,\n
+                "function": "fire",\n
+                "class": "Illuminate\\Queue\\Jobs\\Job",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 253,\n
+                "function": "push",\n
+                "class": "Illuminate\\Queue\\SyncQueue",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 229,\n
+                "function": "pushCommandToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 77,\n
+                "function": "dispatchToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\NotificationSender.php",\n
+                "line": 229,\n
+                "function": "dispatch",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\NotificationSender.php",\n
+                "line": 76,\n
+                "function": "queueNotification",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Notifications\\ChannelManager.php",\n
+                "line": 39,\n
+                "function": "send",\n
+                "class": "Illuminate\\Notifications\\NotificationSender",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php",\n
+                "line": 353,\n
+                "function": "send",\n
+                "class": "Illuminate\\Notifications\\ChannelManager",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Quaeris\\Actions\\SendInviteAction.php",\n
+                "line": 36,\n
+                "function": "__callStatic",\n
+                "class": "Illuminate\\Support\\Facades\\Facade",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\spatie\\laravel-queueable-action\\src\\ActionJob.php",\n
+                "line": 92,\n
+                "function": "execute",\n
+                "class": "Modules\\Quaeris\\Actions\\SendInviteAction",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 36,\n
+                "function": "handle",\n
+                "class": "Spatie\\QueueableAction\\ActionJob",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php",\n
+                "line": 41,\n
+                "function": "Illuminate\\Container\\{closure}",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 93,\n
+                "function": "unwrapIfClosure",\n
+                "class": "Illuminate\\Container\\Util",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php",\n
+                "line": 35,\n
+                "function": "callBoundMethod",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php",\n
+                "line": 662,\n
+                "function": "call",\n
+                "class": "Illuminate\\Container\\BoundMethod",\n
+                "type": "::"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 128,\n
+                "function": "call",\n
+                "class": "Illuminate\\Container\\Container",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Bus\\{closure}",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 132,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 123,\n
+                "function": "dispatchNow",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Queue\\{closure}",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 122,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 70,\n
+                "function": "dispatchThroughMiddleware",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\Jobs\\Job.php",\n
+                "line": 98,\n
+                "function": "call",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\SyncQueue.php",\n
+                "line": 43,\n
+                "function": "fire",\n
+                "class": "Illuminate\\Queue\\Jobs\\Job",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 253,\n
+                "function": "push",\n
+                "class": "Illuminate\\Queue\\SyncQueue",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 229,\n
+                "function": "pushCommandToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 77,\n
+                "function": "dispatchToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bus\\PendingDispatch.php",\n
+                "line": 193,\n
+                "function": "dispatch",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php",\n
+                "line": 388,\n
+                "function": "__destruct",\n
+                "class": "Illuminate\\Foundation\\Bus\\PendingDispatch",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Queueable.php",\n
+                "line": 251,\n
+                "function": "dispatch"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 172,\n
+                "function": "dispatchNextJobInChain",\n
+                "class": "Spatie\\QueueableAction\\ActionJob",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\CallQueuedHandler.php",\n
+                "line": 77,\n
+                "function": "ensureNextJobInChainIsDispatched",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\Jobs\\Job.php",\n
+                "line": 98,\n
+                "function": "call",\n
+                "class": "Illuminate\\Queue\\CallQueuedHandler",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Queue\\SyncQueue.php",\n
+                "line": 43,\n
+                "function": "fire",\n
+                "class": "Illuminate\\Queue\\Jobs\\Job",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 253,\n
+                "function": "push",\n
+                "class": "Illuminate\\Queue\\SyncQueue",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 229,\n
+                "function": "pushCommandToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Bus\\Dispatcher.php",\n
+                "line": 77,\n
+                "function": "dispatchToQueue",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bus\\PendingDispatch.php",\n
+                "line": 193,\n
+                "function": "dispatch",\n
+                "class": "Illuminate\\Bus\\Dispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Quaeris\\Http\\Controllers\\Api\\AddContactController.php",\n
+                "line": 111,\n
+                "function": "__destruct",\n
+                "class": "Illuminate\\Foundation\\Bus\\PendingDispatch",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php",\n
+                "line": 54,\n
+                "function": "__invoke",\n
+                "class": "Modules\\Quaeris\\Http\\Controllers\\Api\\AddContactController",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php",\n
+                "line": 43,\n
+                "function": "callAction",\n
+                "class": "Illuminate\\Routing\\Controller",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",\n
+                "line": 259,\n
+                "function": "dispatch",\n
+                "class": "Illuminate\\Routing\\ControllerDispatcher",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php",\n
+                "line": 205,\n
+                "function": "runController",\n
+                "class": "Illuminate\\Routing\\Route",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",\n
+                "line": 799,\n
+                "function": "run",\n
+                "class": "Illuminate\\Routing\\Route",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Routing\\{closure}",\n
+                "class": "Illuminate\\Routing\\Router",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php",\n
+                "line": 50,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",\n
+                "line": 159,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",\n
+                "line": 125,\n
+                "function": "handleRequest",\n
+                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php",\n
+                "line": 87,\n
+                "function": "handleRequestUsingNamedLimiter",\n
+                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php",\n
+                "line": 57,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Auth\\Middleware\\Authenticate",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",\n
+                "line": 798,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",\n
+                "line": 777,\n
+                "function": "runRouteWithinStack",\n
+                "class": "Illuminate\\Routing\\Router",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",\n
+                "line": 741,\n
+                "function": "runRoute",\n
+                "class": "Illuminate\\Routing\\Router",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php",\n
+                "line": 730,\n
+                "function": "dispatchToRoute",\n
+                "class": "Illuminate\\Routing\\Router",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",\n
+                "line": 200,\n
+                "function": "dispatch",\n
+                "class": "Illuminate\\Routing\\Router",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 141,\n
+                "function": "Illuminate\\Foundation\\Http\\{closure}",\n
+                "class": "Illuminate\\Foundation\\Http\\Kernel",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\livewire\\livewire\\src\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware.php",\n
+                "line": 19,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Livewire\\Features\\SupportDisablingBackButtonCache\\DisableBackButtonCacheMiddleware",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\barryvdh\\laravel-debugbar\\src\\Middleware\\InjectDebugbar.php",\n
+                "line": 59,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Barryvdh\\Debugbar\\Middleware\\InjectDebugbar",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",\n
+                "line": 21,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php",\n
+                "line": 31,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php",\n
+                "line": 21,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php",\n
+                "line": 40,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php",\n
+                "line": 27,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php",\n
+                "line": 99,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php",\n
+                "line": 62,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Http\\Middleware\\HandleCors",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php",\n
+                "line": 39,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 180,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Http\\Middleware\\TrustProxies",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",\n
+                "line": 116,\n
+                "function": "Illuminate\\Pipeline\\{closure}",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",\n
+                "line": 175,\n
+                "function": "then",\n
+                "class": "Illuminate\\Pipeline\\Pipeline",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php",\n
+                "line": 144,\n
+                "function": "sendRequestThroughRouter",\n
+                "class": "Illuminate\\Foundation\\Http\\Kernel",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Testing\\Concerns\\MakesHttpRequests.php",\n
+                "line": 573,\n
+                "function": "handle",\n
+                "class": "Illuminate\\Foundation\\Http\\Kernel",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Testing\\Concerns\\MakesHttpRequests.php",\n
+                "line": 539,\n
+                "function": "call",\n
+                "class": "Illuminate\\Foundation\\Testing\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\Modules\\Quaeris\\Tests\\Feature\\AddContactTest.php",\n
+                "line": 126,\n
+                "function": "json",\n
+                "class": "Illuminate\\Foundation\\Testing\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\Framework\\TestCase.php",\n
+                "line": 1102,\n
+                "function": "testLogin",\n
+                "class": "Modules\\Quaeris\\Tests\\Feature\\AddContactTest",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Testing\\TestCase.php",\n
+                "line": 174,\n
+                "function": "runTest",\n
+                "class": "PHPUnit\\Framework\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\Framework\\TestCase.php",\n
+                "line": 653,\n
+                "function": "runTest",\n
+                "class": "Illuminate\\Foundation\\Testing\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\Framework\\TestRunner.php",\n
+                "line": 103,\n
+                "function": "runBare",\n
+                "class": "PHPUnit\\Framework\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\Framework\\TestCase.php",\n
+                "line": 489,\n
+                "function": "run",\n
+                "class": "PHPUnit\\Framework\\TestRunner",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\Framework\\TestSuite.php",\n
+                "line": 340,\n
+                "function": "run",\n
+                "class": "PHPUnit\\Framework\\TestCase",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\TextUI\\TestRunner.php",\n
+                "line": 63,\n
+                "function": "run",\n
+                "class": "PHPUnit\\Framework\\TestSuite",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\src\\TextUI\\Application.php",\n
+                "line": 176,\n
+                "function": "run",\n
+                "class": "PHPUnit\\TextUI\\TestRunner",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\phpunit\\phpunit\\phpunit",\n
+                "line": 99,\n
+                "function": "run",\n
+                "class": "PHPUnit\\TextUI\\Application",\n
+                "type": "->"\n
+            },\n
+            {\n
+                "file": "D:\\var\\www\\_bases\\base_quaeris_fila3\\laravel\\vendor\\bin\\phpunit",\n
+                "line": 122,\n
+                "function": "include"\n
+            }\n
+        ]\n
+    }
+    """
+  #decoded: array:5 [
+    "message" => "Class "Modules\Limesurvey\Models\LimeTokens0" not found"
+    "exception" => "Error"
+    "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasRelationships.php"
+    "line" => 793
+    "trace" => array:127 [
+      0 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasRelationships.php"
+        "line" => 225
+        "function" => "newRelatedInstance"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      1 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Quaeris\Models\Contact.php"
+        "line" => 335
+        "function" => "belongsTo"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      2 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php"
+        "line" => 576
+        "function" => "participant"
+        "class" => "Modules\Quaeris\Models\Contact"
+        "type" => "->"
+      ]
+      3 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php"
+        "line" => 528
+        "function" => "getRelationshipFromMethod"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      4 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php"
+        "line" => 453
+        "function" => "getRelationValue"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      5 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php"
+        "line" => 2225
+        "function" => "getAttribute"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      6 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\spatie\laravel-model-status\src\HasStatuses.php"
+        "line" => 180
+        "function" => "__get"
+        "class" => "Illuminate\Database\Eloquent\Model"
+        "type" => "->"
+      ]
+      7 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Quaeris\Models\Contact.php"
+        "line" => 607
+        "function" => "__get"
+        "class" => "Modules\Quaeris\Models\Contact"
+        "type" => "->"
+      ]
+      8 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Notify\Notifications\ThemeNotification.php"
+        "line" => 57
+        "function" => "sendEmailCallback"
+        "class" => "Modules\Quaeris\Models\Contact"
+        "type" => "->"
+      ]
+      9 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\Channels\MailChannel.php"
+        "line" => 55
+        "function" => "toMail"
+        "class" => "Modules\Notify\Notifications\ThemeNotification"
+        "type" => "->"
+      ]
+      10 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\NotificationSender.php"
+        "line" => 148
+        "function" => "send"
+        "class" => "Illuminate\Notifications\Channels\MailChannel"
+        "type" => "->"
+      ]
+      11 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\NotificationSender.php"
+        "line" => 106
+        "function" => "sendToNotifiable"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      12 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Support\Traits\Localizable.php"
+        "line" => 19
+        "function" => "Illuminate\Notifications\{closure}"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      13 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\NotificationSender.php"
+        "line" => 101
+        "function" => "withLocale"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      14 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\ChannelManager.php"
+        "line" => 54
+        "function" => "sendNow"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      15 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\SendQueuedNotifications.php"
+        "line" => 112
+        "function" => "sendNow"
+        "class" => "Illuminate\Notifications\ChannelManager"
+        "type" => "->"
+      ]
+      16 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 36
+        "function" => "handle"
+        "class" => "Illuminate\Notifications\SendQueuedNotifications"
+        "type" => "->"
+      ]
+      17 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\Util.php"
+        "line" => 41
+        "function" => "Illuminate\Container\{closure}"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      18 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 93
+        "function" => "unwrapIfClosure"
+        "class" => "Illuminate\Container\Util"
+        "type" => "::"
+      ]
+      19 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 35
+        "function" => "callBoundMethod"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      20 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\Container.php"
+        "line" => 662
+        "function" => "call"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      21 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 128
+        "function" => "call"
+        "class" => "Illuminate\Container\Container"
+        "type" => "->"
+      ]
+      22 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Bus\{closure}"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      23 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      24 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 132
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      25 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 123
+        "function" => "dispatchNow"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      26 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Queue\{closure}"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      27 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      28 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 122
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      29 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 70
+        "function" => "dispatchThroughMiddleware"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      30 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\Jobs\Job.php"
+        "line" => 98
+        "function" => "call"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      31 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\SyncQueue.php"
+        "line" => 43
+        "function" => "fire"
+        "class" => "Illuminate\Queue\Jobs\Job"
+        "type" => "->"
+      ]
+      32 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 253
+        "function" => "push"
+        "class" => "Illuminate\Queue\SyncQueue"
+        "type" => "->"
+      ]
+      33 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 229
+        "function" => "pushCommandToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      34 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 77
+        "function" => "dispatchToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      35 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\NotificationSender.php"
+        "line" => 229
+        "function" => "dispatch"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      36 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\NotificationSender.php"
+        "line" => 76
+        "function" => "queueNotification"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      37 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Notifications\ChannelManager.php"
+        "line" => 39
+        "function" => "send"
+        "class" => "Illuminate\Notifications\NotificationSender"
+        "type" => "->"
+      ]
+      38 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php"
+        "line" => 353
+        "function" => "send"
+        "class" => "Illuminate\Notifications\ChannelManager"
+        "type" => "->"
+      ]
+      39 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Quaeris\Actions\SendInviteAction.php"
+        "line" => 36
+        "function" => "__callStatic"
+        "class" => "Illuminate\Support\Facades\Facade"
+        "type" => "::"
+      ]
+      40 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\spatie\laravel-queueable-action\src\ActionJob.php"
+        "line" => 92
+        "function" => "execute"
+        "class" => "Modules\Quaeris\Actions\SendInviteAction"
+        "type" => "->"
+      ]
+      41 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 36
+        "function" => "handle"
+        "class" => "Spatie\QueueableAction\ActionJob"
+        "type" => "->"
+      ]
+      42 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\Util.php"
+        "line" => 41
+        "function" => "Illuminate\Container\{closure}"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      43 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 93
+        "function" => "unwrapIfClosure"
+        "class" => "Illuminate\Container\Util"
+        "type" => "::"
+      ]
+      44 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php"
+        "line" => 35
+        "function" => "callBoundMethod"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      45 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Container\Container.php"
+        "line" => 662
+        "function" => "call"
+        "class" => "Illuminate\Container\BoundMethod"
+        "type" => "::"
+      ]
+      46 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 128
+        "function" => "call"
+        "class" => "Illuminate\Container\Container"
+        "type" => "->"
+      ]
+      47 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Bus\{closure}"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      48 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      49 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 132
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      50 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 123
+        "function" => "dispatchNow"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      51 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Queue\{closure}"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      52 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      53 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 122
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      54 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 70
+        "function" => "dispatchThroughMiddleware"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      55 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\Jobs\Job.php"
+        "line" => 98
+        "function" => "call"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      56 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\SyncQueue.php"
+        "line" => 43
+        "function" => "fire"
+        "class" => "Illuminate\Queue\Jobs\Job"
+        "type" => "->"
+      ]
+      57 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 253
+        "function" => "push"
+        "class" => "Illuminate\Queue\SyncQueue"
+        "type" => "->"
+      ]
+      58 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 229
+        "function" => "pushCommandToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      59 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 77
+        "function" => "dispatchToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      60 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Bus\PendingDispatch.php"
+        "line" => 193
+        "function" => "dispatch"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      61 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php"
+        "line" => 388
+        "function" => "__destruct"
+        "class" => "Illuminate\Foundation\Bus\PendingDispatch"
+        "type" => "->"
+      ]
+      62 => array:3 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Queueable.php"
+        "line" => 251
+        "function" => "dispatch"
+      ]
+      63 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 172
+        "function" => "dispatchNextJobInChain"
+        "class" => "Spatie\QueueableAction\ActionJob"
+        "type" => "->"
+      ]
+      64 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\CallQueuedHandler.php"
+        "line" => 77
+        "function" => "ensureNextJobInChainIsDispatched"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      65 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\Jobs\Job.php"
+        "line" => 98
+        "function" => "call"
+        "class" => "Illuminate\Queue\CallQueuedHandler"
+        "type" => "->"
+      ]
+      66 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Queue\SyncQueue.php"
+        "line" => 43
+        "function" => "fire"
+        "class" => "Illuminate\Queue\Jobs\Job"
+        "type" => "->"
+      ]
+      67 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 253
+        "function" => "push"
+        "class" => "Illuminate\Queue\SyncQueue"
+        "type" => "->"
+      ]
+      68 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 229
+        "function" => "pushCommandToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      69 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Bus\Dispatcher.php"
+        "line" => 77
+        "function" => "dispatchToQueue"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      70 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Bus\PendingDispatch.php"
+        "line" => 193
+        "function" => "dispatch"
+        "class" => "Illuminate\Bus\Dispatcher"
+        "type" => "->"
+      ]
+      71 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Quaeris\Http\Controllers\Api\AddContactController.php"
+        "line" => 111
+        "function" => "__destruct"
+        "class" => "Illuminate\Foundation\Bus\PendingDispatch"
+        "type" => "->"
+      ]
+      72 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Controller.php"
+        "line" => 54
+        "function" => "__invoke"
+        "class" => "Modules\Quaeris\Http\Controllers\Api\AddContactController"
+        "type" => "->"
+      ]
+      73 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php"
+        "line" => 43
+        "function" => "callAction"
+        "class" => "Illuminate\Routing\Controller"
+        "type" => "->"
+      ]
+      74 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Route.php"
+        "line" => 259
+        "function" => "dispatch"
+        "class" => "Illuminate\Routing\ControllerDispatcher"
+        "type" => "->"
+      ]
+      75 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Route.php"
+        "line" => 205
+        "function" => "runController"
+        "class" => "Illuminate\Routing\Route"
+        "type" => "->"
+      ]
+      76 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php"
+        "line" => 799
+        "function" => "run"
+        "class" => "Illuminate\Routing\Route"
+        "type" => "->"
+      ]
+      77 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Routing\{closure}"
+        "class" => "Illuminate\Routing\Router"
+        "type" => "->"
+      ]
+      78 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php"
+        "line" => 50
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      79 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Routing\Middleware\SubstituteBindings"
+        "type" => "->"
+      ]
+      80 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php"
+        "line" => 159
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      81 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php"
+        "line" => 125
+        "function" => "handleRequest"
+        "class" => "Illuminate\Routing\Middleware\ThrottleRequests"
+        "type" => "->"
+      ]
+      82 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Middleware\ThrottleRequests.php"
+        "line" => 87
+        "function" => "handleRequestUsingNamedLimiter"
+        "class" => "Illuminate\Routing\Middleware\ThrottleRequests"
+        "type" => "->"
+      ]
+      83 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Routing\Middleware\ThrottleRequests"
+        "type" => "->"
+      ]
+      84 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Auth\Middleware\Authenticate.php"
+        "line" => 57
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      85 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Auth\Middleware\Authenticate"
+        "type" => "->"
+      ]
+      86 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      87 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php"
+        "line" => 798
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      88 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php"
+        "line" => 777
+        "function" => "runRouteWithinStack"
+        "class" => "Illuminate\Routing\Router"
+        "type" => "->"
+      ]
+      89 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php"
+        "line" => 741
+        "function" => "runRoute"
+        "class" => "Illuminate\Routing\Router"
+        "type" => "->"
+      ]
+      90 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Routing\Router.php"
+        "line" => 730
+        "function" => "dispatchToRoute"
+        "class" => "Illuminate\Routing\Router"
+        "type" => "->"
+      ]
+      91 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php"
+        "line" => 200
+        "function" => "dispatch"
+        "class" => "Illuminate\Routing\Router"
+        "type" => "->"
+      ]
+      92 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 141
+        "function" => "Illuminate\Foundation\Http\{closure}"
+        "class" => "Illuminate\Foundation\Http\Kernel"
+        "type" => "->"
+      ]
+      93 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\livewire\livewire\src\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware.php"
+        "line" => 19
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      94 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Livewire\Features\SupportDisablingBackButtonCache\DisableBackButtonCacheMiddleware"
+        "type" => "->"
+      ]
+      95 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\barryvdh\laravel-debugbar\src\Middleware\InjectDebugbar.php"
+        "line" => 59
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      96 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Barryvdh\Debugbar\Middleware\InjectDebugbar"
+        "type" => "->"
+      ]
+      97 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php"
+        "line" => 21
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      98 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php"
+        "line" => 31
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\TransformsRequest"
+        "type" => "->"
+      ]
+      99 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull"
+        "type" => "->"
+      ]
+      100 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php"
+        "line" => 21
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      101 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php"
+        "line" => 40
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\TransformsRequest"
+        "type" => "->"
+      ]
+      102 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\TrimStrings"
+        "type" => "->"
+      ]
+      103 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ValidatePostSize.php"
+        "line" => 27
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      104 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\ValidatePostSize"
+        "type" => "->"
+      ]
+      105 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php"
+        "line" => 99
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      106 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance"
+        "type" => "->"
+      ]
+      107 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php"
+        "line" => 62
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      108 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Http\Middleware\HandleCors"
+        "type" => "->"
+      ]
+      109 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php"
+        "line" => 39
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      110 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 180
+        "function" => "handle"
+        "class" => "Illuminate\Http\Middleware\TrustProxies"
+        "type" => "->"
+      ]
+      111 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php"
+        "line" => 116
+        "function" => "Illuminate\Pipeline\{closure}"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      112 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php"
+        "line" => 175
+        "function" => "then"
+        "class" => "Illuminate\Pipeline\Pipeline"
+        "type" => "->"
+      ]
+      113 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php"
+        "line" => 144
+        "function" => "sendRequestThroughRouter"
+        "class" => "Illuminate\Foundation\Http\Kernel"
+        "type" => "->"
+      ]
+      114 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php"
+        "line" => 573
+        "function" => "handle"
+        "class" => "Illuminate\Foundation\Http\Kernel"
+        "type" => "->"
+      ]
+      115 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php"
+        "line" => 539
+        "function" => "call"
+        "class" => "Illuminate\Foundation\Testing\TestCase"
+        "type" => "->"
+      ]
+      116 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\Modules\Quaeris\Tests\Feature\AddContactTest.php"
+        "line" => 126
+        "function" => "json"
+        "class" => "Illuminate\Foundation\Testing\TestCase"
+        "type" => "->"
+      ]
+      117 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\Framework\TestCase.php"
+        "line" => 1102
+        "function" => "testLogin"
+        "class" => "Modules\Quaeris\Tests\Feature\AddContactTest"
+        "type" => "->"
+      ]
+      118 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Testing\TestCase.php"
+        "line" => 174
+        "function" => "runTest"
+        "class" => "PHPUnit\Framework\TestCase"
+        "type" => "->"
+      ]
+      119 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\Framework\TestCase.php"
+        "line" => 653
+        "function" => "runTest"
+        "class" => "Illuminate\Foundation\Testing\TestCase"
+        "type" => "->"
+      ]
+      120 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\Framework\TestRunner.php"
+        "line" => 103
+        "function" => "runBare"
+        "class" => "PHPUnit\Framework\TestCase"
+        "type" => "->"
+      ]
+      121 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\Framework\TestCase.php"
+        "line" => 489
+        "function" => "run"
+        "class" => "PHPUnit\Framework\TestRunner"
+        "type" => "->"
+      ]
+      122 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\Framework\TestSuite.php"
+        "line" => 340
+        "function" => "run"
+        "class" => "PHPUnit\Framework\TestCase"
+        "type" => "->"
+      ]
+      123 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\TextUI\TestRunner.php"
+        "line" => 63
+        "function" => "run"
+        "class" => "PHPUnit\Framework\TestSuite"
+        "type" => "->"
+      ]
+      124 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\src\TextUI\Application.php"
+        "line" => 176
+        "function" => "run"
+        "class" => "PHPUnit\TextUI\TestRunner"
+        "type" => "->"
+      ]
+      125 => array:5 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\phpunit\phpunit\phpunit"
+        "line" => 99
+        "function" => "run"
+        "class" => "PHPUnit\TextUI\Application"
+        "type" => "->"
+      ]
+      126 => array:3 [
+        "file" => "D:\var\www\_bases\base_quaeris_fila3\laravel\vendor\bin\phpunit"
+        "line" => 122
+        "function" => "include"
+      ]
+    ]
+  ]
+}
+<pre>[185103]Array
+(
+    [status] => Error: Invalid survey ID
+)
+</pre>

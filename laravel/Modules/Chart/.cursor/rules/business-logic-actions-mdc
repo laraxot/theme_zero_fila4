@@ -1,0 +1,12 @@
+# Business Logic Actions
+
+**When** you are implementing business logic or actions that need to be asynchronous or reusable
+
+**Then** always use `spatie/laravel-queueable-action` for implementing queueable actions instead of traditional services.
+
+**Because** this promotes reuse, testability, and ensures that actions can be queued for better performance and scalability.
+
+**Examples**
+
+- Correct: Use `spatie/laravel-queueable-action` to create actions like `RecordNotificationAction`.
+- Incorrect: Implement business logic in traditional service classes that cannot be queued.

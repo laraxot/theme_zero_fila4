@@ -1,0 +1,14 @@
+# Regola Windsurf: GeoJsonModel (ispirato a Squire)
+
+- Non creare tabelle/migration per dati statici come regioni, province, comuni, CAP se il dataset è gestibile da file.
+- Utilizzare un modello readonly che legge direttamente da un file JSON (es: comuni.json) come fonte dati.
+- Esporre metodi simili a Eloquent/Collection: all(), where(), find(), ecc.
+- I model specialistici (Region, Province, City, Cap) devono estendere la base GeoJsonModel e fornire filtri dedicati.
+- Versionare sempre il file json e documentare la struttura.
+- Aggiornare la documentazione di Geo/docs, Xot/docs e <nome progetto>/docs con la filosofia e la politica della scelta.
+- Collegamenti bidirezionali tra questa rule e le docs.
+
+Vedi anche:
+- Modules/Geo/docs/geo-json-model.md
+- Xot/docs/module-structure.md
+- <nome progetto>/docs/geo-integration.md

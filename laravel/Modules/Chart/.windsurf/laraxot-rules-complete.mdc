@@ -1,0 +1,125 @@
+# Regole Fondamentali WindSurf/Laraxot - <nome progetto>
+
+## Struttura dei Modelli
+
+### Estensione dei Modelli
+- I modelli DEVONO estendere **esclusivamente** `BaseModel` del proprio modulo
+- MAI estendere direttamente `Illuminate\Database\Eloquent\Model` o `Modules\Xot\Models\XotBaseModel`
+- Esempio corretto: `class CondizioniLavoro extends BaseModel`
+
+### Proprietà e Annotazioni
+- La proprietà `$fillable` DEVE essere `protected` con annotazione:
+  ```php
+  /** @var list<string> */
+  protected $fillable = ['campo1', 'campo2'];
+  ```
+- MAI utilizzare la proprietà `$casts`, implementare il metodo `casts()`:
+  ```php
+  /**
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          'updated_at' => 'datetime',
+      ];
+  }
+  ```
+- Documentare tutte le proprietà virtuali con `@property-read`
+- Le relazioni devono avere i tipi generici corretti
+
+## Namespace e Directory
+
+### Regole di Namespace
+- Il namespace corretto è SEMPRE `Modules\<NomeModulo>\...` (senza segmento `app`)
+- Anche se i file sono in `app/...`, il namespace NON deve includere `app`
+- Mappa corretta:
+  - `app/Models/` → `Modules\NomeModulo\Models`
+  - `app/Filament/` → `Modules\NomeModulo\Filament`
+  - `app/Http/Controllers/` → `Modules\NomeModulo\Http\Controllers`
+
+### Tipizzazione Rigorosa
+- Utilizzare `declare(strict_types=1);` in ogni file
+- Specificare TUTTI i tipi di ritorno e parametri
+- Evitare `mixed` quando possibile (usare union types, generics, interfaces)
+- Usare tipi generici per gli array: `array<string, mixed>`, `list<string>`
+- Utilizzare le funzioni sicure di `thecodingmachine/safe`
+
+## Migrazioni e Database
+
+### Migrazioni
+- Utilizzare classi anonime per le migrazioni:
+  ```php
+  return new class extends XotBaseMigration { ... }
+  ```
+- MAI implementare il metodo `down()` in migrazioni che estendono `XotBaseMigration`
+- Per aggiungere colonne a tabelle esistenti:
+  1. Copiare la migrazione originale
+  2. Aggiornare il timestamp nel nome del file
+  3. Aggiungere la colonna con controllo `if (! $this->hasColumn(...))`
+  4. MAI creare nuove migrazioni separate per aggiungere colonne
+
+## Filament Resources
+
+### Setup delle Risorse
+- Namespace corretto: `Modules\<NomeModulo>\Filament`
+- Le risorse DEVONO estendere `XotBaseResource` o ereditare da esso
+- Utilizzare `getFormSchema()` invece di `form()`
+- Le action custom DEVONO sovrascrivere `setUp()` per configurare tutte le proprietà
+
+### Traduzioni in Filament
+- MAI utilizzare `->label()` o altre stringhe hardcoded
+- Tutte le label, heading e descrizioni devono provenire dai file di traduzione
+- Struttura espansa per le traduzioni:
+  ```php
+  'fields' => [
+      'campo_nome' => [
+          'label' => 'Etichetta',
+          'help' => 'Testo di aiuto',
+          'placeholder' => 'Testo segnaposto'
+      ]
+  ]
+  ```
+
+### View Custom
+- Le view custom Filament DEVONO usare `<x-filament::page>` come wrapper principale
+- MAI estendere layout generici o usare sezioni non compatibili con Filament
+- Esporre variabili Blade da `getViewData()`
+
+## PHPStan Compliance
+
+### Esecuzione
+- Eseguire PHPStan sempre da `/var/www/html/<nome progetto>/laravel`
+- Utilizzare `./vendor/bin/phpstan analyze` (MAI `php artisan test:phpstan`)
+- Livello minimo 9 per tutti i moduli
+
+### Risoluzione degli Errori
+- Specificare tutti i tipi di ritorno e parametri
+- Utilizzare generics per gli array (`array<string, mixed>`, `list<string>`)
+- Documentare proprietà con annotazioni PHPDoc complete
+- Eliminare il tipo `mixed` quando possibile
+- Implementare interfacce appropriate per tipizzare meglio
+
+## Documentazione
+
+### Localizzazione
+- Moduli: documentazione in `Modules/<NomeModulo>/docs/`
+- MAI usare `resources/views/docs/`
+- Aggiornare sempre la documentazione più vicina E la root docs
+- Motivare ogni modifica strutturale
+- Creare collegamenti bidirezionali tra documentazioni
+
+### Traduzioni
+- Modulo-specifiche: `Modules/[ModuleName]/lang/[locale]/`
+- Globali: `resources/lang/[locale]/`
+- Utilizzare la struttura espansa per tutti i campi e le azioni
+- Mantenere coerenza nel naming delle chiavi
+
+## Testing e Sicurezza
+- Validazione statica con phpstan
+- Test di regressione dopo ogni bugfix
+- Seguire best practices di sicurezza documentate
+- Documentare ogni correzione di sicurezza
+
+Ultimo aggiornamento: 2025-06-03

@@ -1,0 +1,3 @@
+#[submodule "docs"]
+#	path = docs
+#	url = https://github.com/quaeris-tv/doc_limesurvey.git
