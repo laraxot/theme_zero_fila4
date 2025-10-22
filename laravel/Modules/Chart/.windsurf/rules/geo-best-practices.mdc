@@ -1,0 +1,62 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Best Practices Modulo Geo
+
+## 1. Fonte Dati
+- Utilizzare SEMPRE il file JSON come fonte dati
+- NON creare tabelle nel database per i dati geografici
+- NON duplicare i dati in altri moduli
+
+## 2. Accesso ai Dati
+- Utilizzare SEMPRE `GeoDataService` per accedere ai dati
+- NON accedere direttamente al file JSON
+- Lasciare che il servizio gestisca la cache
+
+## 3. Validazione
+- Utilizzare SEMPRE `GeoDataValidator` per validare i dati
+- Verificare l'integrità dei dati prima di utilizzarli
+- Gestire gli errori di validazione
+
+## 4. UI/UX
+- Utilizzare SEMPRE i componenti Filament forniti:
+  - `LocationForm` per i form
+  - `LocationWidget` per i widget
+- NON creare componenti personalizzati
+- Seguire le traduzioni fornite
+
+## 5. Cache
+- Lasciare che il servizio gestisca la cache
+- NON accedere direttamente alla cache
+- Pulire la cache quando necessario
+
+## 6. Traduzioni
+- Aggiungere nuove traduzioni in `lang/it/`
+- Mantenere la struttura esistente
+- Documentare le modifiche
+
+## 7. Eventi
+- Utilizzare l'evento `location-selected` per gestire le selezioni
+- Gestire gli eventi correttamente
+- Documentare l'utilizzo degli eventi
+
+## 8. Checklist prima del commit
+- [ ] Utilizzo corretto di `GeoDataService`
+- [ ] Validazione dei dati
+- [ ] Componenti Filament corretti
+- [ ] Cache gestita correttamente
+- [ ] Traduzioni aggiornate
+- [ ] Eventi gestiti correttamente
+- [ ] Documentazione aggiornata
+
+## 9. Link Documentazione
+- [README del Modulo](../../laravel/Modules/Geo/docs/README.md)
+- [Integrazione Filament](../../laravel/Modules/Geo/docs/filament-integration.md)
+- [JSON Database](../../laravel/Modules/Geo/docs/json-database.md)
+- [Best Practices Filament](../../docs/filament-best-practices.md)
+- [Clean Code](../../docs/clean-code.md)
+
+---
+**Questa regola è vincolante e va applicata in tutti i moduli che utilizzano il modulo Geo.**

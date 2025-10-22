@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use function Laravel\Folio\{middleware, name};
+
+middleware(['auth']);
+name('logout');
+?>
+
+<x-layout>
+    <x-slot:title>
+        {{ __('Logout') }}
+    </x-slot>
+
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+            @livewire(\Modules\User\Filament\Widgets\LogoutWidget::class)
+        </div>
+    </div>
+</x-layout>

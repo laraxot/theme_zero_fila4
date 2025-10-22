@@ -1,0 +1,516 @@
+# Regole Cursor complete per Laraxot <nome progetto>
+
+## Modelli ed Ereditarietà
+
+### Regola Fondamentale
+- I modelli concreti devono estendere SOLO il `BaseModel` del proprio modulo
+- MAI estendere direttamente `Illuminate\Database\Eloquent\Model`
+- MAI estendere `Modules\Xot\Models\XotBaseModel` direttamente
+
+```php
+// ✅ CORRETTO
+namespace Modules\IndennitaCondizioniLavoro\Models;
+
+class CondizioniLavoro extends BaseModel
+{
+    // Implementazione modello
+}
+
+// ❌ ERRATO
+namespace Modules\IndennitaCondizioniLavoro\Models;
+
+use Illuminate\Database\Eloquent\Model;
+// oppure
+use Modules\Xot\Models\XotBaseModel;
+
+class CondizioniLavoro extends Model // oppure XotBaseModel
+{
+    // Implementazione modello
+}
+```
+
+### Motivazione e Benefici
+- **Isolamento**: Ogni modulo può personalizzare il proprio BaseModel
+- **Override locale**: Funzionalità specifiche del modulo possono essere implementate a livello locale
+- **Compliance PHPStan**: Necessario per il livello 10
+- **Coerenza**: Uniformità di comportamento all'interno di ciascun modulo
+
+### Modelli Aggregati
+- I modelli aggregati e di totali (es. `OrganizzativaTotValutatoreId`) devono estendere il `BaseModel` del loro modulo
+- Esempio: Un modello aggregato del modulo Performance estende `Modules\Performance\Models\BaseModel`
+- **NON** devono estendere `Modules\Xot\Models\BaseModel`
+
+## Proprietà dei Modelli
+
+### Proprietà standard: Definizione e Tipizzazione
+- **$fillable**:
+  ```php
+  /** @var list<string> */
+  protected $fillable = ['nome', 'cognome', 'email'];
+  ```
+- **$hidden**:
+  ```php
+  /** @var list<string> */
+  protected $hidden = ['password', 'remember_token'];
+  ```
+- **$dates**:
+  ```php
+  /** @var list<string> */
+  protected $dates = ['data_nascita', 'data_assunzione'];
+  ```
+- **$with**:
+  ```php
+  /** @var list<string> */
+  protected $with = ['permessi', 'ruoli'];
+  ```
+
+### Casting (IMPORTANTE: Regola aggiornata 2025)
+- **$casts DEPRECATO**: Non usare mai la proprietà $casts
+- **Metodo casts()**:
+  ```php
+  /**
+   * Get the attributes that should be cast.
+   *
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          'updated_at' => 'datetime',
+          'is_active' => 'boolean',
+          'score' => 'float',
+          'options' => 'array',
+          'status' => Status::class, // per enum
+      ];
+  }
+  ```
+
+### Documentazione PHPDoc per Proprietà Esterne
+```php
+/**
+ * @property int $id
+ * @property string $nome
+ * @property string $cognome
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Permessi\Models\Permesso> $permessi
+ */
+```
+
+## Namespace e Struttura Codice
+
+### Regole Namespace
+- **NO 'app' nei namespace**:
+  - ✅ CORRETTO: `Modules\NomeModulo\Models`
+  - ❌ ERRATO: `Modules\NomeModulo\App\Models`
+
+- **Filament namespace**:
+  - ✅ CORRETTO: `Modules\NomeModulo\Filament\Resources`
+  - ❌ ERRATO: `App\Filament\Resources` (anche se directory fisica è app/Filament)
+
+### Struttura Directory Tipica per Modulo
+```
+ModuleName/
+├── app/
+│   ├── Actions/           # Spatie QueableActions
+│   ├── Data/              # Spatie Laravel Data
+│   ├── Exceptions/        # Eccezioni specifiche del modulo
+│   ├── Filament/          # Risorse e componenti Filament
+│   │   ├── Pages/
+│   │   ├── Resources/
+│   │   └── Widgets/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   ├── Models/            # Modelli ed eloquent
+│   │   └── Traits/
+│   ├── Providers/         # Service provider
+│   └── Services/          # Servizi (deprecated, preferire Data/Actions)
+├── config/                # Configurazioni modulo
+├── database/              # Migrazioni e seeder
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+├── docs/                  # Documentazione modulo
+├── lang/                  # Traduzioni
+│   └── it/
+├── resources/             # Asset e viste
+│   ├── js/
+│   ├── sass/
+│   └── views/
+├── routes/                # Definizioni route
+└── tests/                 # Test unitari e feature
+```
+
+## Migrazioni Database
+
+### Classi Anonime
+- Usare sempre classi anonime per le migrazioni
+- Esempio:
+  ```php
+  <?php
+
+  use Illuminate\Database\Schema\Blueprint;
+  use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+  return new class extends XotBaseMigration {
+      /**
+       * Run the migrations.
+       */
+      public function up(): void
+      {
+          // Implementazione
+      }
+
+      // Non implementare mai il metodo down
+  };
+  ```
+
+### Aggiunta Colonne a Tabelle Esistenti
+1. **Copiare** la migrazione originale di creazione della tabella
+2. **Aggiornare** il timestamp nel nome file
+3. **Aggiungere** la colonna in una sezione condizionale
+   ```php
+   if (! $this->hasColumn('performance_organizzativa', 'valutatore_id')) {
+       $this->tableUpdate('performance_organizzativa', function (Blueprint $table) {
+           $table->bigInteger('valutatore_id')->nullable();
+       });
+   }
+   ```
+4. **Documentare** la modifica nelle doc del modulo
+
+### Checklist Migrazione
+- [ ] Classe anonima (`return new class extends XotBaseMigration`)
+- [ ] Solo metodo `up` (no metodo `down`)
+- [ ] Controllo esistenza tabella/colonna prima di creare/modificare
+- [ ] Documentazione aggiornata
+
+## Filament Resources
+
+### Estensione e Namespace
+- Estendere sempre `XotBaseResource` e non `Resource` di Filament
+- Namespace corretto: `Modules\NomeModulo\Filament\Resources`
+
+```php
+namespace Modules\Performance\Filament\Resources;
+
+use Modules\Xot\Filament\Resources\XotBaseResource;
+
+class OrganizzativaResource extends XotBaseResource
+{
+    // Implementazione
+}
+```
+
+### Form Schema
+- Usare `getFormSchema()` anziché `form()`
+- Restituire array di componenti
+- Non usare `->label()` nei componenti
+
+```php
+public static function getFormSchema(): array
+{
+    return [
+        TextInput::make('nome'),
+        TextInput::make('cognome'),
+        DatePicker::make('data_nascita'),
+        Select::make('tipo_id')
+            ->relationship('tipo', 'descrizione'),
+    ];
+}
+```
+
+### Table Schema
+- Usare `getTableColumns()` anziché `table()`
+- Colonne solo da modello/migrazione
+- No label() nei componenti
+- Usare traduzioni per header
+
+```php
+public static function getTableColumns(): array
+{
+    return [
+        TextColumn::make('id'),
+        TextColumn::make('nome'),
+        TextColumn::make('cognome'),
+        DateColumn::make('data_nascita'),
+        TextColumn::make('tipo.descrizione'),
+    ];
+}
+```
+
+## Action Filament Custom (aggiornamento 2025-05)
+
+### Setup e Configurazione
+- Override di `setUp()` per configurare tutte le proprietà
+- Nome univoco passato a parent::make
+- Utilizzo di translation file per tutte le label
+- Tipizzazione rigorosa
+
+```php
+public function setUp(): void
+{
+    parent::setUp();
+
+    $this->label(trans('module-name::actions.export.label'))
+         ->icon('heroicon-o-document-download')
+         ->color('success')
+         ->requiresConfirmation()
+         ->modalHeading(trans('module-name::actions.export.modal.heading'))
+         ->modalDescription(trans('module-name::actions.export.modal.description'))
+         ->modalSubmitActionLabel(trans('module-name::actions.export.modal.confirm'));
+}
+```
+
+### Pattern HeaderAction Custom
+- Seguire il pattern documentato in Performance
+- Evitare override statico di make (pattern Filament 2)
+- Utilizzare ActionGroup per raggruppare azioni correlate
+
+## Traduzioni
+
+### Struttura Completa per Campi
+```php
+// resources/lang/it/resource.php
+return [
+    'fields' => [
+        'nome_campo' => [
+            'label' => 'Etichetta Campo',
+            'tooltip' => 'Descrizione di aiuto',
+            'placeholder' => 'Esempio di input'
+        ],
+    ],
+];
+```
+
+### Struttura Completa per Azioni
+```php
+// resources/lang/it/resource.php
+return [
+    'actions' => [
+        'nome_azione' => [
+            'label' => 'Etichetta Azione',
+            'icon' => 'heroicon-name',
+            'color' => 'primary|secondary|success|danger',
+            'tooltip' => 'Descrizione dell\'azione',
+            'modal' => [
+                'heading' => 'Titolo Modal',
+                'description' => 'Descrizione dettagliata',
+                'confirm' => 'Conferma',
+                'cancel' => 'Annulla'
+            ],
+            'messages' => [
+                'success' => 'Operazione completata con successo',
+                'error' => 'Si è verificato un errore: :error'
+            ]
+        ],
+    ],
+];
+```
+
+### Best Practices per Traduzioni
+1. Utilizzare **frasi complete** per messaggi
+2. **Coerenza** nella capitalizzazione
+3. Grammatica e punteggiatura **corrette**
+4. **Help text** per campi complessi
+5. Label **concise** ma chiare
+6. **Sintassi breve** degli array (`[]` invece di `array()`)
+7. **Organizzzare** traduzioni per contesto
+8. **Documentare** requisiti speciali
+9. **Aggiornare** traduzioni quando si modificano funzionalità
+10. Mantenere **coerenza** tra moduli
+
+## PHPStan (livello 9+)
+
+### Esecuzione
+- Eseguire sempre dalla directory Laravel root:
+  ```bash
+  cd /var/www/html/<nome progetto>/laravel
+  ./vendor/bin/phpstan analyze [target] --level=9
+  ```
+
+### Correzioni Tipiche
+1. **Tipi di ritorno mancanti**
+   ```php
+   // ❌ ERRATO
+   public function execute()
+
+   // ✅ CORRETTO
+   public function execute(): ReturnType
+   ```
+
+2. **Tipi di parametri mancanti**
+   ```php
+   // ❌ ERRATO
+   public function getAlAttribute($value)
+
+   // ✅ CORRETTO
+   public function getAlAttribute(?string $value): ?string
+   ```
+
+3. **Tipi array per proprietà**
+   ```php
+   // ❌ ERRATO
+   protected $fillable = ['field1', 'field2'];
+
+   // ✅ CORRETTO
+   /** @var list<string> */
+   protected $fillable = ['field1', 'field2'];
+   ```
+
+4. **Proprietà non definite**
+   ```php
+   // ❌ ERRATO: Accesso a proprietà non dichiarate
+   $model->anno;
+
+   // ✅ CORRETTO: Dichiarazione proprietà
+   /**
+    * @property int $anno
+    * @property Carbon|null $dal
+    * @property Carbon|null $al
+    */
+   ```
+
+5. **Tipi di ritorno policy**
+   ```php
+   // ❌ ERRATO: Mismatch tra PHPDoc e tipo nativo
+   /**
+    * @return bool|Response
+    */
+   public function viewAny(User $user): bool
+
+   // ✅ CORRETTO: Allineamento tipi
+   /**
+    * @return bool
+    */
+   public function viewAny(User $user): bool
+   ```
+
+6. **Accesso proprietà factory**
+   ```php
+   // ❌ ERRATO: Accesso a proprietà indefinite
+   $user->random_field;
+
+   // ✅ CORRETTO: Usare metodi corretti di Faker
+   $faker->randomElement(['a', 'b', 'c']);
+   ```
+
+### Gestione Valori Mixed (PHPStan livello 9)
+```php
+// ❌ ERRATO
+$result = $data['key'];
+
+// ✅ CORRETTO
+if (is_array($data) && isset($data['key'])) {
+    $result = $data['key'];
+}
+
+// Per la conversione in stringhe:
+// ❌ ERRATO
+$message = "Value: {$value}";
+
+// ✅ CORRETTO
+$message = "Value: " . (is_scalar($value) ? (string) $value : '');
+```
+
+## Documentazione e Manutenzione
+
+### Struttura Documentazione
+- **Documentazione Root**: `/var/www/html/<nome progetto>/docs/`
+  - Linee guida globali
+  - Standard di codice generali
+  - Link bidirezionali a doc moduli
+
+- **Documentazione Modulo**: `Modules/<NomeModulo>/docs/`
+  - Architettura specifica del modulo
+  - API e integrazione
+  - Schema database
+  - Personalizzazioni e override
+
+### Regole di Aggiornamento Documentazione
+1. Studiare la documentazione pertinente prima di apportare modifiche
+2. Aggiornare la documentazione quando:
+   - Si aggiungono nuove funzionalità
+   - Si modificano funzionalità esistenti
+   - Si cambiano decisioni architetturali
+   - Si aggiungono nuove convenzioni
+   - Si trovano comportamenti non documentati
+3. Standard di qualità documentazione:
+   - Chiara e concisa
+   - Esempi ove appropriato
+   - Formattazione coerente
+   - Aggiornata
+   - Riferimenti incrociati tra documenti
+
+## Traits e Dipendenze User
+
+### HasTeams
+- Solo in modelli che estendono `Authenticatable`
+- Richiede trait `HasRoles` per gestione ruoli
+- Richiede tabelle `team` e `team_user` con colonne specifiche
+- Metodi devono gestire correttamente tipi di ritorno e parametri
+
+### HasTenants
+- Solo in modelli che implementano `HasTenants` di Filament
+- Richiede trait `HasRoles` per gestione ruoli
+- Richiede tabelle `tenants` e `tenant_user` con colonne specifiche
+- Metodi devono gestire correttamente tipi di ritorno e parametri
+
+### HasAuthenticationLogTrait
+- Può essere usato in qualsiasi modello che necessita di logging di autenticazione
+- Richiede tabella `authentication_logs` con colonne specifiche
+- Metodi devono gestire correttamente tipi di ritorno e parametri
+- Notifiche devono essere configurate correttamente
+
+### Regole Generali Traits
+- PHPDoc completi per proprietà e metodi
+- Tipi di ritorno specificati esplicitamente
+- Parametri dei metodi con tipi specificati
+- Relazioni definite con tipi corretti
+- Annotazioni `@property-read` per proprietà di sola lettura
+- Metodi che gestiscono correttamente casi null
+- Relazioni definite con tipi generici corretti
+
+## Componenti UI e View
+
+### Posizionamento Componenti Blade
+- **Location**: Componenti shared in `Modules/UI/resources/views/components/ui/`
+- **MAI in root**: Mai usare `resources/views/components/`
+- **Naming**: Coerenza nel naming
+
+### Custom Filament Views
+- **Wrapper**: Usare `<x-filament::page>` come wrapper principale
+- **Anti-pattern**: Evitare view che estendono layout generici
+- **Traduzioni**: Tutte le label da file di traduzione
+
+## Test e Qualità
+
+### Best Practices
+- **PHPStan**: Eseguire prima di committare
+- **Test regressione**: Dopo ogni bugfix
+- **Traduzioni**: Verificare completezza
+- **Code review**: Verificare compliance con regole
+- **Documentazione**: Aggiornare dopo ogni modifica significativa
+
+## Regole Generali
+
+### Tipizzazione
+- `declare(strict_types=1);` in ogni file
+- Evitare `mixed` se possibile
+- Usare le funzioni sicure di `thecodingmachine/safe`
+
+### Moduli
+- Ogni modulo deve avere propria documentazione
+- Seguire convenzioni Laraxot
+- Usare Spatie Laravel Data invece dei servizi
+- Preferire Spatie QueableActions
+
+### Traduzioni
+- Sintassi breve degli array
+- Coerenza nei nomi delle chiavi
+- Documentare tutte le traduzioni
+- Aggiornare documentazione per nuove traduzioni
+- Usare sempre label, placeholder e help
+- Coerenza nel naming delle azioni

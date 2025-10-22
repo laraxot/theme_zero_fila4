@@ -1,0 +1,186 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Regole Namespace e Struttura Directory per Moduli Laravel
+
+## Regola Fondamentale: Struttura File vs Namespace
+
+**IMPORTANTE**: Nel progetto, il segmento `app` è presente nella struttura fisica dei file ma NON nel namespace.
+
+### Mappatura PSR-4
+```json
+"autoload": {
+    "psr-4": {
+        "Modules\\<NomeModulo>\\": "app/"
+    }
+}
+```
+
+### Esempi Corretti
+
+| Aspetto | Pattern | Esempio |
+|---------|---------|---------|
+| **Struttura File** | `Modules/<NomeModulo>/app/<Path>` | `Modules/<nome progetto>/app/Filament/Resources/DoctorResource.php` |
+| **Namespace** | `Modules\<NomeModulo>\<Path>` | `Modules\<nome progetto>\Filament\Resources\DoctorResource` |
+
+## Errore Critico: File fuori da app/
+
+### ❌ ERRATO - File fuori da app/
+```
+Modules/<nome progetto>/Enums/UserType.php
+Modules/<nome progetto>/Actions/RegisterAction.php
+Modules/<nome progetto>/Models/Doctor.php
+Modules/<nome progetto>/Providers/ServiceProvider.php
+Modules/<nome progetto>/Filament/Resources/UserResource.php
+```
+
+### ✅ CORRETTO - File in app/
+```
+Modules/<nome progetto>/app/Enums/UserType.php
+Modules/<nome progetto>/app/Actions/RegisterAction.php
+Modules/<nome progetto>/app/Models/Doctor.php
+Modules/<nome progetto>/app/Providers/ServiceProvider.php
+Modules/<nome progetto>/app/Filament/Resources/UserResource.php
+```
+
+## Namespace Corretti
+
+### ❌ ERRATO - Namespace con app
+```php
+namespace Modules\<nome progetto>\app\Enums;
+namespace Modules\<nome progetto>\app\Filament\Resources;
+namespace Modules\<nome progetto>\app\Models;
+```
+
+### ✅ CORRETTO - Namespace senza app
+```php
+namespace Modules\<nome progetto>\Enums;
+namespace Modules\<nome progetto>\Filament\Resources;
+namespace Modules\<nome progetto>\Models;
+```
+
+## Casi Specifici
+
+### Filament Resources
+- **File**: `Modules/<Nome>/app/Filament/Resources/UserResource.php`
+- **Namespace**: `Modules\<Nome>\Filament\Resources`
+- **MAI**: `Modules\<Nome>\App\Filament\Resources`
+
+### Filament Pages
+- **File**: `Modules/<Nome>/app/Filament/Resources/UserResource/Pages/ListUsers.php`
+- **Namespace**: `Modules\<Nome>\Filament\Resources\UserResource\Pages`
+- **Estende**: `Modules\Xot\Filament\Resources\Pages\XotBaseListRecords`
+
+### Filament Widgets
+- **File**: `Modules/<Nome>/app/Filament/Widgets/StatsWidget.php`
+- **Namespace**: `Modules\<Nome>\Filament\Widgets`
+- **Estende**: `Modules\Xot\Filament\Widgets\XotBaseWidget`
+
+### Models
+- **File**: `Modules/<Nome>/app/Models/User.php`
+- **Namespace**: `Modules\<Nome>\Models`
+- **Estende**: `Modules\<Nome>\Models\BaseModel` o modello base del modulo
+
+### Enums
+- **File**: `Modules/<Nome>/app/Enums/UserType.php`
+- **Namespace**: `Modules\<Nome>\Enums`
+- **Implementa**: `HasLabel`, `HasIcon`, `HasColor` quando appropriato
+
+### Service Providers
+- **File**: `Modules/<Nome>/app/Providers/ServiceProvider.php`
+- **Namespace**: `Modules\<Nome>\Providers`
+- **Estende**: `Modules\Xot\Providers\XotBaseServiceProvider`
+
+## Impatto degli Errori
+
+### Problemi Causati da File fuori da app/
+- Autoloading rotto
+- Namespace incoerenti
+- Problemi di refactoring
+- Test che falliscono
+- IDE che non riconosce le classi
+- CI/CD che fallisce
+- PHPStan che non trova le classi
+- Difficoltà di manutenzione
+
+### Problemi Causati da Namespace Errati
+- Classi non trovate
+- Errori di autoloading
+- Problemi con i Service Provider
+- Conflitti tra moduli
+- Difficoltà di debug
+
+## Checklist Anti-Errore
+
+### Prima di Creare File/Cartelle
+- [ ] Verifica che il file sia sotto `app/`
+- [ ] Controlla che il namespace non contenga `app\`
+- [ ] Verifica la mappatura PSR-4 in composer.json
+- [ ] Consulta esempi esistenti nel modulo
+- [ ] Esegui `composer dump-autoload` dopo modifiche
+
+### Dopo Creazione/Modifica
+- [ ] Verifica che l'IDE riconosca il file
+- [ ] Controlla che i test passino
+- [ ] Verifica che PHPStan non dia errori
+- [ ] Testa l'autoloading con `php artisan`
+
+## Regole Specifiche per Estensioni
+
+### Filament Resources
+- **SEMPRE** estendere `Modules\Xot\Filament\Resources\XotBaseResource`
+- **MAI** estendere `Filament\Resources\Resource` direttamente
+
+### Filament Pages
+- `ListRecords` → `Modules\Xot\Filament\Resources\Pages\XotBaseListRecords`
+- `CreateRecord` → `Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord`
+- `EditRecord` → `Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord`
+- `ViewRecord` → `Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord`
+
+### Filament Widgets
+- **SEMPRE** estendere `Modules\Xot\Filament\Widgets\XotBaseWidget`
+- **MAI** estendere `Filament\Widgets\Widget` direttamente
+
+## Filosofia e Zen
+
+### Principi Guida
+- **Coerenza**: Tutti i moduli seguono la stessa struttura
+- **Prevedibilità**: La struttura è sempre la stessa
+- **Manutenibilità**: Facile trovare e modificare i file
+- **Scalabilità**: La struttura cresce senza problemi
+- **Semplicità**: Regole chiare e semplici da seguire
+
+### Approccio Mentale
+- **Prima di agire, pensa**: Dove va questo file?
+- **Segui gli esempi**: Guarda come sono strutturati i file esistenti
+- **Verifica sempre**: Controlla che tutto funzioni dopo le modifiche
+- **Documenta**: Aggiorna la documentazione quando necessario
+
+## Errori Comuni e Soluzioni
+
+### Errore: Provider non trovato
+```
+Class "Modules\<nome progetto>\app\Providers\ServiceProvider" not found
+```
+**Soluzione**: Namespace errato, deve essere `Modules\<nome progetto>\Providers`
+
+### Errore: Resource non trovata
+```
+Class "Modules\<nome progetto>\App\Filament\Resources\UserResource" not found
+```
+**Soluzione**: Namespace errato, deve essere `Modules\<nome progetto>\Filament\Resources`
+
+### Errore: Autoloading fallito
+**Soluzione**: File fuori da `app/`, spostare nella directory corretta
+
+## Link e Documentazione
+- [Namespace vs File Structure](../laravel/Modules/<nome progetto>/docs/namespace-vs-file-structure.md)
+- [Filament Namespace Rules](../laravel/Modules/<nome progetto>/docs/filament-namespace-rules.md)
+- [README <nome progetto>](../laravel/Modules/<nome progetto>/docs/README.md)
+- [README Xot](../laravel/Modules/Xot/docs/README.md)
+- [PSR-4 Autoloading](https://www.php-fig.org/psr/psr-4/)
+
+---
+**Questa regola è fondamentale per il corretto funzionamento del progetto.**

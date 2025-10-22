@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Quaeris\Filament\Dashboard\Header\Actions;
+
+use Filament\Actions\Action;
+use Webmozart\Assert\Assert;
+use Filament\Pages\Dashboard;
+use Filament\Forms\Components\Radio;
+use Modules\Quaeris\Models\SurveyPdf;
+use Modules\Quaeris\Datas\AnswersFilterData;
+use Modules\Quaeris\Enums\SurveyExportTypesEnum;
+use Modules\Quaeris\Actions\SurveyPdf\ExportTypeAction;
+
+class ExportsAction extends Action
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->translateLabel()
+
+            ->icon('heroicon-o-document-arrow-down')
+            ->modalSubmitActionLabel(__('quaeris::dashboard.modal.submit'))
+            ->openUrlInNewTab()
+            ->action(static function (array $data, Dashboard $livewire) {
+                if (null !== $data['type']) {
+                    Assert::isArray($livewire->filters);
+                    $answersFilterData = AnswersFilterData::from([
+                        'date_from' => $livewire->filters['startDate'],
+                        'date_to' => $livewire->filters['endDate'],
+                        // 'question_id' => $livewire->filters[''],
+                        'question_filter' => $livewire->filters['question_filter'],
+                    ]);
+                    Assert::isInstanceOf($surveyPdf = SurveyPdf::find($livewire->filters['survey_pdf_id']), SurveyPdf::class);
+
+                    return app(ExportTypeAction::class)->execute($surveyPdf, $data['type'], $answersFilterData);
+                }
+            })
+            ->form([
+                Radio::make('type')
+                    ->label('Seleziona cosa vuoi esportare')
+                    /*
+                    ->options(static fn (): array => [
+                        'xls_alert' => 'Lista feedback valutazione <6', // lista feedback valutazione <6
+                        // 'xls_alert_user' => 'xls_alert_user', // lista feedback valutazione <6 per riga di domanda
+                        'xls_alert_user2' => 'Lista feedback valutazione <6 per riga di domanda', // lista feedback valutazione <6 per riga di domanda
+                        // 'xls_alert_user_all_answers' => 'xls_alert_user_all_answers', // lista feedback per riga di domanda
+                        'xls_answers_complete' => 'Lista risposte complete', // select *
+                        'xls_optout' => 'Lista disiscritti', // lista disiscritti
+                        'xls_contact_list' => 'Lista contatti inseriti', // lista contatti inseriti
+                        'pdf' => 'Pdf',
+                    ])
+                    ->descriptions([
+                        'xls_alert' => 'Per intervallo di tempo selezionato, di default ultimo mese',
+                        'xls_alert_user2' => 'Per intervallo di tempo selezionato, di default ultimo mese',
+                        'xls_answers_complete' => 'Per intervallo di tempo selezionato, di default ultimo mese',
+                        'xls_optout' => 'Per intervallo di tempo selezionato, di default ultimo mese',
+                        'xls_contact_list' => 'Per intervallo di tempo selezionato',
+                        'pdf' => 'Versione pdf, per intervallo di tempo selezionato',
+                    ])
+                        */
+                        ->options(SurveyExportTypesEnum::class)
+                    ->required()
+                    ->columns(2)
+                    ->validationMessages([
+                        'required' => 'Devi selezionare un opzione',
+                    ]),
+            ])
+        ;
+    }
+
+    public static function getDefaultName(): ?string
+    {
+        return 'exports';
+    }
+}

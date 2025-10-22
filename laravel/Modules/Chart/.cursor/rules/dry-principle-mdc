@@ -1,0 +1,15 @@
+# DRY Principle (Don't Repeat Yourself)
+
+**When** you are writing or modifying code or documentation
+
+**Then** avoid duplication by reusing existing code, components, or documentation through abstraction and modularization.
+
+**Because** this reduces maintenance overhead, minimizes errors, and improves code readability and scalability.
+
+**Examples**
+
+- Correct: Create a reusable function or component to handle repeated logic.
+- Incorrect: Copy-pasting the same code block in multiple places.
+
+**See**:
+- [Code Quality Guidelines](../Modules/Xot/docs/CODE_QUALITY.md)

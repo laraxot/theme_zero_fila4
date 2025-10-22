@@ -1,0 +1,37 @@
+# Volt and Folio Usage
+
+**When**: Working with Volt and Folio for frontend development in the application.
+
+**Then**:
+- The `@volt` directive must always be the first thing in a Folio file.
+- Do not use `@volt` within HTML markup.
+- Always use the correct layouts:
+  - `<x-layouts.app>`
+  - `<x-layouts.guest>`
+- Never use non-existent layouts.
+
+**Because**:
+- Ensures proper initialization and rendering of Volt components in Folio.
+- Maintains a clean separation of logic and markup.
+- Prevents rendering issues by using standardized and existing layouts.
+
+**Examples**:
+
+*Correct*:
+```blade
+@volt
+<x-layouts.app>
+    <!-- Content -->
+</x-layouts.app>
+```
+
+*Incorrect*:
+```blade
+<x-layouts.app>
+    @volt
+    <!-- Content -->
+</x-layouts.app>
+```
+
+**See**:
+- [Volt and Folio Guidelines](../Modules/Theme/docs/VOLT_FOLIO_GUIDELINES.md)

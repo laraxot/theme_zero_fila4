@@ -1,0 +1,18 @@
+# Working with Locales Metadata for Cursor
+
+## Context
+
+This document provides metadata for Cursor about configuring and managing locales in the `<nome progetto>` project using Laravel's localization features.
+
+## Key Points
+
+- **Purpose**: Configure default and fallback locales to support multi-language functionality.
+- **Approach**: Set 'it' as default locale and 'en' as fallback; use PHP files for structured translations due to JSON fallback limitations.
+- **Suggested Actions**:
+  - Update `/var/www/html/<nome progetto>/laravel/config/app.php` to set 'locale' to 'it' and 'fallback_locale' to 'en'.
+  - Ensure `mcamara/laravel-localization` is installed and middleware is registered in `/var/www/html/<nome progetto>/laravel/app/Http/Kernel.php`.
+  - Configure routes with localization middleware in `/var/www/html/<nome progetto>/laravel/routes/web.php`.
+  - Define supported locales in `/var/www/html/<nome progetto>/laravel/config/laravellocalization.php`.
+  - Continue using PHP translation files for reliable fallback behavior.
+- **Benefits**: Seamless language handling with proper fallback, adhering to project URL localization rules.
+- **Documentation**: Refer to `/var/www/html/<nome progetto>/laravel/Modules/Lang/docs/working-with-locales.md` for full details.

@@ -1,0 +1,19 @@
+# Regola per l'Autoregistrazione dei Comandi da Console
+
+## Contesto
+
+Nel nostro progetto, seguiamo la filosofia di `XotBaseServiceProvider` che prevede l'autoregistrazione dei comandi da console. Questo significa che i comandi non devono essere registrati manualmente nei service provider, ma devono essere rilevati automaticamente da Laravel se posizionati nella directory corretta.
+
+## Regola
+
+- **Nessuna Registrazione Manuale**: Non registrare manualmente i comandi da console nei service provider come `LangServiceProvider.php`, né con `protected $commands` né con `$this->commands()`. I comandi devono essere autoregistrati.
+- **Posizionamento Corretto**: Assicurati che i comandi siano posizionati nella directory `app/Console/Commands` del modulo corrispondente per essere rilevati automaticamente.
+- **Documentazione**: Qualsiasi correzione o modifica a questa regola deve essere documentata nella directory `docs` del modulo interessato.
+
+## Motivazione
+
+Questa regola promuove coerenza, automazione e aderenza alla filosofia del progetto, riducendo il rischio di errori e semplificando la manutenzione del codice.
+
+## Azione
+
+Se viene rilevata una registrazione manuale di comandi da console, rimuoverla e documentare la correzione. Assicurarsi che i comandi siano nella directory corretta per l'autoregistrazione.

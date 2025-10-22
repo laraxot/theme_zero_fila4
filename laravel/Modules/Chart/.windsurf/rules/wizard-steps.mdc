@@ -1,0 +1,71 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Regole per la gestione degli step del wizard
+
+## Principi fondamentali
+
+1. **Separazione degli step**
+   - Ogni step del wizard deve essere definito in un metodo dedicato
+   - I metodi devono seguire il pattern `get{StepName}Step()`
+   - Ogni metodo deve restituire un array con la configurazione dello step
+
+2. **Struttura del metodo getFormSchema**
+   - Il metodo `getFormSchema()` deve utilizzare i metodi dedicati per gli step
+   - La chiave del wizard deve essere 'wizard'
+   - Gli step devono essere referenziati con chiavi stringa
+
+3. **Configurazione degli step**
+   - Ogni step deve avere una chiave stringa
+   - I campi all'interno degli step devono avere chiavi stringa
+   - Le relazioni tra i campi devono essere gestite tramite `live()` e `afterStateUpdated()`
+
+4. **Best practices**
+   - Mantenere la coerenza nella nomenclatura
+   - Documentare la struttura del wizard
+   - Seguire il principio "Single Responsibility"
+   - Implementare la gestione degli errori
+
+## Esempio di implementazione
+
+```php
+public function getFormSchema(): array
+{
+    return [
+        'wizard' => Wizard::make([
+            'search' => $this->getSearchStep(),
+            'date_time' => $this->getDateTimeStep(),
+            'confirmation' => $this->getConfirmationStep(),
+        ])
+        ->submitAction(
+            Action::make('submit')
+                ->submit('save')
+        ),
+    ];
+}
+
+protected function getSearchStep(): array
+{
+    return [
+        Wizard\Step::make('search')
+            ->schema([
+                'fieldset' => Fieldset::make('fieldset')
+                    ->schema([
+                        'field' => Select::make('field')
+                            ->options(fn () => $this->getOptions())
+                            ->required()
+                            ->live(),
+                    ]),
+            ]),
+    ];
+}
+```
+
+## Note aggiuntive
+
+- La separazione degli step migliora la manutenibilità del codice
+- Ogni step deve essere indipendente e autocontenuto
+- Le dipendenze tra gli step devono essere gestite tramite lo stato del form
+- La documentazione deve essere aggiornata quando si modifica la struttura del wizard

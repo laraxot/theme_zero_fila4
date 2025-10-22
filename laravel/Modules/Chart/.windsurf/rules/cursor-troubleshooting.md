@@ -1,0 +1,48 @@
+---
+trigger: always_on
+description: 
+globs: 
+---
+# Cursor – Troubleshooting, Errori Comuni e Soluzioni
+
+## Errori Comuni
+- MCP non attivo: controllare la configurazione e i permessi
+- Tool MCP non visibile: validare la sintassi di mcp.json e la presenza del tool
+- Problemi SSH: preferire stdio in locale, SSE in remoto
+- Percorsi errati: usare sempre percorsi relativi
+- Namespace errato: evitare il segmento 'app' nei namespace
+- Proprietà non tipizzate: aggiungere sempre PHPDoc e tipi espliciti
+- Down nelle migrazioni: MAI implementare il metodo down
+
+## Edge Case
+- Tool MCP che funziona in locale ma non in remoto: verificare variabili d'ambiente e permessi
+- Errori di validazione context: controllare provider e propagazione
+- Conflitti tra moduli: verificare che ogni modulo usi il proprio BaseModel
+- Traduzioni mancanti: controllare la struttura espansa e la presenza di tutte le chiavi
+
+## Soluzioni Pratiche
+- Validare sempre la configurazione MCP dopo ogni modifica
+- Usare script di validazione automatica per percorsi e namespace
+- Aggiornare la documentazione e i file .mdc dopo ogni fix
+- Eseguire PHPStan livello 9+ dopo ogni modifica strutturale
+
+## Checklist Troubleshooting
+- [ ] Validare la configurazione MCP (stdio/SSE)
+- [ ] Controllare permessi e variabili d'ambiente
+- [ ] Aggiornare docs e .cursor/rules dopo ogni fix
+- [ ] Documentare errori e soluzioni
+- [ ] Eseguire test di regressione
+
+## Warning
+- Non ignorare warning di PHPStan o errori di validazione
+- Non usare percorsi assoluti nei riferimenti
+- Non modificare la struttura dei moduli senza aggiornare la documentazione
+
+## Riferimenti e Collegamenti
+- [model_context_protocol.md](mdc:../../docs/model_context_protocol.md)
+- [mcp_implementation_guide.md](mdc:../../docs/mcp_implementation_guide.md)
+- [mcp_errors_and_lessons.md](mdc:../../docs/mcp_errors_and_lessons.md)
+- [laraxot_conventions.md](mdc:../../docs/laraxot_conventions.md)
+- [links.md](mdc:../../docs/links.md)
+
+*Ultimo aggiornamento: giugno 2025 – conforme a standard Laraxot, best practice Cursor, e regole di documentazione interna.*

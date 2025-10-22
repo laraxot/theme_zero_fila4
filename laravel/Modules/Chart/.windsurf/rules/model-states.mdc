@@ -1,0 +1,85 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole per la Gestione degli Stati dei Modelli
+
+## When
+- Stai creando o modificando stati per un modello
+- Hai bisogno di gestire transizioni di stato
+- Devi implementare logica di business basata sugli stati
+- Vuoi tracciare i cambiamenti di stato
+
+## Then
+- Usa SEMPRE `spatie/laravel-model-states` invece di enum standard
+- Crea una classe di stato che estende `State`
+- Implementa le transizioni di stato consentite
+- Definisci gli eventi per ogni transizione
+- Usa il trait `HasStates` nel modello
+
+## Because
+- `spatie/laravel-model-states` offre:
+  - Transizioni di stato controllate
+  - Validazione delle transizioni
+  - Eventi per ogni cambio di stato
+  - Storico delle transizioni
+  - Logica di business più robusta
+
+## Examples
+
+### Definizione di uno Stato
+```php
+use Spatie\ModelStates\State;
+
+class UserState extends State
+{
+    public static function config(): StateConfig
+    {
+        return parent::config()
+            ->default(Pending::class)
+            ->allowTransition(Pending::class, Approved::class)
+            ->allowTransition(Pending::class, Rejected::class)
+            ->allowTransition(Approved::class, Suspended::class);
+    }
+}
+```
+
+### Implementazione nel Modello
+```php
+use Spatie\ModelStates\HasStates;
+
+class User extends Model
+{
+    use HasStates;
+
+    protected $casts = [
+        'state' => UserState::class,
+    ];
+}
+```
+
+### Utilizzo
+```php
+$user->state->transitionTo(Approved::class);
+$user->state->canTransitionTo(Suspended::class); // true/false
+```
+
+## Common Pitfalls
+
+- **Errore**: Usare enum standard invece di `spatie/laravel-model-states`
+  **Soluzione**: Implementare sempre stati usando `spatie/laravel-model-states`
+
+- **Errore**: Non definire tutte le transizioni possibili
+  **Soluzione**: Definire esplicitamente tutte le transizioni consentite
+
+- **Errore**: Non gestire gli eventi di transizione
+  **Soluzione**: Implementare gli eventi per ogni transizione di stato
+
+- **Errore**: Non validare le transizioni
+  **Soluzione**: Aggiungere logica di validazione nelle transizioni
+
+## Link e Documentazione
+- [Documentazione spatie/laravel-model-states](https://github.com/spatie/laravel-model-states)
+- [README Stati Modello](../../Modules/<nome progetto>/docs/Models/states.md)
+- [Best Practices Stati](../../Modules/<nome progetto>/docs/Models/state-best-practices.md)

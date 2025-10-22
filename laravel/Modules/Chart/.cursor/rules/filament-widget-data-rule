@@ -1,0 +1,97 @@
+# Regole per la Gestione dei Dati nei Widget Filament
+
+## Struttura Base
+```php
+class XotBaseWidget extends Widget implements HasForms
+{
+    // OBBLIGATORIO: Proprietà data per il form binding
+    public ?array $data = [];
+
+    // OBBLIGATORIO: Inizializzazione nel mount
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
+
+    // OBBLIGATORIO: Configurazione form con statePath
+    public function form(Form $form): Form
+    {
+        return $form
+            ->schema($this->getFormSchema())
+            ->statePath('data');
+    }
+}
+```
+
+## Errori Comuni
+- ❌ NON dimenticare `public ?array $data = []` nella classe base
+- ❌ NON usare proprietà pubbliche per i campi del form
+- ❌ NON dimenticare `statePath('data')` nel form
+- ❌ NON dimenticare `$this->form->fill()` nel mount
+
+## Best Practices
+- ✅ Definire `$data` nella classe base per tutti i widget con form
+- ✅ Usare `wire:model="data.field_name"` nei template
+- ✅ Inizializzare il form nel mount
+- ✅ Usare `statePath('data')` per il binding
+
+## Livewire Data Binding
+```php
+// ❌ ERRATO: Proprietà singole
+public $first_name;
+public $last_name;
+
+// ✅ CORRETTO: Array data
+public ?array $data = [];
+
+// Nel template
+<x-filament-forms::field wire:model="data.first_name">
+```
+
+## Ereditarietà
+```php
+// Base Widget
+class XotBaseWidget extends Widget implements HasForms
+{
+    public ?array $data = [];
+}
+
+// Widget Specifico
+class RegistrationWidget extends XotBaseWidget
+{
+    // Eredita $data dalla classe base
+    // Non serve ridichiarare $data
+}
+```
+
+## Troubleshooting
+
+### 1. Property does not exist
+```
+Livewire: [wire:model="data.field"] property does not exist
+```
+Cause:
+- Manca `public ?array $data = []`
+- Manca `statePath('data')`
+- Form non inizializzato nel mount
+
+### 2. Undefined Property
+```
+Undefined property: $data
+```
+Cause:
+- `$data` non definito nella classe base
+- Manca l'ereditarietà corretta
+- Mount non chiamato
+
+## Checklist Implementazione
+1. [ ] `public ?array $data = []` nella classe base
+2. [ ] `statePath('data')` nel form
+3. [ ] `$this->form->fill()` nel mount
+4. [ ] `wire:model="data.field"` nei template
+
+## Note Importanti
+- La proprietà `$data` deve essere nella classe base
+- Tutti i widget con form devono estendere la classe base
+- Il binding deve sempre usare il prefisso "data."
+- Inizializzare sempre il form nel mount 
