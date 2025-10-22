@@ -1,0 +1,201 @@
+# Regole per i Metodi Filament
+
+## Principi Fondamentali
+
+1. **Visibilità e Tipo dei Metodi**
+   - ❌ NON rendere statico un metodo non statico della classe padre
+   - ❌ NON rendere astratto un metodo non astratto della classe padre
+   - ❌ NON modificare la visibilità dei metodi ereditati
+   - ❌ NON dichiarare lo stesso metodo più volte nella stessa classe
+   - ✅ Mantenere SEMPRE la stessa firma del metodo della classe padre
+
+2. **Metodi Non Statici di Filament**
+   ```php
+   // ❌ ERRATO
+   public static function getFormSchema(): array
+   
+   // ✅ CORRETTO
+   public function getFormSchema(): array
+   ```
+
+3. **Metodi Non Astratti**
+   ```php
+   // ❌ ERRATO
+   abstract public function getTableColumns(): array;
+   
+   // ✅ CORRETTO
+   public function getTableColumns(): array
+   ```
+
+4. **Dichiarazioni Duplicate**
+   ```php
+   // ❌ ERRATO
+   class ListSnapshots extends XotBaseListRecords
+   {
+       public function getTableColumns(): array
+       {
+           // Prima dichiarazione
+       }
+
+       public function getTableColumns(): array
+       {
+           // Seconda dichiarazione - ERRORE!
+       }
+   }
+
+   // ✅ CORRETTO
+   class ListSnapshots extends XotBaseListRecords
+   {
+       public function getTableColumns(): array
+       {
+           // Unica dichiarazione
+           return [
+               TextColumn::make('id')->sortable(),
+               TextColumn::make('name')->searchable(),
+           ];
+       }
+   }
+   ```
+
+## Metodi Comuni e Loro Caratteristiche
+
+### Widget Methods
+- `getFormSchema()`: NON statico
+- `getColumns()`: NON statico
+- `getData()`: NON statico
+- `getFilters()`: NON statico
+
+### Resource Methods
+- `getTableColumns()`: NON statico, NON astratto
+- `getFormSchema()`: NON statico
+- `getTableFilters()`: NON statico
+- `getTableActions()`: NON statico
+- `getTableBulkActions()`: NON statico
+
+### RelationManager Methods
+- `getTableColumns()`: NON statico
+- `getFormSchema()`: NON statico
+- `getTableFilters()`: NON statico
+- `getTableActions()`: NON statico
+- `getTableBulkActions()`: NON statico
+
+## Best Practices
+
+1. **Verifica della Classe Padre**
+   - Controllare sempre la firma dei metodi nella classe padre
+   - Mantenere la stessa visibilità
+   - Mantenere lo stesso tipo (statico/non statico)
+   - Mantenere gli stessi parametri
+
+2. **Estensione dei Metodi**
+   - Chiamare sempre il metodo parent quando necessario
+   - Aggiungere solo la logica specifica necessaria
+   - Non duplicare la logica della classe padre
+   - Mantenere la stessa struttura di parametri e tipo di ritorno
+
+3. **Documentazione**
+   - Documentare le personalizzazioni
+   - Spiegare le deviazioni dalle convenzioni standard
+   - Mantenere i commenti PHPDoc aggiornati
+   - Indicare le dipendenze e i requisiti
+
+## Checklist di Verifica
+
+Prima di implementare un metodo:
+1. [ ] Verificare la firma del metodo nella classe padre
+2. [ ] Controllare se il metodo è statico/non statico
+3. [ ] Verificare se il metodo è astratto/non astratto
+4. [ ] Controllare la visibilità del metodo
+5. [ ] Verificare i parametri e il tipo di ritorno
+
+## Note Importanti
+
+1. **Compatibilità**
+   - Verificare la versione di Filament in uso
+   - Controllare i breaking changes
+   - Testare le modifiche
+   - Mantenere la compatibilità all'indietro
+
+2. **Performance**
+   - Ottimizzare le query nei metodi
+   - Evitare operazioni costose
+   - Utilizzare il caching quando possibile
+   - Monitorare le prestazioni
+
+3. **Manutenibilità**
+   - Mantenere i metodi piccoli e focalizzati
+   - Seguire il principio DRY
+   - Documentare le modifiche
+   - Aggiornare i test
+
+## Esempi di Implementazione Corretta
+
+### Widget
+```php
+class MyWidget extends XotBaseWidget
+{
+    public function getFormSchema(): array
+    {
+        return [
+            TextInput::make('name'),
+            TextInput::make('email'),
+        ];
+    }
+}
+```
+
+### Resource
+```php
+class ListRecords extends XotBaseListRecords
+{
+    public function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('id')->sortable(),
+            TextColumn::make('name')->searchable(),
+        ];
+    }
+}
+```
+
+### RelationManager
+```php
+class TeamsRelationManager extends RelationManager
+{
+    public function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('name'),
+            TextColumn::make('created_at'),
+        ];
+    }
+}
+```
+
+## Errori Comuni
+
+1. **Dichiarazioni Duplicate**
+   - Causa: Dichiarazione multipla dello stesso metodo nella stessa classe
+   - Errore: `Cannot redeclare {Class}::{method}()`
+   - Soluzione: Mantenere una sola dichiarazione del metodo
+   - Verifica: Controllare l'intero file per dichiarazioni duplicate
+
+2. **Modificatori Errati**
+   - Causa: Uso di `static` o `abstract` su metodi che non lo supportano
+   - Errore: `Cannot make non static/abstract method ... static/abstract`
+   - Soluzione: Rimuovere il modificatore non supportato
+   - Verifica: Controllare la classe padre per la firma corretta
+
+3. **Visibilità Errata**
+   - Causa: Modifica della visibilità di un metodo ereditato
+   - Errore: `Access level ... must be ...`
+   - Soluzione: Mantenere la stessa visibilità della classe padre
+   - Verifica: Controllare la visibilità nella classe padre
+
+## Checklist Aggiuntiva
+
+Prima di salvare un file:
+1. [ ] Verificare che non ci siano dichiarazioni duplicate di metodi
+2. [ ] Controllare che tutti i metodi abbiano una sola implementazione
+3. [ ] Assicurarsi che non ci siano copie accidentali di metodi
+4. [ ] Verificare che tutti i metodi abbiano un unico scopo chiaro 

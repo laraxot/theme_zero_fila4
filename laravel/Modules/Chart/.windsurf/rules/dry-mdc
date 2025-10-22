@@ -1,0 +1,81 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Principio DRY (Don't Repeat Yourself)
+
+## Definizione
+Il principio DRY afferma che "ogni pezzo di conoscenza deve avere una singola, inequivocabile, autorevole rappresentazione all'interno di un sistema".
+
+## Obiettivi
+- Ridurre la duplicazione del codice e della logica
+- Facilitare la manutenzione
+- Migliorare la coerenza del sistema
+
+## Applicazione
+- Estrarre codice ripetuto in funzioni, classi, metodi o moduli riutilizzabili
+- Utilizzare costanti e configurazioni centralizzate
+- Favorire l'uso di template e componenti
+- Documentare le soluzioni comuni in un unico punto
+
+## Benefici
+- Minore rischio di errori
+- Aggiornamenti più semplici e veloci
+- Codice più leggibile e manutenibile
+
+## Attenzione
+- Non forzare l'astrazione prematura
+- Valutare sempre il contesto prima di applicare DRY
+
+## Esempi
+- Funzioni helper condivise
+- Componenti UI riutilizzabili
+- Modelli di dati centralizzati
+
+## Limiti
+- DRY non significa eliminare ogni ripetizione, ma solo quella che rappresenta la stessa conoscenza o logica.
+
+## Console Commands
+- Non duplicare mai la registrazione dei comandi console nei ServiceProvider dei moduli
+- Usare sempre l'autoregistrazione centralizzata (es. XotBaseServiceProvider)
+- Ogni eccezione va documentata e motivata
+
+## Regola AddressResource
+
+Quando un modulo (es. StudioResource, UserResource, ecc.) deve gestire indirizzi tramite Filament, deve sempre riutilizzare:
+
+```php
+'addresses' => Forms\Components\Repeater::make('addresses')
+    ->relationship('addresses')
+    ->schema(Modules\Geo\Filament\Resources\AddressResource::getFormSchema())
+```
+
+invece di duplicare la logica dei campi.
+
+## Regola collegamenti documentazione
+
+I collegamenti nei file .md devono essere sempre relativi, mai assoluti.
+
+### Motivazione filosofica
+- Un solo punto di verità per la UI degli indirizzi
+- Coerenza e manutenibilità
+- Facilità di refactoring e portabilità della documentazione
+- Zen: serenità nella manutenzione
+
+## Regola BaseModel
+
+Tutti i modelli di un modulo devono estendere il BaseModel del modulo stesso (es. `Modules\<nome progetto>\Models\BaseModel`), **mai** direttamente `Illuminate\Database\Eloquent\Model`.
+
+### Motivazione filosofica
+- Centralizzazione della logica comune (connessione, cast, factory, ecc.)
+- Coerenza architetturale tra tutti i moduli
+- Facilità di override e personalizzazione
+- DRY: nessuna duplicazione di logica tra modelli
+- Zen: "Un solo BaseModel per domarli tutti"
+
+### Checklist
+- [ ] Nessun modello estende direttamente `Model` di Laravel
+- [ ] Tutti i modelli estendono il BaseModel del modulo
+- [ ] La logica comune è centralizzata
+- [ ] La documentazione è aggiornata

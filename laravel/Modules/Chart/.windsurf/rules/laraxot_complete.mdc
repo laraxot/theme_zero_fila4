@@ -1,0 +1,292 @@
+---
+description: Regole complete Windsurf per Laraxot <nome progetto>
+globs: ["**/*.php"]
+alwaysApply: true
+---
+
+# Regole Windsurf per Laraxot <nome progetto> (Giugno 2025)
+
+## Modelli e ORM
+
+### Estensione dei Modelli
+- **REGOLA FONDAMENTALE**: I modelli devono estendere `BaseModel` del proprio modulo, MAI direttamente `Illuminate\Database\Eloquent\Model` o `Modules\Xot\Models\XotBaseModel`
+- **Motivazione**: Garantisce isolamento, override locale, coerenza tra moduli e compliance PHPStan livello 10
+- **Esempio corretto**:
+  ```php
+  namespace Modules\IndennitaCondizioniLavoro\Models;
+
+  class CondizioniLavoro extends BaseModel
+  {
+      // Implementazione modello
+  }
+  ```
+- **Anti-pattern**:
+  ```php
+  namespace Modules\IndennitaCondizioniLavoro\Models;
+
+  use Illuminate\Database\Eloquent\Model;
+  // oppure use Modules\Xot\Models\XotBaseModel;
+
+  class CondizioniLavoro extends Model // oppure XotBaseModel
+  {
+      // Implementazione modello
+  }
+  ```
+
+### Proprietà dei Modelli
+- **$fillable**: Sempre `protected` e annotata con `/** @var list<string> */`
+- **$hidden**: Sempre `protected` e annotata con `/** @var list<string> */`
+- **$dates**: Sempre `protected` e annotata con `/** @var list<string> */`
+- **$with**: Sempre `protected` e annotata con `/** @var list<string> */`
+- **$casts DEPRECATO**: Mai usare la proprietà `$casts` (deprecata)
+- **Metodo casts()**:
+  ```php
+  /**
+   * Get the attributes that should be cast.
+   *
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          'updated_at' => 'datetime',
+          // Altri cast...
+      ];
+  }
+  ```
+- **Regole casting**:
+  1. Tutti i campi datetime devono essere cast a 'datetime'
+  2. Tutti i campi booleani devono essere cast a 'boolean'
+  3. Tutti i campi numerici devono avere cast appropriato ('integer', 'float', ecc.)
+  4. Tutti i campi enum devono essere cast alla rispettiva classe enum
+
+### Documentazione PHPDoc per Modelli
+- **Proprietà esterne**: Documentare proprietà accessibili ma non definite nel modello:
+  ```php
+  /**
+   * @property int $id
+   * @property string $nome
+   * @property string $cognome
+   * @property Carbon|null $created_at
+   * @property Carbon|null $updated_at
+   * @property-read Collection<Permesso> $permessi
+   */
+  ```
+- **Metodi**: Documentare tutti i metodi con tipi di parametri e di ritorno:
+  ```php
+  /**
+   * Recupera gli utenti collegati.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Modules\User\Models\User>
+   */
+  public function utenti(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+  ```
+
+## Namespace e Struttura
+
+### Regole di Namespace
+- **NO app in namespace**: Mai usare segmento 'app' nei namespace (corretto: `Modules\ModuleName\Models`, errato: `Modules\ModuleName\App\Models`)
+- **Filament namespace**: Sempre `Modules\<NomeModulo>\Filament`, mai `App\Filament`, anche se la directory fisica è `app/Filament`
+- **Mappatura directory-namespace**:
+  - `app/Models/` → `Modules\ModuleName\Models`
+  - `app/Http/Controllers/` → `Modules\ModuleName\Http\Controllers`
+  - `app/Filament/Resources/` → `Modules\ModuleName\Filament\Resources`
+
+### Struttura Moduli
+```
+ModuleName/
+├── app/
+│   ├── Actions/
+│   ├── Data/
+│   ├── Filament/
+│   ├── Http/
+│   ├── Models/
+│   └── Providers/
+├── docs/
+└── routes/
+```
+
+## Migrazioni
+
+### Regole Generali
+- **Classi anonime**: Tutte le migrazioni devono essere classi anonime restituite da `return new class extends XotBaseMigration { ... }`
+- **No metodo down**: Mai implementare `down()` nelle migrazioni che estendono `XotBaseMigration`
+- **Aggiunta colonne**: Per aggiungere colonne a tabelle esistenti:
+  1. Copiare la migrazione originale
+  2. Aggiornare il timestamp
+  3. Aggiungere controllo `if (! $this->hasColumn(...))`
+
+### Esempio di Migrazione Corretta
+```php
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+return new class extends XotBaseMigration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // Creazione tabella se non esiste
+        if (! $this->hasTable('performance_organizzativa')) {
+            $this->createTable('performance_organizzativa', function (Blueprint $table) {
+                $table->id();
+                $table->string('descrizione')->nullable();
+                $table->integer('anno')->nullable();
+                $table->timestamps();
+            });
+        }
+
+        // Aggiunta colonna se non esiste
+        if (! $this->hasColumn('performance_organizzativa', 'valutatore_id')) {
+            $this->tableUpdate('performance_organizzativa', function (Blueprint $table) {
+                $table->bigInteger('valutatore_id')->nullable();
+            });
+        }
+    }
+
+    // Non implementare mai il metodo down
+};
+```
+
+## Filament
+
+### Risorse Filament
+- **XotBaseResource**: Estendere sempre `XotBaseResource` anziché `Resource` di Filament
+- **getFormSchema()**: Utilizzare `getFormSchema()` anziché `form()`
+- **Label da traduzioni**: Mai usare `->label()`, solo traduzioni
+- **Namespace**: Sempre `Modules\<NomeModulo>\Filament`
+
+### Action Filament
+- **Nome univoco**: Utilizzare nomi univoci per tutte le action custom
+- **Setup**: Override di `setUp()` per configurare tutte le proprietà dell'action
+- **Conferma**: Configurare conferme tramite metodi dedicati
+- **Label**: Mai hardcoded, sempre da traduzioni
+
+### Tabelle Filament
+- **Colonne**: Solo da modello/migrazione, mai inventate
+- **Ordinamento**: Configurare colonne ordinabili in modo esplicito
+- **Filtri**: Implementare filtri pertinenti al modello
+
+### View Custom
+- **Wrapper**: Utilizzare `<x-filament::page>` come wrapper principale
+- **Variabili**: Esporre dati tramite variabili Blade
+- **Anti-pattern**: Evitare view che estendono layout generici
+
+## Traduzioni
+
+### Struttura Standard
+- **Fields**:
+  ```php
+  'fields' => [
+      'field_name' => [
+          'label' => 'Human Readable Label',
+          'help' => 'Help text if needed',
+          'placeholder' => 'Placeholder text if needed'
+      ]
+  ]
+  ```
+- **Actions**:
+  ```php
+  'actions' => [
+      'action_name' => [
+          'label' => 'Action Label',
+          'success' => 'Success message',
+          'error' => 'Error message',
+          'tooltip' => 'Action description'
+      ]
+  ]
+  ```
+- **Sections**:
+  ```php
+  'sections' => [
+      'section_name' => [
+          'label' => 'Section Label',
+          'tooltip' => 'Section description'
+      ]
+  ]
+  ```
+
+### Best Practices
+- **Frasi complete**: Utilizzare frasi complete per i messaggi
+- **Coerenza**: Mantenere terminologia e capitalizzazione uniforme
+- **Array brevi**: Usare sempre sintassi breve degli array
+- **Contestualizzazione**: Organizzare traduzioni per contesto
+- **Manutenzione**: Aggiornare traduzioni quando si modificano funzionalità
+
+## PHPStan
+
+### Esecuzione
+- **Directory**: Sempre da `/var/www/html/<nome progetto>/laravel`
+- **Comando**: `./vendor/bin/phpstan analyze [target] --level=[1-9]`
+- **Livello minimo**: 9
+- **Memoria**: `--memory-limit=2G` per moduli grandi
+
+### Correzioni Comuni
+- **Tipi di ritorno**: Aggiungere sempre tipi di ritorno espliciti
+- **Tipi di parametri**: Specificare sempre tipi per parametri
+- **Tipi generici**: Utilizzare generics correttamente (es. `Builder<static>`)
+- **Mixed**: Evitare `mixed` se possibile
+- **Strict types**: Usare `declare(strict_types=1);` in ogni file
+
+### PHPDoc
+- **Return**: Annotare tipi di ritorno completi
+- **Param**: Documentare tutti i parametri
+- **Property-read**: Usare per proprietà di sola lettura
+- **Var**: Annotare tutte le proprietà di classe
+
+## Documentazione
+
+### Struttura
+- **Moduli**: Documentazione in `Modules/<NomeModulo>/docs/`
+- **Root**: Documentazione globale in `/var/www/html/<nome progetto>/docs/`
+- **Collegamenti**: Mantenere collegamenti bidirezionali
+
+### Standard di Qualità
+- **Chiarezza**: Chiara e concisa
+- **Esempi**: Includere esempi pratici
+- **Formattazione**: Mantenere formattazione consistente
+- **Aggiornamenti**: Mantenere documentazione aggiornata
+- **Cross-reference**: Riferimenti incrociati tra documenti
+
+### Contenuti Obbligatori
+- **Perché**: Spiegare il motivo delle scelte implementative
+- **Pattern/Anti-pattern**: Documentare pattern corretti e anti-pattern
+- **Changelog**: Mantenere storico delle modifiche
+
+## UI e Componenti
+
+### Componenti Blade
+- **Location**: Posizionare in `Modules/UI/resources/views/components/ui/`
+- **MAI in root**: Mai usare `resources/views/components/`
+- **Naming**: Mantenere coerenza nel naming
+
+## Traits e Dipendenze
+
+### Traits di User
+- **HasTeams**: Solo in modelli che estendono Authenticatable, richiede HasRoles
+- **HasTenants**: Solo in modelli che implementano HasTenants di Filament
+- **HasAuthenticationLogTrait**: Per logging di autenticazione
+
+### Altre Dipendenze
+- **Safe functions**: Usare funzioni sicure di `thecodingmachine/safe`
+- **Spatie Laravel Data**: Preferire a servizi custom
+- **QueableActions**: Preferire per logica di business
+
+## Test e Validazione
+
+### Best Practices
+- **Validazione statica**: Eseguire PHPStan prima dei commit
+- **Test di regressione**: Dopo ogni bugfix
+- **Controllo traduzioni**: Verificare completezza
+- **Review code**: Verificare compliance con regole
+
+## Aggiornamento Giugno 2025
+- Aggiornate regole per view custom Filament (wrapper `<x-filament::page>`)
+- Consolidate linee guida per azioni Filament custom
+- Migliorate specifiche per traduzione dei campi e azioni
+- Allineate regole PHPStan al livello 10
+- Aggiornate specifiche per BaseModel di moduli specifici

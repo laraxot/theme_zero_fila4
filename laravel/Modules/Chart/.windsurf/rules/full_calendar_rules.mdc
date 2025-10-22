@@ -1,0 +1,419 @@
+---
+description: Regole per l'implementazione e l'utilizzo del componente FullCalendar di Saade per Filament in Laraxot <nome progetto>
+globs: ["**/Filament/Widgets/*Calendar*.php", "**/Models/Evento.php"]
+alwaysApply: true
+---
+
+# Regole per il Componente FullCalendar in Laraxot <nome progetto>
+
+## Architettura
+
+### Widget Base in Modulo UI
+
+Il componente base di FullCalendar **DEVE** essere implementato nel modulo UI:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\UI\Filament\Widgets;
+
+use Filament\Forms;
+use Illuminate\Database\Eloquent\Model;
+use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
+
+abstract class BaseCalendarWidget extends FullCalendarWidget
+{
+    // Implementazione base
+}
+```
+
+### Implementazioni Specifiche nei Moduli
+
+Ogni modulo che utilizza un calendario **DEVE** estendere il widget base del modulo UI:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Ptv\Filament\Widgets;
+
+use Modules\UI\Filament\Widgets\BaseCalendarWidget;
+use Modules\Ptv\Models\Evento;
+
+class CalendarioEventiWidget extends BaseCalendarWidget
+{
+    /**
+     * Modello degli eventi.
+     *
+     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     */
+    public string $model = Evento::class;
+
+    // Implementazione specifica
+}
+```
+
+## Modello Evento
+
+### Struttura
+
+I modelli per gli eventi del calendario **DEVONO**:
+
+1. Estendere `BaseModel` del modulo specifico
+2. Utilizzare il metodo `casts()` invece della proprietà `$casts`
+3. Avere annotazioni PHPDoc complete per tutte le proprietà
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Ptv\Models;
+
+use Carbon\Carbon;
+use Modules\Ptv\Models\BaseModel;
+
+/**
+ * Modello per gli eventi di calendario.
+ *
+ * @property int $id
+ * @property string $titolo
+ * @property string|null $descrizione
+ * @property Carbon $data_inizio
+ * @property Carbon $data_fine
+ * @property string|null $colore
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ */
+class Evento extends BaseModel
+{
+    /**
+     * Gli attributi assegnabili.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'titolo',
+        'descrizione',
+        'data_inizio',
+        'data_fine',
+        'colore',
+    ];
+
+    /**
+     * Gli attributi che dovrebbero essere convertiti in tipi nativi.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'data_inizio' => 'datetime',
+            'data_fine' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
+}
+```
+
+## Migrazione Eventi
+
+### Struttura Migrazione
+
+Le migrazioni per le tabelle degli eventi **DEVONO**:
+
+1. Estendere `XotBaseMigration`
+2. Non implementare il metodo `down()`
+3. Verificare l'esistenza della tabella prima di crearla
+4. Per aggiungere colonne a una tabella esistente, copiare la migrazione originale e verificare l'esistenza della colonna
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Xot\Services\XotBaseMigration;
+
+return new class extends XotBaseMigration
+{
+    /**
+     * Esegue la migrazione.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        if (!$this->tableExists('eventi')) {
+            Schema::create('eventi', function (Blueprint $table) {
+                $table->id();
+                $table->string('titolo');
+                $table->text('descrizione')->nullable();
+                $table->dateTime('data_inizio');
+                $table->dateTime('data_fine');
+                $table->string('colore', 50)->nullable();
+                $table->timestamps();
+            });
+        }
+    }
+};
+```
+
+### Aggiunta Colonna a Tabella Esistente
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Services\XotBaseMigration;
+
+return new class extends XotBaseMigration
+{
+    /**
+     * Esegue la migrazione.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        // Verifica esistenza colonna prima di aggiungerla
+        if (!$this->hasColumn('eventi', 'categoria_id')) {
+            $this->tableUpdate('eventi', function (Blueprint $table) {
+                $table->foreignId('categoria_id')->nullable()->constrained('categorie');
+            });
+        }
+    }
+};
+```
+
+## Widget FullCalendar
+
+### Schema Form
+
+Gli schemi form **DEVONO**:
+
+1. Utilizzare componenti Filament con validazione appropriata
+2. Non utilizzare etichette hardcoded ma affidarsi alle traduzioni
+3. Essere tipizzati correttamente
+
+```php
+/**
+ * Schema del form per la creazione/modifica degli eventi.
+ *
+ * @return array<int, Forms\Components\Component>
+ */
+public function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('titolo')
+            ->required()
+            ->maxLength(255),
+        Forms\Components\Grid::make()
+            ->schema([
+                Forms\Components\DateTimePicker::make('data_inizio')
+                    ->required()
+                    ->seconds(false),
+                Forms\Components\DateTimePicker::make('data_fine')
+                    ->required()
+                    ->seconds(false)
+                    ->after('data_inizio'),
+            ]),
+        Forms\Components\Textarea::make('descrizione')
+            ->maxLength(1000)
+            ->columnSpanFull(),
+        Forms\Components\ColorPicker::make('colore')
+            ->rgb(),
+    ];
+}
+```
+
+### Configurazione
+
+La configurazione **DEVE** essere nel metodo `setUp()`:
+
+```php
+/**
+ * Configurazione delle proprietà del widget.
+ *
+ * @return void
+ */
+public function setUp(): void
+{
+    parent::setUp();
+
+    $this->selectable(true)
+        ->editable(true)
+        ->timezone(config('app.timezone'))
+        ->locale('it')
+        ->plugins(['dayGrid', 'timeGrid', 'list', 'interaction']);
+}
+```
+
+### Metodo fetchEvents
+
+Il metodo `fetchEvents` **DEVE**:
+
+1. Essere tipizzato correttamente
+2. Utilizzare EventData per la creazione degli eventi
+3. Filtrare correttamente gli eventi per data
+
+```php
+/**
+ * Recupera gli eventi da visualizzare nel calendario.
+ *
+ * @param array<string, mixed> $fetchInfo
+ *
+ * @return array<int, array<string, mixed>>
+ */
+public function fetchEvents(array $fetchInfo): array
+{
+    return Evento::query()
+        ->where('data_inizio', '>=', $fetchInfo['start'])
+        ->where('data_fine', '<=', $fetchInfo['end'])
+        ->get()
+        ->map(
+            fn (Evento $evento) => EventData::make()
+                ->id($evento->id)
+                ->title($evento->titolo)
+                ->start($evento->data_inizio)
+                ->end($evento->data_fine)
+                ->color($evento->colore ?? '#4338ca')
+        )
+        ->toArray();
+}
+```
+
+## Componenti UI
+
+Tutti i componenti Blade UI personalizzati per il calendario **DEVONO** essere posizionati in:
+
+```
+Modules/UI/resources/views/components/ui/calendar/
+```
+
+E **MAI** in:
+
+```
+resources/views/components/
+```
+
+## Traduzioni
+
+Le traduzioni **DEVONO**:
+
+1. Essere in file dedicati nei moduli appropriati
+2. Utilizzare la struttura espansa per campi e azioni
+3. Includere tutte le etichette, messaggi e descrizioni
+
+```php
+// Modules/Ptv/lang/it/calendario.php
+return [
+    'widget' => [
+        'title' => 'Calendario Eventi',
+        'actions' => [
+            'create' => [
+                'label' => 'Nuovo Evento',
+                'modal' => [
+                    'heading' => 'Crea Evento',
+                ],
+                'messages' => [
+                    'success' => 'Evento creato con successo',
+                ],
+            ],
+            // Altre azioni...
+        ],
+        'fields' => [
+            'titolo' => [
+                'label' => 'Titolo',
+                'placeholder' => 'Inserisci il titolo dell\'evento',
+            ],
+            // Altri campi...
+        ],
+    ],
+];
+```
+
+## Documentazione
+
+La documentazione **DEVE** essere:
+
+1. Nel modulo UI: `Modules/UI/docs/components/full_calendar.md`
+2. Nel modulo specifico: `Modules/ModuleName/docs/features/full_calendar.md`
+3. Con collegamenti bidirezionali tra i documenti
+4. Aggiornata quando vengono apportate modifiche
+
+## PHPStan Compliance
+
+Il codice **DEVE**:
+
+1. Passare l'analisi PHPStan livello 9+
+2. Usare `declare(strict_types=1);` in ogni file
+3. Avere tipi di ritorno espliciti per tutti i metodi
+4. Avere tipi di parametri per tutti i metodi
+5. Avere annotazioni PHPDoc complete
+
+## Registrazione del Widget
+
+La registrazione **DEVE** avvenire nel service provider del modulo:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Ptv\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Filament\Facades\Filament;
+use Modules\Ptv\Filament\Widgets\CalendarioEventiWidget;
+
+class PtvServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        // Registrazione widget
+        Filament::registerWidgets([
+            CalendarioEventiWidget::class,
+        ]);
+    }
+}
+```
+
+## Checklist di Validazione
+
+- [ ] Widget base nel modulo UI
+- [ ] Widget specifico nel modulo appropriato
+- [ ] Modello Evento estende BaseModel del modulo
+- [ ] Utilizzo del metodo casts() invece della proprietà $casts
+- [ ] Migrazione corretta (estende XotBaseMigration, no down())
+- [ ] Schema form con validazione appropriata
+- [ ] Configurazione nel metodo setUp()
+- [ ] fetchEvents tipizzato correttamente
+- [ ] Componenti UI nella posizione corretta
+- [ ] Traduzioni complete nei file dedicati
+- [ ] Documentazione aggiornata in entrambi i moduli
+- [ ] PHPStan compliance (livello 9+)
+- [ ] Registrazione corretta nel service provider
+
+## Backlink e Riferimenti
+
+- [Documentazione Modulo UI](../../laravel/Modules/UI/docs/components/full_calendar.md)
+- [Documentazione Modulo Ptv](../../laravel/Modules/Ptv/docs/features/full_calendar.md)
+- [Regole Modello](../rules/model_extension_rules.mdc)
+- [Regole Migrazione](../rules/migration_rules.mdc)
+- [Regole PHPStan](../rules/phpstan_rules.mdc)
+
+*Ultimo aggiornamento: giugno 2025*

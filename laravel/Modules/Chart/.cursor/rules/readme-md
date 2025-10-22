@@ -1,0 +1,62 @@
+# Project Rules and Guidelines
+
+This directory contains all the rules and guidelines for the project, organized by category. Each `.mdc` or `.rule` file contains specific rules for different aspects of the project.
+
+## Categories
+
+1. **Architecture**
+   - `modular-monolith-architecture.mdc` - Guidelines for modular monolith architecture
+   - `project-architecture.mdc` - Overall project architecture guidelines
+
+2. **Code Style**
+   - `code-quality.mdc` - General code quality standards
+   - `naming-conventions.mdc` - Naming conventions for variables, classes, etc.
+   - `psr4-compliance.mdc` - PSR-4 autoloading standards
+
+3. **Laravel Specific**
+   - `laravel-installation.mdc` - Laravel installation guidelines
+   - `laravel-localization.mdc` - Localization best practices
+   - `laravel-validation-messages.mdc` - Validation message standards
+
+4. **Filament**
+   - `filament-resources.mdc` - Resource creation and management
+   - `filament-widgets.mdc` - Widget development guidelines
+   - `filament-pages.mdc` - Page components and structure
+
+5. **Testing**
+   - `testing-guidelines.mdc` - Testing standards and practices
+   - `test-coverage.mdc` - Test coverage requirements
+
+6. **Documentation**
+   - `documentation-standards.mdc` - Documentation standards
+   - `api-documentation.mdc` - API documentation guidelines
+
+7. **Security**
+   - `security-guidelines.mdc` - Security best practices
+   - `authentication-authorization.mdc` - AuthN/AuthZ standards
+
+8. **Deployment**
+   - `deployment-guidelines.mdc` - Deployment procedures
+   - `environment-configuration.mdc` - Environment setup
+
+## How to Use
+
+1. Follow the guidelines in the relevant `.mdc` or `.rule` files
+2. When creating new rules, place them in the appropriate category
+3. Keep file names in kebab-case
+4. Reference rules using their file names without extensions
+
+## Adding New Rules
+
+1. Create a new `.mdc` file in the appropriate category
+2. Use Markdown formatting
+3. Include examples where necessary
+4. Reference related rules
+5. Add the new rule to this README
+
+## Maintenance
+
+- Keep rules up to date with the latest standards
+- Remove deprecated rules
+- Consolidate similar rules
+- Ensure consistency across all rule files

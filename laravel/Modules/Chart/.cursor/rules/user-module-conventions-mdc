@@ -1,0 +1,43 @@
+---
+description: Conventions for terminology and package usage in the User module.
+globs: []
+alwaysApply: false
+---
+
+# User Module Conventions
+
+**When**: Working with user data, types, and state management.
+
+**What**: 
+- **User Type Naming**: When distinguishing between different user types, use `type` as the field name in the database and codebase, following the convention set by the Tighten Parental package (Reference: https://github.com/tighten/parental).
+- **Moderation Status Naming**: For tracking user moderation status, use `state` as the field name instead of `moderation_status`, aligning with the Spatie Laravel Model States package (Reference: https://spatie.be/docs/laravel-model-states/v2/working-with-states/01-configuring-states).
+- **Queueable Actions**: Use a queueable action package for handling actions that can be queued, instead of traditional Services. This ensures asynchronous processing of user moderation tasks.
+- **Activity Logging**: Utilize an activity logging package for logging user activities and moderation state changes. This package provides a comprehensive logging system for tracking changes to user models.
+
+**Because**: 
+- Using `type` for user categorization aligns with established Laravel packages, ensuring compatibility and clarity in model inheritance.
+- Using `state` for moderation status follows the conventions of state management packages, providing a clear and consistent way to manage user states.
+- Adopting a queueable action package allows for better scalability and user experience by processing tasks asynchronously.
+- Implementing an activity logging package ensures detailed tracking of user-related actions, enhancing auditability and transparency.
+
+**Examples**:
+- Database Migration for User Type and State:
+  ```php
+  Schema::table('users', function (Blueprint $table) {
+      $table->string('type')->nullable();
+      $table->string('state')->default('pending');
+  });
+  ```
+- User Model Configuration for States:
+  ```php
+  use Spatie\ModelStates\HasStates;
+
+  class User extends Authenticatable
+  {
+      use HasStates;
+
+      protected $casts = [
+          'state' => UserState::class,
+      ];
+  }
+  ```

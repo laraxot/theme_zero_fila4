@@ -1,0 +1,110 @@
+# Regole per i Resources Filament
+
+## Metodi da NON Implementare
+- `form()`
+- `table()`
+- `getPages()` (se standard)
+- `getTableColumns()`
+- `getTableFilters()`
+- `getTableActions()`
+- `getTableBulkActions()`
+- `getNavigationGroup()`
+
+## Metodi da Implementare
+- `getFormSchema()`
+
+## Metodi Deprecati
+- `getListTableColumns()` - Usare `getTableColumns()` invece
+- `getListTableFilters()` - Usare `getTableFilters()` invece
+- `getListTableActions()` - Usare `getTableActions()` invece
+- `getListTableBulkActions()` - Usare `getTableBulkActions()` invece
+- `getGridTableColumns()` - Usare `getTableColumns()` con layout appropriato
+
+## Best Practices
+1. Estendere sempre `XotBaseResource`
+2. Implementare SOLO `getFormSchema()`
+3. Usare file di traduzione per le label
+4. Non hardcodare stringhe
+5. Seguire le convenzioni di naming
+6. Mantenere la coerenza tra i moduli
+
+## Anti-pattern
+1. Non implementare metodi già gestiti da XotBaseResource
+2. Non usare metodi deprecati
+3. Non hardcodare traduzioni
+4. Non duplicare logica tra Resources
+5. Non ignorare le best practices di Filament
+
+## Metodi Final
+I seguenti metodi sono `final` in XotBaseResource e **NON DEVONO** essere sovrascritti:
+- `form()`
+- `table()`
+- `getPages()` (se restituisce solo index, create, edit)
+
+## Metodi da Implementare
+```php
+class MyResource extends XotBaseResource
+{
+    protected static ?string $model = MyModel::class;
+
+    // OBBLIGATORIO
+    public static function getFormSchema(): array
+    {
+        return [
+            // Schema del form
+        ];
+    }
+
+    // OPZIONALE
+    public static function getTableColumns(): array
+    {
+        return [
+            // Colonne della tabella
+        ];
+    }
+
+    // OPZIONALE
+    public static function getTableFilters(): array
+    {
+        return [
+            // Filtri della tabella
+        ];
+    }
+
+    // OPZIONALE
+    public static function getTableActions(): array
+    {
+        return [
+            // Azioni della tabella
+        ];
+    }
+
+    // OPZIONALE - Solo se servono pagine custom oltre a index, create, edit
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListRecords::route('/'),
+            'create' => Pages\CreateRecord::route('/create'),
+            'edit' => Pages\EditRecord::route('/{record}/edit'),
+            'custom' => Pages\CustomPage::route('/custom'), // ← Solo se necessario
+        ];
+    }
+}
+```
+
+## Checklist Implementazione
+1. [ ] Estendere XotBaseResource
+2. [ ] Definire model
+3. [ ] Implementare getFormSchema
+4. [ ] NON sovrascrivere metodi final
+5. [ ] Creare file traduzioni
+6. [ ] Verificare namespace
+7. [ ] Testare funzionalità
+8. [ ] Documentare codice
+
+## Note Importanti
+- XotBaseResource include già TransTrait
+- Le traduzioni sono gestite automaticamente
+- NON sovrascrivere metodi final
+- Seguire la struttura standard
+- Mantenere coerenza tra moduli 

@@ -1,0 +1,80 @@
+# Namespace Structure Rules for <nome progetto> Modules
+
+## CRITICAL RULE: Namespace vs File Path
+
+**NEVER include `app` in the namespace even though files are physically in the `app` directory**
+
+### File System Structure
+```
+/laravel/Modules/ModuleName/app/[Folder]/[File].php
+```
+
+### Namespace Structure
+```php
+namespace Modules\ModuleName\[Folder];
+```
+
+## Examples
+
+### ✅ CORRECT
+```php
+// File: /laravel/Modules/<nome progetto>/app/Enums/AppointmentType.php
+namespace Modules\<nome progetto>\Enums;
+
+// File: /laravel/Modules/Geo/app/Filament/Forms/LocationForm.php
+namespace Modules\Geo\Filament\Forms;
+
+// File: /laravel/Modules/User/app/Models/User.php
+namespace Modules\User\Models;
+```
+
+### ❌ INCORRECT
+```php
+// WRONG - Never include "App" in namespace
+namespace Modules\Geo\App\Filament\Forms;
+
+// WRONG - File not in app directory
+// File: /laravel/Modules/<nome progetto>/Enums/AppointmentType.php
+// Should be: /laravel/Modules/<nome progetto>/app/Enums/AppointmentType.php
+```
+
+## Quick Reference
+
+| File Type | File Path | Namespace |
+|-----------|-----------|-----------|
+| Action | `/Modules/[Module]/app/Actions/[Name]Action.php` | `Modules\[Module]\Actions` |
+| Data (DTO) | `/Modules/[Module]/app/Datas/[Name]Data.php` | `Modules\[Module]\Datas` |
+| Enum | `/Modules/[Module]/app/Enums/[Name].php` | `Modules\[Module]\Enums` |
+| Model | `/Modules/[Module]/app/Models/[Name].php` | `Modules\[Module]\Models` |
+| Controller | `/Modules/[Module]/app/Http/Controllers/[Name]Controller.php` | `Modules\[Module]\Http\Controllers` |
+| Filament Resource | `/Modules/[Module]/app/Filament/Resources/[Name]Resource.php` | `Modules\[Module]\Filament\Resources` |
+| Filament Form | `/Modules/[Module]/app/Filament/Forms/[Name]Form.php` | `Modules\[Module]\Filament\Forms` |
+| Provider | `/Modules/[Module]/app/Providers/[Name]Provider.php` | `Modules\[Module]\Providers` |
+| Service | `/Modules/[Module]/app/Services/[Name]Service.php` | `Modules\[Module]\Services` |
+
+## Verification Commands
+
+```bash
+# After creating/modifying files
+cd /var/www/html/_bases/base_<nome progetto>/laravel
+composer dumpautoload
+
+# Find files with incorrect namespaces
+grep -r "namespace Modules.*App\\\\" /var/www/html/_bases/base_<nome progetto>/laravel/Modules/
+```
+
+## Composer Autoload Configuration
+
+Each module's `composer.json`:
+```json
+{
+    "autoload": {
+        "psr-4": {
+            "Modules\\ModuleName\\": "app/",
+            "Modules\\ModuleName\\Database\\": "database/"
+        }
+    }
+}
+```
+
+This maps `Modules\ModuleName\*` to the `app/` directory, explaining why `app` is not in the namespace.

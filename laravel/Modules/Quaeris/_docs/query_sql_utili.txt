@@ -1,0 +1,79 @@
+# risposte email tramite query della dashboard v2
+SELECT 
+    NULL AS label,
+    NULL AS _sort,
+    COUNT(*) AS value
+FROM 
+    `lime_survey_892883`
+INNER JOIN 
+    `lime_tokens_892883` AS `u`
+    ON `u`.`token` = `lime_survey_892883`.`token`
+WHERE 
+    `submitdate` IS NOT NULL
+    AND `u`.`sent` != 'N'
+    AND `u`.`sent` >= '2022-11-11'
+    AND `u`.`sent` <= '2025-01-01'
+GROUP BY 
+    NULL
+ORDER BY 
+    NULL;
+    
+-- risposte sms tramite query della dashboard v2
+SELECT 
+    NULL AS label,
+    NULL AS _sort,
+    COUNT(*) AS value
+FROM 
+    `lime_survey_892883`
+INNER JOIN 
+    `geek_quaeris_backup_server_18_01_2025`.`contacts` AS `B`
+    ON `B`.`token` = `lime_survey_892883`.`token` 
+    AND `B`.`token` IS NOT NULL
+WHERE 
+    `submitdate` IS NOT NULL
+    AND `sms_count` != '0'
+    AND `sms_sent_at` >= '2022-11-11'
+    AND `sms_sent_at` <= '2025-01-25'
+GROUP BY 
+    NULL
+ORDER BY 
+    NULL;
+
+
+# inviti email tramite query della dashboard v2
+SELECT 
+    NULL AS label,
+    NULL AS _sort,
+    COUNT(*) AS value
+FROM 
+    `lime_tokens_892883`
+WHERE 
+    `sent` != 'N'
+    AND `sent` >= '2022-11-11'
+    AND `sent` <= '2025-01-01'
+GROUP BY 
+    NULL
+ORDER BY 
+    NULL;
+    
+    
+-- inviti sms tramite query della dashboard v2
+SELECT 
+    NULL AS label,
+    NULL AS _sort,
+    COUNT(*) AS value
+FROM 
+    `geek_quaeris_backup_server_18_01_2025`.`contacts`
+WHERE 
+    `survey_pdf_id` = 16
+    AND `sms_count` != '0'
+    AND `sms_sent_at` >= '2022-11-11'
+    AND `sms_sent_at` <= '2025-01-01'
+GROUP BY 
+    NULL
+ORDER BY 
+    NULL;
+
+
+
+
