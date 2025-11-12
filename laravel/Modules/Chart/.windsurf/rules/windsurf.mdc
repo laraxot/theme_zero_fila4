@@ -1,0 +1,78 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Windsurf – Regole, Best Practice, Checklist e Template
+
+## Struttura e Aggiornamento Documentazione
+- Seguire la gerarchia: docs/ (globale), Modules/[Module]/docs/ (modulo), .windsurf/rules (regole Windsurf)
+- Ogni nuova regola va documentata sia nel modulo che nella root, con backlink e motivazione
+- Aggiornare sempre .windsurf/rules per ogni variazione
+- Mantenere la coerenza tra .windsurf/rules, .cursor/rules e la documentazione dei moduli
+
+## Checklist Operativa
+- [ ] Aggiorna la documentazione del modulo e la root
+- [ ] Aggiorna .windsurf/rules e .cursor/rules
+- [ ] Fornisci esempi pratici e motivazione
+- [ ] Crea/aggiorna backlink e riferimenti incrociati
+- [ ] Valida la coerenza tra tutte le documentazioni
+- [ ] Aggiorna la sezione anti-pattern e cosa NON fare
+
+## Regole Windsurf sulle Migrazioni
+- Usare **solo classi anonime** per le migrazioni (mai nominali)
+- Non creare mai una nuova migrazione di update per aggiungere colonne: copiare la migrazione di creazione, aggiornare il timestamp, aggiungere la colonna solo se non esiste
+- Mai implementare il metodo `down` nelle migrazioni anonime
+- Documentare ogni modifica e aggiornare i backlink
+
+## Template per Nuova Regola
+```md
+### [Titolo Regola]
+- **Ambito**: [globale/modulo]
+- **Motivazione**: [perché è importante]
+- **Regola**: [enunciato chiaro]
+- **Esempio pratico**:
+  ```php
+  // Codice di esempio
+  ```
+- **Anti-pattern**:
+  ```php
+  // Codice da evitare
+  ```
+- **Collegamenti**: [link a doc correlate]
+```
+
+## Cosa NON fare (Anti-pattern)
+- Non duplicare regole tra .windsurf/rules e .cursor/rules senza motivazione e backlink
+- Non aggiornare solo la documentazione di modulo: serve sempre anche la root e le regole globali
+- Non lasciare regole senza esempio pratico o motivazione
+- Non ignorare la validazione incrociata tra regole, doc e codice
+
+## Come mantenere la coerenza tra regole e documentazione
+1. Ogni variazione va documentata sia nella regola che nella doc del modulo e nella root
+2. Aggiornare sempre sia .windsurf/rules che .cursor/rules
+3. Usare backlink e riferimenti incrociati tra file
+4. Validare periodicamente la coerenza tra tutte le fonti
+5. Usare checklist e template per ogni nuova regola
+
+## Best Practice
+- Validare sempre il contesto prima dell'uso
+- Utilizzare oggetti di contesto immutabili
+- Documentare i requisiti di contesto
+- Implementare la propagazione del contesto
+- Usare il contesto anche per logging e monitoring
+- Audit di sicurezza periodici
+
+## Collegamenti e Risorse
+- [MODULE_NAMESPACE_RULES.md](mdc:../../docs/MODULE_NAMESPACE_RULES.md)
+- [model_context_protocol.md](mdc:../../docs/model_context_protocol.md)
+- [mcp_implementation_guide.md](mdc:../../docs/mcp_implementation_guide.md)
+- [mcp_errors_and_lessons.md](mdc:../../docs/mcp_errors_and_lessons.md)
+- [phpstan_usage.md](mdc:../../docs/phpstan_usage.md)
+- [laraxot_conventions.md](mdc:../../docs/laraxot_conventions.md)
+- [laraxot-framework.md](mdc:../../docs/laraxot-framework.md)
+- [README.md](mdc:../../docs/README.md)
+- [cursor.mdc](mdc:../../.cursor/rules/cursor.mdc)
+
+## Ultimo aggiornamento
+2025-06-04

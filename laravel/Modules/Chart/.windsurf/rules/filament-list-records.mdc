@@ -1,0 +1,48 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole per l'Utilizzo di XotBaseListRecords
+
+## When
+- Stai creando una pagina di elenco record in Filament
+- La pagina deve visualizzare una lista di record in formato tabella
+- La pagina è parte di una Resource Filament
+
+## Then
+- Estendi SEMPRE `Modules\Xot\Filament\Resources\Pages\XotBaseListRecords`
+- NON estendere mai direttamente `\Filament\Resources\Pages\ListRecords`
+- NON estendere mai `XotBasePage` per le pagine di elenco
+- Implementa i metodi richiesti come definito nella documentazione di XotBaseListRecords
+
+## Because
+- XotBaseListRecords fornisce funzionalità comuni e configurazioni predefinite
+- Mantiene la coerenza tra i moduli
+- Implementa il sistema di traduzione automatico
+- Gestisce correttamente il routing e le azioni della tabella
+
+## Examples
+
+```php
+// CORRETTO
+namespace Modules\YourModule\Filament\Resources\YourResource\Pages;
+
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
+
+class ListYourRecords extends XotBaseListRecords
+{
+    protected static string $resource = YourResource::class;
+}
+
+// ERRATO
+class ListYourRecords extends XotBasePage // ERRORE: Usa XotBaseListRecords
+{
+    protected static string $resource = YourResource::class;
+}
+```
+
+## Common Pitfalls
+- Estendere XotBasePage invece di XotBaseListRecords
+- Non implementare i metodi richiesti
+- Modificare il livello di accesso dei metodi ereditati

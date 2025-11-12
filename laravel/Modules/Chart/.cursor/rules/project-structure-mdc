@@ -1,0 +1,37 @@
+---
+description: Description of the project structure and organization for <nome progetto>.
+globs: []
+alwaysApply: false
+---
+# Struttura del Progetto: Regole Trasversali
+
+## Introduzione
+Queste regole definiscono la struttura generale dei moduli, directory e naming per garantire coerenza e scalabilità.
+
+## Regola
+- Ogni modulo deve avere una cartella `docs` con README e file tecnici.
+- Usare naming coerente per directory, file e namespace (es. PascalCase per classi, snake_case per file).
+- Struttura tipica:
+```
+Modules/
+  ├── NomeModulo/
+  │   ├── app/
+  │   ├── docs/
+  │   ├── database/
+  │   ├── resources/
+  │   └── ...
+```
+- I path devono essere relativi e privi di riferimenti al nome progetto.
+
+## Checklist
+- [ ] Ogni modulo ha una cartella docs
+- [ ] Naming coerente tra namespace, directory e file
+- [ ] Path relativi e cross-platform
+- [ ] README e INDEX in ogni docs
+
+## Collegamenti correlati
+- [README centrale](mdc:../../docs/README.md)
+- [Best Practices](mdc:../../docs/best-practices.md)
+- [Patient/README](mdc:../../laravel/Modules/Patient/docs/README.md)
+- [Xot/README](mdc:../../laravel/Modules/Xot/docs/README.md)
+- [project-structure.md](mdc:../../docs/project-structure.md)

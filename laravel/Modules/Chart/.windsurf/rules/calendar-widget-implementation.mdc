@@ -1,0 +1,85 @@
+# Calendar Widget Implementation Guide
+
+## Overview
+
+This document outlines the implementation details for calendar widgets in the <nome progetto> module, following the project's architecture and coding standards.
+
+## Widget Structure
+
+### Base Calendar Widget
+
+Location: `app/Filament/Widgets/BaseCalendarWidget.php`
+
+```php
+namespace Modules\<nome progetto>\Filament\Widgets;
+
+use Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget;
+
+abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
+{
+    // Implementation...
+}
+```
+
+### Required Methods
+
+1. **getEventsQuery()**
+   - Returns a query builder instance for fetching events
+   - Must apply proper scoping (tenancy, user permissions)
+   - Should eager load required relationships
+
+2. **mapToEvent()**
+   - Converts a model instance to a FullCalendar event array
+   - Must include required fields (id, title, start, end)
+   - Should include any extended properties needed for display
+
+3. **getCalendarConfig()**
+   - Returns an array of FullCalendar options
+   - Should include view configuration, header toolbar, etc.
+   - Can be extended in child classes for customization
+
+## Security Considerations
+
+### Authorization
+- Always check user permissions before displaying data
+- Use policies for complex authorization logic
+- Never expose sensitive data in the frontend
+
+### Data Protection
+- Use proper model scopes for data access
+- Implement proper validation for all inputs
+- Use form requests for complex validation rules
+
+## Performance Optimization
+
+### Database Queries
+- Use eager loading to prevent N+1 queries
+- Add indexes for frequently queried columns
+- Cache expensive operations
+
+### Frontend Performance
+- Minimize JavaScript and CSS
+- Use lazy loading for images
+- Optimize event handlers
+
+## Testing Guidelines
+
+### Unit Tests
+- Test all widget methods
+- Test edge cases and error conditions
+- Mock external dependencies
+
+### Feature Tests
+- Test widget rendering
+- Test user interactions
+- Test different user roles and permissions
+
+## Related Documentation
+
+- [XotBaseFullCalendarWidget Documentation](../xot-base-fullcalendar-widget.md)
+- [Filament Widgets](https://filamentphp.com/docs/3.x/panels/widgets)
+- [FullCalendar Documentation](https://fullcalendar.io/docs)
+
+## Changelog
+
+- 2023-10-26: Initial version

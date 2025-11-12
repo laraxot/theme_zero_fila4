@@ -1,0 +1,17 @@
+{
+    "Xot": true,
+    "User": true,
+    "UI": true,
+    "Tenant": true,
+    "Chart": true,
+    "Job": true,
+    "Limesurvey": true,
+    "Media": true,
+    "Notify": true,
+    "Quaeris": true,
+    "Setting": true,
+    "Activity": true,
+    "Gdpr": true,
+    "CloudStorage": true,
+    "Lang": true
+}

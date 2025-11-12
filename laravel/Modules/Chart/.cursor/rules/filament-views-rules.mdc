@@ -1,0 +1,289 @@
+---
+description: Regole per l'implementazione di view custom Filament in progetti Laraxot/<nome progetto>
+globs: ["**/Filament/Pages/*.php", "**/Filament/Resources/**/*.php", "**/resources/views/filament/**/*.blade.php"]
+alwaysApply: true
+---
+
+# Regole per le View Custom Filament in Laraxot/<nome progetto>
+
+## Principi Fondamentali
+
+- **Wrapper Principale**: Utilizzare SEMPRE `<x-filament::page>` come wrapper principale
+- **Dati Blade**: Esporre SEMPRE i dati passati da `getViewData()` come variabili Blade
+- **Posizionamento**: Le view custom DEVONO risiedere nella cartella appropriata del modulo
+- **Traduzioni**: Tutte le label e i testi DEVONO provenire dai file di traduzione
+- **Documentazione**: Documentare SEMPRE nella cartella `docs` del modulo specifico
+
+## Struttura Corretta delle View Custom
+
+### ✅ Pattern Corretto
+
+```blade
+{{-- resources/views/filament/pages/custom-page.blade.php --}}
+<x-filament::page>
+    <div>
+        <h2>{{ __('modulename::filament.pages.custom_page.title') }}</h2>
+
+        <p>{{ __('modulename::filament.pages.custom_page.description') }}</p>
+
+        @if($items->count() > 0)
+            <ul>
+                @foreach($items as $item)
+                    <li>{{ $item->name }}</li>
+                @endforeach
+            </ul>
+        @else
+            <p>{{ __('modulename::filament.pages.custom_page.empty_state') }}</p>
+        @endif
+    </div>
+</x-filament::page>
+```
+
+### ❌ Anti-pattern da Evitare
+
+```blade
+{{-- ❌ MAI fare questo --}}
+<div>
+    {{-- Manca il wrapper <x-filament::page> --}}
+    <h2>Titolo della pagina</h2> {{-- Testo hardcoded invece di traduzione --}}
+
+    <p>Descrizione della pagina</p> {{-- Testo hardcoded invece di traduzione --}}
+
+    @if($items->count() > 0)
+        <ul>
+            @foreach($items as $item)
+                <li>{{ $item->name }}</li>
+            @endforeach
+        </ul>
+    @else
+        <p>Nessun elemento trovato</p> {{-- Testo hardcoded invece di traduzione --}}
+    @endif
+</div>
+```
+
+## Posizionamento Corretto dei File
+
+Le view custom per Filament devono seguire questa struttura di cartelle:
+
+```
+Modules/ModuleName/
+└── resources/
+    └── views/
+        └── filament/
+            ├── pages/
+            │   └── custom-page.blade.php
+            └── resources/
+                └── model-resource/
+                    ├── pages/
+                    │   ├── create.blade.php
+                    │   ├── edit.blade.php
+                    │   └── view.blade.php
+                    └── widgets/
+                        └── custom-widget.blade.php
+```
+
+## Passaggio di Dati alle View
+
+### Page Class
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Pages;
+
+use Filament\Pages\Page;
+use Illuminate\Contracts\View\View;
+use Modules\ModuleName\Models\Item;
+
+class CustomPage extends Page
+{
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string $view = 'modulename::filament.pages.custom-page';
+
+    /**
+     * Dati da passare alla view.
+     *
+     * @return array<string, mixed>
+     */
+    protected function getViewData(): array
+    {
+        return [
+            'items' => Item::query()->latest()->get(),
+            'title' => __('modulename::filament.pages.custom_page.title'),
+        ];
+    }
+
+    /**
+     * Opzionale: override del metodo render per logica aggiuntiva.
+     */
+    public function render(): View
+    {
+        return view(
+            static::$view,
+            $this->getViewData()
+        );
+    }
+}
+```
+
+## Integrazione con Componenti Filament
+
+Le view custom possono utilizzare componenti Filament:
+
+```blade
+<x-filament::page>
+    <x-filament::section>
+        <x-slot name="heading">
+            {{ __('modulename::filament.sections.overview.heading') }}
+        </x-slot>
+
+        <x-slot name="description">
+            {{ __('modulename::filament.sections.overview.description') }}
+        </x-slot>
+
+        {{-- Contenuto della sezione --}}
+    </x-filament::section>
+
+    <x-filament::card>
+        {{-- Contenuto della card --}}
+    </x-filament::card>
+</x-filament::page>
+```
+
+## Traduzioni per View Custom
+
+Le traduzioni devono seguire una struttura organizzata:
+
+```php
+// Modules/ModuleName/lang/it/filament.php
+return [
+    'pages' => [
+        'custom_page' => [
+            'title' => 'Titolo della Pagina Personalizzata',
+            'description' => 'Descrizione dettagliata della pagina personalizzata.',
+            'empty_state' => 'Nessun elemento trovato.',
+        ],
+    ],
+    'sections' => [
+        'overview' => [
+            'heading' => 'Panoramica',
+            'description' => 'Visualizza una panoramica degli elementi.',
+        ],
+    ],
+];
+```
+
+## Errori Comuni e Soluzioni
+
+### Errore: "View not found"
+
+**Causa**: Il percorso della view è errato o la view non esiste nel percorso specificato.
+
+**Soluzione**:
+1. Verificare che il percorso nella proprietà `$view` corrisponda al percorso fisico della view
+2. Assicurarsi che la notazione utilizzi `::` per il namespace del modulo
+3. Verificare la presenza del file nella cartella corretta
+
+```php
+// ✅ CORRETTO
+protected static string $view = 'modulename::filament.pages.custom-page';
+
+// ❌ ERRATO
+protected static string $view = 'filament.pages.custom-page';
+```
+
+### Errore: "Undefined variable"
+
+**Causa**: Variabile utilizzata nella view ma non passata tramite `getViewData()`.
+
+**Soluzione**: Assicurarsi che tutte le variabili utilizzate nella view siano restituite da `getViewData()`.
+
+```php
+protected function getViewData(): array
+{
+    return [
+        'items' => Item::query()->latest()->get(),
+        // 'title' mancante ma utilizzato nella view!
+    ];
+}
+```
+
+## Widgets nelle View Custom
+
+Per includere widget nelle view custom:
+
+```php
+/**
+ * @return array<class-string<Widget>>
+ */
+protected function getHeaderWidgets(): array
+{
+    return [
+        Widgets\StatsOverviewWidget::class,
+    ];
+}
+
+/**
+ * @return array<class-string<Widget>>
+ */
+protected function getFooterWidgets(): array
+{
+    return [
+        Widgets\ChartWidget::class,
+    ];
+}
+```
+
+## Documentazione Necessaria
+
+La documentazione delle view custom deve includere:
+
+1. **Scopo**: Descrizione del ruolo della view nel contesto dell'applicazione
+2. **Dati**: Elenco delle variabili passate alla view e loro scopo
+3. **Componenti**: Descrizione dei componenti Filament utilizzati
+4. **Screenshot**: Esempi visivi dell'aspetto della view (se applicabile)
+5. **Collegamenti**: Riferimenti a controller, modelli o altre view correlate
+
+## Pattern e Best Practice
+
+1. **Separare Logica e Presentazione**:
+   - La logica complessa va nella classe Page
+   - La view dovrebbe occuparsi solo della presentazione
+
+2. **Utilizzare Componenti Blade**:
+   - Estrarre parti ripetitive in componenti riutilizzabili
+   - Mantenere le view principali semplici e leggibili
+
+3. **Gestire Stati di Errore**:
+   - Prevedere e gestire stati vuoti o di errore
+   - Fornire messaggi utente chiari tramite traduzioni
+
+4. **Rispettare la Gerarchia Filament**:
+   - Utilizzare i layout e i componenti standard di Filament
+   - Seguire le convenzioni di denominazione di Filament
+
+## Controlli di Qualità
+
+Prima di considerare completa una view custom:
+
+1. **Verifica Traduzioni**:
+   - Nessuna stringa hardcoded
+   - Tutti i testi nei file di traduzione
+
+2. **Verifica Struttura**:
+   - Presenza del wrapper `<x-filament::page>`
+   - Posizionamento corretto del file
+
+3. **Verifica Dati**:
+   - Tutte le variabili utilizzate sono passate da `getViewData()`
+   - Gestione degli stati vuoti o di errore
+
+4. **Verifica Documentazione**:
+   - Documentazione aggiornata nella cartella `docs` del modulo
+   - Collegamenti bidirezionali con altri documenti pertinenti
+
+5. **Verifica Consistenza**:
+   - Design coerente con il resto dell'applicazione
+   - Comportamento prevedibile e intuitivo
