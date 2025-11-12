@@ -1,0 +1,78 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+use Carbon\Carbon;
+
+/**
+ * Class LimeQuestionTheme.
+ *
+ * @property int         $id
+ * @property string      $name
+ * @property string|null $visible
+ * @property string|null $xml_path
+ * @property string|null $image_path
+ * @property string      $title
+ * @property Carbon|null $creation_date
+ * @property string|null $author
+ * @property string|null $author_email
+ * @property string|null $author_url
+ * @property string|null $copyright
+ * @property string|null $license
+ * @property string|null $version
+ * @property string      $api_version
+ * @property string|null $description
+ * @property Carbon|null $last_update
+ * @property int|null    $owner_id
+ * @property string|null $theme_type
+ * @property string      $question_type
+ * @property bool|null   $core_theme
+ * @property string|null $extends
+ * @property string|null $group
+ * @property string|null $settings
+ */
+class LimeQuestionTheme extends BaseModel {
+    protected $table = 'lime_question_themes';
+    public $timestamps = false;
+
+    protected $casts = [
+        'owner_id' => 'int',
+        'core_theme' => 'bool',
+    ];
+
+    protected $dates = [
+        'creation_date',
+        'last_update',
+    ];
+
+    protected $fillable = [
+        'name',
+        'visible',
+        'xml_path',
+        'image_path',
+        'title',
+        'creation_date',
+        'author',
+        'author_email',
+        'author_url',
+        'copyright',
+        'license',
+        'version',
+        'api_version',
+        'description',
+        'last_update',
+        'owner_id',
+        'theme_type',
+        'question_type',
+        'core_theme',
+        'extends',
+        'group',
+        'settings',
+    ];
+}

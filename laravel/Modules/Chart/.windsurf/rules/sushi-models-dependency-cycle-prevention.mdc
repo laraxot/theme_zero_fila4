@@ -1,0 +1,73 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Sushi Models - Dependency Cycle Prevention Rules
+
+## Regola Critica per Modelli Sushi
+
+### Problema Identificato
+I modelli che usano Sushi trait possono causare **loop infiniti** se utilizzano helper che richiedono il service provider del modulo durante il bootstrap.
+
+### Regola Obbligatoria
+
+#### ✅ SEMPRE Usare Path Diretti
+```php
+// CORRETTO - Path diretto senza dependency
+public function getJsonFile(): string
+{
+    return base_path('laravel/Modules/{ModuleName}/resources/json/{file}.json');
+}
+```
+
+#### ❌ MAI Usare Helper Mediati
+```php
+// VIETATO - Può causare dependency cycle
+public function getJsonFile(): string
+{
+    return module_path('{ModuleName}', 'resources/json/{file}.json'); // LOOP RISK!
+}
+```
+
+### Helper Vietati nei Modelli Sushi
+- `module_path()`
+- `app_path()` quando richiede service provider resolution
+- Qualsiasi helper che possa causare circular dependency
+
+### Pattern Sicuro Raccomandato
+```php
+class SafeSushiModel extends BaseModel
+{
+    use Sushi;
+    
+    private const JSON_FILE_PATH = 'laravel/Modules/{ModuleName}/resources/json/data.json';
+    
+    public function getJsonFile(): string
+    {
+        return base_path(self::JSON_FILE_PATH);
+    }
+}
+```
+
+### Controllo Pre-Deploy
+Prima di ogni deploy verificare che nessun modello Sushi usi:
+- `module_path()` in `getJsonFile()`
+- Helper che richiedono risoluzione di service provider
+
+### Filosofia
+- **Immediatezza > Convenienza**: Path diretti sono più sicuri
+- **Trasparenza > Astrazione**: Dependency esplicite sono preferibili
+- **KISS Principle**: Il più semplice è il più robusto
+
+### Debugging
+Se si verifica loop infinito con Sushi:
+1. Controllare tutti i metodi `getJsonFile()`
+2. Sostituire helper mediati con `base_path()`
+3. Verificare che il file JSON esista nel path specificato
+
+---
+
+**Priorità**: P0 (Critical)  
+**Applicabilità**: Tutti i modelli con Sushi trait  
+**Ultimo aggiornamento**: Dicembre 2024

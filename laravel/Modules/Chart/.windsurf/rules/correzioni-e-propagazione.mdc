@@ -1,0 +1,17 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+Ultimo aggiornamento: 2025-05-27
+Responsabile: Cascade AI
+
+Le classi che estendono \Modules\Xot\Filament\Resources\Pages\XotBaseListRecords devono avere il metodo getTableColumns() che restituisce un array associativo con chiavi stringa, colonne ricavate dal modello o dalla migrazione. Policy aggiornata e propagata in [Xot/docs/filament/listrecords.md](mdc:../../laravel/Modules/Xot/docs/filament/listrecords.md) e [<nome progetto>/docs/resources/studio-resource.md](mdc:../../laravel/Modules/<nome progetto>/docs/resources/studio-resource.md).
+
+---
+Ultimo aggiornamento: 2025-05-27
+Responsabile: Cascade AI
+
+- I widget FullCalendar devono sempre essere implementati come classi custom che estendono FullCalendarWidget, con override di config() e fetchEvents().
+- Non usare mai FullCalendarWidget::make()->options() o metodi fluenti: questi metodi non esistono e generano errori.
+- Nelle pagine Filament, includere solo la classe custom nei metodi getHeaderWidgets() o simili.

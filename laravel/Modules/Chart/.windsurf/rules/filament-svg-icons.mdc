@@ -1,0 +1,49 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola: Icone SVG custom per navigation.icon nei moduli Filament
+
+## Regola
+- La chiave `navigation.icon` nei file di traduzione dei moduli deve essere un identificatore logico `<modulo>-<icona>` (es. `<nome progetto>-doctor`), **non** un path fisico.
+- Il file SVG deve essere salvato in `resources/svg/` del modulo, con lo stesso nome (`<nome progetto>-doctor.svg`).
+- Il resolver delle icone trasforma l'identificatore in path e carica l'SVG.
+
+## Motivazione
+- **Uniformità**: Convenzione chiara e prevedibile per tutti i moduli.
+- **Decoupling**: Le traduzioni non dipendono dalla struttura fisica dei file.
+- **Override/Fallback**: Possibilità di override e fallback centralizzato.
+- **Manutenibilità**: Cambiare la struttura delle cartelle non richiede modifiche alle traduzioni.
+- **Performance**: Ottimizzazione per caching e lazy loading.
+- **Best practice**: Allineato a convenzioni di altri ecosistemi (Material Icons, Heroicons, ecc.).
+
+## Esempio
+```php
+// lang/it/doctor.php
+return [
+    'navigation' => [
+        'icon' => '<nome progetto>-doctor',
+        // ...
+    ],
+];
+```
+// resources/svg/<nome progetto>-doctor.svg
+// (SVG animato custom)
+```
+
+## Checklist
+- [ ] La chiave navigation.icon è sempre <modulo>-<icona>
+- [ ] Il file SVG ha lo stesso nome in resources/svg/
+- [ ] Gli array sono in short syntax
+- [ ] Tutti i file PHP hanno declare(strict_types=1);
+- [ ] La doc locale e centrale è aggiornata
+
+## Errori comuni
+- Usare un path invece di un identificatore (es. 'svg/doctor.svg')
+- Nominare il file SVG in modo incoerente
+- Non aggiornare la doc o i file .mdc
+
+## Link doc
+- [README <nome progetto>](../../laravel/Modules/<nome progetto>/docs/README.md)
+- [README Xot](../../laravel/Modules/Xot/docs/README.md)

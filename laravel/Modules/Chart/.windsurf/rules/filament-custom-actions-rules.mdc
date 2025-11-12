@@ -1,0 +1,444 @@
+---
+description: Regole per l'implementazione di Azioni Filament personalizzate in progetti Laraxot/<nome progetto> (aggiornamento 2025-05)
+globs: ["**/Filament/Actions/*.php", "**/Filament/Resources/**/Actions/*.php", "**/Filament/Pages/**/Actions/*.php"]
+alwaysApply: true
+---
+
+# Regole per Azioni Filament Personalizzate (2025-05)
+
+## Principi Fondamentali
+
+- **Override di setUp()**: Configurare TUTTE le proprietà dell'action nel metodo `setUp()`
+- **Nome Univoco**: Ogni action deve avere un nome univoco e documentato (passato a `parent::make()`)
+- **File di Traduzione**: Tutte le label, heading e descrizioni da file di traduzione (mai hardcoded)
+- **Tipizzazione Rigorosa**: Tutti i metodi devono avere tipi di ritorno e parametri espliciti
+- **Documentazione Completa**: PHPDoc e documentazione aggiornata nel modulo
+
+## Implementazione Corretta
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Actions;
+
+use Filament\Actions\Action;
+use Filament\Forms;
+use Filament\Support\Colors\Color;
+use Illuminate\Database\Eloquent\Model;
+
+class CustomAction extends Action
+{
+    /**
+     * Crea una nuova istanza dell'azione.
+     */
+    public static function make(?string $name = null): static
+    {
+        $name = $name ?? 'custom_action_name';
+        return parent::make($name);
+    }
+
+    /**
+     * Configurazione dell'azione.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->label(__('modulename::actions.custom_action.label'))
+            ->icon('heroicon-o-check-circle')
+            ->color(Color::BLUE)
+            ->form([
+                Forms\Components\TextInput::make('field_name')
+                    ->label(__('modulename::actions.custom_action.fields.field_name.label'))
+                    ->placeholder(__('modulename::actions.custom_action.fields.field_name.placeholder'))
+                    ->helperText(__('modulename::actions.custom_action.fields.field_name.help'))
+                    ->required(),
+            ])
+            ->action(function (array $data, Model $record): void {
+                $this->processAction($record, $data);
+            })
+            ->successNotificationTitle(__('modulename::actions.custom_action.notifications.success'));
+    }
+
+    /**
+     * Elabora l'azione.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $record
+     * @param array<string, mixed> $data
+     */
+    protected function processAction(Model $record, array $data): void
+    {
+        // Implementazione dell'azione
+    }
+}
+```
+
+## Anti-pattern da Evitare
+
+### ❌ NO: Configurazione fuori da setUp()
+
+```php
+// ❌ MAI configurare proprietà fuori da setUp()
+class BadAction extends Action
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->label('Etichetta'); // NO: fuori da setUp e hardcoded
+    }
+}
+```
+
+### ❌ NO: Etichette Hardcoded
+
+```php
+// ❌ MAI usare etichette hardcoded
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->label('Approva')       // NO: etichetta hardcoded
+        ->modalHeading('Conferma') // NO: heading hardcoded
+        ->modalDescription('Sei sicuro?'); // NO: descrizione hardcoded
+}
+```
+
+### ❌ NO: Tipizzazione Assente
+
+```php
+// ❌ MAI omettere tipi di ritorno o parametri
+protected function processAction($record, $data) // NO: tipi mancanti
+{
+    // Implementazione...
+}
+```
+
+## Struttura File di Traduzione
+
+```php
+// Modules/ModuleName/lang/it/actions.php
+return [
+    'custom_action' => [
+        'label' => 'Nome Azione',
+        'modal_heading' => 'Conferma Azione',
+        'modal_description' => 'Descrizione dettagliata dell\'azione',
+        'fields' => [
+            'field_name' => [
+                'label' => 'Etichetta Campo',
+                'placeholder' => 'Inserisci valore...',
+                'help' => 'Testo di aiuto per il campo',
+            ],
+        ],
+        'notifications' => [
+            'success' => 'Azione completata con successo',
+            'error' => 'Si è verificato un errore',
+        ],
+        'buttons' => [
+            'confirm' => 'Conferma',
+            'cancel' => 'Annulla',
+        ],
+    ],
+];
+```
+
+## Tipizzazione Rigorosa (PHPStan Livello 9+)
+
+```php
+/**
+ * @param \Illuminate\Database\Eloquent\Collection<int, \Modules\ModuleName\Models\ModelName> $records
+ * @return array<string, mixed>
+ */
+protected function getModalData(Collection $records): array
+{
+    return [
+        'count' => $records->count(),
+    ];
+}
+
+/**
+ * @return array<\Filament\Forms\Components\Component>
+ */
+protected function getFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('name')
+            ->label(__('modulename::form.fields.name.label'))
+            ->required(),
+    ];
+}
+```
+
+## Autorizzazioni
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->authorize(fn (Model $record) => auth()->user()->can('update', $record))
+        ->visible(fn (Model $record) => $record->status !== 'completed');
+}
+```
+
+## Azioni di Massa (Bulk Actions)
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Actions;
+
+use Filament\Tables\Actions\BulkAction;
+use Illuminate\Database\Eloquent\Collection;
+use Modules\ModuleName\Models\ModelName;
+
+class BulkCustomAction extends BulkAction
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->label(__('modulename::actions.bulk_custom.label'))
+            ->icon('heroicon-o-check-badge')
+            ->requiresConfirmation()
+            ->deselectRecordsAfterCompletion()
+            ->action(function (Collection $records): void {
+                $this->processBulkAction($records);
+            });
+    }
+
+    /**
+     * Elabora l'azione in blocco.
+     *
+     * @param \Illuminate\Database\Eloquent\Collection<int, \Modules\ModuleName\Models\ModelName> $records
+     */
+    protected function processBulkAction(Collection $records): void
+    {
+        $records->each(function (ModelName $record): void {
+            // Azione sul singolo record
+        });
+    }
+}
+```
+
+## Documentazione Obbligatoria
+
+### 1. File Modulo: `Modules/ModuleName/docs/actions/custom_action.md`
+
+```markdown
+# CustomAction
+
+## Descrizione
+Descrizione dettagliata dell'azione e del suo scopo.
+
+## Utilizzo
+```php
+use Modules\ModuleName\Filament\Actions\CustomAction;
+
+// In una Resource
+protected function getTableActions(): array
+{
+    return [
+        CustomAction::make(),
+    ];
+}
+```
+
+## Parametri
+- `$name` (opzionale): Nome personalizzato per l'azione
+
+## Comportamento
+Descrizione del comportamento dell'azione, inclusi:
+- Modifica di dati
+- Notifiche
+- Eventi generati
+
+## Permessi Richiesti
+- `update` sul modello
+
+## File di Traduzione
+L'azione utilizza le traduzioni da `modulename::actions.custom_action.*`
+```
+
+### 2. Collegamento nella Root Docs: `docs/filament/actions.md`
+
+```markdown
+# Azioni Filament
+
+Questa pagina elenca tutte le azioni Filament personalizzate disponibili nel sistema.
+
+## Modulo ModuleName
+
+- [CustomAction](../laravel/Modules/ModuleName/docs/actions/custom_action.md)
+- [BulkCustomAction](../laravel/Modules/ModuleName/docs/actions/bulk_custom_action.md)
+
+...
+```
+
+## Procedure di Test
+
+Ogni azione Filament deve essere testata:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Tests\Feature\Actions;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\ModuleName\Filament\Actions\CustomAction;
+use Modules\ModuleName\Models\ModelName;
+use Modules\User\Models\User;
+use Tests\TestCase;
+
+class CustomActionTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_action_updates_record_successfully(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        $record = ModelName::factory()->create(['status' => 'pending']);
+
+        // Act
+        $this->actingAs($user)
+            ->post(route('filament.resources.model-names.actions.custom-action', [
+                'record' => $record->id,
+                'data' => ['field_name' => 'Test Value'],
+            ]));
+
+        // Assert
+        $this->assertDatabaseHas('model_names', [
+            'id' => $record->id,
+            'status' => 'completed',
+        ]);
+    }
+}
+```
+
+## Gestione Errori e Logging
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->action(function (array $data, Model $record): void {
+        try {
+            DB::beginTransaction();
+
+            // Azione...
+
+            DB::commit();
+
+            $this->success();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            \Log::error('Errore in CustomAction', [
+                'record_id' => $record->id,
+                'data' => $data,
+                'exception' => $e->getMessage(),
+            ]);
+
+            $this->failure(__('modulename::actions.custom_action.notifications.error'));
+        }
+    });
+}
+```
+
+## Lifecycle Hooks
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->mountUsing(function (Forms\Form $form, Model $record): void {
+        $form->fill([
+            'field_name' => $record->default_value,
+        ]);
+    })
+    ->mutateRecordDataUsing(function (array $data): array {
+        $data['user_id'] = auth()->id();
+        $data['processed_at'] = now();
+
+        return $data;
+    });
+}
+```
+
+## Modal Personalizzata
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->modalWidth('md')
+        ->modalAlignment('center')
+        ->modalIcon('heroicon-o-information-circle')
+        ->modalIconColor('primary')
+        ->modalHeading(__('modulename::actions.custom_action.modal_heading'))
+        ->modalDescription(__('modulename::actions.custom_action.modal_description'))
+        ->modalSubmitActionLabel(__('modulename::actions.custom_action.buttons.confirm'))
+        ->modalCancelActionLabel(__('modulename::actions.custom_action.buttons.cancel'));
+}
+```
+
+## Notifiche e Messaggi
+
+```php
+protected function setUp(): void
+{
+    parent::setUp();
+
+    $this->successNotificationTitle(__('modulename::actions.custom_action.notifications.success'))
+        ->successNotificationBody(__('modulename::actions.custom_action.notifications.success_details'))
+        ->failureNotificationTitle(__('modulename::actions.custom_action.notifications.error'))
+        ->extraAttributes([
+            'data-analytics-event' => 'custom_action_clicked',
+        ]);
+}
+```
+
+## Liste di Controllo per la Qualità
+
+Prima di considerare completa un'Action personalizzata, verificare:
+
+1. **Configurazione in setUp()**
+   - [x] Chiamata a parent::setUp() come prima istruzione
+   - [x] Tutte le proprietà configurate all'interno di setUp()
+   - [x] Nome univoco fornito o generato automaticamente
+
+2. **Traduzioni**
+   - [x] Nessuna stringa hardcoded
+   - [x] File di traduzione completo con struttura corretta
+   - [x] Tutti i messaggi, label, descrizioni da file di traduzione
+
+3. **Tipizzazione**
+   - [x] Tutti i metodi hanno tipi di ritorno espliciti
+   - [x] Tutti i parametri hanno tipi espliciti
+   - [x] Utilizzo corretto di generics per Collection
+   - [x] PHPDoc completo per tutti i metodi
+
+4. **Autorizzazioni**
+   - [x] Verifica dei permessi implementata
+   - [x] Condizioni di visibilità definite
+
+5. **Documentazione**
+   - [x] File di documentazione nel modulo
+   - [x] Collegamento nella documentazione root
+   - [x] Esempi di utilizzo
+   - [x] Descrizione dei parametri e comportamento
+
+6. **Test**
+   - [x] Test unitari o funzionali implementati
+   - [x] Copertura dei casi di errore
+   - [x] Verifica del comportamento atteso

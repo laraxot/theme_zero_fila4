@@ -1,0 +1,50 @@
+# Business Logic Implementation Rules
+
+**When**: Implementing business logic or actions in the application.
+
+**Then**:
+- Always use `spatie/laravel-queueable-action` for business logic and reusable actions.
+- Never use `Service` classes for business logic.
+- Place Livewire components in `app/Http/Livewire` of the respective module.
+- Ensure namespaces do not include 'app' (e.g., `Modules\ModuleName\Http\Livewire`).
+- Place actions in the correct directory according to conventions.
+
+**Because**:
+- Promotes a standardized approach to handling business logic with queueable actions.
+- Ensures better testability and reusability of code.
+- Maintains consistency in namespace and directory structure across modules.
+
+**Examples**:
+
+*Correct*:
+```php
+namespace Modules\Example\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+
+class ProcessDataAction
+{
+    use QueueableAction;
+
+    public function execute(array $data): void
+    {
+        // Business logic here
+    }
+}
+```
+
+*Incorrect*:
+```php
+namespace Modules\Example\Services;
+
+class DataProcessingService
+{
+    public function process(array $data): void
+    {
+        // Business logic here
+    }
+}
+```
+
+**See**:
+- [Queueable Actions Documentation](https://spatie.be/docs/laravel-queueable-action)
