@@ -1,0 +1,95 @@
+---
+description: Regole Windsurf per le migrazioni database
+globs: ["**/database/migrations/*.php"]
+alwaysApply: true
+---
+
+# Regole per le Migrazioni Database
+
+## Regola Universale
+- Usa sempre anonymous class: `return new class extends XotBaseMigration { ... }`
+- Non implementare mai il metodo `down` se estendi XotBaseMigration
+- Per aggiungere colonne a tabelle esistenti:
+  - Copia la migrazione originale, aggiorna il timestamp
+  - Aggiungi la colonna in `tableUpdate` solo se non esiste (`if (! $this->hasColumn(...))`)
+  - Aggiorna sempre questa doc, la root docs e la doc del modulo
+
+## Esempio di Migrazione Corretta
+
+```php
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+return new class extends XotBaseMigration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // Creazione tabella se non esiste
+        if (! $this->hasTable('performance_organizzativa')) {
+            $this->createTable('performance_organizzativa', function (Blueprint $table) {
+                $table->id();
+                $table->string('descrizione')->nullable();
+                $table->integer('anno')->nullable();
+                $table->timestamps();
+            });
+        }
+        
+        // Aggiunta colonna se non esiste
+        if (! $this->hasColumn('performance_organizzativa', 'valutatore_id')) {
+            $this->tableUpdate('performance_organizzativa', function (Blueprint $table) {
+                $table->bigInteger('valutatore_id')->nullable();
+            });
+        }
+    }
+    
+    // Non implementare mai il metodo down
+};
+```
+
+## Motivazione
+- Prevenire conflitti di nomi
+- Garantire rollback sicuro
+- Compliance PHPStan livello 10
+- Facilitare troubleshooting e ripresa lavoro
+
+## Checklist rapida
+- [ ] Anonymous class
+- [ ] Solo metodo `up`
+- [ ] Update solo se colonna non esiste
+- [ ] Aggiorna sempre la doc
+
+## Cross-reference
+- [Update migrazioni Performance](mdc:../../laravel/Modules/Performance/docs/migration_update_rules.md)
+- [Root MODULE_NAMESPACE_RULES.md](mdc:../../docs/MODULE_NAMESPACE_RULES.md)
+
+## Errori comuni e soluzioni
+
+### Errore: Unknown column
+
+Se riscontri errori del tipo "Unknown column 'nome_colonna' in field list", significa che la migrazione non è stata eseguita correttamente. 
+
+### Soluzione
+
+1. Verifica che la colonna esista nella tabella
+2. Segui la procedura corretta per aggiungere la colonna
+3. Documenta la modifica nelle doc del modulo e della root
+
+### Esempio di errore valutatore_id
+
+```
+SQLSTATE[42S22]: Unknown column 'valutatore_id' in 'field list'
+```
+
+La soluzione è seguire la procedura sopra descritta per aggiungere correttamente la colonna `valutatore_id` alla tabella `performance_organizzativa`.
+
+## Aggiornamenti recenti (2025-05)
+- Aggiunta regola per l'aggiornamento della documentazione
+- Integrazione con PHPStan level 10
+- Miglioramento della checklist rapida
+- Aggiunta sezione errori comuni e soluzioni
+
+*Ultimo aggiornamento: maggio 2025*

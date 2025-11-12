@@ -1,0 +1,62 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Roadmap Management Rules - SaluteOra
+
+## Documento di Riferimento Principale
+Il documento **principale** per la roadmap frontoffice è:
+- `/var/www/html/_bases/base_saluteora/docs/roadmap_frontoffice.md`
+
+## Documenti di Stato Dettagliati
+- `/var/www/html/_bases/base_saluteora/docs/stato_aggiornamenti_lavori_dettagliato_gennaio_2025.md`
+- `/var/www/html/_bases/base_saluteora/docs/stato_avanzamenti_lavori_2025_05_28.md`
+
+## Struttura File Dettaglio
+Tutti i file di dettaglio risiedono in:
+- `/var/www/html/_bases/base_saluteora/docs/roadmap_frontoffice/`
+
+### File Critici Nuovi
+- `31-mobile-optimization.md` - Ottimizzazione mobile (Priorità Alta)
+- `32-security-audit.md` - Audit sicurezza GDPR (Priorità Critica)
+- `30-patient-book.md` - Prenotazione diretta (Priorità Critica)
+
+## Stato Avanzamento Generale
+- **Completamento**: 82%
+- **Target finale**: 30 Aprile 2025
+- **Budget utilizzato**: 78%
+
+## Priorità Critiche Gennaio 2025
+1. Prenotazione diretta `/it/patient/book` (0% - DA INIZIARE)
+2. Ottimizzazione mobile performance (70% - IN CORSO)
+3. Security audit e GDPR compliance (CRITICO)
+4. Integrazione SPID (60% completata)
+
+## Rules per Aggiornamenti
+- SEMPRE aggiornare prima il documento principale roadmap_frontoffice.md
+- SEMPRE creare/aggiornare file dettaglio nella directory roadmap_frontoffice/
+- SEMPRE aggiornare collegamenti bidirezionali
+- SEMPRE indicare percentuali di completamento e timeline
+- SEMPRE documentare rischi e mitigazioni
+
+## Collegamenti Bidirezionali Obbligatori
+Ogni file dettaglio DEVE collegare a:
+- Roadmap principale
+- Stato dettagliato lavori
+- File correlati nella stessa directory
+- Standard e best practices
+
+## Timeline Fasi
+- **Gennaio 2025**: Focus mobile optimization + security
+- **Febbraio 2025**: Prenotazione diretta + workflow approvazione
+- **Marzo 2025**: Completamento features avanzate
+- **Aprile 2025**: Testing, audit, go-live preparation
+
+## Budget Allocation
+- Sviluppo: €195K utilizzati / €300K totali
+- Infrastruttura: €45K utilizzati / €100K totali  
+- Security: €50K allocati per audit e compliance
+- Marketing: €20K utilizzati / €100K totali
+
+*Ultimo aggiornamento: 2 Gennaio 2025*

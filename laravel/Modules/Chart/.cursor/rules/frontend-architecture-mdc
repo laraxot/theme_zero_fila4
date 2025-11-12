@@ -1,0 +1,15 @@
+# Frontend Architecture
+
+**When** you are working on the frontend of the application
+
+**Then** use Folio, Volt, Livewire, and Widgets for Frontoffice. Do not define routes in `web.php`. Place templates in `Themes/{Theme}/resources/views/pages/`. Ensure Widgets extend `XotBaseWidget` with `HasForms`. Avoid directly extending Filament classes.
+
+**Because** this maintains a consistent frontend structure, leverages Filament's capabilities, and ensures modularity and reusability.
+
+**Examples**
+
+- Correct: Use Folio and Volt for page rendering with templates in the specified theme directory.
+- Incorrect: Define custom routes in `web.php` or directly extend Filament classes for widgets.
+
+**See**:
+- [Frontend Development Guidelines](../Modules/Theme/docs/FRONTEND_GUIDELINES.md)

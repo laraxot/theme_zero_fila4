@@ -1,0 +1,32 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole per FetchEventsAction
+
+## Namespace
+- Il namespace deve essere `Modules\<nome progetto>\Actions\Patient\Calendar`
+
+## Struttura
+- La classe deve estendere `Modules\Xot\Actions\Action`
+- Deve implementare il metodo `execute` che accetta un array `$fetchInfo`
+- Deve restituire un array di eventi nel formato richiesto dal calendario
+
+## Parametri
+- `$fetchInfo` deve contenere:
+  - `start`: Data di inizio
+  - `end`: Data di fine
+
+## Formato Eventi
+Ogni evento deve avere:
+- `title`: ID del paziente
+- `start`: Data di inizio
+- `end`: Data di fine
+- `url`: URL per la visualizzazione dei dettagli
+- `shouldOpenUrlInNewTab`: true
+
+## Integrazione
+- Deve utilizzare `XotData` per la gestione delle risorse
+- Deve essere compatibile con `UserCalendarWidget`
+- Deve seguire le convenzioni di Filament per gli URL

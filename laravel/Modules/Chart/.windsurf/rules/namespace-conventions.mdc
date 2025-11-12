@@ -1,0 +1,42 @@
+# Namespace Conventions
+
+**When** you are defining or modifying namespaces for models or Filament resources in the project
+
+**Then**:
+- Use `Modules\<ModuleName>\Models` for model classes.
+- Use `Modules\<ModuleName>\Filament` for Filament resources and pages.
+- Ensure specialized models (e.g., `Doctor`, `Patient`) extend `User` from the same module instead of generic base models like `XotBaseModel` or `Illuminate\Database\Eloquent\Model`.
+
+**Because**:
+- Maintains consistency across the modular structure of the application.
+- Prevents naming conflicts and ensures clarity in class hierarchies.
+- Aligns with PSR-4 autoloading standards as defined in each module's `composer.json`.
+
+**Examples**:
+
+*Correct*:
+```php
+namespace Modules\<nome progetto>\Models;
+
+use Modules\<nome progetto>\Models\User;
+
+class Doctor extends User
+{
+    // Model definition
+}
+```
+
+*Incorrect*:
+```php
+namespace Modules\<nome progetto>\App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Doctor extends Model
+{
+    // Model definition
+}
+```
+
+**See**:
+- [Namespace Conventions Documentation](../Modules/Xot/docs/NAMESPACE_CONVENTIONS.md)

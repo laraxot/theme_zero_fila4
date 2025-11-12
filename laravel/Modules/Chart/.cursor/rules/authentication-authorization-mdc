@@ -1,0 +1,93 @@
+# Authentication & Authorization Rules
+
+## Role and Permission Management
+
+### Role Definitions
+- **Admin**: Full system access
+- **Doctor**: Can manage appointments, view patient records
+- **Patient**: Can view own appointments and records
+- **Staff**: Limited backend access
+
+### Permission Naming Conventions
+- Use `{resource}.{action}` format (e.g., `appointments.create`)
+- Keep permission names consistent across the application
+- Document all permissions in the module's README.md
+
+## Code Style
+
+### Role Checks
+```php
+// Good
+if (Auth::user()->hasRole('admin')) {}
+
+// Bad - hardcoded role names
+if (Auth::user()->roles->contains('name', 'admin')) {}
+```
+
+### Permission Checks
+```php
+// Good - using can()
+if (Auth::user()->can('appointments.create')) {}
+
+// Good - using @can in Blade
+@can('appointments.edit')
+    <button>Edit</button>
+@endcan
+```
+
+## Security Rules
+
+1. **Never trust user input**
+   - Always validate and authorize all user input
+   - Use form requests for validation and authorization
+
+2. **Principle of Least Privilege**
+   - Assign minimum required permissions
+   - Regularly review and audit permissions
+
+3. **CSRF Protection**
+   - Always include `@csrf` in forms
+   - Use `@method` for PUT/PATCH/DELETE requests
+
+## Testing
+
+### Unit Tests
+- Test all permission checks
+- Test both positive and negative cases
+- Test role inheritance
+
+### Feature Tests
+```php
+// Test user with role can access route
+$user = User::factory()->create();
+$user->assignRole('admin');
+$this->actingAs($user)
+     ->get('/admin/dashboard')
+     ->assertStatus(200);
+
+// Test unauthorized access is denied
+$user = User::factory()->create();
+$this->actingAs($user)
+     ->get('/admin/dashboard')
+     ->assertStatus(403);
+```
+
+## Common Issues
+
+### "Undefined method 'hasRole'"
+1. Ensure `Spatie\Permission\Traits\HasRoles` is used in User model
+2. Run `composer dump-autoload`
+3. Clear configuration cache
+
+### Permission Not Working
+1. Check permission is assigned to role
+2. Verify user has the role
+3. Clear permission cache: `php artisan cache:forget('spatie.permission.cache')`
+
+## Best Practices
+
+1. **Use Policies** for model authorization
+2. **Group related permissions** under common prefixes
+3. **Document all permissions** in module documentation
+4. **Regularly audit** roles and permissions
+5. **Keep roles and permissions** in database seeders for easy setup

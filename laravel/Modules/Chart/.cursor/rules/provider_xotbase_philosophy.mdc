@@ -1,0 +1,52 @@
+# Provider XotBase Philosophy (Laraxot)
+
+## Regola Fondamentale
+- Tutti i ServiceProvider dei moduli DEVONO estendere la rispettiva classe base Xot (es. XotBaseServiceProvider, XotBaseRouteServiceProvider, XotBaseEventServiceProvider).
+- Vietato estendere direttamente i provider Laravel (es. ServiceProvider, RouteServiceProvider, EventServiceProvider).
+- Override solo per logica realmente custom, sempre dopo la chiamata al parent.
+- Proprietà obbligatorie: `$name` (pubblica), `$nameLower` (pubblica, se richiesta), `$moduleNamespace`, `$module_dir`, `$module_ns` (protette, se serve override avanzato).
+- Non ridefinire `$namespace` (deprecato e causa errori in Laravel 12+).
+- Ogni override va motivato e documentato.
+
+## Filosofia
+- Centralizzazione, DRY, refactoring sicuro, onboarding immediato.
+- Un solo punto di verità, nessuna duplicazione.
+- Serenità del codice e della documentazione.
+
+## Religione
+- "Non avrai altro provider all’infuori di XotBase..."
+- La catena di ereditarietà è sacra: solo override motivati e documentati.
+
+## Politica
+- Ogni modulo deve essere plug&play, aggiornabile, coerente, senza duplicazione.
+- La coerenza è la base della scalabilità.
+
+## Zen
+- Serenità del codice, onboarding immediato, refactoring senza paura.
+
+## Checklist
+- [x] Estensione della classe base Xot corretta
+- [x] Nessuna estensione diretta di provider Laravel
+- [x] Proprietà obbligatorie presenti
+- [x] Override solo se necessario e documentato
+- [x] Documentazione aggiornata
+
+## Esempio Corretto
+```php
+class RouteServiceProvider extends XotBaseRouteServiceProvider {
+    public string $name = 'SaluteMo';
+    protected string $moduleNamespace = 'Modules\\SaluteMo\\Http\\Controllers';
+    protected string $module_dir = __DIR__;
+    protected string $module_ns = __NAMESPACE__;
+    // Override solo se serve logica custom
+}
+```
+
+## Errori Comuni
+- Ridefinire `$namespace` (causa errori in Laravel 12+)
+- Duplicare metodi già gestiti dalla base
+- Non documentare override
+
+## Collegamenti
+- [docs/provider_issues.md](../../laravel/Modules/SaluteMo/docs/provider_issues.md)
+- [docs/providers_specification.md](../../laravel/Modules/SaluteMo/docs/providers_specification.md)
