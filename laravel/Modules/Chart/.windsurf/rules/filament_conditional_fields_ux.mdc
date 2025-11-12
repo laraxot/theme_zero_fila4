@@ -1,0 +1,155 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole Filament: Campi Condizionali UX Intelligente
+
+## Pattern: Repeater con Campi Condizionali e Esclusività
+
+### Applicazione
+Utilizzare quando un repeater ha campi che devono:
+- Apparire/scomparire in base al numero di elementi
+- Avere logica di esclusività (solo 1 elemento può avere una proprietà)
+- Gestire automaticamente i default per UX semplificata
+
+### Schema Base Obbligatorio
+
+#### 1. Metodo Custom per Schema
+```php
+protected static function get{Entity}FormSchema(): array
+{
+    $baseSchema = {BaseResource}::getFormSchema();
+
+    // Campo denominazione condizionale
+    $baseSchema['name'] = Forms\Components\TextInput::make('name')
+        ->maxLength(255)
+        ->visible(function (Get $get): bool {
+            $items = $get('../../{repeater_name}') ?? [];
+            return count($items) > 1;
+        })
+        ->live();
+
+    // Campo esclusivo con auto-gestione
+    $baseSchema['is_primary'] = Forms\Components\Toggle::make('is_primary')
+        ->visible(function (Get $get): bool {
+            $items = $get('../../{repeater_name}') ?? [];
+            return count($items) > 1;
+        })
+        ->default(function (Get $get): bool {
+            $items = $get('../../{repeater_name}') ?? [];
+            return count($items) <= 1;
+        })
+        ->afterStateUpdated(function ($state, $set, Get $get, Component $component): void {
+            if ($state === true) {
+                $path = $component->getStatePath();
+                preg_match('/{repeater_name}\.(\d+)\.is_primary/', $path, $matches);
+                $currentIndex = $matches[1] ?? null;
+
+                if ($currentIndex !== null) {
+                    $items = $get('../../{repeater_name}') ?? [];
+                    foreach ($items as $index => $item) {
+                        if ((string)$index !== (string)$currentIndex) {
+                            $set("../../{repeater_name}.{$index}.is_primary", false);
+                        }
+                    }
+                }
+            }
+        })
+        ->live()
+        ->dehydrateStateUsing(function ($state, Get $get): bool {
+            $items = $get('../../{repeater_name}') ?? [];
+            if (count($items) <= 1) {
+                return true; // Forza true per singolo elemento
+            }
+            return (bool) $state;
+        });
+
+    return $baseSchema;
+}
+```
+
+#### 2. Repeater Reattivo Obbligatorio
+```php
+Forms\Components\Repeater::make('{repeater_name}')
+    ->relationship('{repeater_name}')
+    ->schema(static::get{Entity}FormSchema())
+    ->live() // CRITICO per reattività
+    ->defaultItems(1)
+```
+
+### Comportamenti UX Garantiti
+
+#### Campo Denominazione (`name`)
+- **1 elemento**: Nascosto (UI minimal)
+- **2+ elementi**: Visibile (necessario per distinguere)
+- **Transizioni**: Smooth show/hide automatico
+
+#### Campo Esclusivo (`is_primary`, `is_main`, etc.)
+- **1 elemento**: Nascosto, valore `true` automatico
+- **2+ elementi**: Visibile, solo 1 può essere `true`
+- **Selezione**: Disattiva automaticamente gli altri
+- **Garantia**: Sempre almeno 1 elemento è primary
+
+### Componenti Tecnici Chiave
+
+#### Pattern Path Extraction
+```php
+$path = $component->getStatePath(); // "addresses.0.is_primary"
+preg_match('/addresses\.(\d+)\.is_primary/', $path, $matches);
+$currentIndex = $matches[1] ?? null;
+```
+
+#### Mutua Esclusione
+```php
+->afterStateUpdated(function ($state, $set, Get $get, Component $component): void {
+    if ($state === true) {
+        // Logic per disattivare altri elementi
+    }
+})
+```
+
+#### Dehydration Intelligente
+```php
+->dehydrateStateUsing(function ($state, Get $get): bool {
+    // Forza comportamenti automatici prima del salvataggio
+})
+```
+
+### Import Richiesti
+```php
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Forms\Components\Component;
+```
+
+### Esempi di Applicazione
+- **Studio → Indirizzi**: name + is_primary
+- **Doctor → Specializzazioni**: name + is_main
+- **Patient → Contatti**: name + is_emergency
+- **User → Ruoli**: description + is_active
+
+### Anti-Pattern Vietati
+❌ Campi sempre visibili anche con 1 elemento
+❌ Gestione manuale dell'esclusività
+❌ Repeater senza ->live()
+❌ Default statici senza logica condizionale
+❌ Mancanza di Component import per path extraction
+
+### Test Coverage Obbligatorio
+- Singolo elemento: campi nascosti, valori auto
+- Multi elemento: campi visibili, esclusività funzionante
+- Transizioni: smooth show/hide
+- Persistenza: valori corretti nel database
+
+### Documentazione Pattern
+- Documentare in `{Module}/docs/filament/conditional_fields_ux.md`
+- Link bidirezionali con root docs
+- Esempi specifici del modulo
+
+### Collegamenti
+- [SaluteOra Implementation](../../laravel/Modules/SaluteOra/docs/filament/conditional_fields_ux.md)
+- [Filament Forms Documentation](https://filamentphp.com/docs/forms)
+
+---
+*Pattern UX Avanzato - Dicembre 2024*

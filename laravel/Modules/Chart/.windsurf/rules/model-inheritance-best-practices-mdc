@@ -1,0 +1,135 @@
+---
+trigger: model_decision
+description: Regole e best practices per l'ereditarietà dei modelli in Laravel, con particolare attenzione al pattern Single Table Inheritance (STI) e alla gestione corretta dei trait per garantire un'implementazione pulita e manutenibile.
+globs: *.php, app/Models/*.php, Modules/*/app/Models/*.php
+---
+
+# Model Inheritance Best Practices
+
+**When** you are creating or modifying model classes in the project
+
+**Then** do not redeclare traits already present in parent classes, and ensure models extend the appropriate base model from the module (e.g., `User` from `Patient` module for `Doctor` and `Patient` models).
+
+**Because** this prevents redundancy, avoids potential conflicts, and maintains a consistent inheritance hierarchy.
+
+## Examples
+
+### Gerarchia di Ereditarietà Corretta
+
+```php
+// app/Models/User.php (Base)
+class User extends BaseUser
+{
+    use HasFactory; // Dichiarato qui, non va ridichiarato nelle classi figlie
+    
+    // Logica comune a tutti gli utenti
+}
+
+// Modules/Patient/app/Models/Doctor.php
+class Doctor extends User
+{
+    use HasParent; // Necessario per STI
+    use SoftDeletes; // Trait specifico non presente nella classe genitore
+    
+    // Solo logica specifica per i dottori
+}
+
+// Modules/Patient/app/Models/Patient.php
+class Patient extends User
+{
+    use HasParent; // Necessario per STI
+    use HasAppointments; // Trait specifico non presente nella classe genitore
+    
+    // Solo logica specifica per i pazienti
+}
+```
+
+### Errore: Ridichiarazione di Trait
+
+```php
+// ERRATO
+class Doctor extends User
+{
+    use HasFactory; // ERRORE: Già presente in User
+    use HasParent;
+    use SoftDeletes;
+}
+
+// CORRETTO
+class Doctor extends User
+{
+    use HasParent;
+    use SoftDeletes;
+}
+```
+
+### Migrazione STI Corretta
+
+```php
+// database/migrations/2014_10_12_000000_create_users_table.php
+Schema::create('users', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->string('type')->nullable(); // Necessario per STI
+    
+    // Campi comuni a tutti i tipi di utenti
+    $table->timestamp('email_verified_at')->nullable();
+    $table->string('password');
+    
+    // Campi specifici per Doctor
+    $table->string('specialization')->nullable();
+    $table->json('certifications')->nullable();
+    
+    // Campi specifici per Patient
+    $table->date('date_of_birth')->nullable();
+    $table->string('insurance_number')->nullable();
+    
+    $table->rememberToken();
+    $table->timestamps();
+});
+```
+
+### Verifica della Catena di Ereditarietà
+
+```php
+// Prima di aggiungere un trait o un metodo, verificare la catena di ereditarietà
+// BaseUser -> User -> Doctor
+
+// Verificare i trait in BaseUser
+class BaseUser extends Model
+{
+    use HasFactory; // Questo trait è già presente qui
+    use Notifiable;
+    use HasRoles;
+}
+
+// Non ridichiarare HasFactory in User o Doctor
+class User extends BaseUser
+{
+    // Non ridichiarare HasFactory qui
+}
+
+class Doctor extends User
+{
+    use HasParent;
+    // Non ridichiarare HasFactory qui
+}
+```
+
+## Common Pitfalls
+
+- **Errore**: Ridichiarare trait già presenti nelle classi genitori
+  **Soluzione**: Verificare sempre la catena di ereditarietà completa prima di aggiungere trait
+
+- **Errore**: Dimenticare il trait `HasParent` nei modelli che utilizzano STI
+  **Soluzione**: Aggiungere sempre `use HasParent;` nei modelli che estendono altri modelli
+
+- **Errore**: Aggiungere campi specifici per i modelli specializzati senza aggiungerli alla tabella base
+  **Soluzione**: Assicurarsi che tutti i campi utilizzati dai modelli specializzati siano presenti nella tabella base
+
+- **Errore**: Duplicare la logica comune in più modelli specializzati
+  **Soluzione**: Posizionare la logica comune nel modello base
+
+- **Errore**: Non documentare la catena di ereditarietà
+  **Soluzione**: Documentare chiaramente la catena di ereditarietà nei file di documentazione

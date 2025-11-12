@@ -1,0 +1,100 @@
+# Laraxot <nome progetto> Base Rules (June 2025)
+
+## Models and Namespaces
+- **Fundamental model rule**: Models must extend their module's `BaseModel`, NEVER directly `Illuminate\Database\Eloquent\Model` or `Modules\Xot\Models\XotBaseModel`
+- **NO app in namespace**: Never use 'app' segment in namespaces (correct: `Modules\ModuleName\Models`, incorrect: `Modules\ModuleName\App\Models`)
+- **Filament namespace**: Always `Modules\<ModuleName>\Filament`, never `App\Filament`, even if the physical directory is `app/Filament`
+
+## Model Properties
+- **$fillable**: Always `protected` and annotated with `/** @var list<string> */`
+- **$hidden**: Always `protected` and annotated with `/** @var list<string> */`
+- **$dates**: Always `protected` and annotated with `/** @var list<string> */`
+- **$with**: Always `protected` and annotated with `/** @var list<string> */`
+- **$casts DEPRECATED**: Use `casts()` method instead of `$casts` property:
+  ```php
+  /**
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          'updated_at' => 'datetime',
+      ];
+  }
+  ```
+
+## Migrations
+- **Anonymous classes**: All migrations must be anonymous classes returned via `return new class extends XotBaseMigration { ... }`
+- **No down method**: Never implement `down()` in migrations extending `XotBaseMigration`
+- **Adding columns**: To add columns to existing tables:
+  1. Copy the original migration
+  2. Update the timestamp
+  3. Add check `if (! $this->hasColumn(...))`
+  4. Document the reason
+
+## Filament
+- **Setup actions**: Override `setUp()` to configure all custom action properties
+- **Unique name**: Unique and documented name passed to `parent::make` (or handled internally by Filament)
+- **Labels from translations**: Never hardcoded strings, always from module translation files
+- **Table columns**: Only from model/migration, never invented
+- **Custom views**: Use `<x-filament::page>` as wrapper
+- **Form schema**: Return array of components, documented with `@return array<int, \Filament\Forms\Components\Component>`
+
+## Documentation
+- **Module docs**: In `Modules/<ModuleName>/docs/`, never in `resources/views/docs/`
+- **Root docs**: In `/docs/` with bidirectional links to module docs
+- **Update workflow**: Always study and update closest documentation first
+- **Bidirectional links**: Maintain bidirectional links between module docs and root docs
+- **General rules**: In `Modules/Xot/docs/`, specific modules only with references/links
+
+## PHPStan
+- **Execution**: Always from `/var/www/html/<nome progetto>/laravel` with `./vendor/bin/phpstan analyze`
+- **Level**: 9 as minimum standard
+- **Type safety**:
+  - Use `declare(strict_types=1);` in every file
+  - Avoid `mixed` when possible
+  - All methods with return types
+  - All parameters with types
+  - Use generics correctly (e.g., `Builder<static>`)
+
+## Translations
+- **Fields structure**:
+  ```php
+  'fields' => [
+      'field_name' => [
+          'label' => 'Label',
+          'help' => 'Help text',
+          'placeholder' => 'Placeholder text'
+      ]
+  ]
+  ```
+- **Actions structure**:
+  ```php
+  'actions' => [
+      'action_name' => [
+          'label' => 'Action Label',
+          'success' => 'Success message',
+          'error' => 'Error message'
+      ]
+  ]
+  ```
+- **Consistency**: Uniform terminology and capitalization
+- **Short arrays**: Always use short array syntax
+
+## UI and Components
+- **Blade components**: Located in `Modules/UI/resources/views/components/ui/`, NEVER in `resources/views/components/`
+- **Naming**: Maintain consistency in action naming
+
+## Traits and Dependencies
+- **HasTeams**: Only in models extending Authenticatable, requires HasRoles
+- **HasTenants**: Only in models implementing Filament's HasTenants, requires HasRoles
+- **HasAuthenticationLogTrait**: For models requiring authentication logging
+- **PHPDoc**: Complete for properties and methods, including `@property-read` annotations
+
+## General Best Practices
+- **Safe functions**: Use safe functions from `thecodingmachine/safe`
+- **Spatie**: Prefer Spatie Laravel Data instead of services
+- **QueableActions**: Prefer Spatie QueableActions
+- **Validation**: Regression tests after each bugfix
+- **Documentation management**: Always update docs during changes
