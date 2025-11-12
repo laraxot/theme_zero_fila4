@@ -1,0 +1,12 @@
+ # URL Localization
+
+**When** you are creating or modifying URLs in the application
+
+**Then** always include the language prefix as the first segment of the URL path using `app()->getLocale()` to retrieve the current locale.
+
+**Because** this ensures that URLs are properly localized, providing a consistent user experience across different languages.
+
+**Examples**
+
+- Correct: `<a href="{{ url('/' . app()->getLocale() . '/pages/' . $page->slug) }}">{{ $page->title }}</a>`
+- Incorrect: `<a href="{{ url('/pages/' . $page->slug) }}">{{ $page->title }}</a>`

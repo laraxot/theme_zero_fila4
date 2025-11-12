@@ -1,0 +1,168 @@
+description: Regola CRITICA sui namespace - NON includere MAI 'App' nei namespace dei moduli
+globs:
+  - '**/*.php'
+alwaysApply: true
+---
+# ERRORE CRITICO: MAI includere 'App' nei namespace
+
+## ⚠️ REGOLA FONDAMENTALE ⚠️
+
+I namespace dei moduli **NON** devono **MAI** includere il segmento `App` anche se i file sono fisicamente nella directory `app/`.
+
+## La Mappatura PSR-4
+
+Nei moduli Laravel, la configurazione PSR-4 mappa:
+```json
+"Modules\\NomeModulo\\": "Modules/NomeModulo/app/"
+```
+
+Questo significa che `Modules\NomeModulo\` punta direttamente alla cartella `app/`.
+
+## ❌ ERRATO - MAI USARE
+
+```php
+// QUESTI SONO TUTTI SBAGLIATI!
+namespace Modules\Geo\App\Filament\Forms;
+namespace Modules\User\App\Models;
+namespace Modules\Tenant\App\Http\Controllers;
+namespace Modules\Patient\App\Datas;
+namespace Modules\Blog\App\Actions;
+namespace Modules\Dental\App\Enums;
+```
+
+## ✅ CORRETTO - SEMPRE USARE
+
+```php
+// QUESTI SONO CORRETTI!
+namespace Modules\Geo\Filament\Forms;
+namespace Modules\User\Models;
+namespace Modules\Tenant\Http\Controllers;
+namespace Modules\Patient\Datas;
+namespace Modules\Blog\Actions;
+namespace Modules\Dental\Enums;
+```
+
+## Esempi Completi
+
+### Esempio 1: Filament Form
+```php
+// File: Modules/Geo/app/Filament/Forms/LocationForm.php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Geo\Filament\Forms;  // ✅ CORRETTO - senza App
+
+use Modules\Xot\Filament\Forms\XotBaseForm;
+
+class LocationForm extends XotBaseForm
+{
+    // ...
+}
+```
+
+### Esempio 2: Model
+```php
+// File: Modules/User/app/Models/User.php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\User\Models;  // ✅ CORRETTO - senza App
+
+use Modules\Xot\Models\XotBaseModel;
+
+class User extends XotBaseModel
+{
+    // ...
+}
+```
+
+### Esempio 3: Action
+```php
+// File: Modules\Patient\app\Actions\CreatePatientAction.php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Patient\Actions;  // ✅ CORRETTO - senza App
+
+use Spatie\QueueableAction\QueueableAction;
+
+class CreatePatientAction
+{
+    use QueueableAction;
+    // ...
+}
+```
+
+## Checklist di Verifica
+
+Prima di creare QUALSIASI file PHP in un modulo:
+
+1. **✓ Percorso fisico corretto?**
+   - Il file DEVE essere in: `Modules/NomeModulo/app/...`
+   
+2. **✓ Namespace inizia correttamente?**
+   - DEVE iniziare con: `Modules\NomeModulo\`
+   
+3. **✓ Namespace NON contiene 'App'?**
+   - NON deve MAI contenere: `\App\`
+   
+4. **✓ Resto del namespace corrisponde?**
+   - Dopo `Modules\NomeModulo\` deve corrispondere alla struttura dopo `app/`
+
+## Verifica con Composer
+
+Dopo OGNI creazione di file:
+```bash
+composer dumpautoload
+```
+
+Se vedi errori tipo "Class not found", controlla IMMEDIATAMENTE i namespace!
+
+## Conseguenze dell'Errore
+
+1. **Autoloading rotto**: Le classi non vengono trovate
+2. **Errori runtime**: "Class not found" errors
+3. **Inconsistenza**: Codice non allineato con il resto del progetto
+4. **Difficoltà di manutenzione**: Refactoring complesso
+
+## Esempi di Errori Comuni
+
+### Errore in Filament Resource
+```php
+// ❌ ERRATO
+namespace Modules\Blog\App\Filament\Resources;
+class PostResource extends XotBaseResource { }
+
+// ✅ CORRETTO
+namespace Modules\Blog\Filament\Resources;
+class PostResource extends XotBaseResource { }
+```
+
+### Errore in Controller
+```php
+// ❌ ERRATO
+namespace Modules\Api\App\Http\Controllers;
+class ApiController extends Controller { }
+
+// ✅ CORRETTO
+namespace Modules\Api\Http\Controllers;
+class ApiController extends Controller { }
+```
+
+### Errore in Data Object
+```php
+// ❌ ERRATO
+namespace Modules\Invoice\App\Datas;
+class InvoiceData extends Data { }
+
+// ✅ CORRETTO
+namespace Modules\Invoice\Datas;
+class InvoiceData extends Data { }
+```
+
+## RICORDA SEMPRE
+
+**La directory `app` esiste SOLO nel filesystem, MAI nei namespace!**

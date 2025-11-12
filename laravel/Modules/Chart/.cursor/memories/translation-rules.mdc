@@ -1,0 +1,122 @@
+# Regole Critiche per Traduzioni e Documentazione
+
+## REGOLA ASSOLUTA: MAI USARE ->label()
+- **VIETATO**: `->label('Testo')` nei componenti Filament
+- **VIETATO**: `->placeholder('Testo')` nei componenti Filament  
+- **VIETATO**: `->helperText('Testo')` nei componenti Filament
+- **OBBLIGATORIO**: Utilizzare SEMPRE i file di traduzione del modulo
+
+## REGOLA CRITICA PER ENUM: SEMPRE TransTrait
+- **OBBLIGATORIO**: Utilizzare `TransTrait` e `transClass()` per tutti i metodi `get*()`
+- **VIETATO**: `match()` o `__()` manuali per traduzioni negli enum
+- **PATTERN CORRETTO**:
+```php
+use Modules\Xot\Filament\Traits\TransTrait;
+
+enum MyEnum: string {
+    use TransTrait;
+    
+    public function getLabel(): string {
+        return $this->transClass(self::class, $this->value.'.label');
+    }
+    
+    public function getColor(): string {
+        return $this->transClass(self::class, $this->value.'.color');
+    }
+    
+    public function getIcon(): string {
+        return $this->transClass(self::class, $this->value.'.icon');
+    }
+    
+    public function getDescription(): string {
+        return $this->transClass(self::class, $this->value.'.description');
+    }
+    
+    public function getTooltip(): string {
+        return $this->transClass(self::class, $this->value.'.tooltip');
+    }
+    
+    public function getHelperText(): string {
+        return $this->transClass(self::class, $this->value.'.helper_text');
+    }
+}
+```
+
+## REGOLA CRITICA PER DOCUMENTAZIONE: MAI ESEMPI CON ->label()
+- **VIETATO**: Scrivere esempi con `->label()` nella documentazione
+- **OBBLIGATORIO**: Esempi puliti senza hardcoded strings
+- **PATTERN CORRETTO PER DOCUMENTAZIONE**:
+```php
+// ✅ CORRETTO - Solo make() senza ->label()
+TextColumn::make('name')
+    ->searchable()
+    ->sortable(),
+
+TextInput::make('email')
+    ->required(),
+
+Select::make('status')
+    ->options([
+        'active' => 'Active',
+        'inactive' => 'Inactive',
+    ]),
+```
+
+## REGOLA CRITICA PER FILE DI TRADUZIONE: STRUTTURA ESPANSA
+- **OBBLIGATORIO**: Struttura espansa per tutti i campi
+- **PATTERN CORRETTO PER FILE DI TRADUZIONE**:
+```php
+return [
+    'fields' => [
+        'nome_campo' => [
+            'label' => 'Etichetta Campo',
+            'placeholder' => 'Placeholder diverso',
+            'help' => 'Testo di aiuto specifico'
+        ]
+    ],
+    'actions' => [
+        'nome_azione' => [
+            'label' => 'Etichetta Azione',
+            'success' => 'Operazione completata',
+            'error' => 'Si è verificato un errore'
+        ]
+    ]
+];
+```
+
+## REGOLA CRITICA PER FILE README.md: SEMPRE MAIUSCOLO
+- **VIETATO**: File `readme.md` in minuscolo
+- **OBBLIGATORIO**: File `README.md` in maiuscolo
+- **PROCESSO**: Se esistono entrambi, assemblare contenuti e eliminare quello minuscolo
+
+## REGOLA CRITICA PER CONFLITTI GIT: RISOLVERE IMMEDIATAMENTE
+- **VIETATO**: Lasciare marker `<<< HEAD` nei file
+- **OBBLIGATORIO**: Risolvere immediatamente tutti i conflitti
+- **OBBLIGATORIO**: Eliminare file binari con conflitti
+
+## REGOLA CRITICA PER NOMI FILE E CARTELLE IN DOCS: SEMPRE MINUSCOLO
+- **VIETATO**: Nomi file con caratteri maiuscoli in cartelle docs
+- **VIETATO**: Nomi cartelle con caratteri maiuscoli in cartelle docs
+- **OBBLIGATORIO**: Tutti i file e cartelle in docs devono essere minuscoli
+- **ECCEZIONE**: Solo `README.md` può avere maiuscole
+- **PATTERN CORRETTO**:
+  - ✅ `my-document.md`
+  - ✅ `my-folder/`
+  - ✅ `README.md` (solo questo file)
+  - ❌ `MyDocument.md`
+  - ❌ `MyFolder/`
+
+## CHECKLIST OBBLIGATORIA
+- [ ] MAI usare `->label()`, `->placeholder()`, `->helperText()`
+- [ ] SEMPRE usare `TransTrait` e `transClass()` negli enum
+- [ ] MAI scrivere esempi con `->label()` nella documentazione
+- [ ] SEMPRE struttura espansa per traduzioni
+- [ ] SEMPRE `README.md` in maiuscolo
+- [ ] MAI lasciare conflitti Git
+- [ ] SEMPRE nomi file/cartelle minuscoli in docs
+- [ ] Aggiornare regole e memorie dopo ogni correzione
+
+ULTIMO AGGIORNAMENTO: 2025-01-27 - REGOLA CRITICA DA RICORDARE SEMPRE
+---
+alwaysApply: true
+---

@@ -1,0 +1,12 @@
+# SMS Configuration
+
+**When** you are configuring or modifying SMS settings in the application
+
+**Then** always retrieve configurations from `config('sms')` for global settings and `config('sms.drivers.{provider}')` for provider-specific settings, avoiding duplication of settings like retry or rate limits in provider configurations.
+
+**Because** this ensures consistency, modularity, and maintainability by centralizing SMS configurations in a dedicated file.
+
+**Examples**
+
+- Correct: `$token = config('sms.drivers.netfun.token');`
+- Incorrect: `$token = config('services.netfun.token');`

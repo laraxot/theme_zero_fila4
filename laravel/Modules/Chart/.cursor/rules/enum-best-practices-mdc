@@ -1,0 +1,222 @@
+---
+description: Regole e best practices per l'utilizzo delle enum in PHP 8.1+ nelle applicazioni Laravel, che definiscono come implementare, utilizzare e integrare le enum per garantire type safety, manutenibilità e coerenza del codice.
+globs: *.php
+---
+
+# Best Practices per l'Utilizzo delle Enum in PHP 8.1+
+
+## When
+
+- Stai definendo un insieme limitato di valori costanti (stati, tipi, categorie)
+- Hai bisogno di type safety per i valori enumerati
+- Stai implementando logica specifica per stati o tipi diversi
+- Stai interagendo con un database che memorizza valori enumerati
+- Stai creando interfacce utente che visualizzano stati o tipi
+
+## Then
+
+- Utilizza enum backed (con valori associati) per l'interazione con database o API
+- Implementa metodi helper nelle enum per incapsulare la logica specifica
+- Utilizza il casting automatico nei modelli per convertire i valori del database in enum
+- Implementa metodi per ottenere etichette tradotte per i valori enum
+- Aggiungi metodi per ottenere colori, icone o altri attributi UI per i valori enum
+- Documenta chiaramente ogni caso enum e i suoi metodi
+
+## Because
+
+- Le enum forniscono type safety a compile-time, riducendo gli errori di runtime
+- L'incapsulamento della logica nelle enum centralizza il comportamento e migliora la manutenibilità
+- Il casting automatico semplifica l'interazione con il database
+- I metodi helper per le etichette tradotte migliorano l'internazionalizzazione
+- I metodi per attributi UI garantiscono una rappresentazione coerente nell'interfaccia utente
+- La documentazione chiara migliora la comprensione e l'utilizzo delle enum
+
+## Examples
+
+### Definizione di Enum Backed
+
+```php
+enum DoctorStatus: string
+{
+    case PENDING = 'pending';
+    case APPROVED = 'approved';
+    case REJECTED = 'rejected';
+    
+    /**
+     * Ottiene l'etichetta localizzata per lo stato
+     */
+    public function getLabel(): string
+    {
+        return match($this) {
+            self::PENDING => __('patient::enums.doctor_status.pending'),
+            self::APPROVED => __('patient::enums.doctor_status.approved'),
+            self::REJECTED => __('patient::enums.doctor_status.rejected'),
+        };
+    }
+    
+    /**
+     * Verifica se lo stato consente la modifica dei dati
+     */
+    public function canEdit(): bool
+    {
+        return match($this) {
+            self::PENDING => true,
+            self::APPROVED, self::REJECTED => false,
+        };
+    }
+    
+    /**
+     * Ottiene il colore associato allo stato per l'UI
+     */
+    public function getColor(): string
+    {
+        return match($this) {
+            self::PENDING => 'warning',
+            self::APPROVED => 'success',
+            self::REJECTED => 'danger',
+        };
+    }
+}
+```
+
+### Casting nei Modelli
+
+```php
+class Doctor extends User
+{
+    use HasParent;
+    use SoftDeletes;
+    
+    protected $casts = [
+        'status' => DoctorStatus::class,
+        // Altri cast...
+    ];
+}
+```
+
+### Utilizzo nei Metodi
+
+```php
+public function isApproved(): bool
+{
+    return $this->status === DoctorStatus::APPROVED;
+}
+
+public function canEditProfile(): bool
+{
+    return $this->status->canEdit();
+}
+
+public function getStatusLabelAttribute(): string
+{
+    return $this->status->getLabel();
+}
+```
+
+### Utilizzo in Filament
+
+```php
+use Filament\Tables\Columns\BadgeColumn;
+
+BadgeColumn::make('status')
+    ->formatStateUsing(fn ($state) => $state->getLabel())
+    ->colors(fn ($state) => [
+        'warning' => $state === DoctorStatus::PENDING,
+        'success' => $state === DoctorStatus::APPROVED,
+        'danger' => $state === DoctorStatus::REJECTED,
+    ])
+    ->icons(fn ($state) => [
+        'heroicon-o-clock' => $state === DoctorStatus::PENDING,
+        'heroicon-o-check-circle' => $state === DoctorStatus::APPROVED,
+        'heroicon-o-x-circle' => $state === DoctorStatus::REJECTED,
+    ])
+```
+
+### Metodi Statici Utili
+
+```php
+enum DoctorStatus: string
+{
+    // ... casi enum ...
+    
+    /**
+     * Ottiene tutti i casi come array per select, ecc.
+     */
+    public static function toArray(): array
+    {
+        return array_combine(
+            array_column(self::cases(), 'value'),
+            array_map(fn($case) => $case->getLabel(), self::cases())
+        );
+    }
+    
+    /**
+     * Ottiene tutti i casi come array per Filament select
+     */
+    public static function toSelectArray(): array
+    {
+        $result = [];
+        foreach (self::cases() as $case) {
+            $result[$case->value] = [
+                'label' => $case->getLabel(),
+                'icon' => $case->getIcon(),
+                'color' => $case->getColor(),
+            ];
+        }
+        return $result;
+    }
+}
+```
+
+## Common Pitfalls
+
+- **Errore**: Comparazione di stringhe invece di enum
+  ```php
+  // ERRATO
+  if ($doctor->status === 'approved') { ... }
+  
+  // CORRETTO
+  if ($doctor->status === DoctorStatus::APPROVED) { ... }
+  ```
+
+- **Errore**: Mancato utilizzo del casting
+  ```php
+  // ERRATO: Senza casting, $doctor->status è una stringa
+  
+  // CORRETTO: Con casting, $doctor->status è un'istanza di DoctorStatus
+  protected $casts = [
+      'status' => DoctorStatus::class,
+  ];
+  ```
+
+- **Errore**: Logica di stato duplicata
+  ```php
+  // ERRATO: Logica duplicata in più file
+  if ($doctor->status === DoctorStatus::APPROVED) {
+      $canEdit = false;
+  }
+  
+  // CORRETTO: Logica centralizzata nell'enum
+  $canEdit = $doctor->status->canEdit();
+  ```
+
+- **Errore**: Hardcodare le etichette
+  ```php
+  // ERRATO
+  return $doctor->status === DoctorStatus::APPROVED ? 'Approvato' : 'Non approvato';
+  
+  // CORRETTO
+  return $doctor->status->getLabel();
+  ```
+
+- **Errore**: Non documentare le enum
+  ```php
+  // ERRATO: Nessuna documentazione
+  enum Status: string { ... }
+  
+  // CORRETTO: Documentazione chiara
+  /**
+   * Rappresenta lo stato di un dottore nel sistema.
+   */
+  enum DoctorStatus: string { ... }
+  ```

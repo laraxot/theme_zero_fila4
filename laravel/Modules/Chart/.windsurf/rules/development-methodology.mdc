@@ -1,0 +1,92 @@
+# Metodologia di Sviluppo Obbligatoria
+
+## REGOLA FONDAMENTALE: Documentazione Prima del Codice
+
+### Processo Obbligatorio per OGNI Modifica
+
+1. **Fase 1 - Documentazione Stato Attuale**
+   - Analizza e documenta lo stato corrente
+   - Identifica tutti i file coinvolti
+   - Mappa le dipendenze
+
+2. **Fase 2 - Studio della Documentazione**
+   - Leggi TUTTA la documentazione esistente
+   - Verifica coerenza tra docs e codice
+   - Comprendi le scelte architetturali
+
+3. **Fase 3 - Pianificazione Scritta**
+   - Documenta COSA vuoi fare
+   - Documenta COME lo farai
+   - Elenca file da modificare
+   - Prevedi effetti collaterali
+
+4. **Fase 4 - Riflessione Critica**
+   - Fermati e rifletti
+   - Considera alternative
+   - Valuta pro e contro
+
+5. **Fase 5 - Dialogo Interno**
+   - Verifica coerenza architettturale
+   - Controlla best practices
+   - Evita debito tecnico
+
+6. **Fase 6 - Analisi Profonda**
+   - **Politica**: Rispetta le regole del progetto?
+   - **Filosofia**: Segue DRY, SOLID, KISS?
+   - **Logica**: Il flusso è sensato?
+   - **Standard**: Mantiene la qualità?
+
+7. **Fase 7 - Aggiornamento Docs Finale**
+   - Documenta la decisione finale
+   - Aggiorna TUTTE le docs pertinenti
+   - Prepara changelog
+
+8. **Fase 8 - Implementazione**
+   - SOLO ORA scrivi il codice
+   - Segui esattamente la documentazione
+   - Testa ogni modifica
+
+## Quando Applicare
+
+- **SEMPRE** per modifiche strutturali
+- **SEMPRE** per nuove funzionalità
+- **SEMPRE** per refactoring
+- **SEMPRE** per codice critico
+- Anche per bug fix non banali
+
+## Esempio di Violazione
+
+```
+// ❌ SBAGLIATO
+1. Vedo un errore
+2. Modifico subito il codice
+3. "Poi documento"
+
+// ✅ CORRETTO
+1. Vedo un errore
+2. Documento l'errore in /docs/ERRORI/
+3. Studio la documentazione
+4. Pianifico la soluzione in /docs/SOLUZIONI/
+5. Rifletto e analizzo
+6. Aggiorno le best practices
+7. Implemento seguendo la documentazione
+```
+
+## Benefici
+
+- Zero errori causati da fretta
+- Documentazione sempre aggiornata
+- Decisioni ponderate e tracciabili
+- Codice di alta qualità
+- Manutenibilità eccellente
+
+## Promemoria
+
+> "Il tempo 'perso' a documentare prima è tempo guadagnato in debugging dopo"
+
+## File di Riferimento
+
+- `/laravel/docs/METODOLOGIA_SVILUPPO_RIFLESSIVO.md` - Guida completa
+- `/laravel/docs/` - Tutta la documentazione del progetto
+
+**QUESTA METODOLOGIA È OBBLIGATORIA - NON SONO AMMESSE ECCEZIONI**

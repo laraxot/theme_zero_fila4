@@ -1,0 +1,36 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola Windsurf: Migrazioni XotBaseMigration
+
+## Regola
+- Usare SEMPRE `$this->hasColumn('nome_colonna')` nelle migrazioni che estendono XotBaseMigration.
+- NON usare mai `Schema::hasColumn`.
+- La proprietà `$connection` deve essere dichiarata come `protected ?string $connection = 'mysql';` (o altro valore appropriato), mai solo `string`.
+
+## Esempio
+```php
+if (! $this->hasColumn('state')) {
+    $this->tableUpdate(function (Blueprint $table) {
+        $table->string('state')->nullable();
+    });
+}
+```
+
+## Motivazione
+- Compatibilità multi-db
+- Coerenza tra i moduli
+- Evita errori dovuti a override custom
+
+## Checklist
+- [ ] Usare solo $this->hasColumn
+- [ ] Aggiornare tutte le vecchie migrazioni
+
+## Collegamenti correlati
+- [README User](../../laravel/Modules/User/docs/README.md)
+- [Best Practices](../../laravel/Modules/User/docs/best-practices.mdc)
+- [Linee guida Actions](../../laravel/Modules/User/docs/actions.mdc)
+- [Linee guida Activitylog](../../laravel/Modules/User/docs/activitylog.mdc)
+- [Documentazione centrale](../../docs/INDEX.md)

@@ -1,0 +1,12 @@
+{
+    "name": "Gdpr",
+    "alias": "gdpr",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Gdpr\\Providers\\GdprServiceProvider",
+        "Modules\\Gdpr\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "files": []
+}

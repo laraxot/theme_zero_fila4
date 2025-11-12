@@ -1,0 +1,34 @@
+# KISS Principle (Keep It Simple, Stupid)
+
+**When** you are designing or implementing solutions in the project
+
+**Then** prioritize simplicity by avoiding unnecessary complexity in code, architecture, and documentation.
+
+**Because** simple solutions are easier to understand, maintain, and extend, reducing the likelihood of errors.
+
+**Examples**
+
+- Correct: Use a straightforward function to solve a problem.
+```php
+public function calculateTotal($items) {
+    return array_sum(array_column($items, 'price'));
+}
+```
+
+- Incorrect: Over-engineer a solution with multiple layers of abstraction when a simpler approach suffices.
+```php
+public function calculateTotal($items) {
+    $total = 0;
+    foreach ($items as $item) {
+        if (isset($item['price'])) {
+            if (is_numeric($item['price'])) {
+                $total += $item['price'];
+            }
+        }
+    }
+    return $total;
+}
+```
+
+**See**:
+- [Code Quality Guidelines](../Modules/Xot/docs/CODE_QUALITY.md)

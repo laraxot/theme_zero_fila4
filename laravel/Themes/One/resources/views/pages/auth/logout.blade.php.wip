@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Auth;
+use function Laravel\Folio\{middleware, name};
+
+middleware(['auth']);
+name('logout');
+if(Auth::check()){
+    // Terminate the authenticated session
+    Auth::logout();
+
+    // Invalidate and regenerate session to prevent session fixation
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+}
+// Redirect the user to the localized home page
+return redirect()->route('home');
+?>

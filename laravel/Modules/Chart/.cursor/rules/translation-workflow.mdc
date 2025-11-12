@@ -1,0 +1,62 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Translation Validation Workflow
+
+Workflow dedicato al controllo completo dei file di traduzione, verifica della struttura espansa e conformità agli standard Laraxot <nome progetto>.
+
+## Invocazione
+Usa `/translation-check` in Windsurf Cascade per eseguire una validazione completa delle traduzioni.
+
+## Controlli Principali
+
+### Struttura Espansa Obbligatoria
+```php
+// ✅ CORRETTO - Struttura espansa completa
+'fields' => [
+    'nome_campo' => [
+        'label' => 'Etichetta Campo',
+        'placeholder' => 'Placeholder diverso',
+        'help' => 'Testo di aiuto specifico'
+    ]
+]
+
+// ❌ ERRATO - Struttura semplificata
+'fields' => [
+    'nome_campo' => 'Etichetta Campo'
+]
+
+// ❌ ERRATO - helper_text uguale a placeholder
+'nome_campo' => [
+    'label' => 'Campo',
+    'placeholder' => 'Inserisci valore',
+    'helper_text' => 'Inserisci valore'  // Deve essere diverso!
+]
+```
+
+### Controllo Componenti Filament
+```bash
+# Cerca uso di ->label() nei componenti (VIETATO)
+grep -r "->label(" Modules/ --include="*.php" | grep -v "test\|Test" | head -10 || echo "✅ Nessun ->label() hardcoded trovato"
+
+# Cerca ->placeholder() hardcoded
+grep -r "->placeholder(" Modules/ --include="*.php" | grep -v "test\|Test" | head -10 || echo "✅ Nessun ->placeholder() hardcoded trovato"
+```
+
+## Regole di Conformità
+
+1. **Struttura Espansa**: SEMPRE obbligatoria per fields e actions
+2. **No Hardcoded**: MAI usare ->label(), ->placeholder(), ->helperText()
+3. **Array Syntax**: SEMPRE usare [] invece di array()
+4. **Strict Types**: SEMPRE includere declare(strict_types=1)
+5. **Helper Text**: SEMPRE diverso da placeholder e description
+6. **Naming**: File e cartelle docs in minuscolo (eccetto README.md)
+7. **Return Array**: SEMPRE return con array alla fine del file
+
+---
+
+**Ultimo aggiornamento**: Dicembre 2024
+**Versione**: 1.0
+**Compatibilità**: Laraxot <nome progetto>, Filament 3.x

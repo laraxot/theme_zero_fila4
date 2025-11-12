@@ -1,0 +1,86 @@
+# REGOLA CRITICA: MAI USARE ->label() NEI COMPONENTI FILAMENT
+
+## ⚠️ REGOLA ASSOLUTA ⚠️
+
+**MAI, MAI, MAI** usare `->label()` nei componenti Filament. Le traduzioni sono gestite automaticamente dal LangServiceProvider.
+
+## ❌ ERRATO - MAI FARE QUESTO
+
+```php
+// ❌ ERRATO - MAI USARE ->label()
+TextInput::make('name')
+    ->label('Nome')  // ❌ ERRORE CRITICO
+
+Select::make('status')
+    ->label('Stato')  // ❌ ERRORE CRITICO
+
+Action::make('save')
+    ->label('Salva')  // ❌ ERRORE CRITICO
+```
+
+## ✅ CORRETTO - SEMPRE FARE QUESTO
+
+```php
+// ✅ CORRETTO - SENZA ->label()
+TextInput::make('name'),  // Traduzione automatica
+
+Select::make('status'),  // Traduzione automatica
+
+Action::make('save'),  // Traduzione automatica
+```
+
+## Motivazione
+
+1. **Centralizzazione**: Le traduzioni sono gestite dai file di lingua
+2. **Consistenza**: Tutte le traduzioni seguono lo stesso pattern
+3. **Manutenibilità**: Cambiare traduzioni senza toccare il codice
+4. **Override**: Permette override delle traduzioni per temi/moduli
+5. **Type Safety**: Evita errori di digitazione nelle stringhe
+
+## File di Traduzione
+
+Le traduzioni devono essere in:
+- `Modules/ModuleName/lang/it/fields.php`
+- `Modules/ModuleName/lang/it/actions.php`
+- `Modules/ModuleName/lang/it/messages.php`
+
+## Struttura Corretta
+
+```php
+// Modules/ModuleName/lang/it/fields.php
+return [
+    'name' => [
+        'label' => 'Nome',
+        'placeholder' => 'Inserisci il nome',
+        'help' => 'Nome completo dell\'utente',
+    ],
+    'email' => [
+        'label' => 'Email',
+        'placeholder' => 'Inserisci l\'email',
+        'help' => 'Indirizzo email valido',
+    ],
+];
+```
+
+## RICORDA SEMPRE
+
+- **MAI** `->label('testo')`
+- **MAI** `->placeholder('testo')`
+- **MAI** `->helperText('testo')`
+- **SEMPRE** usare solo `->make('campo')`
+- **SEMPRE** traduzioni nei file di lingua
+
+## Penalità per Violazione
+
+- ❌ Codice non conforme
+- ❌ Difficoltà di manutenzione
+- ❌ Inconsistenza nelle traduzioni
+- ❌ Impossibilità di override
+- ❌ Errori di type safety
+
+## Ultimo Aggiornamento
+2025-01-27 - Regola critica per evitare ->label()
+description:
+globs:
+alwaysApply: false
+---

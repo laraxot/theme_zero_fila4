@@ -1,0 +1,208 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola: StudioSelectorButtons Pattern - SaluteOra (DRY + KISS)
+
+## Ambito
+- Globale (pattern per componenti form specifici del dominio)
+- Specifico per moduli con selezioni di entità con relazioni
+
+## Motivazione
+- **DRY**: Evitare duplicazione logica tra widget e componente
+- **KISS**: Passare direttamente modelli invece di array trasformati
+- **Separazione**: Logica modulo, presentazione tema
+- **Manutenibilità**: Un solo punto per gestione dati e UI
+
+## Regola Fondamentale
+- SEMPRE passare modelli Eloquent direttamente al componente
+- SEMPRE lasciare che il componente gestisca la trasformazione dati
+- SEMPRE utilizzare view nel tema (`pub_theme::`) per personalizzazione
+- MAI duplicare logica di trasformazione dati tra widget e componente
+
+## Pattern Corretto DRY + KISS
+
+### Struttura Files
+```php
+// Componente Form - GESTISCE TUTTO
+Modules/{ModuleName}/app/Filament/Forms/Components/{ComponentName}.php
+
+// View Template - Solo UI
+Themes/One/resources/views/filament/forms/components/{component-name}.blade.php
+
+// Widget - MINIMO INDISPENSABILE
+- passa Collection di modelli
+- niente metodi di trasformazione
+```
+
+### Implementazione Widget (Semplificata)
+```php
+// ✅ CORRETTO: Widget minimalista
+protected function getStudioStepSchema(): array
+{
+    return [
+        \Modules\SaluteOra\Filament\Forms\Components\StudioSelectorButtons::make('studio_selection')
+            ->studios(fn (Get $get) => $this->getStudiosForLocationFull($get))
+            ->populatesStudioField('studio_id')
+            ->populatesDoctorField('doctor_id')
+            ->required(),
+            
+        Hidden::make('studio_id')->required(),
+        Hidden::make('doctor_id')->required(),
+    ];
+}
+
+// ❌ ERRATO: Widget con logica di trasformazione
+private function getStudioDoctorCards(Get $get): array
+{
+    $studios = $this->getStudiosForLocationFull($get);
+    
+    return $studios->map(function ($studio) {
+        return [
+            'studio_id' => $studio->id,
+            'studio_name' => $studio->name,
+            // ... altra trasformazione
+        ];
+    })->toArray(); // DUPLICAZIONE LOGICA!
+}
+```
+
+### Implementazione Componente (Completa)
+```php
+// ✅ CORRETTO: Componente gestisce tutto
+public function studios(Closure|Collection $studios): static
+{
+    $this->studios = $studios;
+    return $this;
+}
+
+public function getStudios(): Collection
+{
+    return $this->evaluate($this->studios) ?? new Collection();
+}
+```
+
+### View Template (Gestisce Modelli)
+```blade
+{{-- ✅ CORRETTO: Accede direttamente ai modelli --}}
+studios: @js($getStudios()->toArray()),
+
+<template x-for="studio in studios">
+    <h4 x-text="studio.name"></h4>
+    <p x-text="studio.address ? studio.address.formatted_address : 'N/A'"></p>
+    <template x-for="doctor in studio.doctors">
+        <button @click="selectStudioDoctor(studio.id, doctor.id)">
+            <span x-text="doctor.name"></span>
+        </button>
+    </template>
+</template>
+```
+
+## Vantaggi Misurabili
+
+### Prima (Duplicazione)
+- Widget: 50 linee metodo trasformazione
+- Componente: 30 linee gestione array
+- View: 40 linee mapping dati
+- **TOTALE**: 120 linee, logica duplicata
+
+### Dopo (DRY + KISS)
+- Widget: 8 linee configurazione
+- Componente: 15 linee gestione modelli  
+- View: 25 linee accesso diretto
+- **TOTALE**: 48 linee, logica centralizzata
+
+**RISPARMIO**: 60% codice, 100% duplicazione eliminata
+
+## Anti-Pattern da Evitare
+
+### ❌ Trasformazione Dati nel Widget
+```php
+// ERRATO: Widget fa il lavoro del componente
+private function getStudioDoctorCards(): array
+{
+    return $studios->map(fn ($studio) => [
+        'studio_id' => $studio->id,
+        'studio_name' => $studio->name,
+        'doctors' => $studio->doctors->map(...)
+    ])->toArray();
+}
+```
+
+### ❌ Componente Passivo
+```php
+// ERRATO: Componente solo riceve array
+public function cards(array $cards): static
+{
+    $this->cards = $cards; // Nessuna logica!
+    return $this;
+}
+```
+
+### ❌ View con Logica Business
+```blade
+{{-- ERRATO: View calcola dati --}}
+@php
+    $studios = $getStudios();
+    $transformedData = $studios->map(...);
+@endphp
+```
+
+## Regole Implementazione
+
+### Widget Responsibilities
+- ✅ Configurazione componente
+- ✅ Passaggio modelli Eloquent
+- ❌ Trasformazione dati
+- ❌ Logica UI
+
+### Componente Responsibilities  
+- ✅ Gestione modelli Eloquent
+- ✅ Trasformazione per view
+- ✅ Logica interazione
+- ❌ Query database
+
+### View Responsibilities
+- ✅ Rendering UI
+- ✅ Interazione utente
+- ❌ Trasformazione dati
+- ❌ Logica business
+
+## Checklist Implementazione
+
+### Pre-Development
+- [ ] Identificare entità principale (Studio)
+- [ ] Identificare relazioni necessarie (doctors)
+- [ ] Pianificare namespace corretto nel modulo
+
+### Development
+- [ ] Widget passa Collection direttamente
+- [ ] Componente gestisce trasformazione
+- [ ] View accede ai modelli tramite componente
+- [ ] Nessuna duplicazione logica
+
+### Post-Development
+- [ ] Test con dati reali
+- [ ] Performance check (< 100ms)
+- [ ] Debugging temporaneo rimosso
+- [ ] Documentazione aggiornata
+
+## Filosofia
+
+**"Passa i dati grezzi, lascia che il componente li cucini"**
+
+- **Widget**: Chef che ordina gli ingredienti
+- **Componente**: Cuoco che prepara il piatto  
+- **View**: Cameriere che serve al tavolo
+
+Ogni livello ha la sua responsabilità specifica, nessuna duplicazione.
+
+## Collegamenti
+
+- [SaluteOra: StudioSelectorButtons Implementation](../../laravel/Modules/SaluteOra/docs/form-components/studio-selector-buttons.md)
+- [DRY + KISS Principles](../../docs/architecture/dry-kiss-principles.md)
+- [Filament Component Best Practices](../../docs/filament/component-best-practices.md)
+
+## Ultimo aggiornamento
+2025-01-16 - Pattern DRY + KISS implementato
