@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use function Safe\ini_set;
+use function Safe\curl_close;
+use function Safe\curl_exec;
 use function Safe\curl_init;
 use function Safe\curl_setopt;
-use function Safe\curl_exec;
-use function Safe\curl_close;
 use function Safe\curl_setopt_array;
+use function Safe\ini_set;
 use function Safe\json_decode;
 use function Safe\json_encode;
 
