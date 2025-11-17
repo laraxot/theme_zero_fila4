@@ -1,11 +1,20 @@
 <?php
 
 declare(strict_types=1);
+
+use function Safe\curl_init;
+use function Safe\curl_setopt;
+use function Safe\curl_exec;
+use function Safe\curl_close;
+use function Safe\curl_setopt_array;
+use function Safe\json_decode;
+use function Safe\ini_set;
+
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 $base_url = 'http://quaerisf3.local';
-//$base_url = 'https://manager.quaeris.it';
+// $base_url = 'https://manager.quaeris.it';
 $login = '/api/user/login';
 $addContact = '/api/quaeris/add-contact';
 $email = 'marco.sottana@gmail.com';
@@ -20,12 +29,10 @@ $post = ['email' => $email, 'password' => $pass];
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
 $response = curl_exec($ch);
-//die('<pre>'.print_r($response, true).'<hr>'.curl_error($ch).'</pre>['.__LINE__.']');
-
+// die('<pre>'.print_r($response, true).'<hr>'.curl_error($ch).'</pre>['.__LINE__.']');
 
 $json = json_decode($response);
-//die('<pre>'.print_r($response, true).'<hr>'.curl_error($ch).'</pre>['.__LINE__.']');
-
+// die('<pre>'.print_r($response, true).'<hr>'.curl_error($ch).'</pre>['.__LINE__.']');
 
 $data = [
     'survey_pdf_id' => '10',
