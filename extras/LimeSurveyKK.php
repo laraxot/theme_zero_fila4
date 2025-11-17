@@ -3,18 +3,19 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\DB;
+
 use function Safe\preg_match;
 use function Safe\preg_replace;
 
 class LimeSurveyKK
 {
-    public \Illuminate\Database\Connection|null $db_lime = null;
+    public ?\Illuminate\Database\Connection $db_lime = null;
 
-    public \Illuminate\Database\Connection|null $db_xot = null;
+    public ?\Illuminate\Database\Connection $db_xot = null;
 
-    public \Illuminate\Database\Connection|null $db_quaeris = null;
+    public ?\Illuminate\Database\Connection $db_quaeris = null;
 
-    public \Illuminate\Database\Connection|null $db = null;
+    public ?\Illuminate\Database\Connection $db = null;
 
     public int $survey_id = 0;
 
