@@ -19,3 +19,17 @@ Durante l'analisi del progetto con PHPStan, sono stati identificati e risolti i 
 3. **Abilitazione dei Moduli Necessari**:
    - **Problema**: Alcuni moduli richiesti per il corretto funzionamento dell'applicazione erano disabilitati.
    - **Soluzione**: Sono stati abilitati i moduli `Cms` e `Geo` per garantire il corretto caricamento delle dipendenze.
+
+## Struttura e Personalizzazione
+
+- `app/`: componenti PHP e Blade specifici del tema
+- `resources/`: viste, CSS e JS basati su Tailwind + Vite
+- `public/`: asset compilati
+- `lang/`: file di traduzione dedicati
+
+Per personalizzare:
+1. Aggiornare componenti/layout in `resources/views/`
+2. Modificare gli stili in `resources/css/`
+3. Eseguire `npm run build` (o `npm run dev`) per rigenerare gli asset
+
+Ricordare di documentare ogni variante o layout personalizzato nella cartella `docs/`.
