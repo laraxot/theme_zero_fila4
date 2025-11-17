@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\DB;
-use function Safe\preg_replace;
 use function Safe\preg_match;
+use function Safe\preg_replace;
 
 class LimeSurveyKK
 {
@@ -70,7 +70,7 @@ class LimeSurveyKK
 
         $survey_fields = [];
         foreach ($db_questions as $key => $db_question) {
-            $qid = ($db_question->parent_qid) ?: $db_question->qid;
+            $qid = $db_question->parent_qid ?: $db_question->qid;
             $key = $db_question->sid.'X'.$db_question->gid.'X'.$qid;
 
             if (! isset($survey_fields[$key])) {
@@ -83,7 +83,7 @@ class LimeSurveyKK
                 $survey_fields[$key]['text'] = preg_replace("/[\s\n]+/i", ' ', strip_tags($db_question->text));
                 $survey_fields[$key]['title'] = $db_question->title;
                 $survey_fields[$key]['type'] = $db_question->type;
-                $survey_fields[$key]['other'] = ($db_question->other == 'Y');
+                $survey_fields[$key]['other'] = ($db_question->other === 'Y');
             } else {
                 $sub_key = $key.$db_question->title;
                 $survey_fields[$key]['sq'][$sub_key] = [
@@ -140,7 +140,7 @@ class LimeSurveyKK
 
                     $value = $survey->$field;
 
-                    if ($attr['other'] && $value == '-oth-') {
+                    if ($attr['other'] && $value === '-oth-') {
                         $other_field = $field.'other';
                         $value = $survey->$other_field;
                     } elseif ($value) {
@@ -272,7 +272,7 @@ class LimeSurveyKK
         $survey_fields = [];
         $questions_data = [];
         foreach ($db_questions as $db_question) {
-            $qid = ($db_question->parent_qid) ?: $db_question->qid;
+            $qid = $db_question->parent_qid ?: $db_question->qid;
             $key = $db_question->sid.'X'.$db_question->gid.'X'.$qid;
             $questions_data[$qid] = $db_question;
 
@@ -286,7 +286,7 @@ class LimeSurveyKK
                 $survey_fields[$key]['text'] = trim(preg_replace("/[\s\n]+/i", ' ', strip_tags($db_question->text)));
                 $survey_fields[$key]['title'] = $db_question->title;
                 $survey_fields[$key]['type'] = $db_question->type;
-                $survey_fields[$key]['other'] = ($db_question->other == 'Y');
+                $survey_fields[$key]['other'] = ($db_question->other === 'Y');
             } else {
                 $sub_key = $key.$db_question->title;
                 $survey_fields[$key]['sq'][$sub_key] = [
@@ -304,13 +304,13 @@ class LimeSurveyKK
                 sp.survey_id = '".$sid."'
         ");
 
-        $survey_date_from = (isset($_GET['date_from'])) ? $_GET['date_from'] : (($survey_pdf->date_from) ?: '');
-        $survey_date_to = (isset($_GET['date_to'])) ? $_GET['date_to'] : (($survey_pdf->date_to) ?: '');
+        $survey_date_from = $_GET['date_from'] ?? ($survey_pdf->date_from ?: '');
+        $survey_date_to = $_GET['date_to'] ?? ($survey_pdf->date_to ?: '');
 
-        $survey_date_from = (! preg_match("/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i", $survey_date_from)) ? '0000-00-00' : $survey_date_from;
-        $survey_date_to = (! preg_match("/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i", $survey_date_to)) ? '0000-00-00' : $survey_date_to;
+        $survey_date_from = ! preg_match("/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i", $survey_date_from) ? '0000-00-00' : $survey_date_from;
+        $survey_date_to = ! preg_match("/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i", $survey_date_to) ? '0000-00-00' : $survey_date_to;
 
-        $survey_filter = (isset($_GET['filter'])) ? $_GET['filter'] : null;
+        $survey_filter = $_GET['filter'] ?? null;
 
         $sql = '
             SELECT
@@ -348,14 +348,14 @@ class LimeSurveyKK
                 ls.submitdate IS NOT NULL
         ';
 
-        if ($survey_date_from != '0000-00-00') {
+        if ($survey_date_from !== '0000-00-00') {
             $sql .= "
                 AND
                     ls.submitdate >= '".$survey_date_from."'
             ";
         }
 
-        if ($survey_date_to != '0000-00-00') {
+        if ($survey_date_to !== '0000-00-00') {
             $sql .= "
                 AND
                     ls.submitdate <= '".$survey_date_to."'
@@ -420,7 +420,7 @@ class LimeSurveyKK
                 if (array_key_exists($field, $surveyData)) {
                     $value = $survey->$field;
 
-                    if ($attr['other'] && $value == '-oth-') {
+                    if ($attr['other'] && $value === '-oth-') {
                         $other_field = $field.'other';
                         $value = $survey->$other_field;
                     } elseif ($value) {
@@ -560,7 +560,7 @@ class LimeSurveyKK
                         if (array_key_exists($sub_field, $surveyData)) {
                             if (! isset($questions[$sub_attr['qid']])) {
                                 $questions[$sub_attr['qid']] = [
-                                    'text' => ($sub_attr['text']) ? $attr['text'].' > '.$sub_attr['text'] : $attr['text'],
+                                    'text' => $sub_attr['text'] ? $attr['text'].' > '.$sub_attr['text'] : $attr['text'],
                                 ];
                             }
 
@@ -762,7 +762,7 @@ class LimeSurveyKK
         $charts = [];
         foreach ($db_charts as $db_chart) {
             $charts[$db_chart->id] = [
-                'record' => $db_chart, 'answer_value' => $db_chart->answer_value, 'question_filter' => $survey_pdf->question_filter, 'question_chart_type' => $db_chart->question_chart_type, 'chart_type' => $db_chart->chart_type, 'question' => (array_key_exists($db_chart->question, $questions)) ? $questions[$db_chart->question] : $db_chart->question, 'subquestion' => (array_key_exists($db_chart->subquestion, $questions)) ? $questions[$db_chart->subquestion] : $db_chart->subquestion,
+                'record' => $db_chart, 'answer_value' => $db_chart->answer_value, 'question_filter' => $survey_pdf->question_filter, 'question_chart_type' => $db_chart->question_chart_type, 'chart_type' => $db_chart->chart_type, 'question' => array_key_exists($db_chart->question, $questions) ? $questions[$db_chart->question] : $db_chart->question, 'subquestion' => array_key_exists($db_chart->subquestion, $questions) ? $questions[$db_chart->subquestion] : $db_chart->subquestion,
             ];
         }
         $return['charts'] = $charts;
@@ -791,8 +791,8 @@ class LimeSurveyKK
         }
 
         $return['totals']['sent']['sms'] = $tot_sms ? ($tot_sms->total ?? 0) : 0;
-        $return['totals']['sent']['email'] = ($tot_email && isset($tot_email->total)) ? $tot_email->total : 0;
-        $return['totals']['sent']['all'] = ($tot_sms ? ($tot_sms->total ?? 0) : 0) + (($tot_email && isset($tot_email->total)) ? $tot_email->total : 0);
+        $return['totals']['sent']['email'] = $tot_email && isset($tot_email->total) ? $tot_email->total : 0;
+        $return['totals']['sent']['all'] = ($tot_sms ? ($tot_sms->total ?? 0) : 0) + ($tot_email && isset($tot_email->total) ? $tot_email->total : 0);
 
         $tot_sms = $this->db->selectOne('
             SELECT
@@ -830,8 +830,8 @@ class LimeSurveyKK
         }
 
         $return['totals']['answers']['sms'] = $tot_sms->total;
-        $return['totals']['answers']['email'] = ($tot_email) ? $tot_email->total : 0;
-        $return['totals']['answers']['all'] = $tot_sms->total + (($tot_email) ? $tot_email->total : 0);
+        $return['totals']['answers']['email'] = $tot_email ? $tot_email->total : 0;
+        $return['totals']['answers']['all'] = $tot_sms->total + ($tot_email ? $tot_email->total : 0);
 
         return $return;
     }
@@ -860,7 +860,7 @@ class LimeSurveyKK
 
         $survey_fields = [];
         foreach ($db_questions as $db_question) {
-            $qid = ($db_question->parent_qid) ?: $db_question->qid;
+            $qid = $db_question->parent_qid ?: $db_question->qid;
             $key = $db_question->sid.'X'.$db_question->gid.'X'.$qid;
 
             if (! isset($survey_fields[$key])) {
@@ -873,7 +873,7 @@ class LimeSurveyKK
                 $survey_fields[$key]['text'] = preg_replace("/[\s\n]+/i", ' ', strip_tags($db_question->text));
                 $survey_fields[$key]['title'] = $db_question->title;
                 $survey_fields[$key]['type'] = $db_question->type;
-                $survey_fields[$key]['other'] = ($db_question->other == 'Y');
+                $survey_fields[$key]['other'] = ($db_question->other === 'Y');
             } else {
                 $sub_key = $key.$db_question->title;
                 $survey_fields[$key]['sq'][$sub_key] = [
@@ -1007,7 +1007,7 @@ class LimeSurveyKK
 
         $survey_fields = [];
         foreach ($db_questions as $db_question) {
-            $qid = ($db_question->parent_qid) ?: $db_question->qid;
+            $qid = $db_question->parent_qid ?: $db_question->qid;
             $key = $db_question->sid.'X'.$db_question->gid.'X'.$qid;
 
             if (! isset($survey_fields[$key])) {
@@ -1020,7 +1020,7 @@ class LimeSurveyKK
                 $survey_fields[$key]['text'] = preg_replace("/[\s\n]+/i", ' ', strip_tags($db_question->text));
                 $survey_fields[$key]['title'] = $db_question->title;
                 $survey_fields[$key]['type'] = $db_question->type;
-                $survey_fields[$key]['other'] = ($db_question->other == 'Y');
+                $survey_fields[$key]['other'] = ($db_question->other === 'Y');
             } else {
                 $sub_key = $key.$db_question->title;
                 $survey_fields[$key]['sq'][$sub_key] = [
@@ -1075,7 +1075,7 @@ class LimeSurveyKK
 
                     $value = $survey->$field;
 
-                    if ($attr['other'] && $value == '-oth-') {
+                    if ($attr['other'] && $value === '-oth-') {
                         $other_field = $field.'other';
                         $value = $survey->$other_field;
                     } elseif ($value) {
