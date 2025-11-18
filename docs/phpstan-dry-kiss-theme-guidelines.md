@@ -1,7 +1,8 @@
 # PHPStan Level 10 + DRY/KISS Guidelines for Themes
 
 > **Stato aggiornato al 18 novembre 2025**  
-> Il [modulo User](../../../Modules/User/docs/phpstan-level10-fixes.md) è stato validato con PHPStan livello 10 (nessun errore). Il tema Zero resta pianificato per il prossimo giro di verifica, per garantire continuità tra presentation layer e business layer: schedulare una run dedicata non appena vengono finalizzate le modifiche ai componenti condivisi.
+> Il [modulo User](../../../Modules/User/docs/phpstan-level10-fixes.md) è stato validato con PHPStan livello 10 (nessun errore). Il tema Zero resta pianificato per il prossimo giro di verifica, per garantire continuità tra presentation layer e business layer: schedulare una run dedicata non appena vengono finalizzate le modifiche ai componenti condivisi.  
+> Inoltre, il modulo Activity ha riallineato le proprie risorse Filament alla regola “`getFormSchema()` con chiavi stringhe” documentata in [filament-form-schema-conventions](../../../Modules/Xot/docs/filament-form-schema-conventions.md); i layout del tema che consumano componenti modulare devono assumere lo stesso contract (niente `array_values()` sui form schema condivisi).
 
 ## Theme Code Quality Standards
 

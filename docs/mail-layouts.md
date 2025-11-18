@@ -51,6 +51,9 @@ Il layout supporta le seguenti variabili Mustache:
 - `{{ logo_svg }}` - Logo SVG
 - `{{ company_name }}` - Nome azienda/ente (default: "Provincia di Treviso")
 
+> **Nota 18 novembre 2025**  
+> Il valore di default di `logo_svg` punta al nuovo vettoriale multi-canale (`Modules/Notify/resources/svg/logo.svg`). Se un tema vuole personalizzarlo è sufficiente duplicare il file e modificare le classi `.ring`, `.channel`, `.hub` mantenendo le stesse variabili Mustache documentate qui.
+
 ### Contenuto
 - `{{{ body }}}` - **REQUIRED** - Contenuto principale dall'HTML template del database
 
