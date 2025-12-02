@@ -1,0 +1,75 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# PHPStan Quality Check Workflow
+
+Workflow dedicato all'esecuzione di controlli di qualità del codice con PHPStan, seguendo le best practice di Laraxot <nome progetto>.
+
+## Invocazione
+Usa `/phpstan-check` in Windsurf Cascade per eseguire una completa analisi statica del codice.
+
+## Fase 1: Preparazione Ambiente
+
+### 1.1 Verifica Directory di Lavoro
+```bash
+# OBBLIGATORIO: Eseguire sempre da directory Laravel
+cd /var/www/html/_bases/base_<nome progetto>/laravel
+
+# Verifica struttura del progetto
+ls -la phpstan.neon* composer.json
+```
+
+### 1.2 Controllo Dipendenze
+```bash
+# Verifica installazione PHPStan
+./vendor/bin/phpstan --version
+
+# Aggiorna autoload per nuove classi
+composer dump-autoload
+```
+
+## Fase 2: Analisi Statica Completa
+
+### 2.1 Analisi Progetto Completo
+```bash
+# Analisi livello 9 (standard minimo Laraxot)
+./vendor/bin/phpstan analyze --level=9 --memory-limit=2G
+
+# Con output dettagliato
+./vendor/bin/phpstan analyze --level=9 --memory-limit=2G --verbose
+```
+
+### 2.2 Analisi per Modulo Specifico
+```bash
+# <nome progetto>
+./vendor/bin/phpstan analyze Modules/<nome progetto> --level=9
+
+# Performance
+./vendor/bin/phpstan analyze Modules/Performance --level=9
+
+# User
+./vendor/bin/phpstan analyze Modules/User --level=9
+
+# UI
+./vendor/bin/phpstan analyze Modules/UI --level=9
+
+# Xot (modulo base)
+./vendor/bin/phpstan analyze Modules/Xot --level=9
+```
+
+## Regole Specifiche Laraxot
+
+- ❌ **MAI** usare `php artisan test:phpstan`
+- ✅ **SEMPRE** eseguire da directory `/laravel`
+- ✅ **SEMPRE** livello 9+ per nuovo codice
+- ✅ **VERIFICARE** namespace senza segmento 'App'
+- ✅ **CONTROLLARE** ereditarietà BaseModel specifici
+- ✅ **VALIDARE** migrazioni XotBaseMigration senza down()
+
+---
+
+**Ultimo aggiornamento**: Dicembre 2024
+**Versione**: 1.0
+**Compatibilità**: PHPStan 1.10+, Laraxot <nome progetto>

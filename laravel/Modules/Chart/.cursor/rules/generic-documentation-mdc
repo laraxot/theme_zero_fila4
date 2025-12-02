@@ -1,0 +1,61 @@
+# Generic Documentation Rule
+
+## When
+- You are creating or modifying documentation files in any module's `docs` directory
+- You are writing content for README.md files
+- You are creating or updating any kind of technical documentation
+- You are documenting code examples, paths, or configuration settings
+
+## Then
+- Use generic terms like "the application", "this module", "the system" instead of specific project names
+- Replace specific project paths like `/var/www/html/<nome progetto>/` with generic placeholders like `/var/www/html/[progetto]/`
+- Use placeholder domains like `example.com` instead of real project domains
+- Use generic email addresses like `support@example.com` instead of project-specific emails
+- Avoid hardcoding database names, instead use descriptive terms like "main database" or "user database"
+- Use generic configuration examples that don't reveal specific project settings
+- Ensure all documentation is reusable across different implementations of the same module
+
+## Because
+- Modules are designed to be reusable across multiple projects
+- Project-specific references make documentation less portable
+- Generic documentation is easier to maintain and adapt to different contexts
+- Avoiding specific project references improves security by not revealing implementation details
+- Documentation should focus on concepts and patterns rather than specific implementations
+
+## Examples
+
+### Good
+```markdown
+# Patient Module Documentation
+
+This module handles patient management for healthcare applications.
+
+## Configuration
+Configure the database connection in the module's `config/database.php` file:
+
+```php
+return [
+    'connection' => env('PATIENT_DB_CONNECTION', 'mysql'),
+];
+```
+
+For support, contact: support@example.com
+```
+
+### Bad
+```markdown
+# Patient Module Documentation for <nome progetto>
+
+This module handles patient management for the <nome progetto> dental platform.
+
+## Configuration
+Configure the database connection in `/var/www/html/<nome progetto>/laravel/Modules/Patient/config/database.php`:
+
+```php
+return [
+    'connection' => '<nome progetto>_data',
+];
+```
+
+For support, contact: support@<nome progetto>.it
+```

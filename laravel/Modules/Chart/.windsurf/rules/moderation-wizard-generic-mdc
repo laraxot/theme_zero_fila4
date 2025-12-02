@@ -1,0 +1,6 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Moderazione e Wizard di Registrazione Generici per User

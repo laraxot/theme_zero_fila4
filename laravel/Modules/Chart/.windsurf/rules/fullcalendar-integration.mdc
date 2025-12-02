@@ -1,0 +1,310 @@
+# FullCalendar Integration Rules
+
+## Project Standards Compliance
+
+This document outlines the standards and best practices for integrating FullCalendar with Filament in the <nome progetto> module, following the project's architecture and coding standards.
+
+## Important Notes
+
+1. **Base Classes**: Always extend from XotBase classes
+2. **Namespaces**: Use `Modules\<nome progetto>\Filament` for all Filament components
+3. **Translations**: Utilize language files instead of `->label()` methods
+4. **Documentation**: Keep documentation in sync with code changes
+5. **Testing**: Ensure all integrations are properly tested
+
+## Base Implementation
+
+### Required Base Class
+
+All calendar widgets must extend `XotBaseFullCalendarWidget`:
+
+```php
+namespace Modules\<nome progetto>\Filament\Widgets;
+
+use Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget;
+
+abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
+{
+    // Implementation...
+}
+```
+
+## Installation & Configuration
+
+1. **Dependencies**
+   - Use `saade/filament-fullcalendar` package
+   - Requires Filament 3.x and PHP 8.1+
+   - Install via Composer: `composer require saade/filament-fullcalendar`
+
+2. **Publishing Assets**
+   ```bash
+   php artisan vendor:publish --tag="filament-fullcalendar-config"
+   php artisan vendor:publish --tag="filament-fullcalendar-assets" --force
+   ```
+
+3. **Configuration**
+   - Update `config/filament-fullcalendar.php` as needed
+   - Set default timezone and locale
+   - Configure default views and plugins
+
+## Base Widget Implementation
+
+### Required Methods
+
+### BaseCalendarWidget (Extends XotBaseFullCalendarWidget)
+
+```php
+abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
+{
+    // Required properties
+    protected static ?string $model = null;
+    protected static string $heading = 'Calendar';
+
+    // Required methods
+    abstract protected function getEventsQuery();
+    abstract protected function mapToEvent($model): array;
+
+    // Recommended to override
+    protected function getCalendarConfig(): array;
+    protected function getHeaderActions(): array;
+    protected function getViewData(): array;
+}
+```
+
+### Event Structure
+
+```php
+protected function mapToEvent($model): array
+{
+    return [
+        // Required fields
+        'id' => $model->id,
+        'title' => $model->title,
+        'start' => $model->start,
+        'end' => $model->end,
+
+        // Recommended fields
+        'allDay' => (bool) $model->all_day,
+        'backgroundColor' => $model->color,
+        'borderColor' => $model->color,
+        'textColor' => $this->getContrastColor($model->color),
+
+        // Extended properties
+        'extendedProps' => [
+            'description' => $model->description,
+            // Add other model attributes as needed
+        ],
+
+        // URLs
+        'url' => route('filament.resources.appointments.edit', $model),
+    ];
+}
+```
+
+## Tenancy Integration
+
+### Clinic Scoping
+
+```php
+// In DoctorCalendarWidget.php
+protected function getEventsQuery()
+{
+    $doctor = Filament::auth()->user()->doctor;
+
+    return parent::getEventsQuery()
+        ->where('doctor_id', $doctor->id)
+        ->where('clinic_id', Filament::getTenant()?->id)
+        ->with([
+            'patient',
+            'clinic',
+            'status',
+            'medicalRecords'
+        ]);
+}
+```
+
+### Clinic Switcher
+
+```php
+// In your panel provider
+public function getTenantModel(): string
+{
+    return \App\Models\Clinic::class;
+}
+
+public function getTenantOwnershipRelationshipName(): string
+{
+    return 'clinic';
+}
+```
+
+## Performance Optimization
+
+### Eager Loading
+
+Always eager load relationships to prevent N+1 queries:
+
+```php
+protected function getEventsQuery()
+{
+    return parent::getEventsQuery()
+        ->with([
+            'patient',
+            'doctor.user',
+            'clinic',
+            'status',
+            'service'
+        ]);
+}
+```
+
+### Caching
+
+Cache expensive queries:
+
+```php
+use Illuminate\Support\Facades\Cache;
+
+public function fetchEvents(array $fetchInfo): array
+{
+    $cacheKey = 'calendar-events-' . Filament::getTenant()?->id . '-' . md5(json_encode($fetchInfo));
+
+    return Cache::remember($cacheKey, now()->addHour(), function () use ($fetchInfo) {
+        return parent::fetchEvents($fetchInfo);
+    });
+}
+```
+
+## Security and Best Practices
+
+### Authorization
+- Implement proper authorization checks for all calendar actions
+- Use policies for complex permission logic
+- Never expose sensitive data in the frontend
+
+### Data Protection
+- Use proper model scopes for data access
+- Implement proper validation for all inputs
+- Use form requests for complex validation rules
+
+## Documentation
+
+### Code Documentation
+- Document all public and protected methods
+- Include examples for complex functionality
+- Document any non-obvious behavior
+
+### User Documentation
+- Document widget features and usage
+- Include screenshots where helpful
+- Provide examples of common tasks
+
+## Testing Guidelines
+
+### Unit Tests
+- Test all widget methods
+- Test edge cases and error conditions
+- Mock external dependencies
+
+### Feature Tests
+- Test widget rendering
+- Test user interactions
+- Test different user roles and permissions
+
+## Performance Considerations
+
+### Database Queries
+- Use eager loading to prevent N+1 queries
+- Add indexes for frequently queried columns
+- Cache expensive operations
+
+### Frontend Performance
+- Minimize JavaScript and CSS
+- Use lazy loading for images
+- Optimize event handlers
+
+## Related Documentation
+
+- [XotBaseFullCalendarWidget Documentation](../xot-base-fullcalendar-widget.md)
+- [Filament Widgets](https://filamentphp.com/docs/3.x/panels/widgets)
+- [FullCalendar Documentation](https://fullcalendar.io/docs)
+
+## Changelog
+
+- 2023-10-26: Initial version
+- 2023-10-27: Updated to extend XotBaseFullCalendarWidget
+- 2023-10-28: Added security and performance sections
+
+### Authorization
+
+Always check permissions:
+
+```php
+use Illuminate\Support\Facades\Gate;
+
+public function fetchEvents(array $fetchInfo): array
+{
+    if (!Gate::allows('viewAny', Appointment::class)) {
+        return [];
+    }
+
+    return parent::fetchEvents($fetchInfo);
+}
+```
+
+### Input Validation
+
+Validate all user inputs:
+
+```php
+use Illuminate\Support\Facades\Validator;
+
+public function onEventDrop($eventId, $eventData): void
+{
+    $validator = Validator::make($eventData, [
+        'start' => 'required|date',
+        'end' => 'required|date|after:start',
+    ]);
+
+    if ($validator->fails()) {
+        throw new \Exception('Invalid event data');
+    }
+
+    // Process the update
+}
+```
+
+## Testing
+
+### Feature Tests
+
+```php
+public function test_doctor_can_view_own_appointments()
+{
+    $doctor = User::factory()->doctor()->create();
+    $clinic = Clinic::factory()->create();
+    $doctor->clinics()->attach($clinic);
+
+    $appointment = Appointment::factory()
+        ->for($clinic)
+        ->create(['doctor_id' => $doctor->id]);
+
+    $this->actingAs($doctor)
+        ->get(route('filament.resources.appointments.index'))
+        ->assertOk()
+        ->assertSee($appointment->title);
+}
+```
+
+## Related Files
+
+- `docs/calendar/architecture.md`
+- `docs/calendar/rules/calendar-widgets.mdc`
+- `config/filament-fullcalendar.php`
+- `resources/views/vendor/filament-fullcalendar/`
+
+## Changelog
+
+- 2023-10-15: Initial implementation
+- 2023-10-16: Added tenancy support
+- 2023-10-17: Improved performance with caching

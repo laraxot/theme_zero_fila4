@@ -1,0 +1,38 @@
+# Cursor Rule: Enum Naming Convention
+
+## Rule
+All PHP enum files must end with `Enum.php` and their class names must end with `Enum`.
+
+## Error Message
+"Enum files must end with 'Enum.php' and their class names must end with 'Enum'"
+
+## Examples
+
+### Valid Patterns
+- `app/Enums/UserTypeEnum.php`
+- `modules/ModuleName/app/Enums/AppointmentStatusEnum.php`
+
+### Invalid Patterns
+- `app/Enums/UserType.php` (missing Enum suffix)
+- `app/Models/Enums/UserType.php` (wrong location)
+
+## Implementation
+```php
+// Correct
+namespace App\Enums;
+
+enum UserTypeEnum: string
+{
+    case ADMIN = 'admin';
+    case PATIENT = 'patient';
+}
+
+// Incorrect
+class UserType {}
+```
+
+## Auto-fix
+When this rule is violated, suggest renaming the file and class to include the `Enum` suffix.
+
+## Related Documentation
+- `docs/development/enums.md`

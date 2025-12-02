@@ -1,0 +1,45 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Models Best Practices
+
+## Regole Fondamentali
+- Ogni modello deve estendere il base model del modulo
+- Implementare i trait richiesti (es. HasFactory, Parental\HasParent per STI)
+- Documentare il modello
+- Testare il modello
+
+## Struttura
+- Namespace: `Modules\{Module}\Models` o `App\Models`
+- Nome classe: PascalCase (es. `User`, `Doctor`)
+- Metodi consigliati: `getCasts()`, `getFillable()`, `getHidden()`, `getVisible()`
+
+## Esempio Corretto
+```php
+class Doctor extends BaseModel
+{
+    use Parental\HasParent;
+    // ...
+}
+```
+
+## Best Practices
+- Classi dedicate
+- Trait corretti
+- Override dei metodi solo se necessario
+- Test di unità e integrazione
+
+## Checklist
+- [ ] Classe dedicata
+- [ ] Trait corretti
+- [ ] Override solo se necessario
+- [ ] Test scritti
+- [ ] Documentazione aggiornata
+
+## Collegamenti correlati
+- [Validation Rules](mdc:validation.mdc)
+- [Migration Best Practices](mdc:migrations.mdc)
+- [Error Handling](mdc:error-handling.mdc)
+- [Checklist di Ripartenza](mdc:../../docs/checklist-di-ripartenza.md)

@@ -1,0 +1,48 @@
+# Event Sourcing Guidelines for <nome progetto>
+
+## Overview
+When implementing features in the `<nome progetto>` project, consider using event sourcing for modules where auditability and historical tracking are critical, such as patient management, appointments, and billing.
+
+## Implementation Rules
+- **Use Spatie Package**: Always use `spatie/laravel-event-sourcing` for event sourcing implementation.
+- **Aggregate Definition**: Define aggregates for each major entity (e.g., `PatientAggregate`, `AppointmentAggregate`) to handle commands and produce events.
+- **Event Granularity**: Create specific events for each significant action (e.g., `PatientRegistered`, `AppointmentRescheduled`) rather than generic events.
+- **Projectors for Read Models**: Implement projectors to build efficient read models for querying, ensuring performance in production.
+- **Reactors for Side Effects**: Use reactors for side effects like sending notifications or triggering external systems.
+- **Security**: Encrypt sensitive data within events to protect patient information.
+
+## Code Structure
+- Place aggregates in `app/Aggregates/`.
+- Store events in `app/Events/`.
+- Define projectors in `app/Projectors/`.
+- Implement reactors in `app/Reactors/`.
+
+## Example
+When adding a new feature for patient management:
+```php
+// app/Aggregates/PatientAggregate.php
+class PatientAggregate extends AggregateRoot {
+    public function register(array $data) {
+        $this->recordThat(new PatientRegistered($data));
+        return $this;
+    }
+}
+
+// app/Events/PatientRegistered.php
+class PatientRegistered extends ShouldBeStored {
+    public function __construct(public array $data) {}
+}
+
+// app/Projectors/PatientProjector.php
+class PatientProjector implements Projector {
+    public function onPatientRegistered(PatientRegistered $event, string $aggregateUuid) {
+        Patient::create(['uuid' => $aggregateUuid, 'data' => $event->data]);
+    }
+}
+```
+
+## Compliance
+- Ensure all events are stored indefinitely for audit purposes.
+- Log every state-changing action as an event to comply with healthcare regulations.
+
+Follow these guidelines to ensure a consistent and compliant event sourcing implementation in `<nome progetto>`.
