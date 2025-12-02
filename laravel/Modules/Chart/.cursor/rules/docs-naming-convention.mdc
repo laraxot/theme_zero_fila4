@@ -1,0 +1,138 @@
+# REGOLA CRITICA: NAMING CONVENTION PER CARTELLE DOCS
+
+## ⚠️ REGOLA FONDAMENTALE ⚠️
+
+**TUTTI** i file e le cartelle nelle cartelle `docs` DEVONO essere in **MINUSCOLO**:
+- ✅ CORRETTO: `readme.md`, `project.md`, `technical.md`
+- ❌ ERRATO: `README.md`, `PROJECT.md`, `TECHNICAL.md`
+
+## Motivazione
+- Coerenza con le convenzioni di documentazione
+- Compatibilità cross-platform
+- Facilità di manutenzione
+- Standardizzazione del progetto
+
+## Applicazione
+Questa regola si applica a:
+- Tutte le cartelle `docs/` del progetto
+- Tutti i file `.md` nelle cartelle docs
+- Tutte le sottocartelle delle cartelle docs
+- Qualsiasi file di documentazione
+
+## Procedura per Correzione
+Quando si identificano file con caratteri maiuscoli:
+
+1. **Identificare i file problematici**:
+   ```bash
+   find docs -name "*[A-Z]*" -type f
+   ```
+
+2. **Rinominare in minuscolo**:
+   ```bash
+   mv docs/README.md docs/readme.md
+   mv docs/PROJECT.md docs/project.md
+   ```
+
+3. **Verificare la correzione**:
+   ```bash
+   find docs -name "*[A-Z]*" -type f
+   # Dovrebbe restituire nessun risultato
+   ```
+
+## Eccezioni
+- **Nessuna eccezione**: Tutti i file devono essere in minuscolo
+- **Nessun caso speciale**: Anche i file importanti come README devono essere `readme.md`
+
+## Comandi Utili
+```bash
+# Trova tutti i file con caratteri maiuscoli
+find docs -name "*[A-Z]*" -type f
+
+# Trova tutte le cartelle con caratteri maiuscoli
+find docs -name "*[A-Z]*" -type d
+
+# Rinomina tutti i README.md in readme.md
+find docs -name "README.md" -type f -exec bash -c 'mv "$1" "$(dirname "$1")/readme.md"' _ {} \;
+```
+
+## Checklist
+- [ ] Verificare che tutti i file siano in minuscolo
+- [ ] Verificare che tutte le cartelle siano in minuscolo
+- [ ] Aggiornare tutti i riferimenti nei file
+- [ ] Documentare la correzione
+- [ ] Aggiornare regole e memorie
+
+## Collegamenti
+- [Documentazione Naming Convention](docs/readme-naming-convention.md)
+- [Correzione Naming 2025-01-27](docs/readme-naming-correction-2025-01-27.md)
+
+*Ultimo aggiornamento: 2025-01-27*
+# Convenzioni di Naming per Files e Cartelle nella Directory docs
+
+## Regola Fondamentale: Minuscole Ovunque, README.md in Maiuscolo
+
+Tutti i file e le cartelle all'interno di qualsiasi directory `docs` (e relative sottocartelle) DEVONO essere scritti in **minuscolo**, con la sola eccezione di `README.md` che deve essere sempre tutto **maiuscolo**.
+
+## Esempi Specifici
+
+| Corretto | Errato |
+|----------|--------|
+| `README.md` | `readme.md` |
+| `README.md` | `Readme.md` |
+| `service-provider.md` | `Service-Provider.md` |
+| `filament/widgets-guide.md` | `Filament/Widgets-Guide.md` |
+
+## Applicazione della Regola
+
+Questa regola si applica:
+- A tutti i moduli del progetto
+- A tutte le sottocartelle delle directory `docs`
+- A tutti i tipi di file (`.md`, `.mdc`, `.txt`, ecc.)
+- Sia per i file esistenti che per quelli generati automaticamente
+- Per link e riferimenti nei documenti
+
+## Struttura Raccomandata per la Directory docs
+
+```
+docs/
+  README.md            # Indice principale della documentazione (MAIUSCOLO)
+  architecture/        # Tutto minuscolo
+    patterns.md        # Tutto minuscolo
+    principles.md      # Tutto minuscolo
+  providers/           # Tutto minuscolo
+    service-provider.md # Tutto minuscolo
+    route-provider.md  # Tutto minuscolo
+  filament/            # Tutto minuscolo
+    resources.md       # Tutto minuscolo
+    widgets.md         # Tutto minuscolo
+  migrations/          # Tutto minuscolo
+    convention.md      # Tutto minuscolo
+```
+
+## Motivazioni
+
+1. **Coerenza**: Mantenere uniformità in tutti i moduli
+2. **Prevedibilità**: Rendere prevedibile il sistema di denominazione
+3. **Compatibilità**: Evitare problemi con filesystem sensibili a maiuscole/minuscole
+4. **Convenzioni Git**: Rispettare le convenzioni comuni per il README
+5. **Riconoscibilità**: README è un file speciale che merita distinzione
+
+## Correzione Automatica
+
+Per correggere eventuali violazioni di questa regola, è possibile utilizzare il seguente comando da eseguire nella directory radice di un modulo:
+
+```bash
+find ./docs -type f -not -name "README.md" | while read file; do 
+    dir=$(dirname "$file");
+    filename=$(basename "$file");
+    new_filename=$(echo "$filename" | tr 'A-Z' 'a-z');
+    if [ "$filename" != "$new_filename" ]; then
+        mv "$file" "$dir/$new_filename";
+        echo "Rinominato: $filename -> $new_filename";
+    fi;
+done
+```
+
+## Verifica di Conformità
+
+Prima di inviare modifiche, verificare sempre che tutti i file e le cartelle nella directory `docs` rispettino questa convenzione di nomenclatura. La violazione di questa regola sarà considerata un errore e dovrà essere corretta immediatamente.

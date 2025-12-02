@@ -1,0 +1,156 @@
+# Regole per i Componenti Blade
+
+## Struttura dei Componenti
+
+1. **Posizione dei Componenti**
+   ```
+   Modules/
+   └── ModuleName/
+       └── resources/
+           ├── views/
+           │   └── components/
+           │       └── chart-assets.blade.php
+           └── View/
+               └── Components/
+                   └── ChartAssets.php
+   ```
+
+2. **Naming Convention**
+   - File Vista: `kebab-case.blade.php`
+   - File Classe: `PascalCase.php`
+   - Tag: `<x-module-name::component-name>`
+   - Namespace: `Modules\ModuleName\View\Components`
+
+3. **Registrazione**
+   ```php
+   // ❌ ERRATO: Registrazione manuale nel ServiceProvider
+   Blade::component('module-name::component-name', ComponentClass::class);
+   
+   // ✅ CORRETTO: Registrazione automatica tramite convenzioni
+   // Il componente verrà registrato automaticamente se segue la struttura corretta
+   ```
+
+## Errori Comuni
+
+1. **Componente Non Trovato**
+   ```
+   Unable to locate class or view [Modules\ModuleName\View\Components\ComponentName]
+   ```
+   
+   Cause:
+   - Manca la classe del componente
+   - Namespace errato
+   - Nome file non corrispondente alla convenzione
+   - Mancata corrispondenza tra nome vista e classe
+   
+   Soluzioni:
+   - Creare la classe in `View/Components/ComponentName.php`
+   - Verificare il namespace corretto
+   - Usare PascalCase per la classe
+   - Assicurare corrispondenza tra vista e classe
+
+   - Verificare il path: `Modules/ModuleName/resources/views/components/`
+   - Controllare il namespace: `Modules\ModuleName\View\Components`
+   - Usare kebab-case per i nomi dei file
+   - Seguire la struttura standard dei moduli
+
+2. **Asset Non Trovati**
+   ```
+   Unable to locate asset [component-name.js]
+   ```
+   
+   Cause:
+   - Asset non pubblicati
+   - Path errato
+   - Asset non compilati
+   
+   Soluzioni:
+   - Pubblicare gli asset: `php artisan module:publish ModuleName`
+   - Verificare il path degli asset
+   - Compilare gli asset: `npm run build`
+
+## Best Practices
+
+1. **Struttura Standard**
+   - Un componente per file
+   - Nome file descrittivo
+   - Documentazione inline
+   - Test unitari per la logica
+
+2. **Organizzazione**
+   - Raggruppare componenti correlati
+   - Separare logica e presentazione
+   - Mantenere componenti piccoli e focalizzati
+   - Riutilizzare componenti quando possibile
+
+3. **Asset Management**
+   - Pubblicare gli asset durante l'installazione
+   - Versionare gli asset
+   - Ottimizzare per la produzione
+   - Usare il lazy loading quando appropriato
+
+## Checklist di Verifica
+
+Prima di usare un componente:
+1. [ ] Verificare che il componente esista nel path corretto
+2. [ ] Controllare che il nome segua le convenzioni
+3. [ ] Verificare che gli asset siano pubblicati
+4. [ ] Testare il componente in sviluppo
+
+## Esempi di Implementazione
+
+### Componente Base
+```php
+// Modules/ModuleName/resources/views/components/chart.blade.php
+<div {{ $attributes->merge(['class' => 'chart']) }}>
+    {{ $slot }}
+</div>
+```
+
+### Componente con Asset
+```php
+// Modules/ModuleName/resources/views/components/chart-assets.blade.php
+@push('scripts')
+    <script src="{{ module_asset('ModuleName', 'js/chart.js') }}"></script>
+@endpush
+
+<div class="chart-container">
+    {{ $slot }}
+</div>
+```
+
+### Componente con Classe
+```php
+// Modules/ModuleName/View/Components/Chart.php
+namespace Modules\ModuleName\View\Components;
+
+use Illuminate\View\Component;
+
+class Chart extends Component
+{
+    public function render()
+    {
+        return view('module-name::components.chart');
+    }
+}
+```
+
+## Note Importanti
+
+1. **Sicurezza**
+   - Sanitizzare gli input
+   - Validare i dati
+   - Evitare XSS
+   - Proteggere gli asset sensibili
+
+2. **Performance**
+   - Minimizzare gli asset
+   - Usare il caching
+   - Ottimizzare le query
+   - Lazy load quando possibile
+
+3. **Manutenibilità**
+   - Documentare i componenti
+   - Seguire le convenzioni
+   - Mantenere i test aggiornati
+   - Versionare correttamente 

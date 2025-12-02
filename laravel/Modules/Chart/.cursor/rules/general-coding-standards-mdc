@@ -1,0 +1,63 @@
+# General Coding Standards for <nome progetto>
+
+## Architecture
+
+### Modules
+- Each module must be independent.
+- Use Xot base classes for consistency and to leverage pre-built functionality.
+- Avoid circular dependencies between modules to maintain clean architecture.
+- Keep documentation updated with any changes to module functionality or structure.
+
+### Code
+- Follow PSR-12 coding standards for PHP code formatting and style.
+- Use type hints for function parameters and return types to improve code clarity and IDE support.
+- Document classes and methods with PHPDoc blocks to explain purpose, parameters, and return values.
+- Maintain DRY (Don't Repeat Yourself) principles by reusing code where possible and avoiding duplication.
+
+## Enum Usage
+
+Enums should be used for defining status values and other fixed sets of options. Follow this pattern for consistency:
+
+```php
+use Filament\Support\Contracts\HasLabel;
+use Filament\Support\Contracts\HasColor;
+
+enum RegistrationStatus: string implements HasLabel, HasColor
+{
+    case Pending = 'pending';
+    case UnderReview = 'under_review';
+    case Approved = 'approved';
+    case Rejected = 'rejected';
+
+    public function getLabel(): string
+    {
+        return match($this) {
+            self::Pending => __('Pending'),
+            self::UnderReview => __('Under Review'),
+            self::Approved => __('Approved'),
+            self::Rejected => __('Rejected'),
+        };
+    }
+
+    public function getColor(): string
+    {
+        return match($this) {
+            self::Pending => 'warning',
+            self::UnderReview => 'info',
+            self::Approved => 'success',
+            self::Rejected => 'danger',
+        };
+    }
+}
+```
+
+### Enum Best Practices
+- Implement `HasLabel` and `HasColor` interfaces from Filament for UI integration.
+- Use `match` expressions for clean and readable label and color mappings.
+- Ensure enum values are translatable using the `__()` helper function.
+
+## Additional Guidelines
+- Regularly review code for adherence to these standards.
+- Use tools like PHPStan for static analysis to catch potential issues early.
+- Ensure that all new code is thoroughly tested, aiming for a minimum coverage of 80%.
+- When refactoring, maintain backward compatibility or provide clear migration paths.

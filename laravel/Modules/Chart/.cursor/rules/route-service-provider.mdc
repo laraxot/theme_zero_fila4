@@ -1,0 +1,56 @@
+---
+description: Rules for implementing RouteServiceProvider in Laravel modules
+globs: "**/app/Providers/RouteServiceProvider.php"
+alwaysApply: true
+---
+
+# RouteServiceProvider Implementation Rules
+
+## Base Class
+- MUST extend `Modules\Xot\Providers\XotBaseRouteServiceProvider`
+- NEVER extend Laravel's base `RouteServiceProvider` directly
+
+## Required Properties
+
+### `public string $name`
+- MUST be set to the module name in PascalCase (e.g., 'SaluteMo')
+- MUST be marked as `public`
+- Used for route registration and error handling
+
+### `protected string $namespace`
+- MUST be set to the module's controller namespace (e.g., 'Modules\\SaluteMo\\Http\\Controllers')
+- Used for controller resolution in routes
+
+## Optional Properties
+
+### `protected string $module_dir`
+- Defaults to `__DIR__`
+- Can be overridden if module structure is non-standard
+
+### `protected string $module_ns`
+- Defaults to `__NAMESPACE__`
+- Can be overridden for custom namespace resolution
+
+## Method Overrides
+
+### `map()`
+- Already implemented in base class
+- Calls `mapApiRoutes()` and `mapWebRoutes()`
+- Override ONLY if custom route mapping is needed
+
+### `mapWebRoutes()`
+- Handles web route registration
+- Uses 'web' middleware group
+- Automatically loads routes from `routes/web.php`
+
+### `mapApiRoutes()`
+- Handles API route registration
+- Uses 'api' middleware group
+- Automatically loads routes from `routes/api.php`
+
+## Best Practices
+1. Keep overrides to a minimum
+2. Call parent methods when overriding
+3. Document any custom route patterns or middleware
+4. Use route groups for organization
+5. Keep route files clean and well-documented
