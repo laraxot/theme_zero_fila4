@@ -1,0 +1,36 @@
+---
+description: Standards for creating and maintaining documentation within the project.
+globs: []
+alwaysApply: false
+---
+
+# Documentation Standards
+
+## Introduction
+This document establishes the standards for creating and maintaining documentation within the project. Consistent and thorough documentation is crucial for project understanding and collaboration.
+
+## General Guidelines
+- **Language**: Documentation should primarily be in Italian for project-specific content, with technical documentation and code comments in English for broader accessibility.
+- **Format**: Use Markdown (`.md`) for documentation files for ease of reading and version control.
+- **Location**: Main project documentation resides in `/docs`, with module-specific documentation in each module's `docs` folder.
+
+## Structure
+- **INDEX.md**: Every major directory should have an `INDEX.md` file summarizing its contents and purpose.
+- **README.md**: Each module should have a `README.md` at its root providing an overview of the module's functionality.
+- **Categorized Folders**: Use folders to organize documentation by topic (e.g., `architecture`, `standards`, `roadmap`).
+
+## Content Requirements
+- **Project Overview**: High-level description of the project's goals and scope.
+- **Technical Guides**: Detailed instructions on setup, configuration, and development workflows.
+- **API Documentation**: For modules exposing APIs, include detailed endpoint descriptions.
+- **Change Logs**: Maintain changelogs for significant updates or releases.
+
+## Naming Conventions
+- **Descriptive Titles**: File names should reflect content (e.g., `database-migrations.md`).
+- **Lowercase with Hyphens**: Use lowercase letters with hyphens for spaces in filenames.
+
+## Linking
+- **Internal Links**: Use relative paths for linking to other documentation within the project.
+- **External Links**: Provide full URLs with descriptive text for external resources.
+
+These standards aim to ensure that documentation is accessible, organized, and useful for all stakeholders involved in the project.

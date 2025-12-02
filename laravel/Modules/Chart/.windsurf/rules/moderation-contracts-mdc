@@ -1,0 +1,6 @@
+---
+trigger: always_on
+description:
+globs:
+---
+# Contratti e Interfacce per la Moderazione Utenti

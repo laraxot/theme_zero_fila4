@@ -1,0 +1,60 @@
+# Principi di Utilizzo delle Configurazioni
+
+## Regola Fondamentale
+
+Nell'applicazione, tutte le opzioni configurabili **DEVONO** essere definite nei file di configurazione e **MAI** hardcoded direttamente nel codice.
+
+## Convenzioni per i Driver e le Opzioni
+
+### 1. Utilizzo di Configurazioni vs Hardcoding
+
+#### ❌ ERRATO: Hardcoding nei Form
+
+```php
+Forms\Components\Select::make('driver')
+    ->options([
+        'smsfactor' => 'SMSFactor',
+        'twilio' => 'Twilio',
+    ])
+```
+
+#### ✅ CORRETTO: Utilizzo del File di Configurazione
+
+```php
+Forms\Components\Select::make('driver')
+    ->options(collect(config('sms.drivers'))->mapWithKeys(fn ($config, $driver) => 
+        [$driver => Str::studly($driver)]
+    )->toArray())
+```
+
+### 2. Utilizzo di Enum quando Appropriato
+
+Definire un Enum per valori predefiniti e usarlo nell'applicazione.
+
+## Benefici
+
+1. **Centralizzazione**: Tutte le opzioni in un unico luogo
+2. **Manutenibilità**: Modifiche in un solo punto
+3. **Testabilità**: Facilita i test con configurazioni diverse
+4. **Flessibilità**: Modifiche senza toccare il codice
+
+## Template Blade e Form Actions
+
+Le azioni dei form **DEVONO** essere richiamate dai metodi PHP, non hardcoded nei template.
+
+#### ❌ ERRATO: Hardcoding di azioni nei template
+
+```blade
+<x-filament::button wire:click="sendSMS" type="submit">
+    Invia SMS
+</x-filament::button>
+```
+
+#### ✅ CORRETTO: Utilizzo delle azioni definite nella classe
+
+```blade
+<x-filament-panels::form.actions :actions="$this->getSmsFormActions()" />
+```
+
+## Riferimenti
+- [Documentazione completa](/var/www/html//laravel/Modules/Notify/docs/CONFIGURATIONS_USAGE_PRINCIPLES.md)
