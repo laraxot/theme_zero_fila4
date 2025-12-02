@@ -1,0 +1,196 @@
+<?php
+
+/**
+ * ---.
+ */
+
+declare(strict_types=1);
+
+namespace Modules\Quaeris\Actions\QuestionChart;
+
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Chart\Datas\AnswerData;
+use Modules\Chart\Datas\AnswersChartData;
+use Modules\Chart\Datas\ChartData;
+use Modules\Quaeris\Actions\QuestionChart\Custom\Custom\MergeInvitedAnswers;
+use Modules\Quaeris\Actions\QuestionChart\GetPieceQueryBySurveyIdAction;
+use Modules\Quaeris\Datas\AnswersFilterData;
+use Modules\Quaeris\Models\QuestionChart;
+use Spatie\LaravelData\DataCollection;
+use Spatie\QueueableAction\QueueableAction;
+
+class GetSelectTypeMailResponseRate
+{
+    use QueueableAction;
+
+    public int $email_invited_count = 0;
+
+    public int $email_answers_count = 0;
+
+    /**
+     * Execute the action.
+     *
+     * ---
+     */
+    public function execute(QuestionChart $questionChart, string $group_by, string $sort_by, ?AnswersFilterData $answersFilterData = null): AnswersChartData
+    {
+        $invited_rows = $this->getEmailInvited($questionChart, $group_by, $sort_by, $answersFilterData);
+        $answers_rows = $this->getEmailAnswers($questionChart, $group_by, $sort_by, $answersFilterData);
+        $data = $this->mergeInvitedAnswers($invited_rows, $answers_rows);
+        $dataCollection = AnswerData::collect($data,DataCollection::class);
+        $answersChartData = AnswersChartData::from(['answers' => $dataCollection, 'chart' => ChartData::from($questionChart->charts[0]), 'tot_answered' => $this->email_answers_count, 'tot_invited' => $this->email_invited_count]);
+        // dddx([
+        //     $this->email_answers_count,
+        //     $this->email_invited_count
+        // ]);
+        $risp_perc = $this->email_invited_count != 0 ? $this->email_answers_count * 100 / $this->email_invited_count : 100;
+        // $res->footer = 'Totale Invitati: '.$this->email_invited_count.' - Rispondenti: '.$this->email_answers_count.' - Percentuale di risposta '.round($this->email_answers_count * 100 / $this->email_invited_count, 2).'%';
+        $answersChartData->footer = 'Totale Invitati: '.$this->email_invited_count.' - Rispondenti: '.$this->email_answers_count.' - Percentuale di risposta '.round($risp_perc, 2).'%';
+        // dddx($res);
+
+        // return $answers;
+        return $answersChartData;
+    }
+
+    public function withParticipants(Builder $builder, string $survey_id): Builder
+    {
+        $participants_table = 'lime_tokens_'.$survey_id;
+        $survey_table = 'lime_survey_'.$survey_id;
+
+        return $builder
+            ->join($participants_table.' as u', static function ($join) use ($survey_table): void {
+                $join->on('u.token', '=', $survey_table.'.token');
+                // ->whereRaw('ask.qid = "'.$qid.'"');
+            });
+    }
+
+    /**
+     * @return DataCollection<AnswerData>
+     */
+    public function getEmailInvited(QuestionChart $questionChart, string $group_by, string $sort_by, ?AnswersFilterData $answersFilterData = null): DataCollection
+    {
+        $dateFrom = $questionChart->date_from;
+        $dateTo = $questionChart->date_to;
+        if ($answersFilterData != null) {
+            $dateFrom = $answersFilterData->date_from;
+            $dateTo = $answersFilterData->date_to;
+        }
+
+        $invited = $questionChart->participants()
+            ->where('sent', '!=', 'N')
+            ->when($dateFrom, static function ($q1) use ($dateFrom): void {
+                $q1->where('sent', '>=', $dateFrom);
+            })->when($dateTo, static function ($q1) use ($dateTo): void {
+                $q1->where('sent', '<=', $dateTo);
+            });
+        // ->where('sent', '>=', $q->date_from ?? 0)
+        // ->where('sent', '<=', $q->date_to ?? now());
+
+        // ->whereBetween('sent', [$q->date_from ?? 0, $q->date_to ?? now()]) //non usare between
+
+        // if ($answersFilterData?->question_filter != null) {
+        //     $invited->where('attribute_2', $answersFilterData?->question_filter);
+        // }
+        if ($answersFilterData != null && $answersFilterData->question_filter != null) {
+            $invited->where('attribute_2', $answersFilterData->question_filter);
+        }
+
+        $this->email_invited_count = $invited->count();
+        // ->count();
+        // dddx($invited->count());
+        $group_by = app(GetPieceQueryBySurveyIdAction::class)
+            ->execute($questionChart->survey_id, $group_by, 'name', 'sent');
+        $sort_by = app(GetPieceQueryBySurveyIdAction::class)
+            ->execute($questionChart->survey_id, $sort_by, 'number', 'sent');
+        $label = $group_by;
+        $select = [];
+        $select[] = $label.' as label';
+        $select[] = $sort_by.' as _sort';
+        $select[] = 'count(*) as value';
+        $rows = $invited
+            ->selectRaw(implode(',', $select))
+            ->groupByRaw($group_by)
+            ->orderByRaw($sort_by)
+            ->get();
+        /**
+         * @var DataCollection<AnswerData>
+         */
+        $res_coll=AnswerData::collect($rows->toArray(),DataCollection::class);
+        return $res_coll;
+    }
+
+    /**
+     * @return DataCollection<AnswerData>
+     */
+    public function getEmailAnswers(QuestionChart $questionChart, string $group_by, string $sort_by, ?AnswersFilterData $answersFilterData = null): DataCollection
+    {
+        $dateFrom = $questionChart->date_from;
+        $dateTo = $questionChart->date_to;
+        if ($answersFilterData != null) {
+            $dateFrom = $answersFilterData->date_from;
+            $dateTo = $answersFilterData->date_to;
+        }
+
+        $answers = $this->withParticipants($questionChart->answers()->getQuery(), $questionChart->survey_id)
+            ->where('u.sent', '!=', 'N')
+            ->when($dateFrom, static function ($q1) use ($dateFrom): void {
+                $q1->where('u.sent', '>=', $dateFrom);
+            })->when($dateTo, static function ($q1) use ($dateTo): void {
+                $q1->where('u.sent', '<=', $dateTo);
+            });
+        // if ($answersFilterData?->question_filter != null) {
+        //     $answers->where('attribute_2', $answersFilterData?->question_filter);
+        // }
+        if ($answersFilterData != null && $answersFilterData->question_filter != null) {
+            $answers->where('attribute_2', $answersFilterData->question_filter);
+        }
+
+        $this->email_answers_count = $answers->count();
+        // ->count();
+        // $criteria = 'submitdate'; // quello di prima, son le risposte nel mese
+        $criteria = 'sent';
+        // ha piu' senso, che son le risposte riferito all'invito
+
+        $group_by = app(GetPieceQueryBySurveyIdAction::class)
+            ->execute($questionChart->survey_id, $group_by, 'name', $criteria);
+        $sort_by = app(GetPieceQueryBySurveyIdAction::class)
+            ->execute($questionChart->survey_id, $sort_by, 'number', $criteria);
+        $label = $group_by;
+        $select = [];
+        $select[] = $label.' as label';
+        $select[] = $sort_by.' as _sort';
+        $select[] = 'count(*) as value';
+        // $tot_invited = $invited->count();
+        // $tot_answers = $answers->count();
+
+        $rows = $answers->selectRaw(implode(',', $select))
+            ->groupByRaw($group_by)
+            ->orderByRaw($sort_by)
+            ->get();
+        /**
+         * @var DataCollection<AnswerData>
+         */
+        $res_coll=AnswerData::collect($rows->toArray(),DataCollection::class);
+        return $res_coll;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param  DataCollection<AnswerData>  $invited_rows
+     * @param  DataCollection<AnswerData>  $answers_rows
+     * @return DataCollection<AnswerData>
+     */
+    public function mergeInvitedAnswers(DataCollection $invited_rows, DataCollection $answers_rows): DataCollection
+    {
+        return app(MergeInvitedAnswers::class)->execute($invited_rows, $answers_rows);
+    }
+}
+
+/*
+select COUNT(*) from lime_survey_39275
+left join lime_tokens_39275 as B
+on lime_survey_39275.token = B.token
+where `submitdate` is not NULL
+AND B.sent != 'N'
+*/

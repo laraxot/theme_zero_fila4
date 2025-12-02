@@ -1,0 +1,12 @@
+# Blade Components
+
+**When** you are creating or modifying Blade components for the user interface
+
+**Then** always prefer native Filament Blade components over custom ones, using the `<x-filament::...>` syntax.
+
+**Because** this ensures reuse, testability, accessibility, and consistency in UI/UX across the application.
+
+**Examples**
+
+- Correct: `<x-filament::button>Click Me</x-filament::button>`
+- Incorrect: Creating a custom Blade component for a button when a Filament component exists.

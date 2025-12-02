@@ -1,0 +1,90 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Regole per gli Stati e le Transizioni
+
+## Struttura Directory
+- Le classi di transizione devono essere nella sottodirectory `Transitions/` della directory dello stato
+- Il namespace deve essere `Modules\<nome_modulo>\States\<entità>`
+
+## Convenzioni di Nomenclatura
+- Classi di stato: nome descrittivo (es. `Pending`, `Active`)
+- Classi di transizione: pattern `FromStateToState` (es. `PendingToActive`)
+
+## Implementazione
+- Estendere `Transition` di Spatie
+- Implementare costruttore con stato di partenza
+- Implementare `canTransition()` e `handle()`
+- Utilizzare `$this->state->getModel()` per accedere al modello
+
+## Best Practices
+- Mantenere la logica di transizione atomica
+- Documentare le condizioni di transizione
+- Utilizzare il trait `HasStates` nel modello
+- Definire le transizioni nel metodo `config()`
+
+## Collegamenti
+- [Documentazione Stati <nome progetto>](mdc:../../laravel/Modules/<nome progetto>/docs/STATES.md)
+- [Regole Generali Stati](mdc:../../laravel/Modules/Xot/docs/STATES.md)
+
+# Regole per Stati e Transizioni
+
+## Quando
+- Stai implementando una transizione di stato
+- Stai creando una nuova classe di stato
+- Stai modificando una transizione esistente
+- Stai aggiungendo parametri a una transizione
+
+## Allora
+- Il primo parametro del costruttore DEVE essere sempre il modello (es. `User $user`)
+- I parametri aggiuntivi DEVONO essere opzionali o avere valori di default
+- Usa il tipo nullable (`?`) per parametri opzionali
+- Documenta sempre i parametri richiesti e opzionali
+- Implementa la validazione dei parametri nel costruttore
+- Fornisci messaggi di errore chiari per parametri non validi
+- Logga le transizioni fallite per debugging
+
+## Perché
+- Evita errori di "Too few arguments" nel costruttore
+- Mantiene la retrocompatibilità quando si aggiungono nuovi parametri
+- Migliora la manutenibilità del codice
+- Facilita il debugging delle transizioni fallite
+- Garantisce una gestione coerente dei parametri in tutte le transizioni
+
+## Esempi
+
+### Implementazione Corretta
+```php
+class ActiveToSuspended extends Transition
+{
+    public User $user;
+    public ?string $message;
+
+    public function __construct(User $user, ?string $message = null)
+    {
+        $this->user = $user;
+        $this->message = $message;
+    }
+}
+```
+
+### Implementazione Errata
+```php
+class ActiveToSuspended extends Transition
+{
+    public User $user;
+    public string $message;
+
+    public function __construct(User $user, string $message) // ERRORE: message è obbligatorio
+    {
+        $this->user = $user;
+        $this->message = $message;
+    }
+}
+```
+
+## Collegamenti
+- [Documentazione Stati](mdc:../laravel/Modules/<nome progetto>/docs/STATES.md)
+- [Documentazione Spatie Model States](mdc:https:/spatie.be/docs/laravel-model-states)

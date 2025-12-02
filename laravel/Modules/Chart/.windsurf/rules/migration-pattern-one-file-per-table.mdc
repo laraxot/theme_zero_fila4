@@ -1,0 +1,421 @@
+# Pattern di Migrazione "Un File Per Tabella": Principi e Implementazione
+
+## Fondamenti Concettuali del Pattern
+
+Il framework SaluteOra adotta un pattern di migrazione distintivo denominato "Un File Per Tabella", che rappresenta una divergenza significativa dal modello tradizionale Laravel di migrazioni incrementali separate. Questo approccio si allinea con la filosofia architettonica più ampia del framework, che predilige la coesione semantica, la visibilità completa e l'evoluzione controllata delle strutture dati.
+
+## La Regola Fondamentale: Una Tabella, Un File, Una Storia Evolutiva
+
+**Principio Cardinale**: Ogni tabella del database è rappresentata da un unico file di migrazione che contiene sia la definizione iniziale che tutte le evoluzioni successive della sua struttura.
+
+### Struttura Nominale Standard
+
+```
+YYYY_MM_DD_HHMMSS_create_oggetto_contesto_table.php
+```
+
+Dove:
+- **YYYY_MM_DD_HHMMSS**: Timestamp standard Laravel, spesso con suffisso sequenziale (`000001`, `000002`, ecc.)
+- **oggetto**: L'entità principale rappresentata dalla tabella (es. `user`, `doctor`, `appointment`)
+- **contesto**: Opzionale, specifica il dominio o il contesto d'uso (es. `team`, `profile`, `settings`)
+
+## Anatomia di un File di Migrazione Unificato
+
+Un file di migrazione seguendo questo pattern contiene due sezioni critiche, chiaramente delimitate:
+
+### 1. Schema di Creazione Iniziale
+
+```php
+public function up(): void
+{
+    // Schema iniziale
+    $this->tableCreate(function (Blueprint $table): void {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->timestamp('email_verified_at')->nullable();
+        $table->string('password');
+        $table->rememberToken();
+        $table->timestamps();
+    });
+    
+    // Modifiche incrementali
+    $this->tableUpdate(function (Blueprint $table): void {
+        // Le modifiche future verranno aggiunte qui
+    });
+}
+```
+
+### 2. Metodo di Rollback Unificato
+
+```php
+public function down(): void
+{
+    Schema::dropIfExists($this->tableComments);
+    Schema::dropIfExists($this->table);
+}
+```
+
+## Il Ciclo di Vita di una Tabella in SaluteOra
+
+### Fase 1: Creazione Iniziale
+
+Il file di migrazione viene creato con la definizione iniziale della tabella nella sezione `tableCreate`.
+
+```php
+$this->tableCreate(function (Blueprint $table): void {
+    $table->id();
+    $table->string('name');
+    $table->timestamps();
+});
+```
+
+### Fase 2: Evoluzione Incrementale
+
+Quando è necessaria una modifica alla struttura, invece di creare un nuovo file, la modifica viene aggiunta alla sezione `tableUpdate` dello stesso file.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // Prima modifica
+    if (! Schema::hasColumn($this->table, 'email')) {
+        $table->string('email')->nullable()->after('name');
+    }
+    
+    // Seconda modifica (aggiunta in un momento successivo)
+    if (! Schema::hasColumn($this->table, 'phone')) {
+        $table->string('phone')->nullable()->after('email');
+    }
+});
+```
+
+### Fase 3: Identificazione Temporale tramite Controlli Condizionali
+
+Per distinguere quando una modifica specifica deve essere applicata, si utilizzano controlli condizionali basati sulla struttura esistente.
+
+```php
+// Verifica se la colonna esiste
+if (! Schema::hasColumn($this->table, 'colonna')) {
+    $table->string('colonna')->nullable();
+}
+
+// Verifica se la colonna ha un determinato tipo
+if (Schema::hasColumn($this->table, 'colonna')) {
+    $columnType = DB::getSchemaBuilder()->getColumnType($this->table, 'colonna');
+    if ($columnType !== 'text') {
+        $table->text('colonna')->change();
+    }
+}
+```
+
+## Implementazione Tecnica tramite XotBaseMigration
+
+Il pattern è supportato dalla classe base `XotBaseMigration`, che fornisce metodi specializzati:
+
+```php
+abstract class XotBaseMigration extends Migration
+{
+    // Proprietà che le classi derivate devono definire
+    protected string $table;
+    protected string $module_name;
+    
+    // Metodi per la gestione unificata delle migrazioni
+    protected function tableCreate(Closure $callback): void
+    {
+        if (! Schema::hasTable($this->table)) {
+            Schema::create($this->table, $callback);
+        }
+    }
+    
+    protected function tableUpdate(Closure $callback): void
+    {
+        Schema::table($this->table, $callback);
+    }
+}
+```
+
+## Esempi di Riferimento nel Progetto SaluteOra
+
+### Esempio 1: Tabella Utenti (Evolutiva)
+
+```php
+// 2025_05_15_000001_create_users_table.php
+
+namespace Modules\User\Database\Migrations;
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+class CreateUsersTable extends XotBaseMigration
+{
+    protected string $table = 'users';
+    protected string $module_name = 'User';
+
+    public function up(): void
+    {
+        // Schema iniziale (v1.0)
+        $this->tableCreate(function (Blueprint $table): void {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+        
+        // Modifiche incrementali
+        $this->tableUpdate(function (Blueprint $table): void {
+            // Aggiunta in v1.1
+            if (! Schema::hasColumn($this->table, 'phone')) {
+                $table->string('phone')->nullable()->after('email');
+            }
+            
+            // Aggiunta in v1.2
+            if (! Schema::hasColumn($this->table, 'avatar')) {
+                $table->string('avatar')->nullable()->after('name');
+            }
+            
+            // Modifica in v1.3
+            if (Schema::hasColumn($this->table, 'name')) {
+                $columnType = DB::getSchemaBuilder()->getColumnType($this->table, 'name');
+                if ($columnType !== 'text') {
+                    $table->text('name')->change();
+                }
+            }
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists($this->table);
+    }
+}
+```
+
+### Esempio 2: Tabella Relazionale (Semplice)
+
+```php
+// 2025_05_17_000001_create_doctor_team_table.php
+
+namespace Modules\User\Database\Migrations;
+
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+class CreateDoctorTeamTable extends XotBaseMigration
+{
+    protected string $table = 'doctor_team';
+    protected string $module_name = 'User';
+
+    public function up(): void
+    {
+        $this->tableCreate(function (Blueprint $table): void {
+            $table->id();
+            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
+            $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
+            $table->string('role')->nullable();
+            $table->timestamps();
+            
+            $table->unique(['doctor_id', 'team_id']);
+        });
+        
+        $this->tableUpdate(function (Blueprint $table): void {
+            // Modifiche future verranno aggiunte qui
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists($this->table);
+    }
+}
+```
+
+## Vantaggi Architetturali del Pattern
+
+### 1. Coesione Semantica
+Tutta la storia evolutiva di una tabella è contenuta in un unico file, fornendo una visione completa della sua struttura e delle sue modifiche nel tempo.
+
+### 2. Visibilità Storica
+Lo sviluppatore può vedere l'intera evoluzione della tabella senza dover cercare attraverso molteplici file di migrazione.
+
+### 3. Riduzione della Frammentazione
+Evita la proliferazione di piccoli file di migrazione che possono rendere difficile comprendere la struttura complessiva del database.
+
+### 4. Gestione Robusta delle Dipendenze
+Le dipendenze tra tabelle sono più facili da tracciare quando ogni tabella è completamente definita in un unico file.
+
+### 5. Tracciabilità tramite Controllo di Versione
+Il versionamento Git fornisce una cronologia chiara delle modifiche alla struttura della tabella.
+
+## Gestione delle Sfide Comuni
+
+### 1. Conflitti di Fusione
+Quando più sviluppatori modificano lo stesso file di migrazione, possono verificarsi conflitti di fusione.
+
+**Soluzione**: Utilizzare sezioni ben delimitate all'interno del metodo `tableUpdate` e adottare un approccio basato su controlli condizionali.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // Sviluppatore A: aggiunta campo email
+    if (! Schema::hasColumn($this->table, 'email')) {
+        $table->string('email')->nullable();
+    }
+    
+    // Sviluppatore B: aggiunta campo phone
+    if (! Schema::hasColumn($this->table, 'phone')) {
+        $table->string('phone')->nullable();
+    }
+});
+```
+
+### 2. Ordinamento delle Modifiche
+In alcuni casi, l'ordine di applicazione delle modifiche è importante.
+
+**Soluzione**: Utilizzare commenti chiari e sezioni numerate per indicare l'ordine intenzionale.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // 1. Prima aggiungi la colonna status
+    if (! Schema::hasColumn($this->table, 'status')) {
+        $table->string('status')->default('active');
+    }
+    
+    // 2. Poi aggiungi l'indice su status
+    if (Schema::hasColumn($this->table, 'status') && ! $this->hasIndex($this->table, 'status')) {
+        $table->index('status');
+    }
+});
+```
+
+### 3. Modifiche Complesse e Dati Esistenti
+Alcune modifiche richiedono manipolazione di dati esistenti.
+
+**Soluzione**: Incorporare la logica di trasformazione dei dati direttamente nel file di migrazione.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // Aggiungi la colonna formatted_phone
+    if (! Schema::hasColumn($this->table, 'formatted_phone') && Schema::hasColumn($this->table, 'phone')) {
+        $table->string('formatted_phone')->nullable()->after('phone');
+        
+        // Popola la nuova colonna in base ai dati esistenti
+        DB::table($this->table)->whereNotNull('phone')->cursor()->each(function ($row) {
+            DB::table($this->table)
+                ->where('id', $row->id)
+                ->update(['formatted_phone' => $this->formatPhoneNumber($row->phone)]);
+        });
+    }
+});
+
+private function formatPhoneNumber(string $phone): string
+{
+    // Logica di formattazione
+    return preg_replace('/(\d{3})(\d{3})(\d{4})/', '+39 $1 $2 $3', $phone);
+}
+```
+
+## Principi Guida per l'Implementazione
+
+### 1. Chiarezza e Documentazione
+Ogni sezione del file di migrazione deve essere chiaramente commentata, specialmente per modifiche complesse.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // [v2.1.0] Aggiunta supporto per preferenze di notifica
+    // Richiesto per la nuova funzionalità di notifiche personalizzate
+    // Riferimento: Issue #123
+    if (! Schema::hasColumn($this->table, 'notification_preferences')) {
+        $table->json('notification_preferences')->nullable();
+    }
+});
+```
+
+### 2. Idempotenza Assoluta
+Ogni modifica deve essere completamente idempotente, ovvero deve poter essere eseguita più volte senza effetti collaterali.
+
+```php
+// Approccio sicuro e idempotente
+if (! Schema::hasColumn($this->table, 'colonna')) {
+    $table->string('colonna');
+}
+
+// Approccio pericoloso - non idempotente
+$table->string('colonna'); // Potrebbe fallire se la colonna esiste già
+```
+
+### 3. Controlli di Compatibilità
+Per modifiche complesse, includere controlli di compatibilità con la versione del database in uso.
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // Implementazione condizionale basata sulla versione MySQL
+    if ($this->getMySQLVersion() >= '8.0') {
+        if (! Schema::hasColumn($this->table, 'full_text_search')) {
+            $table->fullText(['title', 'content']);
+        }
+    }
+});
+
+private function getMySQLVersion(): string
+{
+    return DB::select('SELECT VERSION() as version')[0]->version;
+}
+```
+
+### 4. Consistenza tra Ambienti
+Garantire che le migrazioni funzionino correttamente su tutti gli ambienti (sviluppo, staging, produzione).
+
+```php
+$this->tableUpdate(function (Blueprint $table): void {
+    // Adattamento all'ambiente corrente
+    $maxLength = env('DB_CONNECTION') === 'sqlite' ? null : 255;
+    
+    if (! Schema::hasColumn($this->table, 'url')) {
+        $table->string('url', $maxLength)->nullable();
+    }
+});
+```
+
+## Test delle Migrazioni
+
+### Test di Unità
+
+```php
+public function testUserMigration(): void
+{
+    // Verifica che la migrazione crei correttamente la tabella
+    $this->assertTrue(Schema::hasTable('users'));
+    
+    // Verifica la presenza delle colonne
+    $this->assertTrue(Schema::hasColumn('users', 'email'));
+    $this->assertTrue(Schema::hasColumn('users', 'phone'));
+    
+    // Verifica i tipi di colonna
+    $this->assertEquals('string', DB::getSchemaBuilder()->getColumnType('users', 'email'));
+}
+```
+
+### Test di Integrazione
+
+```php
+public function testCompleteUserMigrationCycle(): void
+{
+    // Esegue le migrazioni
+    $this->artisan('migrate:fresh');
+    
+    // Verifica lo stato finale del database
+    $this->assertTrue(Schema::hasTable('users'));
+    $this->assertTrue(Schema::hasColumn('users', 'email'));
+    
+    // Rollback e verifica
+    $this->artisan('migrate:rollback');
+    $this->assertFalse(Schema::hasTable('users'));
+}
+```
+
+## Conclusione: Un Pattern per la Sostenibilità e la Chiarezza
+
+Il pattern "Un File Per Tabella" adottato da SaluteOra rappresenta un approccio che privilegia la coesione semantica, la visibilità storica e la manutenibilità a lungo termine rispetto alla semplice atomicità delle modifiche. Questo allineamento con i principi architetturali più ampi del framework contribuisce a creare una base di codice più comprensibile, tracciabile e sostenibile nel tempo.
+
+Questo pattern non è solo una scelta tecnica, ma riflette una filosofia di sviluppo che valorizza la visione olistica delle strutture dati e la loro evoluzione come parte integrante della storia del sistema.

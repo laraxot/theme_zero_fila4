@@ -1,0 +1,88 @@
+---
+description: Rules for implementing RouteServiceProvider in Laravel modules
+globs: "**/app/Providers/RouteServiceProvider.php"
+alwaysApply: true
+---
+
+# RouteServiceProvider Implementation Rules
+
+## Architecture Philosophy
+
+1. **Centralization**: Route registration logic is centralized in XotBaseRouteServiceProvider
+2. **Consistency**: All modules follow the same route registration pattern
+3. **Simplicity**: Minimal code in child classes, maximum reuse of base functionality
+4. **Maintainability**: Changes to route handling can be made in one place
+
+## Implementation Guidelines
+
+### Class Definition
+```php
+namespace Modules\YourModule\Providers;
+
+use Modules\Xot\Providers\XotBaseRouteServiceProvider;
+
+class RouteServiceProvider extends XotBaseRouteServiceProvider
+{
+    // Implementation
+}
+```
+
+### Required Properties
+
+1. **$name**
+   - Type: `public string`
+   - Purpose: Module identification and error messages
+   - Example: `public string $name = 'YourModule';`
+
+2. **$namespace**
+   - Type: `protected string`
+   - Purpose: Controller namespace for route resolution
+   - Example: `protected string $namespace = 'Modules\\YourModule\\Http\\Controllers';`
+
+### Optional Properties
+
+1. **$module_dir**
+   - Type: `protected string`
+   - Default: `__DIR__`
+   - Purpose: Base directory for route files
+   - Example: `protected string $module_dir = __DIR__;`
+
+2. **$module_ns**
+   - Type: `protected string`
+   - Default: `__NAMESPACE__`
+   - Purpose: Module namespace for service registration
+   - Example: `protected string $module_ns = __NAMESPACE__;`
+
+## Common Patterns
+
+### Custom Route Middleware
+```php
+protected function mapWebRoutes(): void
+{
+    parent::mapWebRoutes();
+    
+    Route::middleware(['web', 'custom-middleware'])
+        ->namespace($this->namespace)
+        ->group(module_path($this->name, '/Routes/custom.php'));
+}
+```
+
+### Route Model Binding
+```php
+public function boot()
+{
+    parent::boot();
+    
+    Route::bind('custom_model', function ($value) {
+        return \App\Models\CustomModel::findOrFail($value);
+    });
+}
+```
+
+## Testing Routes
+
+1. Verify web routes are registered
+2. Verify API routes are registered
+3. Check middleware application
+4. Test route model binding
+5. Verify route caching works

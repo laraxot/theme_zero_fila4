@@ -1,0 +1,72 @@
+# Regole PSR-4 per l'Autoloading
+
+## Struttura Base dei Moduli
+```
+Modules/
+└── NomeModulo/
+    └── app/
+        ├── Filament/
+        │   ├── Resources/
+        │   ├── Widgets/
+        │   └── Blocks/
+        ├── Models/
+        ├── Enums/
+        └── View/
+            └── Components/
+```
+
+## Namespace Corretti
+- Moduli: `Modules\NomeModulo\*`
+- App: `App\*`
+- Vendor: `App\View\Components\Vendor\*`
+
+## Errori Comuni
+- ❌ NON usare namespace `App\` in moduli
+- ❌ NON usare namespace vendor in componenti app
+- ❌ NON creare cartelle duplicate (es. Enums/Enums)
+- ❌ NON usare namespace errati per i Blocks
+
+## Best Practices
+- ✅ Seguire la struttura delle cartelle per i namespace
+- ✅ Usare PascalCase per nomi di classi e file
+- ✅ Un file = una classe
+- ✅ Namespace deve corrispondere al percorso del file
+
+## Esempi
+
+### ✅ CORRETTO
+```php
+// Modules/User/app/Enums/LanguageEnum.php
+namespace Modules\User\Enums;
+
+// Modules/UI/app/Filament/Blocks/Page.php
+namespace Modules\UI\Filament\Blocks;
+
+// app/View/Components/Vendor/Health/StatusIndicator.php
+namespace App\View\Components\Vendor\Health;
+```
+
+### ❌ ERRATO
+```php
+// Modules/User/app/Enums/Enums/LanguageEnum.php
+namespace Modules\User\Enums;
+
+// Modules/UI/app/Filament/Blocks/Page.php
+namespace App\Filament\Blocks;
+
+// app/View/Components/vendor/health/StatusIndicator.php
+namespace Spatie\Health\Components;
+```
+
+## Verifica
+1. Il namespace deve iniziare con:
+   - `Modules\NomeModulo\` per file in `Modules/NomeModulo/app/`
+   - `App\` per file in `app/`
+
+2. Il percorso del file deve corrispondere al namespace:
+   - `Modules\User\Enums` -> `Modules/User/app/Enums/`
+   - `App\View\Components\Vendor\Health` -> `app/View/Components/Vendor/Health/`
+
+3. I componenti vendor devono essere in:
+   - `app/View/Components/Vendor/NomeVendor/`
+   - Con namespace `App\View\Components\Vendor\NomeVendor` 

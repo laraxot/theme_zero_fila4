@@ -1,0 +1,44 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Principi e Pratiche Agile
+
+## Definizione
+Agile è un insieme di valori e principi per lo sviluppo software che privilegia la collaborazione, la flessibilità e la consegna continua di valore.
+
+## Valori Fondamentali (Manifesto Agile)
+- Individui e interazioni più che processi e strumenti
+- Software funzionante più che documentazione esaustiva
+- Collaborazione col cliente più che negoziazione contrattuale
+- Rispondere al cambiamento più che seguire un piano
+
+## Principi Chiave
+- Soddisfazione del cliente tramite consegne rapide e continue
+- Accettazione del cambiamento anche in fase avanzata
+- Consegna frequente di software funzionante
+- Collaborazione costante tra stakeholder
+- Team motivati e autonomi
+- Comunicazione diretta e continua
+- Semplicità e attenzione all'essenziale
+- Miglioramento continuo
+
+## Pratiche Comuni
+- Iterazioni brevi (sprint)
+- Daily stand-up
+- Retrospective
+- Backlog prioritizzato
+- Pair programming
+- Continuous integration e delivery
+
+## Benefici
+- Maggiore adattabilità
+- Feedback rapido
+- Riduzione dei rischi
+- Miglioramento continuo
+
+## Limiti
+- Richiede disciplina e coinvolgimento
+- Non adatto a tutti i contesti organizzativi
+- Può essere frainteso come assenza di regole
