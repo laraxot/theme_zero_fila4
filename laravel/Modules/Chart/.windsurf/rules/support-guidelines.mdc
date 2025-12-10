@@ -1,0 +1,12 @@
+# Support Guidelines
+
+**When** you are providing support for the application
+
+**Then** offer support through email, ticket systems, chat, and phone. Ensure response times are under 2 hours, resolution times under 24 hours, maintain uptime over 99.9%, and backup restore times under 4 hours.
+
+**Because** this ensures user satisfaction, quick issue resolution, and maintains trust in the application's reliability.
+
+**Examples**
+
+- Correct: Respond to a support ticket within 2 hours and resolve the issue within 24 hours.
+- Incorrect: Delay responses or fail to meet uptime and restore time SLAs.

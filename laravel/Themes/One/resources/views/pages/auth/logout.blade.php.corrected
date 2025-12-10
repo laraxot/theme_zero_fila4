@@ -1,0 +1,69 @@
+<?php
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Auth;
+use function Laravel\Folio\{middleware, name};
+use function Livewire\Volt\{state};
+
+middleware(['auth']);
+name('logout');
+
+// Stato del componente
+state([
+    'isConfirming' => true,
+]);
+
+// Azione di logout
+$logout = function () {
+    if (Auth::check()) {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+    }
+    
+    // Reindirizzamento localizzato
+    $locale = app()->getLocale();
+    return redirect()->to('/' . $locale);
+};
+
+// Azione per annullare
+$cancel = function () {
+    $locale = app()->getLocale();
+    return redirect()->to('/' . $locale);
+};
+?>
+
+<x-layouts.main>
+    @volt('auth.logout')
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+            <div class="text-center">
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                    {{ __('Sei sicuro di voler uscire?') }}
+                </h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    {{ __('Potrai sempre accedere nuovamente con le tue credenziali.') }}
+                </p>
+            </div>
+
+            <div class="mt-8 flex space-x-4">
+                <x-filament::button
+                    wire:click="cancel"
+                    color="secondary"
+                    class="flex-1"
+                >
+                    {{ __('Annulla') }}
+                </x-filament::button>
+                
+                <x-filament::button
+                    wire:click="logout"
+                    color="danger"
+                    class="flex-1"
+                >
+                    {{ __('Logout') }}
+                </x-filament::button>
+            </div>
+        </div>
+    </div>
+    @endvolt
+</x-layouts.main>

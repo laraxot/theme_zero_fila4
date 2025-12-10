@@ -1,0 +1,20 @@
+{
+  "Resources/css/app.css": {
+    "file": "assets/app-l0sNRNKZ.js",
+    "name": "app",
+    "src": "Resources/css/app.css",
+    "isEntry": true
+  },
+  "Resources/js/app.js": {
+    "file": "assets/app-DP2rzg_V.js",
+    "name": "app",
+    "src": "Resources/js/app.js",
+    "isEntry": true
+  },
+  "Resources/js/filament-chart-js-plugins.js": {
+    "file": "assets/filament-chart-js-plugins-Rc_bp8Yh.js",
+    "name": "filament-chart-js-plugins",
+    "src": "Resources/js/filament-chart-js-plugins.js",
+    "isEntry": true
+  }
+}

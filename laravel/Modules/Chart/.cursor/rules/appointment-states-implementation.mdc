@@ -1,0 +1,137 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regola: Implementazione Stati Appuntamenti SaluteOra
+
+## Ambito
+- Modulo SaluteOra
+- Pattern State Machine per appuntamenti medici
+- Gestione ciclo di vita appuntamenti
+
+## Motivazione
+- Gestire correttamente il flusso degli appuntamenti medici
+- Implementare notifiche automatiche per paziente e dottore
+- Mantenere coerenza con il pattern degli stati User
+- Tracciabilità completa delle transizioni
+
+## Regola
+- SEMPRE estendere `AppointmentState` per nuovi stati
+- SEMPRE estendere `BaseTransition` per nuove transizioni
+- SEMPRE fornire label, color, icon per ogni stato
+- MAI bypassare il sistema di transizioni
+- SEMPRE includere messaggio descrittivo nelle transizioni
+
+## Stati Implementati
+```php
+Pending → Confirmed → Scheduled → InProgress → Completed
+   ↓         ↓          ↓
+Rejected   Cancelled   NoShow
+            ↓          
+          Rescheduled ← Scheduled
+                        ↓
+                    Cancelled
+```
+
+**IMPORTANTE**: Da `Pending` si può andare solo a `Confirmed` o `Rejected`. 
+La transizione PendingToCancelled è stata rimossa - un appuntamento in attesa deve essere prima confermato o rifiutato.
+
+## Pattern Corretto
+
+### Stato Base
+```php
+abstract class AppointmentState extends State
+{
+    abstract public function label(): string;
+    abstract public function color(): string;
+    abstract public function icon(): string;
+    
+    public function canBeModified(): bool { return false; }
+    public function isActive(): bool { return false; }
+    public function isPending(): bool { return false; }
+    public function isCompleted(): bool { return false; }
+}
+```
+
+### Stato Concreto
+```php
+class Scheduled extends AppointmentState
+{
+    public static $name = 'scheduled';
+    
+    public function label(): string { return 'Programmato'; }
+    public function color(): string { return 'info'; }
+    public function icon(): string { return 'heroicon-o-calendar'; }
+    public function canBeModified(): bool { return true; }
+    public function isActive(): bool { return true; }
+}
+```
+
+### Transizione
+```php
+class PendingToConfirmed extends BaseTransition
+{
+    // Eredita automaticamente tutto da BaseTransition
+    // Notifiche automatiche a paziente e dottore
+    // Gestione cambio stato automatica
+}
+```
+
+## Notifiche Automatiche
+
+### BaseTransition Features
+- Notifiche automatiche via email
+- Slug automatico: `appointment-[nome-transizione]`
+- Dati contestuali: data, paziente, dottore
+- Gestione errori integrata
+
+### Utilizzo
+```php
+// Cambio stato con messaggio
+$appointment->state->transitionTo(Confirmed::class, 'Confermato dal paziente');
+
+// Controllo stato
+if ($appointment->state->canBeModified()) {
+    // Modificabile
+}
+```
+
+## File Implementati
+
+### Stati (9 totali)
+- `AppointmentState.php` (base)
+- `Pending.php`, `Confirmed.php`, `Scheduled.php`
+- `InProgress.php`, `Completed.php`, `Cancelled.php`
+- `Rejected.php`, `NoShow.php`, `Rescheduled.php`
+
+### Transizioni (10 totali)
+- `BaseTransition.php` (base)
+- `PendingToConfirmed.php`, `PendingToCancelled.php`
+- `ConfirmedToScheduled.php`, `ConfirmedToCancelled.php`, `ConfirmedToRescheduled.php`
+- `ScheduledToInProgress.php`, `ScheduledToCancelled.php`, `ScheduledToNoShow.php`
+- `ScheduledToRescheduled.php`, `InProgressToCompleted.php`
+
+## Anti-pattern
+- Non modificare direttamente il campo `state`
+- Non creare transizioni senza estendere BaseTransition
+- Non omettere messaggi nelle transizioni
+- Non creare stati senza implementare tutti i metodi astratti
+
+## Integrazione Widget
+- `FindDoctorAndAppointmentWidget` crea appuntamenti in stato `Pending`
+- Transizione automatica verso `Scheduled` dopo conferma
+- Notifiche automatiche a paziente e dottore
+
+## Best Practice
+- Sempre testare tutte le transizioni
+- Includere messaggi descrittivi
+- Utilizzare i metodi helper (`canBeModified()`, `isActive()`, etc.)
+- Documentare nuovi stati e transizioni
+
+## Collegamenti
+- [appointment-states.md](../../laravel/Modules/SaluteOra/docs/appointment-states.md)
+- [User States Pattern](../../laravel/Modules/SaluteOra/docs/user-states.md)
+
+## Ultimo aggiornamento
+Dicembre 2024 - Implementazione completa stati appuntamenti
