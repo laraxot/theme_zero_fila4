@@ -68,7 +68,6 @@ git init
 git add .
 git commit -m "Initial commit"
 
-<<<<<<< HEAD
 # Configura remote principale
 git remote add origin <url>
 git push -u origin main
@@ -432,22 +431,9 @@ Soluzione: sudo chmod 777 -R .
 # Cambia versione PHP
 sudo update-alternatives --config php
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 ## 🔄 Se menù o altri elementi frontend non si aggiornano
 ```bash
 # Eseguire script "go" presente nel composer.json
 composer go
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD

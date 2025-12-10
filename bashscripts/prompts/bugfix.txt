@@ -1,28 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Guida Completa per Bug Fixing - Laraxot SaluteOra
 
 ## Principi Fondamentali
@@ -152,19 +128,6 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
 3. **Eliminare se inutile**: Se il metodo non serve più, eliminarlo
 
 ### Esempio Corretto
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Linee Guida per il Bug Fixing e Best Practices
 
 ## Principi Fondamentali
@@ -219,7 +182,6 @@ Un errore `ParseError: syntax error, unexpected token "protected", expecting end
    - Rivedere modifiche recenti
    - Analizzare classi estese e traits correlati
 
-<<<<<<< HEAD
 # Linee Guida per il Bug Fixing e Best Practices
 
 ## Principi Fondamentali
@@ -341,16 +303,6 @@ Un errore di tipo `ParseError: syntax error, unexpected token "protected", expec
 - Utilizzare sempre editor con linting attivo per prevenire errori di sintassi
 
 ### Esempio (Corretto)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```php
 class Example {
     public function foo() {}
@@ -358,27 +310,6 @@ class Example {
 } // <--- questa DEVE essere l'ultima parentesi graffa
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ## Processo di Revisione
 
 ### Auto-Revisione
@@ -428,20 +359,6 @@ class Example {
 *Ultimo aggiornamento: 2025-08-04*
 *Versione: 2.0*
 *Compatibilità: Laraxot SaluteOra, PHP 8.2+, Laravel 12+, Filament 3.4+*
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 ### Caso Reale
 - Errore su `Modules/User/app/Filament/Widgets/Auth/RegisterWidget.php` risolto spostando la funzione orfana all'interno della classe o eliminandola se non più necessaria
 
@@ -516,13 +433,3 @@ class Example {
 - Considerare costi nascosti
 - Mantenere longevità del codice
 - Rispettare principi di economia circolare del software
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD

@@ -5,23 +5,6 @@ PHPStan è già installato in `/var/www/html/_bases/base_predict_fila3_mono/lara
 Questo prompt guida l'analisi sistematica e il miglioramento della qualità del codice attraverso PHPStan.
 
 ## Workflow Sistematico
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 Per ogni correzione:
 - Aggiorna prima la documentazione tecnica del modulo, poi quella generale nella root.
 - Implementa la soluzione architettonicamente più coerente, non la più facile.
@@ -35,21 +18,6 @@ Regole chiave:
 - Le funzionalità come ->colors($metatag->getColors()) devono avere i metodi definiti in MetatagData; se mancanti, documenta il perché e implementali nel modulo corretto.
 - Non usare mai ->label(''), ma gestire le etichette tramite i file di traduzione localizzati nei moduli (LangServiceProvider).
 - Se servono script shell, usa solo cartelle bashscripts esistenti.
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 La documentazione approfondita e tecnica si trova nelle cartelle docs di ciascun modulo; la root contiene solo l'indice e i link bidirezionali. Dopo ogni livello di analisi fornisci un riepilogo delle modifiche, delle scelte architetturali e degli impatti futuri attesi.
 PHPStan è già installato nella cartella laravel e si esegue con ./vendor/bin/phpstan. Analizza sistematicamente ogni modulo in laravel/Modules dal livello 1 al 10, salvando i report JSON nella cartella docs/phpstan di ciascun modulo (es: laravel/Modules/Auth/docs/phpstan/level_1.json). Prima di correggere qualsiasi errore, studia accuratamente la struttura del modulo, aggiorna la documentazione tecnica specifica del modulo nella sua cartella docs/, poi aggiorna la documentazione generale nella cartella docs della root che funge da indice centrale con collegamenti bidirezionali. Per ogni correzione implementata: aggiorna prima la documentazione tecnica del modulo specificando le modifiche architetturali, poi quella generale nella root, implementa sempre la soluzione architettonicamente più coerente e robusta non quella più facile o veloce, dopo ogni gruppo di correzioni verifica l'integrità completa dell'applicazione eseguendo test sintattici e controlli autoload, procedi in modo completamente autonomo e sistematico senza interruzioni o richieste di conferma. Regole architetturali imprescindibili: ogni modulo è completamente indipendente con proprio composer.json, namespace dedicato senza prefisso "app", autoload indipendente; non modificare mai il file phpstan.neon di configurazione; le funzioni getTableColumns, getTableActions e getTableBulkActions devono sempre restituire array associativi con chiavi stringa, se restituiscono solo azioni standard predefinite (ViewAction, EditAction, DeleteAction o DeleteBulkAction) senza personalizzazioni rimuovile completamente, se contengono azioni aggiuntive personalizzate includi obbligatoriamente ...parent::getTableActions() o equivalenti; le funzionalità come ->colors($metatag->getColors()) devono avere i relativi metodi correttamente definiti nella classe appropriata come MetatagData, se mancanti documenta dettagliatamente il motivo e implementali nel modulo corretto seguendo i pattern esistenti; non usare mai ->label('') vuoto ma gestire tutte le etichette tramite i file di traduzione localizzati nei moduli utilizzando LangServiceProvider; se servono script shell utilizza esclusivamente le cartelle bashscripts già esistenti nel progetto; implementa type hints rigorosi per tutti i parametri e return types, gestisci correttamente i nullable values, evita mixed types salvo necessità documentate, assicura che tutti gli array abbiano strutture definite; per ogni livello PHPStan risolto genera un report dettagliato delle modifiche con impatti architetturali, scelte implementative e conseguenze future attese; la documentazione tecnica approfondita si trova nelle cartelle docs di ciascun modulo mentre la root docs contiene solo indici e collegamenti bidirezionali; mantieni sempre la coerenza con i pattern esistenti nel codebase, rispetta le convenzioni di naming del progetto, preserva l'indipendenza modulare; dopo ogni livello completato fornisci un riepilogo delle modifiche implementate, delle scelte architetturali adottate, degli impatti sui moduli coinvolti e delle aspettative per i livelli successivi. phpstan e' gia' installato dentro /var/www/html/_bases/base_predict_fila3_mono/laravel e lo puoi richiamare con ./vendor/bin/phpstan , il file phpstan.neon non devi toccarlo, creati uno script per prendere i primi 100 errori di phpstan su tutto modules, se per problemi di memoria non riesci a farlo fallo prima modulo per modulo, gli scripts ti ricordo che vanno dentro una sottocartella di bashscripts, poi questi 100 errori salvali dentro /var/www/html/_bases/base_predict_fila3_mono/docs/phpstan , poi ci ragioni analizzi il codice studi e aggiorni le cartelle docs , documenti bene come vorresti correggere e poi implementa correzione, non devi toccare phpstan.neon, 
