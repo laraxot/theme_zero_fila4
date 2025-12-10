@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+/**
+ * Class LimeDefaultvalueL10n.
+ *
+ * @property int         $id
+ * @property int         $dvid
+ * @property string      $language
+ * @property string|null $defaultvalue
+ */
+class LimeDefaultvalueL10n extends BaseModel {
+    protected $table = 'lime_defaultvalue_l10ns';
+    public $timestamps = false;
+
+    protected $casts = [
+        'dvid' => 'int',
+    ];
+
+    protected $fillable = [
+        'dvid',
+        'language',
+        'defaultvalue',
+    ];
+}

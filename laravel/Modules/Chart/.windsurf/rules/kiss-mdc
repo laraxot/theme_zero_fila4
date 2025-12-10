@@ -1,0 +1,37 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Principio KISS (Keep It Simple, Stupid)
+
+## Definizione
+Il principio KISS suggerisce che i sistemi funzionano meglio se mantenuti semplici, evitando complessità non necessarie.
+
+## Obiettivi
+- Favorire la semplicità progettuale
+- Ridurre la complessità del codice
+- Facilitare la comprensione e la manutenzione
+
+## Applicazione
+- Scrivere codice chiaro e diretto
+- Evitare soluzioni troppo astratte o complicate
+- Preferire soluzioni semplici e testate
+- Documentare in modo essenziale
+
+## Benefici
+- Codice più leggibile
+- Minori probabilità di bug
+- Manutenzione più semplice
+
+## Attenzione
+- Semplice non significa superficiale
+- Non sacrificare la robustezza per la semplicità
+
+## Esempi
+- Funzioni brevi e con una sola responsabilità
+- Strutture dati semplici
+- Flussi di lavoro lineari
+
+## Limiti
+- Alcuni problemi richiedono soluzioni complesse: valutare sempre il contesto.

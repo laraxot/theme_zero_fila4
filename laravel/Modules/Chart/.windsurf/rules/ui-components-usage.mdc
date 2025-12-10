@@ -1,0 +1,35 @@
+# UI Components Usage
+
+**When**: Implementing UI components in the application's frontend.
+
+**Then**:
+- Always use native Filament components for UI elements:
+  - `x-filament::icon`
+  - `x-filament::button`
+  - `x-filament::dropdown`
+  - `x-filament::avatar`
+- Never use non-existent or custom components unless absolutely necessary.
+- For separators in dropdowns, use: `<div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>`.
+
+**Because**:
+- Ensures consistency in UI design and behavior across the application.
+- Leverages Filament's built-in styling and accessibility features.
+- Prevents the introduction of unmaintainable or inconsistent custom components.
+
+**Examples**:
+
+*Correct*:
+```blade
+<x-filament::button>Submit</x-filament::button>
+<x-filament::dropdown>
+    <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+</x-filament::dropdown>
+```
+
+*Incorrect*:
+```blade
+<x-custom-button>Submit</x-custom-button>
+```
+
+**See**:
+- [Filament UI Components](../Modules/Xot/docs/FILAMENT_UI_COMPONENTS.md)

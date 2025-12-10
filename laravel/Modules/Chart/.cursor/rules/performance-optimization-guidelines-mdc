@@ -1,0 +1,12 @@
+# Performance Optimization Guidelines
+
+**When** you are developing or optimizing the application for performance
+
+**Then** implement lazy loading, optimize assets, use browser and server caching, leverage a CDN for assets, optimize database queries, use queues for jobs, and apply rate limiting where necessary.
+
+**Because** this improves application speed, reduces server load, and enhances user experience.
+
+**Examples**
+
+- Correct: Use lazy loading for images and implement query optimization for database calls.
+- Incorrect: Load all assets upfront or run unoptimized queries that slow down the application.

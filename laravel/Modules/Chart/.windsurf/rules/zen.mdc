@@ -1,0 +1,9 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+## Console Commands Zen
+- La registrazione dei comandi console deve essere automatica e invisibile
+- Meno codice scritto = meno errori, più armonia
+- "Il miglior comando è quello che non devi mai registrare a mano"

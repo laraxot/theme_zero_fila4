@@ -1,0 +1,96 @@
+# 🔧 Activity Module .gitignore
+# File di configurazione per ignorare file e directory nel modulo Activity
+
+# 📦 Dipendenze e packages
+/vendor/
+/node_modules/
+/docs/vendor/
+
+# 🔒 Lock files e cache
+*.lock
+*.cache
+*.phar
+*.jar
+package-lock.json
+composer.lock
+yarn-error.log
+npm-debug.log
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# 📝 Log files
+*.log
+error_log
+
+# 🏗️ Build directories
+/build/
+/build
+build/
+
+# 📱 Laravel specifici
+bootstrap/compiled.php
+app/storage/
+public/storage
+public/hot
+public_html/storage
+public_html/hot
+storage/*.key
+.env
+.env.*
+
+# 🗃️ Database directories
+database/Factories_old
+database/Migrations_old
+database/Seeders_old
+database_old
+
+# ⚙️ Configurazioni locali
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# 🛠️ IDE e editor
+/.idea
+.phpintel
+.vscode/
+*.swp
+*.swo
+*~
+
+# 🔄 Git specifici
+.git-blame-ignore-revs
+.git-rewrite/
+.git-rewrite
+
+# 🗂️ File temporanei e di sistema
+*.tmp
+*.stackdump
+*.exe
+*:Zone.Identifier
+.DS_Store
+Thumbs.db
+
+# 📋 Backup files
+*.old
+*.old1
+*.backup
+*.backup.*
+*.bak
+*.new
+
+# 📚 Documentation e cache
+docs/phpstan/
+docs/cache/
+cache/
+
+# 🎨 Risorse e componenti
+resources/views/Components_old
+
+# 🔧 Development tools
+.windsurf/
+.cursor/
+
+# 🚫 File specifici del progetto
+*.fila2
+laravel
+public_html

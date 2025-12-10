@@ -1,0 +1,42 @@
+# Best Practice: Avoid Redundant `helper_text` in Translation Arrays
+
+## Rule
+If the value of `helper_text` is identical to `description` or `placeholder` in a translation array, set `helper_text` to an empty string `''`.
+
+## Motivation
+- Prevents redundant or confusing help text in UI
+- Keeps translation files clean and DRY
+- Ensures only meaningful help text is shown to the user
+- Avoids accidental duplication in forms and tooltips
+
+## Example
+
+```php
+// ❌ Wrong
+'route' => [
+    'label' => 'Via',
+    'placeholder' => 'Inserisci la via',
+    'description' => 'route',
+    'helper_text' => 'route', // Duplicato, va svuotato
+],
+
+// ✅ Correct
+'route' => [
+    'label' => 'Via',
+    'placeholder' => 'Inserisci la via',
+    'description' => 'route',
+    'helper_text' => '', // Nessun duplicato
+],
+```
+
+## Where to Apply
+- All translation files in `Modules/*/lang/*/*.php`
+- Especially for form fields and UI components
+
+## Checklist
+- [ ] No `helper_text` duplicates `description` or `placeholder`
+- [ ] If duplicate, set to `''`
+- [ ] Code review and CI enforce this rule
+
+---
+_Last update: 2025-06-04_

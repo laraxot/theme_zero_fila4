@@ -1,0 +1,641 @@
+---
+description: Pattern e best practice per l'utilizzo di Spatie QueableActions in progetti Laraxot/<nome progetto>
+globs: ["**/Actions/**/*.php", "**/Services/**/*.php"]
+alwaysApply: true
+---
+
+# Pattern per Spatie QueableActions in Laraxot/<nome progetto>
+
+## Principi Fondamentali
+
+- **Preferenza**: Utilizzare SEMPRE Spatie QueableActions invece di servizi tradizionali
+- **Tipizzazione**: Dichiarare SEMPRE tipi espliciti per parametri e valori di ritorno
+- **Responsabilità Singola**: Ogni Action deve avere una sola responsabilità
+- **Testabilità**: Le Actions devono essere facilmente testabili
+- **Namespace**: Rispettare lo schema `Modules\{ModuleName}\Actions`
+
+## Pattern Spatie QueableAction
+
+### ✅ Pattern Corretto - Action Base
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+use Modules\ModuleName\Data\InputData;
+use Modules\ModuleName\Data\ResultData;
+
+class ProcessDataAction
+{
+    use QueueableAction;
+
+    /**
+     * Crea una nuova istanza dell'azione.
+     */
+    public function __construct(
+        private readonly \Modules\ModuleName\Repositories\RepositoryInterface $repository
+    ) {
+    }
+
+    /**
+     * Esegue l'azione.
+     *
+     * @param \Modules\ModuleName\Data\InputData $input
+     * @return \Modules\ModuleName\Data\ResultData
+     */
+    public function execute(InputData $input): ResultData
+    {
+        // Logica di elaborazione
+        $result = $this->repository->process($input);
+
+        // Restituisci un oggetto Data
+        return new ResultData(
+            status: 'success',
+            message: __('modulename::actions.process_data.success'),
+            data: $result
+        );
+    }
+}
+```
+
+### ✅ Pattern Corretto - Action Accodabile
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Modules\ModuleName\Data\UserData;
+
+class ProcessUserDataAction implements ShouldQueue
+{
+    use QueueableAction;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    /**
+     * Crea una nuova istanza dell'azione.
+     */
+    public function __construct(
+        private readonly \Modules\ModuleName\Repositories\UserRepositoryInterface $repository
+    ) {
+    }
+
+    /**
+     * Esegue l'azione.
+     *
+     * @param \Modules\ModuleName\Data\UserData $userData
+     * @return \Modules\ModuleName\Data\UserData
+     */
+    public function execute(UserData $userData): UserData
+    {
+        // Elabora i dati dell'utente
+        $processedUser = $this->repository->store($userData);
+
+        // Logga l'operazione
+        \Log::info('User processed', [
+            'id' => $processedUser->id,
+            'name' => $processedUser->name,
+        ]);
+
+        return $processedUser;
+    }
+}
+```
+
+### ✅ Pattern Corretto - Action con Notifica
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Modules\ModuleName\Data\UserData;
+use Modules\ModuleName\Notifications\ActionCompletedNotification;
+use Modules\ModuleName\Models\User;
+
+class NotifyUserAction implements ShouldQueue
+{
+    use QueueableAction;
+
+    /**
+     * Esegue l'azione.
+     *
+     * @param \Modules\ModuleName\Data\UserData $userData
+     * @return void
+     */
+    public function execute(UserData $userData): void
+    {
+        if (!$userData->id) {
+            throw new \InvalidArgumentException(__('modulename::errors.invalid_user_id'));
+        }
+
+        $user = User::find($userData->id);
+
+        if (!$user) {
+            throw new \InvalidArgumentException(__('modulename::errors.user_not_found'));
+        }
+
+        $user->notify(new ActionCompletedNotification($userData));
+    }
+}
+```
+
+### ✅ Pattern Corretto - Composizione di Actions
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+use Modules\ModuleName\Data\UserData;
+
+class RegisterUserAction
+{
+    use QueueableAction;
+
+    /**
+     * Crea una nuova istanza dell'azione.
+     */
+    public function __construct(
+        private readonly ProcessUserDataAction $processUserAction,
+        private readonly NotifyUserAction $notifyAction
+    ) {
+    }
+
+    /**
+     * Esegue l'azione composta.
+     *
+     * @param \Modules\ModuleName\Data\UserData $userData
+     * @return \Modules\ModuleName\Data\UserData
+     */
+    public function execute(UserData $userData): UserData
+    {
+        // Prima process l'utente
+        $processedUser = $this->processUserAction->execute($userData);
+
+        // Poi invia la notifica
+        $this->notifyAction->execute($processedUser);
+
+        return $processedUser;
+    }
+}
+```
+
+## Integrazione con Controller
+
+### ✅ Pattern Corretto - Action in Controller
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Modules\ModuleName\Actions\ProcessUserDataAction;
+use Modules\ModuleName\Data\UserData;
+
+class UserController extends Controller
+{
+    /**
+     * Processa i dati dell'utente.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Modules\ModuleName\Actions\ProcessUserDataAction $action
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function process(Request $request, ProcessUserDataAction $action): JsonResponse
+    {
+        // Validazione e conversione in un oggetto Data
+        $userData = UserData::validateAndCreate($request->all());
+
+        // Esecuzione immediata dell'action
+        $result = $action->execute($userData);
+
+        return response()->json([
+            'success' => true,
+            'data' => $result,
+            'message' => __('modulename::messages.process_success'),
+        ]);
+    }
+
+    /**
+     * Processa i dati dell'utente in modo asincrono.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Modules\ModuleName\Actions\ProcessUserDataAction $action
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function processAsync(Request $request, ProcessUserDataAction $action): JsonResponse
+    {
+        // Validazione e conversione in un oggetto Data
+        $userData = UserData::validateAndCreate($request->all());
+
+        // Accodamento dell'action
+        $action->onQueue('users')->execute($userData);
+
+        return response()->json([
+            'success' => true,
+            'message' => __('modulename::messages.process_queued'),
+        ]);
+    }
+}
+```
+
+## Integrazione con Filament
+
+### ✅ Pattern Corretto - Action in Filament
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Resources\UserResource\Pages;
+
+use Filament\Resources\Pages\CreateRecord;
+use Modules\ModuleName\Actions\ProcessUserDataAction;
+use Modules\ModuleName\Data\UserData;
+use Modules\ModuleName\Filament\Resources\UserResource;
+
+class CreateUser extends CreateRecord
+{
+    protected static string $resource = UserResource::class;
+
+    /**
+     * Gestisce la creazione del record.
+     *
+     * @param array<string, mixed> $data
+     * @return \Modules\ModuleName\Models\User
+     */
+    protected function handleRecordCreation(array $data)
+    {
+        // Converti i dati del form in un oggetto Data
+        $userData = UserData::from($data);
+
+        // Esegui l'action
+        $processedData = app(ProcessUserDataAction::class)->execute($userData);
+
+        // Crea e restituisci il modello
+        return $processedData->toModel();
+    }
+
+    /**
+     * Gestione del successo dopo la creazione.
+     */
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}
+```
+
+### ✅ Pattern Corretto - Filament Table Action
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\ModuleName\Filament\Resources\UserResource\Pages;
+
+use Filament\Resources\Pages\ListRecords;
+use Filament\Actions;
+use Filament\Tables\Actions\BulkAction;
+use Modules\ModuleName\Actions\ProcessMultipleUsersAction;
+use Modules\ModuleName\Data\UserData;
+use Modules\ModuleName\Filament\Resources\UserResource;
+
+class ListUsers extends ListRecords
+{
+    protected static string $resource = UserResource::class;
+
+    /**
+     * Configura le azioni bulk.
+     *
+     * @return array<BulkAction>
+     */
+    protected function getTableBulkActions(): array
+    {
+        return [
+            Actions\BulkAction::make('process')
+                ->label(__('modulename::actions.process.label'))
+                ->icon('heroicon-o-cog')
+                ->action(function (array $records) {
+                    // Converte i modelli in Data Objects
+                    $usersData = collect($records)->map(function ($user) {
+                        return UserData::fromModel($user);
+                    })->toArray();
+
+                    // Esegue l'action di processamento multiplo
+                    app(ProcessMultipleUsersAction::class)->execute($usersData);
+
+                    // Notifica il successo
+                    $this->notify('success', __('modulename::actions.process.success'));
+                })
+                ->requiresConfirmation()
+                ->modalHeading(__('modulename::actions.process.modal_heading'))
+                ->modalDescription(__('modulename::actions.process.modal_description')),
+        ];
+    }
+}
+```
+
+## Anti-pattern da Evitare
+
+### ❌ No: Servizi Tradizionali
+
+```php
+// ❌ MAI utilizzare servizi tradizionali invece di Actions
+namespace Modules\ModuleName\Services;
+
+class UserService
+{
+    public function process(array $data)
+    {
+        // Logica di business direttamente nel servizio
+        // senza tipizzazione dei parametri
+        $user = \Modules\ModuleName\Models\User::create($data);
+
+        return $user;
+    }
+}
+```
+
+### ❌ No: Action con Multiple Responsabilità
+
+```php
+// ❌ MAI creare Action con troppe responsabilità
+namespace Modules\ModuleName\Actions;
+
+class UserManagerAction
+{
+    use QueueableAction;
+
+    public function execute(array $data)
+    {
+        // Troppe responsabilità in una singola Action
+        $user = $this->createUser($data);
+        $this->sendWelcomeEmail($user);
+        $this->assignRole($user, 'customer');
+        $this->createProfile($user);
+        $this->logActivity($user);
+
+        return $user;
+    }
+
+    // Metodi privati che dovrebbero essere Actions separate
+    private function createUser(array $data) { /* ... */ }
+    private function sendWelcomeEmail($user) { /* ... */ }
+    // ...
+}
+```
+
+### ❌ No: Mancanza di Tipi Espliciti
+
+```php
+// ❌ MAI omettere i tipi espliciti
+namespace Modules\ModuleName\Actions;
+
+class ProcessDataAction
+{
+    use QueueableAction;
+
+    public function execute($data) // Tipo parametro mancante
+    {
+        // Logica...
+
+        return $result; // Tipo di ritorno mancante
+    }
+}
+```
+
+## Best Practice
+
+1. **Responsabilità Singola**
+   - Ogni Action deve avere una sola responsabilità
+   - Utilizzare la composizione per operazioni complesse
+   - Mantenere le Actions piccole e focalizzate
+
+2. **Tipizzazione**
+   - Dichiarare SEMPRE tipi espliciti per parametri e valori di ritorno
+   - Preferire oggetti Spatie Data agli array
+   - Utilizzare PHPDoc completi con tipi generics quando necessario
+
+3. **Gestione Errori**
+   - Gestire sempre gli errori in modo appropriato
+   - Lanciare eccezioni tipizzate e documentate
+   - Utilizzare messaggi di errore localizzati
+
+4. **Testing**
+   - Scrivere test unitari per tutte le Actions
+   - Utilizzare mocking per dipendenze esterne
+   - Testare casi di successo ed errore
+
+5. **Accodamento**
+   - Utilizzare l'accodamento per operazioni lunghe
+   - Configurare code dedicate per diversi tipi di operazioni
+   - Implementare la gestione dei fallimenti
+
+## Migrazione da Servizi a Actions
+
+### Fase 1: Identificare i Servizi da Migrare
+
+```php
+// Servizio originale da migrare
+namespace Modules\ModuleName\Services;
+
+class UserService
+{
+    public function create(array $data)
+    {
+        return \Modules\ModuleName\Models\User::create($data);
+    }
+
+    public function update(int $id, array $data)
+    {
+        $user = \Modules\ModuleName\Models\User::findOrFail($id);
+        $user->update($data);
+        return $user;
+    }
+}
+```
+
+### Fase 2: Creare Data Objects (vedi spatie-data-patterns.mdc)
+
+### Fase 3: Creare Actions
+
+```php
+// Creazione delle Actions
+namespace Modules\ModuleName\Actions;
+
+use Spatie\QueueableAction\QueueableAction;
+use Modules\ModuleName\Data\UserData;
+
+class CreateUserAction
+{
+    use QueueableAction;
+
+    /**
+     * Esegue l'azione.
+     *
+     * @param \Modules\ModuleName\Data\UserData $data
+     * @return \Modules\ModuleName\Data\UserData
+     */
+    public function execute(UserData $data): UserData
+    {
+        $user = new \Modules\ModuleName\Models\User();
+        $user->name = $data->name;
+        $user->email = $data->email;
+        $user->save();
+
+        return UserData::from($user);
+    }
+}
+
+class UpdateUserAction
+{
+    use QueueableAction;
+
+    /**
+     * Esegue l'azione.
+     *
+     * @param \Modules\ModuleName\Data\UserData $data
+     * @return \Modules\ModuleName\Data\UserData
+     * @throws \InvalidArgumentException Se l'ID utente non è valido
+     */
+    public function execute(UserData $data): UserData
+    {
+        if (!$data->id) {
+            throw new \InvalidArgumentException(__('modulename::errors.invalid_user_id'));
+        }
+
+        $user = \Modules\ModuleName\Models\User::findOrFail($data->id);
+        $user->name = $data->name;
+        $user->email = $data->email;
+        $user->save();
+
+        return UserData::from($user);
+    }
+}
+```
+
+### Fase 4: Aggiornare i Controller
+
+```php
+// Aggiornamento del Controller
+namespace Modules\ModuleName\Http\Controllers;
+
+use Modules\ModuleName\Actions\CreateUserAction;
+use Modules\ModuleName\Actions\UpdateUserAction;
+use Modules\ModuleName\Data\UserData;
+
+class UserController extends Controller
+{
+    /**
+     * Crea un nuovo utente.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Modules\ModuleName\Actions\CreateUserAction $action
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request, CreateUserAction $action): JsonResponse
+    {
+        $data = UserData::validateAndCreate($request->all());
+        $result = $action->execute($data);
+
+        return response()->json($result);
+    }
+
+    /**
+     * Aggiorna un utente esistente.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @param \Modules\ModuleName\Actions\UpdateUserAction $action
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, int $id, UpdateUserAction $action): JsonResponse
+    {
+        $data = UserData::validateAndCreate(array_merge(
+            $request->all(),
+            ['id' => $id]
+        ));
+
+        $result = $action->execute($data);
+
+        return response()->json($result);
+    }
+}
+```
+
+## Documentazione Essenziale per Actions
+
+Ogni modulo che utilizza Spatie QueableActions dovrebbe includere:
+
+1. **Documentazione Generale**
+   - `Modules/ModuleName/docs/ACTIONS.md` - Documentazione delle Actions disponibili
+
+2. **Esempio di Documentazione Actions**
+   ```markdown
+   # Actions in ModuleName
+
+   Questo modulo utilizza Spatie QueableActions per implementare la logica di business.
+
+   ## CreateUserAction
+   Crea un nuovo utente nel sistema.
+
+   ### Parametri
+   - `UserData $data`: Dati dell'utente da creare
+
+   ### Restituisce
+   - `UserData`: Dati dell'utente creato con ID assegnato
+
+   ### Esempio d'uso
+   ```php
+   // Uso diretto
+   $userData = new UserData(name: 'Mario', email: 'mario@example.com');
+   $result = app(CreateUserAction::class)->execute($userData);
+
+   // Uso accodato
+   app(CreateUserAction::class)
+       ->onQueue('users')
+       ->execute($userData);
+   ```
+
+   ## UpdateUserAction
+   Aggiorna un utente esistente.
+
+   ### Parametri
+   - `UserData $data`: Dati dell'utente da aggiornare (deve includere l'ID)
+
+   ### Restituisce
+   - `UserData`: Dati dell'utente aggiornati
+
+   ### Eccezioni
+   - `InvalidArgumentException`: Se l'ID utente non è valido
+   ```

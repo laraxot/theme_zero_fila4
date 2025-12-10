@@ -1,0 +1,46 @@
+---
+trigger: manual
+description:
+globs:
+---
+# Best Practice: XotBaseMigration (Cursor)
+
+## Introduzione
+Per tutte le migrazioni dei moduli, si utilizza la classe base personalizzata `XotBaseMigration` invece delle classi standard Laravel. Questo garantisce coerenza, estendibilità e compatibilità con le regole del progetto.
+
+## Pattern Consigliati
+- Usare sempre `$this->hasColumn('nome_colonna')` invece di `Schema::hasColumn()`.
+- Usare `$this->hasTable()` invece di `Schema::hasTable()`.
+- Usare i metodi helper `tableCreate()` e `tableUpdate()`.
+- Mai usare direttamente Schema::
+
+## Esempio Corretto
+```php
+if (! $this->hasColumn('state')) {
+    $this->tableUpdate(function (Blueprint $table) {
+        $table->string('state', 32)->nullable();
+    });
+}
+```
+
+## Esempio Sbagliato
+```php
+if (!Schema::hasColumn('users', 'state')) {
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('state', 32)->nullable();
+    });
+}
+```
+
+## Motivazione
+- Compatibilità con override e logging
+- Rollback e gestione avanzata
+- Evita errori di namespace
+
+## Errori Comuni
+- Usare Schema::hasColumn invece di $this->hasColumn
+- Usare Schema::table invece di $this->tableUpdate
+
+## Collegamenti
+- [Migrazioni del Database](../../docs/database-migrations.md)
+- [Best Practice: ActivityLog per la Moderazione Utenti](../../laravel/Modules/User/docs/ACTIVITYLOG_MODERATION_BEST_PRACTICES.mdc)

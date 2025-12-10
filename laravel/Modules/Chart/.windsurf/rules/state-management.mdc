@@ -1,0 +1,133 @@
+# Gestione degli Stati con spatie/laravel-model-states
+
+## Quando
+
+Stai implementando la gestione degli stati per i modelli, come gli stati di registrazione per `User`, `Doctor`, `Patient` o altre entità che richiedono un flusso di stati ben definito.
+
+## Allora
+
+Utilizza `spatie/laravel-model-states` per gestire gli stati dei modelli invece di soluzioni personalizzate o enum. Definisci ogni stato come una classe che estende `State` con transizioni specifiche.
+
+## Perché
+
+1. **Tipizzazione forte**: Migliore supporto dell'IDE e controllo dei tipi
+2. **Validazione integrata**: Le transizioni non valide vengono bloccate automaticamente
+3. **Estensibilità**: Facile aggiungere logica specifica per ogni stato
+4. **Supporto al query builder**: Filtraggio semplice per stato
+5. **Eventi automatici**: Reagisci ai cambiamenti di stato con eventi dedicati
+6. **Documentazione automatica**: La struttura delle classi documenta automaticamente le transizioni possibili
+
+## Struttura delle directory
+
+```
+app/
+  Models/
+    User.php
+  States/
+    User/
+      UserState.php  # Classe astratta base
+      Pending.php
+      Active.php
+      Suspended.php
+      Rejected.php
+      IntegrationRequested.php
+```
+
+## Esempi
+
+### Corretto
+
+```php
+// Definizione di uno stato
+class Pending extends UserState
+{
+    public function label(): string { return 'In attesa'; }
+    public function color(): string { return 'warning'; }
+    public function icon(): string { return 'heroicon-o-clock'; }
+}
+
+// Configurazione delle transizioni
+public static function config(): StateConfig
+{
+    return parent::config()
+        ->default(Pending::class)
+        ->allowTransition(Pending::class, Active::class)
+        ->allowTransition(Pending::class, Rejected::class)
+        ->registerState(Pending::class)
+        ->registerState(Active::class);
+}
+
+// Utilizzo nel codice
+$user->state->transitionTo(Active::class);
+$user->save();
+
+// Verifica dello stato
+if ($user->state->equals(Active::class)) {
+    // ...
+}
+```
+
+### Errato
+
+```php
+// Utilizzo di enum o stringhe per gestire gli stati
+enum UserState: string
+{
+    case PENDING = 'pending';
+    case ACTIVE = 'active';
+    // ...
+}
+
+// Gestione manuale delle transizioni senza validazione
+$user->state = 'active';
+$user->save();
+
+// Verifica con stringhe o enum
+if ($user->state === 'active') {
+    // ...
+}
+```
+
+## Best Practice
+
+1. **Incollare la logica di transizione**: Incapsula la logica di transizione in metodi del modello
+2. **Utilizzare eventi**: Sfrutta gli eventi per azioni collaterali
+3. **Validare le transizioni**: Definisci regole chiare per le transizioni consentite
+4. **Documentare**: Documenta le transizioni e il loro significato
+5. **Testare**: Scrivi test per verificare il comportamento degli stati
+
+## Configurazione del modello
+
+```php
+class User extends Model
+{
+    use HasStates;
+    
+    protected $states = [
+        'state' => UserState::class,
+    ];
+    
+    protected $attributes = [
+        'state' => Pending::class,
+    ];
+    
+    protected $casts = [
+        'state' => UserState::class,
+    ];
+}
+```
+
+## Registrazione degli stati
+
+Registra gli stati nel Service Provider:
+
+```php
+public function boot()
+{
+    State::resolveStateUsing(
+        User::class,
+        'state',
+        'App\\States\\User'
+    );
+}
+```

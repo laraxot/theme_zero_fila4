@@ -1,0 +1,9 @@
+*:Zone.Identifier
+.php-cs-fixer.cache
+**/*.Zone.Identifier
+vendor
+node_modules
+*.log
+*.old
+
+

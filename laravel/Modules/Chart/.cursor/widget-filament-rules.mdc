@@ -1,0 +1,54 @@
+# Regole CRITICHE per Widget Filament
+
+## ❌ ERRORE GRAVISSIMO DA NON RIPETERE
+
+### MAI fare queste cose:
+1. **MAI creare viste blade per widget Filament Form-based**
+2. **MAI creare file in `/Modules/*/resources/views/filament/widgets/`**
+3. **MAI definire `protected static string $view` nei widget con form**
+
+### Perché è CRITICO:
+- I widget Form-based generano automaticamente l'HTML
+- Creare viste causa errori "multiple root elements" in Livewire
+- Viola completamente l'architettura Filament
+
+## ✅ Regole da Seguire SEMPRE
+
+### Widget con Form (99% dei casi)
+```php
+class MyWidget extends XotBaseWidget
+{
+    protected function getFormSchema(): array
+    {
+        return [
+            'field' => TextInput::make('field'),
+        ];
+    }
+    // STOP! Non aggiungere altro!
+}
+```
+
+### Struttura File Corretta
+```
+/Modules/NomeModulo/
+└── app/
+    └── Filament/
+        └── Widgets/
+            └── MyWidget.php  ← SOLO il file PHP!
+
+/Themes/One/
+└── resources/
+    └── views/
+        └── pages/
+            └── page.blade.php ← Le pagine USANO i widget
+```
+
+## Verifica PRIMA di creare widget:
+1. Estende XotBaseWidget? ✓
+2. Usa form()? → NON creare vista ✓
+3. Vista necessaria? → Ripensa l'approccio ✓
+
+## Se vedi errore "Multiple root elements":
+1. HAI creato una vista per un widget form? → ELIMINALA
+2. Esegui: `php artisan view:clear`
+3. Rimuovi QUALSIASI vista in `/filament/widgets/`
