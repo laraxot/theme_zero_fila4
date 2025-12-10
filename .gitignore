@@ -70,3 +70,5 @@ docs
 bashscripts/
 laravel/
 public_html/
+.env.docker
+.env.latest
