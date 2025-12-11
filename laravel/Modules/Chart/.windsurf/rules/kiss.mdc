@@ -1,8 +1,0 @@
----
-description:
-globs:
-alwaysApply: false
----
-## Console Commands KISS
-- Non registrare mai manualmente i comandi console
-- Lascia che la base faccia il lavoro
