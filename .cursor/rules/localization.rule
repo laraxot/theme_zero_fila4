@@ -130,7 +130,7 @@ Route::group([
    - Proteggere da XSS
 
 ## Struttura dei File di Configurazione
-- I file di configurazione delle sezioni sono in `laravel/config/local/saluteora/database/content/sections/`
+- I file di configurazione delle sezioni sono in `laravel/config/local/<nome progetto>/database/content/sections/`
 - Ogni sezione ha un file JSON che definisce i blocchi e le loro proprietà
 - I blocchi di tipo "language-selector" devono usare il view corretto definito nel JSON
 

@@ -1,8 +1,8 @@
-# Convenzioni di Naming per Acronimi in SaluteOra
+# Convenzioni di Naming per Acronimi in <nome progetto>
 
 ## Regola Fondamentale
 
-In SaluteOra, gli acronimi nei nomi delle classi e dei file devono utilizzare **PascalCase** e non tutte maiuscole.
+In <nome progetto>, gli acronimi nei nomi delle classi e dei file devono utilizzare **PascalCase** e non tutte maiuscole.
 
 ## Esempi Corretti vs Errati
 
@@ -31,6 +31,6 @@ Questa regola si applica a:
 
 ## Riferimenti
 
-- [Modules/Notify/docs/ACRONYM_NAMING_CONVENTIONS.md](file:///var/www/html/saluteora/laravel/Modules/Notify/docs/ACRONYM_NAMING_CONVENTIONS.md)
+- [Modules/Notify/docs/ACRONYM_NAMING_CONVENTIONS.md](file:///var/www/html/<nome progetto>/laravel/Modules/Notify/docs/ACRONYM_NAMING_CONVENTIONS.md)
 - [PSR-1: Basic Coding Standard](https://www.php-fig.org/psr/psr-1/)
 - [Laravel Documentation - Coding Style](https://laravel.com/docs/10.x/contributions#coding-style)

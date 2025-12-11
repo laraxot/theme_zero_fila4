@@ -1,8 +1,8 @@
-# Convenzioni dei Path in Laravel e SaluteOra
+# Convenzioni dei Path in Laravel e <nome progetto>
 
 ## Regole Fondamentali per i Path di Cartelle
 
-In Laravel e SaluteOra, i nomi delle cartelle principali (come definite nella struttura standard di Laravel) **DEVONO** rispettare il caso specifico definito dalle convenzioni di Laravel.
+In Laravel e <nome progetto>, i nomi delle cartelle principali (come definite nella struttura standard di Laravel) **DEVONO** rispettare il caso specifico definito dalle convenzioni di Laravel.
 
 ## Cartelle Standard e loro Casing Corretto
 
@@ -24,13 +24,13 @@ In Laravel e SaluteOra, i nomi delle cartelle principali (come definite nella st
 Le viste in Laravel devono essere collocate in:
 
 ```
-/var/www/html/saluteora/laravel/Modules/Notify/resources/views/
+/var/www/html/<nome progetto>/laravel/Modules/Notify/resources/views/
 ```
 
 **NON** in:
 
 ```
-/var/www/html/saluteora/laravel/Modules/Notify/Resources/views/
+/var/www/html/<nome progetto>/laravel/Modules/Notify/Resources/views/
 ```
 
 ## Importanza
@@ -41,4 +41,4 @@ Le viste in Laravel devono essere collocate in:
 
 ## Riferimenti
 
-- [Documentazione completa](/var/www/html/saluteora/laravel/Modules/Notify/docs/LARAVEL_PATH_CONVENTIONS.md)
+- [Documentazione completa](/var/www/html/<nome progetto>/laravel/Modules/Notify/docs/LARAVEL_PATH_CONVENTIONS.md)

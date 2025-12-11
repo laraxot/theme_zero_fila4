@@ -18,7 +18,7 @@ La sequenza esatta dei comandi per l'installazione del progetto è:
    ```bash
    laravel new laravel
    ```
-   > NOTA: È fondamentale utilizzare esattamente il comando `laravel new laravel`. Non utilizzare varianti come `laravel new saluteora` o `laravel new laravel --version=X.Y`.
+   > NOTA: È fondamentale utilizzare esattamente il comando `laravel new laravel`. Non utilizzare varianti come `laravel new <nome progetto>` o `laravel new laravel --version=X.Y`.
 
 3. **Installazione Laravel Modules:**
    ```bash

@@ -1,8 +1,8 @@
-# Convenzioni per Template Blade di Filament in SaluteOra
+# Convenzioni per Template Blade di Filament in <nome progetto>
 
 ## Struttura Standard dei Template di Pagina
 
-Ogni template di pagina Filament in SaluteOra **DEVE** seguire questa struttura standardizzata per garantire coerenza nell'interfaccia utente.
+Ogni template di pagina Filament in <nome progetto> **DEVE** seguire questa struttura standardizzata per garantire coerenza nell'interfaccia utente.
 
 ## Elementi Obbligatori
 
@@ -48,4 +48,4 @@ Ogni template di pagina Filament deve includere:
 - Includere pulsanti di azione nel footer per ogni form
 
 ## Riferimenti
-- [Documentazione completa](/var/www/html/saluteora/laravel/Modules/Notify/docs/FILAMENT_TEMPLATE_CONVENTIONS.md)
+- [Documentazione completa](/var/www/html/<nome progetto>/laravel/Modules/Notify/docs/FILAMENT_TEMPLATE_CONVENTIONS.md)

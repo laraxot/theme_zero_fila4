@@ -19,7 +19,7 @@ La documentazione all'interno dei moduli **non deve mai** contenere riferimenti 
 
 #### ❌ Non Corretto
 ```markdown
-Il modulo Notify gestisce l'invio di email in SaluteOra utilizzando template personalizzabili.
+Il modulo Notify gestisce l'invio di email in <nome progetto> utilizzando template personalizzabili.
 ```
 
 #### ✅ Corretto

@@ -1,4 +1,4 @@
-# JSON Migration Best Practices in Laravel & SaluteOra
+# JSON Migration Best Practices in Laravel & <nome progetto>
 
 ## Critical Error Identified
 
@@ -6,7 +6,7 @@ The error `SQLSTATE[22032]: <<Unknown error>>: 3140 Invalid JSON text: "Invalid 
 
 ## Root Cause
 
-When using `XotBaseMigration` in SaluteOra:
+When using `XotBaseMigration` in <nome progetto>:
 
 1. The pattern `$table->json('field_name')->nullable()->change()` directly attempts to convert existing data
 2. This fails if any record in the column contains data that is not valid JSON
@@ -70,4 +70,4 @@ Before running migrations that involve JSON conversions:
 4. ✅ Consider chunking for large tables to avoid memory issues
 5. ✅ Always have a backup of the database before running JSON migrations
 
-This memory replaces any previous guidance on JSON migrations and must be followed for all migrations in SaluteOra that involve JSON columns.
+This memory replaces any previous guidance on JSON migrations and must be followed for all migrations in <nome progetto> that involve JSON columns.

@@ -1,4 +1,4 @@
-# Pattern di Migrazione in SaluteOra
+# Pattern di Migrazione in <nome progetto>
 
 ## Pattern XotBaseMigration
 
