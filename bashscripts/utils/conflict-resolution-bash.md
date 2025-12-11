@@ -48,12 +48,6 @@ Spesso i conflitti riguardano funzioni duplicate o con logiche diverse. Ecco una
 
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Funzione di log avanzata: accetta sia log "message" che log "level" "message"
 log() {
     if [ $# -eq 2 ]; then
@@ -87,12 +81,6 @@ Quando si risolvono conflitti tra versioni che richiedono un numero diverso di p
 
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Gestione robusta dei parametri: supporta 2 o 3 parametri, con branch opzionale
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
     echo "Usage: $0 <path> <remote_repo> [branch]"

@@ -1,5 +1,4 @@
 
->>>>>>> e0c964a3 (first)
 # 🚀 Toolkit di Automazione Git per Laraxot PTVX
 
 [![PHPStan](https://img.shields.io/badge/PHPStan-Level%209-brightgreen.svg?style=for-the-badge&logo=php&logoColor=white)](../docs/phpstan/ANALISI_MODULI_PHPSTAN.md)
@@ -40,8 +39,6 @@ git clone git@github.com:aurmich/bashscripts_fila3.git
 
 # Rendi gli script eseguibili
 chmod +x *.sh
->>>>>>> 574afe9e (.)
->>>>>>> e0c964a3 (first)
 chmod +x scripts/**/*.sh
 ```
 
@@ -50,8 +47,6 @@ chmod +x scripts/**/*.sh
 ### Sincronizzazione Subtree
 ```bash
 ./git_sync_subtree.sh <path> <remote_repo>
->>>>>>> 574afe9e (.)
->>>>>>> e0c964a3 (first)
 ./scripts/git/git_sync_subtree.sh <path> <remote_repo>
 ```
 
@@ -187,7 +182,6 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 
 ### Sincronizzazione Modulo
 ```bash
->>>>>>> ea169dcc (.)
 
 ## Regola Fondamentale
 
@@ -251,7 +245,6 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 # Dalla root del progetto
 cd /var/www/html/_bases/base_saluteora
 
->>>>>>> ea169dcc (.)
 # Script per 20 studi con dottori (RACCOMANDATO per iniziare)
 php bashscripts/database/seeding/saluteora-20-studios-66010.php
 
@@ -259,15 +252,12 @@ php bashscripts/database/seeding/saluteora-20-studios-66010.php
 php bashscripts/database/seeding/saluteora-1000-records.php
 # Rendi gli script eseguibili
 chmod +x *.sh
->>>>>>> 574afe9e (.)
 chmod +x scripts/**/*.sh
->>>>>>> 7de7063d (.)
 ```
 
 ### Esecuzione via Tinker
 
 ```bash
->>>>>>> ea169dcc (.)
 # Dalla directory Laravel
 cd laravel
 
@@ -277,9 +267,7 @@ php artisan tinker
 # Incolla il contenuto dello script desiderato
 # Lo script si eseguirà automaticamente
 ./git_sync_subtree.sh <path> <remote_repo>
->>>>>>> 574afe9e (.)
 ./scripts/git/git_sync_subtree.sh <path> <remote_repo>
->>>>>>> 7de7063d (.)
 ```
 
 ## Caratteristiche degli Script
@@ -319,7 +307,6 @@ php artisan tinker
 ### Script 1000 Record
 
 ```bash
->>>>>>> ea169dcc (.)
 🚀 Inizializzazione seeding massivo SaluteOra - 1000 record per modello...
 📊 RISULTATO FINALE:
   - Studi creati: 1000
@@ -392,7 +379,6 @@ cd /var/www/html/_bases/base_saluteora
 # Rendi gli script eseguibili
 chmod +x *.sh
 chmod +x scripts/**/*.sh
->>>>>>> develop
 ```
 
 ### Esecuzione via Tinker
@@ -400,7 +386,6 @@ chmod +x scripts/**/*.sh
 ```bash
 ./git_sync_subtree.sh <path> <remote_repo>
 ./scripts/git/git_sync_subtree.sh <path> <remote_repo>
->>>>>>> develop
 ```
 
 ## Caratteristiche degli Script
@@ -440,17 +425,12 @@ chmod +x scripts/**/*.sh
 ### Script 1000 Record
 
 ```bash
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
 
 # Sincronizza un modulo specifico
 ./git_sync_subtree.sh modules/users git@github.com:org/users.git
 
 # Sincronizza con branch specifico
 REMOTE_BRANCH=develop ./git_sync_subtree.sh modules/auth git@github.com:org/auth.git
->>>>>>> f52d0712 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Sincronizza un modulo specifico
 ./scripts/git/git_sync_subtree.sh modules/users git@github.com:org/users.git
 
@@ -459,14 +439,12 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 
 # Genera riassunto PHPStan
 ./scripts/phpstan/generate_phpstan_summary.sh
->>>>>>> e0c964a3 (first)
 ```
 
 ## ⚠️ Risoluzione Problemi
 
 ### Errori Comuni
 
->>>>>>> ea169dcc (.)
 ```
 
 ## Documentazione Correlata
@@ -503,13 +481,11 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 3. **Errore database**: Verificare migrazioni e configurazione
 4. **Memoria insufficiente**: Utilizzare script in batch più piccoli
 
->>>>>>> ea169dcc (.)
 ### Soluzioni
 1. **Eseguire migrazioni**: `php artisan migrate`
 2. **Verificare autoload**: `composer dump-autoload`
 3. **Controllare namespace**: Verificare struttura moduli
 4. **Testare connessione**: Verificare configurazione database
->>>>>>> 71ff9e32 (.)
 ```
 
 ## Documentazione Correlata
@@ -546,13 +522,10 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 3. **Errore database**: Verificare migrazioni e configurazione
 4. **Memoria insufficiente**: Utilizzare script in batch più piccoli
 
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
 1. **Prefix Option Mancante**
    ```bash
    fatal: you must provide the --prefix option
    ```
->>>>>>> ec52a6b4 (.)
    ✅ **Soluzione:** Verifica il path del subtree
 
 2. **Push Rejected**
@@ -560,8 +533,6 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
    ! [rejected] dev -> dev (non-fast-forward)
    ```
    ✅ **Soluzione:** Esegui prima un pull
->>>>>>> 574afe9e (.)
->>>>>>> e0c964a3 (first)
    **Soluzione**: Verifica che il path del subtree sia corretto
 
 2. **Permessi Script**
@@ -648,7 +619,6 @@ Questo progetto è rilasciato sotto licenza MIT. Vedi il file [LICENSE](LICENSE)
 
 ---
 
->>>>>>> ea169dcc (.)
 
 ## Note Importanti
 
@@ -663,7 +633,6 @@ Questo progetto è rilasciato sotto licenza MIT. Vedi il file [LICENSE](LICENSE)
 **Versione**: 2.0
 **Compatibilità**: Laravel 10+, Moduli SaluteOra/SaluteMo
    **Soluzione**: Verifica che il path del subtree sia corretto
->>>>>>> develop
 
 - **Regola fondamentale**: Script SEMPRE in `bashscripts/`, MAI in `laravel/`
 - **Categorizzazione**: Organizzare script per funzionalità e modulo
@@ -672,7 +641,6 @@ Questo progetto è rilasciato sotto licenza MIT. Vedi il file [LICENSE](LICENSE)
 
 ---
 
->>>>>>> ec52a6b4 (.)
 <div align="center">
   <strong>🚀 Potenzia il tuo workflow Git con questi script!</strong>
 </div>
@@ -1244,6 +1212,3 @@ This toolkit addresses these challenges by providing automated tools that simpli
 - [Italiano](docs/README.it.md)
 - [Español](docs/README.es.md)
  43df3e0 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)

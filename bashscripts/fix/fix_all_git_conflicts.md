@@ -58,34 +58,16 @@ File aggiornato per chiarezza, eliminata duplicazione. Vedi anche [README global
 [Backlink: scripts_conflict_resolution.md](scripts_conflict_resolution.md)
 [Backlink: git_conflicts_resolution.md](git_conflicts_resolution.md)
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 ## Casi d'Uso Avanzati
 
 ### 1. Risoluzione Selettiva
 È possibile modificare lo script per risolvere selettivamente solo determinati tipi di file:
 
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 ### 2. Integrazione con Git Hooks
 Lo script può essere integrato con Git hooks per verificare automaticamente la presenza di conflitti prima del commit:
 
 ```bash
->>>>>>> e0c964a3 (first)
 
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # .git/hooks/pre-commit
 #!/bin/bash
 ```

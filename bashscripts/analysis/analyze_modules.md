@@ -136,13 +136,6 @@ Lo script può essere integrato in pipeline CI/CD per automatizzare l'analisi de
 
 ```yaml
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> 9c02579 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Esempio di configurazione GitHub Actions
 name: PHPStan Analysis
 on: [push, pull_request]

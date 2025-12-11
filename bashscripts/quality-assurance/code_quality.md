@@ -44,7 +44,6 @@ php bashscripts/check_form_schema.php --output=report.txt
 #### Output di Esempio
 ```text
 XotBaseResource Classes Form Schema Check
-========================================
 
 ✅ Analisi completata: 15 classi trovate
 ❌ 3 classi mancanti del metodo getFormSchema():
@@ -186,7 +185,6 @@ jobs:
 - **Template standardizzati**: Pattern riutilizzabili per report
 
 Questa documentazione descrive gli script e le procedure utilizzate per verificare e migliorare la qualità del codice nel progetto Laravel.
->>>>>>> develop
 
 ## check_form_schema.php
 
@@ -212,9 +210,7 @@ php bashscripts/check_form_schema.php
 
 #### Output di Esempio
 ```text
->>>>>>> 7de7063d (.)
 XotBaseResource Classes Form Schema Check
-========================================
 
 ### Output
 Esempio di output:
@@ -222,7 +218,6 @@ Esempio di output:
 XotBaseResource Classes Form Schema Check
 ====
 
->>>>>>> e0c964a3 (first)
 ❌ 3 classi senza getFormSchema:
 - UserResource in Modules/User/Http/Resources/UserResource.php
 - ProfileResource in Modules/Profile/Http/Resources/ProfileResource.php
@@ -240,7 +235,6 @@ XotBaseResource Classes Form Schema Check
 XotBaseResource Classes Form Schema Check
 ====
 
->>>>>>> f52d0712 (.)
 ❌ 3 classi senza getFormSchema:
 - UserResource in Modules/User/Http/Resources/UserResource.php
 - ProfileResource in Modules/Profile/Http/Resources/ProfileResource.php
@@ -255,13 +249,11 @@ XotBaseResource Classes Form Schema Check
 - Utilizzare strumenti come PHPStan e PHP-CS-Fixer per garantire la qualità del codice
 
 ## Altri Script di Verifica della Qualità
->>>>>>> ea169dcc (.)
 
 ### check_before_phpstan.sh
 Esegue controlli preliminari prima dell'analisi con PHPStan.
 
 ### phpstan_docs_generator.sh
->>>>>>> ea169dcc (.)
 Genera la documentazione dei risultati di PHPStan.
 
 ## Raccomandazioni Generali
@@ -430,7 +422,6 @@ php bashscripts/check_form_schema.php --output=report.txt
 #### Output di Esempio
 ```text
 XotBaseResource Classes Form Schema Check
-========================================
 
 ✅ Analisi completata: 15 classi trovate
 ❌ 3 classi mancanti del metodo getFormSchema():
@@ -832,7 +823,6 @@ Esegue controlli preliminari prima dell'analisi con PHPStan.
 
 ### phpstan_docs_generator.sh 
 
->>>>>>> ea169dcc (.)
 ## Risorse Utili
 - [PHPStan](https://phpstan.org/)
 - [Spatie Laravel Data](https://spatie.be/docs/laravel-data/v4/introduction)
@@ -841,11 +831,8 @@ Esegue controlli preliminari prima dell'analisi con PHPStan.
 
 *Ultimo aggiornamento: Agosto 2025*  
 *Versione: 2.1.0*
->>>>>>> 7de7063d (.)
 *Ultimo aggiornamento: Agosto 2025*  
 *Versione: 2.1.0*
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
 Questa documentazione descrive gli script e le procedure utilizzate per verificare e migliorare la qualità del codice nel progetto Laravel.
 
 ## Panoramica
@@ -890,7 +877,6 @@ php bashscripts/check_form_schema.php --output=report.txt
 #### Output di Esempio
 ```text
 XotBaseResource Classes Form Schema Check
-========================================
 
 ✅ Analisi completata: 15 classi trovate
 ❌ 3 classi mancanti del metodo getFormSchema():
@@ -1177,5 +1163,3 @@ git checkout HEAD -- storage/quality-reports/
 
 *Ultimo aggiornamento: Agosto 2025*  
 *Versione: 2.1.0*
->>>>>>> f198176d (.)
->>>>>>> e0c964a3 (first)

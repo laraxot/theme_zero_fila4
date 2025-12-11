@@ -57,12 +57,6 @@ La soluzione ottimale è mantenere la versione che accetta 3 parametri, ma con g
 
 source ./bashscripts/lib/custom.sh
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Validate input
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
     log "error" "Parametri errati"
@@ -184,12 +178,6 @@ La soluzione ottimale è mantenere la versione che accetta 3 parametri, ma con g
 
 source ./bashscripts/lib/custom.sh
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Validate input
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
     log "error" "Parametri errati"
@@ -321,12 +309,6 @@ La soluzione ottimale è mantenere la versione che accetta 3 parametri, ma con g
 
 source ./bashscripts/lib/custom.sh
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Validate input
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
     log "error" "Parametri errati"
@@ -401,8 +383,6 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - [Documentazione degli Script Git](git_scripts.md)
 - [Documentazione Generale sulla Risoluzione dei Conflitti](../../docs/bashscripts_conflict_resolution.md)
 5338a990 (.)
->>>>>>> 574afe9e (.)
->>>>>>> ec52a6b4 (.)
 # Risoluzione dei Conflitti negli Script Git Subtree
 
 ## Problema
@@ -679,11 +659,3 @@ Il valore principale di questa risoluzione è documentativo, mantenendo la leggi
 - **Struttura lineare**: Script semplici e comprensibili
 - **Gestione errori chiara**: Messaggi di errore informativi
 - **Documentazione concisa**: Istruzioni chiare e dirette 
->>>>>>> 3c18aa7e (.)
->>>>>>> 9c02579 (.)
->>>>>>> 9c02579 (.)
->>>>>>> 1420e3b683 (.)
->>>>>>> 574afe9e (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)

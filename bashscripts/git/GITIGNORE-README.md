@@ -29,9 +29,6 @@ Lo script `update-gitignore.sh` permette di applicare il template standardizzato
 
 ```bash
 
->>>>>>> f71d08e230 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
 # Dalla directory del progetto
 cd laravel/Modules
 ./update-gitignore.sh

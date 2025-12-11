@@ -189,12 +189,6 @@ I seguenti file sono stati recentemente risolti:
 [Backlink: fix_all_git_conflicts.md](fix_all_git_conflicts.md)
 [Backlink: git_conflicts_resolution.md](git_conflicts_resolution.md)
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 ### fix_structure.sh
 
 Mantenere la versione più avanzata con funzioni di logging colorate, migliorando:
@@ -263,11 +257,6 @@ I seguenti file sono stati recentemente risolti:
 
 Questa documentazione è collegata bidirezionalmente con la [documentazione principale sulla risoluzione dei conflitti](../../docs/bashscripts_conflict_resolution.md) nella root del progetto. 
 
->>>>>>> e0c964a3 (first)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 #### Utilizzo
 ```bash
 ./bashscripts/utils/conflict_analyzer.sh
@@ -284,12 +273,6 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 1: Identificazione
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Trova tutti i file con conflitti
 ./bashscripts/git/find_conflicts.sh
 ```
@@ -297,12 +280,6 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 2: Analisi
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Analizza i conflitti trovati
 ./bashscripts/utils/conflict_analyzer.sh
 ```
@@ -310,12 +287,6 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 3: Risoluzione Mirata
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Risolvi manualmente i conflitti più critici
 ./bashscripts/utils/resolve_conflicts.sh [file_critico]
 ```
@@ -323,12 +294,6 @@ Questa documentazione è collegata bidirezionalmente con la [documentazione prin
 ### Fase 4: Risoluzione Automatica
 ```bash
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Risolvi automaticamente i conflitti rimanenti meno critici
 ./bashscripts/utils/fix_all_git_conflicts.sh
 ```
@@ -365,21 +330,11 @@ Gli script possono essere migliorati e personalizzati. Per contribuire:
 #!/bin/bash
 
 # =======================
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Nome dello script
 # =======================
 # Descrizione: Breve descrizione dello script
 # Utilizzo: ./path/to/script.sh [argomenti]
 # Autore: Nome dell'autore
->>>>>>> 7de7063d (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> f198176d (.)
->>>>>>> e0c964a3 (first)
 # =======================
 
 # Dichiarazione delle costanti e variabili
@@ -398,12 +353,6 @@ Quando un `git pull` fallisce a causa di conflitti:
 ```bash
 git pull origin main
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Conflitti rilevati
 ./bashscripts/utils/conflict_analyzer.sh
 ./bashscripts/utils/resolve_conflicts.sh [file_conflittuale]
@@ -414,12 +363,6 @@ Prima di eseguire un commit, verificare l'assenza di conflitti:
 ```bash
 ./bashscripts/git/find_conflicts.sh
 
->>>>>>> e0c964a3 (first)
->>>>>>> 3c18aa7e (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
 # Se vengono trovati conflitti, risolverli
 git add .
 git commit -m "Messaggio del commit"
@@ -451,11 +394,3 @@ Per pulire un repository con molti conflitti non risolti:
 - [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
 - [Convenzioni di Namespace](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
 - [Risoluzione Conflitti nei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
->>>>>>> e0c964a3 (first)
->>>>>>> d83fe8da (.)
->>>>>>> 3c18aa7e (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> 71ff9e32 (.)
->>>>>>> ec52a6b4 (.)
->>>>>>> e0c964a3 (first)
