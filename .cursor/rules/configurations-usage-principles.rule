@@ -53,7 +53,9 @@ Le azioni dei form **DEVONO** essere richiamate dai metodi PHP, non hardcoded ne
 #### ✅ CORRETTO: Utilizzo delle azioni definite nella classe
 
 ```blade
-<x-filament-panels::form.actions :actions="$this->getSmsFormActions()" />
+@foreach ($this->getSmsFormActions() as $action)
+    {{ $action }}
+@endforeach
 ```
 
 ## Riferimenti
