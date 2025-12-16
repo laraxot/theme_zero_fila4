@@ -72,3 +72,4 @@ laravel/
 public_html/
 .env.docker
 .env.latest
+node_modules/
