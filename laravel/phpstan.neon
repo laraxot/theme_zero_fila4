@@ -37,18 +37,15 @@ parameters:
         - ./*/phpinsights.php
         - ./*/rector.php
         - ./*/*.blade.php
-        # - ./Modules/Activity
         - ./Modules/Media/app/Actions/Image/Merge.php
         # - ./Modules/Xot/app/Filament/Traits/HasXotTable.php
         - ./Modules/*/packages/*
         - ./Modules/*/tests/*
-        #- ./Modules/*/vendor/*
-        #- ./Modules/*/*.blade.php
 
     bootstrapFiles:
         # - ./phpstan_bootstrap.php
         - ./phpstan_constants.php
-        # - ./vendor/amenadiel/jpgraph/src/config.inc.php
+        - ./vendor/amenadiel/jpgraph/src/config.inc.php
 
     scanFiles:
         - ./Modules/Xot/Helpers/Helper.php

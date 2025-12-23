@@ -1,3 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     fill="none" 
+     viewBox="0 0 24 24" 
+     stroke="currentColor"
+     stroke-width="1.5"
+     aria-hidden="true" 
+     role="img"
+     aria-label="Media Management Logo">
+    <style>
+        .media-camera { 
+            animation: focus-adjust 3s ease-in-out infinite;
+            transform-origin: 12px 12px;
+        }
+        .media-lens { 
+            animation: aperture-spin 6s linear infinite;
+            transform-origin: 12px 12px;
+        }
+        .media-flash { 
+            animation: flash-blink 4s ease-in-out infinite;
+        }
+        .media-waves { 
+            animation: wave-flow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes focus-adjust {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes aperture-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes flash-blink {
+            0%, 90%, 100% { opacity: 0.6; }
+            5%, 15% { opacity: 1; }
+        }
+        
+        @keyframes wave-flow {
+            0% { opacity: 0.4; transform: translateX(-1px); }
+            100% { opacity: 0.8; transform: translateX(1px); }
+        }
+        
+        svg:hover .media-camera { 
+            animation-duration: 1s; 
+        }
+        svg:hover .media-lens { 
+            animation-duration: 2s; 
+        }
+        svg:hover .media-flash { 
+            animation-duration: 1s; 
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .media-camera { opacity: 0.95; }
+            .media-lens { opacity: 0.9; }
+            .media-flash { opacity: 0.8; }
+            .media-waves { opacity: 0.7; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .media-camera, .media-lens, .media-flash, .media-waves { animation: none; }
+        }
+    </style>
+    
+    <!-- Camera body -->
+    <rect class="media-camera" x="2" y="9" width="20" height="12" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Camera lens -->
+    <circle class="media-lens" cx="12" cy="15" r="4" stroke-linecap="round" stroke-linejoin="round" />
+    <circle class="media-lens" cx="12" cy="15" r="2" stroke-width="1" opacity="0.7" />
+    
+    <!-- Camera flash -->
+    <rect class="media-flash" x="6" y="6" width="2" height="3" rx="1" fill="currentColor" opacity="0.6" />
+    
+    <!-- Viewfinder -->
+    <rect class="media-camera" x="17" y="6" width="3" height="2" rx="1" stroke-width="1" opacity="0.8" />
+    
+    <!-- Media waves/signals -->
+    <g class="media-waves">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M16 9c1.5 0 2.5 1 2.5 2s-1 2-2.5 2" stroke-width="1" opacity="0.5" />
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M8 9c-1.5 0-2.5 1-2.5 2s1 2 2.5 2" stroke-width="1" opacity="0.5" />
+    </g>
+    
+    <!-- Focus indicators -->
+    <circle cx="12" cy="15" r="6" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 4" />
 </svg>
