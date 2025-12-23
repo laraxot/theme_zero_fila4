@@ -1,0 +1,37 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Activitylog & Audit: Regole Trasversali
+
+## Introduzione
+Queste regole definiscono l'uso di spatie/laravel-activitylog per audit trail e logging eventi.
+
+## Regola
+- Usare SEMPRE activitylog per tracciare eventi, mai tabelle custom come ModerationLog.
+- Applicare il trait LogsActivity ai modelli rilevanti.
+- Loggare manualmente eventi custom con activity().
+
+## Esempio
+```php
+use Spatie\Activitylog\Traits\LogsActivity;
+class User extends Model {
+    use LogsActivity;
+    protected static $logAttributes = ['state', 'type'];
+    protected static $logName = 'user_moderation';
+}
+activity()->performedOn($user)->causedBy(auth()->user())->log('User approved');
+```
+
+## Checklist
+- [ ] Nessuna tabella custom per audit
+- [ ] Trait LogsActivity sui modelli
+- [ ] Log manuale per eventi custom
+
+## Collegamenti correlati
+- [User/activitylog.mdc](mdc:../../laravel/Modules/User/docs/activitylog.mdc)
+- [Activity/README.md](mdc:../../laravel/Modules/Activity/docs/README.md)
+- [activitylog](mdc:../../docs/notifications-system.md)
+- [README centrale](mdc:../../docs/README.md)
+- [User/README](mdc:../../laravel/Modules/User/docs/README.md)

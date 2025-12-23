@@ -1,0 +1,38 @@
+---
+description: Conventions for terminology and package usage in the User module.
+globs: []
+alwaysApply: false
+---
+
+# User Module Conventions
+
+**When**: Working with user data, types, and state management in the project.
+
+**What**:
+- **User Type Naming**: When distinguishing between different user types, use `type` as the column name or property in models.
+- **State Field Naming**: Use `state` for tracking user status or moderation state, instead of `moderation_status` or other variations.
+- **Queueable Actions**: We use [@spatie/laravel-queueable-action](https://github.com/spatie/laravel-queueable-action) for handling actions that can be queued, instead of traditional Services. This ensures asynchronous processing of user moderation tasks.
+- **Activity Logging**: We utilize [@spatie/laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction) for logging user activities and moderation state changes, replacing the concept of ModerationLog. This package provides a comprehensive logging system for tracking changes to user models.
+
+**Because**: 
+- Using `type` for user categorization aligns with established Laravel packages like `tighten/parental`, ensuring compatibility and clarity in model inheritance.
+- Using `state` for status tracking aligns with `spatie/laravel-model-states`, providing a clear and consistent approach to managing user states.
+- Queueable actions improve performance by allowing asynchronous processing.
+- Activity logging with a dedicated package ensures robust tracking and audit capabilities.
+
+**Example**:
+```php
+// In a migration file
+Schema::table('users', function (Blueprint $table) {
+    $table->string('type')->nullable();
+    $table->string('state')->default('pending');
+});
+
+// In a model
+class User extends Authenticatable
+{
+    protected $casts = [
+        'type' => UserType::class,
+        'state' => UserState::class,
+    ];
+}

@@ -1,0 +1,26 @@
+# Zen Principles
+
+**When**: Approaching problem-solving or design in the application's development process.
+
+**Then**:
+- Embrace simplicity, focus, and mindfulness in design and coding.
+- Eliminate unnecessary distractions in user interfaces and workflows.
+- Strive for balance and harmony in both code structure and user experience.
+
+**Because**:
+- Promotes a calm and efficient development environment.
+- Enhances user satisfaction through intuitive and uncluttered designs.
+- Encourages thoughtful and deliberate decision-making.
+
+**Examples**:
+
+*Correct*:
+- Design a minimalist UI that focuses on core functionality.
+- Write code with clear intent, avoiding over-complication.
+
+*Incorrect*:
+- Creating cluttered interfaces with excessive features.
+- Writing convoluted code that lacks clarity or focus.
+
+**See**:
+- [UI Design Principles](../Modules/UI/docs/UI_DESIGN_PRINCIPLES.md)

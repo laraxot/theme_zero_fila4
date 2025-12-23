@@ -1,0 +1,162 @@
+# CMS Translation Standards - Modulo Cms
+
+## Regole Fondamentali
+
+### Struttura File
+- SEMPRE utilizzare `declare(strict_types=1);`
+- SEMPRE utilizzare sintassi array `[]` invece di `array()`
+- SEMPRE terminare con return array completo
+
+### Struttura Espansa Obbligatoria
+
+```php
+'field_name' => [
+    'label' => 'Etichetta in Italiano',
+    'placeholder' => 'Placeholder specifico',
+    'helper_text' => 'Testo aiuto DIVERSO da placeholder',
+],
+```
+
+### Regole Specifiche
+1. **Label**: SEMPRE in italiano, significativo e contestuale
+2. **Placeholder**: SEMPRE diverso dalla label, specifico per il campo
+3. **Helper_text**: SEMPRE diverso da placeholder e label, descrive l'uso del campo
+4. **Mai** helper_text uguale alla chiave del campo
+5. **Mai** utilizzare stringhe inglesi non tradotte
+
+## Sezioni Obbligatorie
+
+### Fields
+- Campi raggruppati logicamente (Content, Media, Design, Company, etc.)
+- Ogni campo con struttura espansa completa
+- Commenti per separare gruppi logici
+
+### Actions
+```php
+'actions' => [
+    'action_name' => [
+        'label' => 'Etichetta Azione',
+        'success' => 'Messaggio successo',
+        'error' => 'Messaggio errore',
+        'confirmation' => 'Messaggio conferma (se necessario)',
+    ],
+],
+```
+
+### Sections
+```php
+'sections' => [
+    'section_name' => [
+        'label' => 'Nome Sezione',
+        'description' => 'Descrizione scopo sezione',
+    ],
+],
+```
+
+### Messages
+```php
+'messages' => [
+    'success_message' => 'Messaggio di successo',
+    'error_message' => 'Messaggio di errore',
+    'validation_failed' => 'Messaggi di validazione',
+],
+```
+
+### Validation (opzionale)
+```php
+'validation' => [
+    'rule_name' => 'Messaggio errore tradotto',
+],
+```
+
+## Campi Comuni CMS
+
+### Content Fields
+- title, slug, content, description, subtitle, text, level
+
+### Media Fields  
+- image, video, gallery, logo, img_uuid, src, alt, caption, ratio, width, height
+
+### Layout Fields
+- style, size, alignment, gap, orientation, background, class, type, view
+
+### Company Fields
+- company_name, email, phone, address, map_url, logo, copyright
+
+### Navigation Fields
+- items, links, url, label, target, icon, social_links, platform
+
+### Interactive Fields
+- buttons, button_text, button_link, cta_text, cta_link
+
+### Structure Fields
+- sections, content_blocks, sidebar_blocks, footer_blocks
+
+## Anti-Pattern da Evitare
+
+```php
+// ❌ ERRATO
+'title' => [
+    'label' => 'title', // Non tradotto
+],
+
+// ❌ ERRATO  
+'phone' => [
+    'label' => 'Telefono',
+    'placeholder' => 'Telefono', // Uguale alla label
+    'helper_text' => 'phone', // Uguale alla chiave
+],
+
+// ❌ ERRATO
+'email' => [
+    'label' => 'Email',
+    'placeholder' => 'Inserisci email',
+    'helper_text' => 'Inserisci email', // Uguale al placeholder
+],
+```
+
+## Pattern Corretto
+
+```php
+// ✅ CORRETTO
+'title' => [
+    'label' => 'Titolo',
+    'placeholder' => 'Inserisci il titolo del contenuto',
+    'helper_text' => 'Titolo principale che apparirà nel contenuto',
+],
+
+'phone' => [
+    'label' => 'Telefono',
+    'placeholder' => '+39 000 000 0000',
+    'helper_text' => 'Numero di telefono principale per contatti',
+],
+
+'email' => [
+    'label' => 'Email',
+    'placeholder' => 'info@azienda.it',
+    'helper_text' => 'Indirizzo email di contatto principale',
+],
+```
+
+## File Implementati
+- ✅ create.php - Traduzioni per creazione contenuti
+- ✅ edit_section.php - Traduzioni per editing sezioni  
+- ✅ edit.php - Traduzioni per editing generale
+- ✅ txt.php - Traduzioni complete per tutti i componenti
+
+## Controllo Qualità
+- [ ] Verificare declare(strict_types=1) presente
+- [ ] Verificare sintassi [] invece di array()
+- [ ] Verificare struttura espansa completa
+- [ ] Verificare helper_text diverso da placeholder
+- [ ] Verificare traduzioni complete in italiano
+- [ ] Verificare raggruppamenti logici con commenti
+
+---
+*Ultimo aggiornamento: Gennaio 2025*
+*Modulo: Cms*
+*Standard: Laraxot Complete Translation Structure*
+description:
+globs:
+alwaysApply: false
+---

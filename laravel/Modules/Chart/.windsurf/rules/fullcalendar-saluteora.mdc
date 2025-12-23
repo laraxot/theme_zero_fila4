@@ -1,0 +1,347 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole FullCalendar Multi-Tenant per <nome progetto>
+
+## Principi Fondamentali
+
+### Estensione delle Classi Base
+- **SEMPRE** estendere direttamente `Saade\FilamentFullCalendar\Widgets\FullCalendarWidget`
+- **MAI** utilizzare `Modules\Xot\Filament\Widgets\XotBaseFullCalendarWidget` (non esiste nel modulo Xot)
+- Utilizzare il trait `Modules\<nome progetto>\Traits\HasFullCalendarConfig` per configurazioni comuni
+
+### Architettura Multi-Tenant
+- **3 livelli di accesso**: Paziente, Dottore (con tenancy), Admin
+- **Tenancy di Filament**: Utilizzare `Filament::getTenant()` per studio corrente
+- **Isolamento dati**: Ogni widget filtra automaticamente per permessi utente
+- **Sicurezza**: Policy e controlli di accesso sempre implementati
+
+### Namespace e Struttura
+- Widget calendar: `Modules\<nome progetto>\Filament\Widgets\`
+- Modelli: `Modules\<nome progetto>\Models\`
+- Enum: `Modules\<nome progetto>\Enums\`
+- Trait: `Modules\<nome progetto>\Traits\`
+
+## Widget Multi-Tenant Principali
+
+### 1. PatientAppointmentWidget
+```php
+// Per pazienti - Solo i propri appuntamenti
+class PatientAppointmentWidget extends FullCalendarWidget
+{
+    public static function canView(): bool
+    {
+        return auth()->user()->hasRole('patient');
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        return Appointment::query()
+            ->where('patient_id', auth()->id()) // FILTRO OBBLIGATORIO
+            ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])
+            ->get()
+            ->map(fn($appointment) => $this->mapToEventData($appointment))
+            ->toArray();
+    }
+}
+```
+
+### 2. DoctorStudioAppointmentWidget
+```php
+// Per dottori - Appuntamenti dello studio corrente
+class DoctorStudioAppointmentWidget extends FullCalendarWidget
+{
+    public static function canView(): bool
+    {
+        return auth()->user()->hasAnyRole(['doctor', 'studio_admin']);
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        $studio = Filament::getTenant(); // TENANCY OBBLIGATORIO
+        $user = auth()->user();
+
+        $query = Appointment::query()
+            ->where('studio_id', $studio->id) // FILTRO STUDIO
+            ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']]);
+
+        // Se non è admin dello studio, mostra solo i suoi appuntamenti
+        if (!$user->hasRole('studio_admin')) {
+            $query->where('doctor_id', $user->id);
+        }
+
+        return $query->get()
+            ->map(fn($appointment) => $this->mapToEventData($appointment))
+            ->toArray();
+    }
+}
+```
+
+### 3. AdminAllAppointmentsWidget
+```php
+// Per super admin - Tutti gli appuntamenti
+class AdminAllAppointmentsWidget extends FullCalendarWidget
+{
+    public ?string $selectedStudio = null;
+
+    public static function canView(): bool
+    {
+        return auth()->user()->hasRole('super_admin');
+    }
+
+    public function fetchEvents(array $fetchInfo): array
+    {
+        $query = Appointment::query()
+            ->with(['patient', 'doctor', 'studio'])
+            ->whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']]);
+
+        // Filtro opzionale per studio
+        if ($this->selectedStudio) {
+            $query->where('studio_id', $this->selectedStudio);
+        }
+
+        return $query->get()
+            ->map(fn($appointment) => $this->mapToEventData($appointment))
+            ->toArray();
+    }
+}
+```
+
+## Implementazione Widget
+
+### Proprietà Obbligatorie
+```php
+class MyCalendarWidget extends FullCalendarWidget
+{
+    // Modello associato SEMPRE richiesto
+    public Model|string|null $model = Appointment::class;
+
+    // Ordinamento per dashboard
+    protected static ?int $sort = 1;
+
+    // Altezza massima consigliata
+    protected static ?string $maxHeight = '600px';
+}
+```
+
+### Metodi Richiesti
+
+#### fetchEvents()
+- **SEMPRE** utilizzare eager loading con `with()`
+- **SEMPRE** filtrare per range di date: `whereBetween('start_time', [$fetchInfo['start'], $fetchInfo['end']])`
+- **SEMPRE** applicare filtri di sicurezza basati su ruolo utente
+- **SEMPRE** restituire array di `EventData` objects
+- **MAI** restituire più di 100 eventi per chiamata
+
+#### getFormSchema()
+- **SEMPRE** restituire array associativo con chiavi string
+- **SEMPRE** raggruppare campi in Section con chiavi descrittive
+- **MAI** utilizzare `->label()` (gestito da LangServiceProvider)
+
+#### config()
+- **SEMPRE** utilizzare il trait `HasFullCalendarConfig`
+- **SEMPRE** mergiare configurazioni: `$this->mergeConfigs()`
+- **SEMPRE** includere configurazione localizzata italiana
+
+### Gestione Eventi
+
+#### EventData Structure
+```php
+EventData::make()
+    ->id($model->id)                    // SEMPRE richiesto
+    ->title($this->formatTitle($model)) // SEMPRE formattato
+    ->start($model->start_time)         // SEMPRE datetime
+    ->end($model->end_time)             // SEMPRE datetime
+    ->backgroundColor($this->getColor($model->status))
+    ->borderColor($this->getBorderColor($model->type))
+    ->textColor('#ffffff')              // Contrasto leggibile
+    ->extendedProps([                   // Dati aggiuntivi
+        'patient_name' => $model->patient?->full_name,
+        'doctor_name' => $model->doctor?->full_name,
+        'studio_name' => $model->studio?->name,
+        'status' => $model->status->value,
+        'type' => $model->type->value,
+    ])
+```
+
+#### Colori Standardizzati per Multi-Tenant
+- **Pazienti**: Schema colori basato su stato (blu=programmato, verde=confermato)
+- **Dottori**: Schema colori basato su tipo visita + urgenza
+- **Admin**: Schema colori basato su studio per distinguere visivamente
+
+## Configurazioni Multi-Tenant
+
+### Panel Configuration
+```php
+// Panel Paziente
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('patient')
+        ->widgets([PatientAppointmentWidget::class]);
+}
+
+// Panel Dottore (con tenancy)
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('doctor')
+        ->tenant(Studio::class)
+        ->widgets([DoctorStudioAppointmentWidget::class]);
+}
+
+// Panel Admin
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->id('admin')
+        ->widgets([AdminAllAppointmentsWidget::class]);
+}
+```
+
+### Localizzazione Italiana
+```php
+'locale' => 'it',
+'timezone' => 'Europe/Rome',
+'firstDay' => 1, // Lunedì
+'buttonText' => [
+    'today' => 'Oggi',
+    'month' => 'Mese',
+    'week' => 'Settimana',
+    'day' => 'Giorno',
+],
+'eventTimeFormat' => [
+    'hour' => '2-digit',
+    'minute' => '2-digit',
+    'hour12' => false,
+],
+```
+
+## Sicurezza Multi-Tenant
+
+### Policy Implementation
+```php
+class AppointmentPolicy
+{
+    public function view(User $user, Appointment $appointment): bool
+    {
+        // Paziente: solo i suoi appuntamenti
+        if ($user->hasRole('patient')) {
+            return $appointment->patient_id === $user->id;
+        }
+
+        // Dottore: appuntamenti del suo studio
+        if ($user->hasRole('doctor')) {
+            $tenant = Filament::getTenant();
+            return $appointment->studio_id === $tenant?->id &&
+                   $appointment->doctor_id === $user->id;
+        }
+
+        // Studio admin: tutti gli appuntamenti del suo studio
+        if ($user->hasRole('studio_admin')) {
+            $tenant = Filament::getTenant();
+            return $appointment->studio_id === $tenant?->id;
+        }
+
+        // Super admin: tutto
+        return $user->hasRole('super_admin');
+    }
+}
+```
+
+### Controlli di Accesso
+- **SEMPRE** implementare `canView()` per controllo accessi
+- **SEMPRE** filtrare eventi basati sui permessi utente
+- **SEMPRE** utilizzare tenancy per isolamento dati
+- **MAI** esporre dati di altri studi/pazienti
+
+## Performance e Caching
+
+### Performance Multi-Tenant
+```php
+public function fetchEvents(array $fetchInfo): array
+{
+    $cacheKey = sprintf(
+        'calendar_events_%s_%s_%s_%s',
+        auth()->id(),
+        $this->getTenantId(),
+        $fetchInfo['start'],
+        $fetchInfo['end']
+    );
+
+    return cache()->remember($cacheKey, 300, function () use ($fetchInfo) {
+        return $this->queryEvents($fetchInfo);
+    });
+}
+```
+
+### Ottimizzazioni
+- **SEMPRE** utilizzare caching per eventi con chiavi specifiche per utente/tenant
+- **SEMPRE** limitare query con `limit()` o paginazione
+- **SEMPRE** utilizzare eager loading per relazioni
+- **MAI** caricare più di 100 eventi contemporaneamente
+
+## Errori Comuni da Evitare
+
+### ❌ Errori Multi-Tenant
+- Non filtrare per tenant negli widget dottore
+- Esporre dati di altri studi/pazienti
+- Non implementare controlli di accesso
+- Utilizzare cache condivise tra tenant
+
+### ❌ Errori di Sicurezza
+- Non verificare permessi nei widget
+- Esporre dati sensibili senza autorizzazione
+- Non utilizzare policy per controllo accessi
+- Permettere modifiche cross-tenant
+
+### ❌ Errori di Performance
+- Caricare troppi eventi contemporaneamente
+- Non utilizzare caching specifico per tenant
+- Query N+1 nelle relazioni
+- Non limitare range di date
+
+## Testing Multi-Tenant
+
+### Test Obbligatori
+```php
+// Test isolamento tenant
+public function test_doctor_cannot_see_other_studio_appointments()
+
+// Test permessi paziente
+public function test_patient_can_only_see_own_appointments()
+
+// Test admin
+public function test_admin_can_see_all_appointments()
+
+// Test tenancy
+public function test_tenant_switching_filters_data_correctly()
+```
+
+## Documentazione
+
+### File di Documentazione
+- [fullcalendar_multi_tenant_widgets.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_multi_tenant_widgets.md)
+- [fullcalendar_integration.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_integration.md)
+- [fullcalendar_widgets.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_widgets.md)
+- [fullcalendar_configuration.md](../laravel/Modules/<nome progetto>/docs/fullcalendar_configuration.md)
+
+## Filosofia Multi-Tenant
+
+### Principi Guida
+- **Isolamento**: Ogni utente vede solo i dati appropriati
+- **Sicurezza**: Protezione dati sempre prioritaria
+- **Semplicità**: Interfaccia intuitiva per ogni tipo di utente
+- **Performance**: Caricamento rapido anche con multi-tenancy
+- **Scalabilità**: Supporto per crescita numero studi/utenti
+
+### Approccio Sanitario Multi-Studio
+- Dottori possono lavorare in più studi
+- Isolamento completo dei dati tra studi
+- Gestione centralizzata per amministratori
+- Privacy e sicurezza dati pazienti sempre garantita
+- Workflow ottimizzati per ambiente sanitario distribuito
+
+Ricorda: in un ambiente multi-tenant sanitario, la sicurezza e l'isolamento dei dati sono fondamentali. Ogni widget deve essere progettato con la massima attenzione alla privacy e alla conformità normativa.
