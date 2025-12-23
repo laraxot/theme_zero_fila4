@@ -1,0 +1,14 @@
+{
+    "name": "Limesurvey",
+    "alias": "limesurvey",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Limesurvey\\Providers\\LimesurveyServiceProvider",
+        "Modules\\Limesurvey\\Providers\\Filament\\AdminPanelProvider"
+    ],
+    "aliases": [],
+    "files": [],
+    "requires": []
+}

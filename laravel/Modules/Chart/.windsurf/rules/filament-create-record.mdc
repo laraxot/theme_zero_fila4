@@ -1,0 +1,48 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Regole per l'Utilizzo di XotBaseCreateRecord
+
+## When
+- Stai creando una pagina di creazione record in Filament
+- La pagina deve gestire la creazione di nuovi record
+- La pagina è parte di una Resource Filament
+
+## Then
+- Estendi SEMPRE `Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord`
+- NON estendere mai direttamente `\Filament\Resources\Pages\CreateRecord`
+- NON estendere mai `XotBasePage` per le pagine di creazione
+- Implementa i metodi richiesti come definito nella documentazione di XotBaseCreateRecord
+
+## Because
+- XotBaseCreateRecord fornisce funzionalità comuni e configurazioni predefinite
+- Mantiene la coerenza tra i moduli
+- Implementa il sistema di traduzione automatico
+- Gestisce correttamente il form e la validazione
+
+## Examples
+
+```php
+// CORRETTO
+namespace Modules\YourModule\Filament\Resources\YourResource\Pages;
+
+use Modules\Xot\Filament\Resources\Pages\XotBaseCreateRecord;
+
+class CreateYourRecord extends XotBaseCreateRecord
+{
+    protected static string $resource = YourResource::class;
+}
+
+// ERRATO
+class CreateYourRecord extends XotBasePage // ERRORE: Usa XotBaseCreateRecord
+{
+    protected static string $resource = YourResource::class;
+}
+```
+
+## Common Pitfalls
+- Estendere XotBasePage invece di XotBaseCreateRecord
+- Non implementare i metodi richiesti
+- Modificare il livello di accesso dei metodi ereditati

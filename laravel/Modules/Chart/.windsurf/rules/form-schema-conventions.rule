@@ -1,0 +1,61 @@
+# Convenzioni per i Form Schema
+
+## Regola Fondamentale per Array di Schema
+
+Tutti i metodi `getXFormSchema()` **DEVONO** restituire array **associativi** con **chiavi string**, non array sequenziali.
+
+## Convenzione di Naming
+
+Il nome del metodo deve seguire la convenzione `get{FormName}FormSchema()`. Se il form si chiama `emailForm`, il metodo deve chiamarsi `getEmailFormSchema()`.
+
+## Esempio Errato vs Corretto
+
+### ❌ ERRATO: Array Sequenziale/Numerico
+
+```php
+public function getSmsFormSchema(): array
+{
+    return [
+        Forms\Components\TextInput::make('to')
+            ->tel()
+            ->required(),
+        Forms\Components\TextInput::make('message')
+            ->required(),
+        Forms\Components\Select::make('driver')
+            ->options([
+                'netfun' => 'Netfun',
+                'twilio' => 'Twilio',
+            ]),
+    ];
+}
+```
+
+### ✅ CORRETTO: Array Associativo con Chiavi String
+
+```php
+public function getSmsFormSchema(): array
+{
+    return [
+        'to' => Forms\Components\TextInput::make('to')
+            ->tel()
+            ->required(),
+        'message' => Forms\Components\TextInput::make('message')
+            ->required(),
+        'driver' => Forms\Components\Select::make('driver')
+            ->options([
+                'netfun' => 'Netfun',
+                'twilio' => 'Twilio',
+            ]),
+    ];
+}
+```
+
+## Motivazioni
+
+1. **Riferimento Esplicito**: Permette di riferirsi direttamente ai campi del form
+2. **Facilità di Sovrascrittura**: Le classi figlie possono modificare parti dello schema
+3. **Manipolazione Dinamica**: Più semplice manipolare dinamicamente i campi
+4. **Compatibilità XotBasePage**: Progettato per lavorare con array associativi
+
+## Riferimenti
+- [Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md](file:///var/www/html//laravel/Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md)

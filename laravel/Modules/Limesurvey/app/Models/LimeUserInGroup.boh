@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Created by Reliese Model.
+ */
+
+namespace Modules\Limesurvey\Models;
+
+/**
+ * Class LimeUserInGroup.
+ *
+ * @property int $ugid
+ * @property int $uid
+ */
+class LimeUserInGroup extends BaseModel {
+    protected $fillable=['ugid','uid'];
+
+    protected $table = 'lime_user_in_groups';
+    public $incrementing = false;
+    public $timestamps = false;
+
+    protected $casts = [
+        'ugid' => 'int',
+        'uid' => 'int',
+    ];
+}

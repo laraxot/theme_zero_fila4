@@ -1,0 +1,66 @@
+# Regola: Modal Heading e Description come Stringhe Dirette
+
+## Principio Fondamentale
+Le proprietà `modal_heading` e `modal_description` nelle traduzioni devono essere **stringhe dirette**, non array con chiave `label`.
+
+## Motivazione
+- **Coerenza con Filament**: Filament si aspetta stringhe dirette per queste proprietà
+- **Semplicità**: Evita nesting inutile di array
+- **Performance**: Accesso diretto senza lookup di chiavi
+- **Leggibilità**: Codice più pulito e intuitivo
+
+## Pattern Corretto
+```php
+'actions' => [
+    'edit' => [
+        'label' => 'Modifica',
+        'modal_heading' => 'Modifica Profilo',
+        'modal_description' => 'Aggiorna le informazioni del tuo profilo personale',
+    ],
+],
+```
+
+## Pattern Errato
+```php
+'actions' => [
+    'edit' => [
+        'label' => 'Modifica',
+        'modal_heading' => [
+            'label' => 'Modifica Profilo', // NON NECESSARIO
+        ],
+        'modal_description' => [
+            'label' => 'Aggiorna le informazioni del tuo profilo personale', // NON NECESSARIO
+        ],
+    ],
+],
+```
+
+## Utilizzo nel Codice
+```php
+->modalHeading(static::trans('actions.edit.modal_heading'))
+->modalDescription(static::trans('actions.edit.modal_description'))
+```
+
+## Applicazione
+- Tutti i moduli: `Modules/*/lang/*/`
+- Tutti i temi: `Themes/*/lang/*/`
+- Tutte le azioni: `actions.*.modal_heading`, `actions.*.modal_description`
+- Tutte le lingue: it, en, de, etc.
+
+## Eccezioni
+- Campi form: Mantengono struttura espansa con `label`, `placeholder`, `help`
+- Messaggi: Possono mantenere struttura espansa se necessario
+- Altri elementi: Seguono le regole specifiche per il loro tipo
+
+## Checklist
+- [ ] `modal_heading` è stringa diretta
+- [ ] `modal_description` è stringa diretta
+- [ ] Non ci sono array inutili con chiave `label`
+- [ ] Le traduzioni sono naturali e contestuali
+- [ ] Coerenza tra tutte le lingue
+
+*Ultimo aggiornamento: 2025-01-06*
+description:
+globs:
+alwaysApply: false
+---
