@@ -72,8 +72,4 @@ laravel/
 public_html/
 .env.docker
 .env.latest
-<<<<<<< HEAD
-=======
 node_modules/
-node_modules/
->>>>>>> b460befb (.)
