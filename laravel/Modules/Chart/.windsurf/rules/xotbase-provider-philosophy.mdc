@@ -1,0 +1,251 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Filosofia dei Provider XotBase
+
+## Principio Fondamentale
+"Non avrai altro provider all'infuori di XotBase..."
+
+### Significato Profondo
+- XotBase rappresenta la "Via" (道, dào) del nostro sistema
+- Ogni modulo deve seguire questa via per mantenere l'armonia
+- La deviazione dalla via porta al caos e alla mancanza di manutenibilità
+
+## 1. Estensione Provider
+
+### 1.1 Principio di Ereditarietà
+- **NON estendere MAI direttamente i provider Laravel**
+  - I provider Laravel sono "vuoti" (空, kū) di significato specifico
+  - Non conoscono il nostro contesto
+  - Non implementano le nostre convenzioni
+  - Sono come "vasi vuoti" da riempire
+
+- **Usare SEMPRE i provider XotBase corrispondenti**
+  - I provider XotBase sono "pieni" (実, jitsu) di significato
+  - Conoscono il nostro contesto
+  - Implementano le nostre convenzioni
+  - Sono come "vasi pieni" di saggezza
+
+- **Rimuovere import inutili di provider Laravel**
+  - Gli import inutili sono come "pesi morti"
+  - Appesantiscono il codice
+  - Creano confusione
+  - Violano il principio di semplicità
+
+### 1.2 Mappatura Provider
+| Provider Laravel                  | Provider XotBase da Usare                        | Significato                                    |
+|-----------------------------------|--------------------------------------------------|------------------------------------------------|
+| `\Illuminate\Support\ServiceProvider` | `Modules\Xot\Providers\XotBaseServiceProvider` | Base per tutti i provider                      |
+| `\Illuminate\Foundation\Support\Providers\RouteServiceProvider` | `Modules\Xot\Providers\XotBaseRouteServiceProvider` | Gestione route modulare                        |
+| `\Illuminate\Foundation\Support\Providers\EventServiceProvider` | `Modules\Xot\Providers\XotBaseEventServiceProvider` | Gestione eventi modulare                       |
+
+## 2. Proprietà Obbligatorie
+
+### 2.1 Nome del Modulo
+```php
+public string $name = 'SaluteMo';
+```
+- **Significato**: Identità del modulo
+- **Filosofia**: Come il nome di una persona, definisce l'essenza
+- **Best Practice**: PascalCase, senza spazi o caratteri speciali
+- **Validazione**: Deve corrispondere al nome della cartella del modulo
+
+### 2.2 Nome in Lowercase
+```php
+public string $nameLower = 'salutemo';
+```
+- **Significato**: Versione lowercase per uso interno
+- **Filosofia**: Come l'umiltà nella vita, il lowercase nel codice
+- **Best Practice**: Tutto minuscolo, senza spazi
+- **Validazione**: Deve essere il lowercase di `$name`
+
+### 2.3 Namespace (RouteServiceProvider)
+```php
+protected $namespace = 'Modules\\SaluteMo\\Http\\Controllers';
+```
+- **Significato**: Spazio dei nomi per i controller
+- **Filosofia**: Come l'indirizzo di una casa, definisce la posizione
+- **Best Practice**: PSR-4, namespace completo
+- **Validazione**: Deve corrispondere alla struttura delle cartelle
+
+## 3. Proprietà Opzionali
+
+### 3.1 Directory del Modulo
+```php
+protected string $module_dir = __DIR__;
+```
+- **Significato**: Percorso base del modulo
+- **Filosofia**: Come la radice di un albero, punto di partenza
+- **Best Practice**: Usare `__DIR__` per robustezza
+- **Uso**: Per path relativi e autoload
+
+### 3.2 Namespace PHP
+```php
+protected string $module_ns = __NAMESPACE__;
+```
+- **Significato**: Namespace base del modulo
+- **Filosofia**: Come il cognome di una famiglia
+- **Best Practice**: Usare `__NAMESPACE__` per coerenza
+- **Uso**: Per autoload e reflection
+
+## 4. Best Practices
+
+### 4.1 Override Consapevole
+- Override SOLO se serve logica custom
+  - Come un maestro Zen, aggiungi solo ciò che è necessario
+  - Ogni override deve avere una ragione chiara
+  - Documenta sempre il perché dell'override
+
+### 4.2 Gestione del Comune
+- Lasciare che XotBase gestisca il comune
+  - Come l'acqua che scorre, lascia che il flusso naturale faccia il suo corso
+  - Non duplicare ciò che è già gestito
+  - Fidati della saggezza della base
+
+### 4.3 Documentazione
+- Documentare ogni deviazione dalla base
+  - Come un diario Zen, annota ogni deviazione
+  - Spiega il perché della deviazione
+  - Mantieni la tracciabilità delle decisioni
+
+### 4.4 Coerenza
+- Mantenere coerenza tra moduli
+  - Come le onde del mare, tutti i moduli devono muoversi in armonia
+  - Segui gli stessi pattern
+  - Rispetta le convenzioni
+
+## 5. Filosofia Zen
+
+### 5.1 Vuoto e Forma
+- Il provider base è il "vuoto" (空, kū)
+  - Contiene la saggezza comune
+  - È come un vaso vuoto pronto ad essere riempito
+  - Rappresenta il potenziale puro
+
+- Il provider specifico è la "forma" (形, katachi)
+  - Manifesta la saggezza in modo specifico
+  - È come un vaso pieno di significato
+  - Rappresenta la realizzazione
+
+### 5.2 Armonia
+- La coerenza è la chiave dell'armonia
+  - Come le note di una musica
+  - Come i petali di un fiore
+  - Come le onde del mare
+
+### 5.3 Semplicità
+- La semplicità è la via della saggezza
+  - Come l'acqua che trova sempre la via più semplice
+  - Come il vento che soffia senza sforzo
+  - Come il sole che sorge ogni giorno
+
+## 6. Checklist
+
+### 6.1 Estensione
+- [ ] Estende il provider XotBase corretto
+  - Verifica la tabella di mappatura
+  - Controlla gli import
+  - Valida l'ereditarietà
+
+### 6.2 Pulizia
+- [ ] Non ha import inutili di provider Laravel
+  - Rimuovi gli import non usati
+  - Verifica le dipendenze
+  - Mantieni il codice pulito
+
+### 6.3 Proprietà
+- [ ] Ha le proprietà obbligatorie
+  - Verifica `$name` e `$nameLower`
+  - Controlla `$namespace` se necessario
+  - Valida i tipi e i valori
+
+### 6.4 Override
+- [ ] Override solo se necessario
+  - Documenta ogni override
+  - Spiega il perché
+  - Verifica la necessità
+
+### 6.5 Documentazione
+- [ ] Documentazione chiara
+  - Commenti in italiano
+  - Spiegazioni dettagliate
+  - Esempi quando necessario
+
+### 6.6 Coerenza
+- [ ] Coerenza con altri moduli
+  - Verifica i pattern
+  - Controlla le convenzioni
+  - Mantieni l'armonia
+
+## 7. Esempi
+
+### 7.1 Implementazione Corretta
+```php
+/**
+ * Service provider per il modulo SaluteMo.
+ *
+ * Estende XotBaseServiceProvider per garantire:
+ * - Centralizzazione di config, views, traduzioni, migrations, comandi, Livewire/Blade components
+ * - Override solo per logica realmente custom (es. observer, schedule, config extra)
+ * - Coerenza, DRY, refactoring sicuro
+ *
+ * Politica: "Non avrai altro provider all'infuori di XotBase..."
+ */
+class SaluteMoServiceProvider extends XotBaseServiceProvider
+{
+    public string $name = 'SaluteMo';
+    public string $nameLower = 'salutemo';
+}
+```
+
+### 7.2 Implementazione Errata
+```php
+/**
+ * ERRORE: Non estende XotBaseServiceProvider
+ * ERRORE: Import inutile di ServiceProvider
+ * ERRORE: Duplicazione di logica comune
+ */
+use Illuminate\Support\ServiceProvider;
+
+class SaluteMoServiceProvider extends ServiceProvider
+{
+    // ERRORE: Duplicazione di logica già presente in XotBase
+    public function boot(): void
+    {
+        $this->registerTranslations();
+        $this->registerConfig();
+        $this->registerViews();
+    }
+}
+```
+
+## 8. Note Finali
+
+### 8.1 La Via del Codice
+- I provider XotBase implementano la nostra "via" (道, dào)
+  - Come un sentiero ben tracciato
+  - Come una strada maestra
+  - Come un fiume che scorre
+
+### 8.2 Il Cammino
+- Ogni modulo deve seguire lo stesso cammino
+  - Come i pellegrini che seguono la stessa via
+  - Come i monaci che seguono la stessa regola
+  - Come le stelle che seguono la stessa orbita
+
+### 8.3 Manutenibilità
+- La coerenza garantisce manutenibilità
+  - Come un giardino ben curato
+  - Come una casa ben costruita
+  - Come un corpo sano
+
+### 8.4 Armonia
+- L'armonia del codice è l'obiettivo
+  - Come l'armonia della natura
+  - Come l'armonia della musica
+  - Come l'armonia della vita
+
+---
+**Questa regola è stata copiata da `.cursor/rules/xotbase-provider-philosophy.mdc`**

@@ -1,0 +1,66 @@
+# Regola Suprema: Console Commands Standard (da ChangeTypeCommand.php)
+
+## Filosofia Estratta dal Capolavoro
+- **Strict Types**: `declare(strict_types=1);` sempre obbligatorio
+- **Laravel Prompts Only**: `text()`, `select()`, `confirm()` - mai `ask()` o `choice()`
+- **XotData e Contracts**: Mai accesso diretto modelli, sempre `XotData::make()` e `UserContract`
+- **Error Handling Robusto**: `method_exists()`, controlli preventivi, `$this->error()` + `return;`
+- **Enum Handling Moderno**: `tryFrom()`, `getLabel()`, type safety completa
+- **Array Helpers**: `Arr::mapWithKeys()` per manipolazioni eleganti
+
+## Template Obbligatorio
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\\{ModuleName}\\Console\\Commands;
+
+use Illuminate\\Console\\Command;
+use Modules\\Xot\\Contracts\\UserContract;
+use Modules\\Xot\\Datas\\XotData;
+use Illuminate\\Support\\Arr;
+
+use function Laravel\\Prompts\\text;
+use function Laravel\\Prompts\\select;
+
+class {Name}Command extends Command
+{
+    protected $name = '{module}:{action}';
+    protected $description = 'Clear description';
+    
+    public function handle(): void
+    {
+        $input = text('Prompt?');
+        $entity = XotData::make()->getMethod($input);
+        
+        if (!$entity) {
+            $this->error(\"Not found.\");
+            return;
+        }
+        
+        if (!method_exists($entity, 'method')) {
+            $this->error('Method missing.');
+            return;
+        }
+        
+        // Rest of implementation
+    }
+}
+```
+
+## Religione
+- "Non avrai altro prompting all'infuori di Laravel Prompts"
+- "Non avrai altro data access all'infuori di XotData e Contracts"
+
+## Anti-Pattern Vietati
+- ❌ `$this->ask()` / `$this->choice()`
+- ❌ `User::where()` accesso diretto
+- ❌ Error handling senza controlli preventivi
+- ❌ Array manipulation con foreach primitivi
+
+## Collegamenti
+- [Modules/User/docs/console_commands_philosophy.md](../../laravel/Modules/User/docs/console_commands_philosophy.md)
+- [Modules/User/app/Console/Commands/ChangeTypeCommand.php](../../laravel/Modules/User/app/Console/Commands/ChangeTypeCommand.php)
+
+*Standard estratto dal capolavoro ChangeTypeCommand.php - giugno 2025*

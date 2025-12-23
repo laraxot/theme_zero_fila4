@@ -1,0 +1,439 @@
+# 🛠️ Soluzioni Comuni per Problemi Git e Bash
+
+## 🔧 Problemi di Interprete Bash
+
+### Fix "bad interpreter: No such file or directory"
+```bash
+# Rimuove caratteri di ritorno a capo Windows
+sed -i -e 's/\r$//' nomefile.sh
+
+# Verifica encoding del file
+file nomefile.sh
+
+# Rende eseguibile lo script
+chmod +x nomefile.sh
+```
+
+## 🔄 Configurazione Git Avanzata
+
+### Setup Repository e Remote
+```bash
+# Fix per "bad interpreter: No such file or directory"
+sed -i -e 's/\r$//' nomefile.sh
+```
+
+## 🔄 Configurazione Git Remoto
+```bash
+# Aggiungere un secondo punto di push
+git remote set-url --push --add origin https://github.com/.....
+
+# Configurazione automatica tracking branch
+git config --global --add --bool push.autoSetupRemote true
+
+# Ignora cambiamenti di permessi
+git config core.fileMode false
+```
+
+## 🔐 Configurazione SSH
+```bash
+# Setup SSH Agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+# Verifica chiavi SSH
+ssh-add -L
+```
+
+## 🔍 Ricerca nei File
+```bash
+# Cerca testo ricorsivamente
+grep -Ril "text-to-find-here" .
+
+# Opzioni:
+# -i: ignore case
+# -R: recursive
+# -l: mostra solo nome file
+```
+
+## 🧹 Pulizia File Temporanei
+```bash
+# Rimuovi file Zone.Identifier
+find . -type f -name "*:Zone.Identifier" -exec rm -f {} \;
+```
+
+## 🚀 Setup Nuovo Repository
+```bash
+# Inizializza nuovo repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Configura remote principale
+git remote add origin <url>
+git push -u origin main
+
+# Aggiunge secondo punto di push (mirror)
+git remote set-url --push --add origin https://github.com/user/repo.git
+
+# Configurazione automatica tracking branch
+git config --global --add --bool push.autoSetupRemote true
+
+# Ignora cambiamenti di permessi (utile su Windows/WSL)
+git config core.fileMode false
+
+# Configurazione globale utente
+git config --global user.name "Nome Utente"
+git config --global user.email "email@example.com"
+```
+
+### Comandi Git Utili
+```bash
+# Stato repository
+git status
+
+# Pull con rebase (evita merge commits)
+git pull --rebase
+
+# Push forzato (ATTENZIONE: solo su branch personali)
+git push --force-with-lease origin <branch>
+
+# Cancella branch locale
+git branch -d <branch-name>
+
+# Cancella branch remoto
+git push origin --delete <branch-name>
+
+# Reset a commit specifico
+git reset --hard <commit-hash>
+
+# Stash modifiche
+git stash
+git stash pop
+
+# Visualizza log compatto
+git log --oneline --graph --all
+```
+
+## 🔐 Configurazione SSH Completa
+
+### Setup SSH Agent e Chiavi
+```bash
+# Avvia SSH Agent
+eval "$(ssh-agent -s)"
+
+# Genera nuova chiave SSH (ED25519 - più sicura)
+ssh-keygen -t ed25519 -C "email@example.com"
+
+# Oppure RSA (se ED25519 non supportata)
+ssh-keygen -t rsa -b 4096 -C "email@example.com"
+
+# Aggiungi chiave all'agent
+ssh-add ~/.ssh/id_ed25519
+
+# Verifica chiavi caricate
+ssh-add -L
+
+# Testa connessione GitHub
+ssh -T git@github.com
+
+# Copia chiave pubblica negli appunti (Ubuntu)
+cat ~/.ssh/id_ed25519.pub | xclip -selection clipboard
+```
+
+### Configurazione SSH Config
+```bash
+# Crea/modifica ~/.ssh/config
+nano ~/.ssh/config
+
+# Esempio configurazione:
+# Host github.com
+#   HostName github.com
+#   User git
+#   IdentityFile ~/.ssh/id_ed25519
+```
+
+## 🔍 Ricerca e Navigazione File
+
+### Comandi Grep Avanzati
+```bash
+# Cerca testo ricorsivamente (ignora case)
+grep -Ril "text-to-find" .
+
+# Cerca con esclusioni
+grep -Ril "text" . --exclude-dir=node_modules --exclude-dir=.git
+
+# Cerca solo in file specifici
+grep -Ril "text" . --include="*.php" --include="*.js"
+
+# Conta occorrenze
+grep -c "pattern" file.txt
+
+# Mostra righe prima e dopo
+grep -A 3 -B 3 "pattern" file.txt
+```
+
+### Find e Locate
+```bash
+# Trova file per nome
+find . -name "*.php" -type f
+
+# Trova file modificati negli ultimi 7 giorni
+find . -mtime -7 -type f
+
+# Trova directory vuote
+find . -type d -empty
+
+# Trova file più grandi di 100MB
+find . -size +100M -type f
+```
+
+## 🧹 Pulizia e Manutenzione
+
+### Rimozione File Temporanei
+```bash
+# Rimuovi file Zone.Identifier (Windows)
+find . -type f -name "*:Zone.Identifier" -delete
+
+# Rimuovi file temporanei comuni
+find . -name "*.tmp" -delete
+find . -name "*.log" -delete
+find . -name ".DS_Store" -delete
+
+# Pulizia Git
+git clean -fd  # Rimuove file non tracciati
+git gc --prune=now  # Garbage collection
+```
+
+### Gestione Permessi Sicura
+```bash
+# Permessi standard per progetti web
+find . -type d -exec chmod 755 {} \;  # Directory
+find . -type f -exec chmod 644 {} \;  # File
+
+# Solo script eseguibili
+chmod +x script.sh
+
+# Aggiungi utente al gruppo www-data
+sudo usermod -aG www-data $(whoami)
+
+# Cambia proprietario (solo se necessario)
+sudo chown -R $(whoami):www-data .
+```
+
+## ⚙️ Gestione PHP e Server
+
+### Cambio Versione PHP
+```bash
+# Ubuntu/Debian - lista versioni disponibili
+sudo update-alternatives --config php
+
+# Installa versione specifica
+sudo apt install php8.1-cli php8.1-fpm
+
+# Verifica versione attiva
+php -v
+
+# Riavvia servizi
+sudo systemctl restart apache2
+sudo systemctl restart nginx
+```
+
+### Debug PHP
+```bash
+# Controlla errori PHP
+php -l file.php
+
+# Esegui script con output errori
+php -d display_errors=1 script.php
+
+# Controlla configurazione
+php --ini
+```
+
+## 🚀 Workflow Development
+
+### Setup Progetto Standard
+```bash
+# Clone e setup
+git clone <repo-url>
+cd <project-dir>
+
+# Se presente composer
+composer install
+
+# Se presente package.json
+npm install
+
+# Se presente requirements.txt (Python)
+pip install -r requirements.txt
+
+# Copia file configurazione
+cp .env.example .env
+
+# Genera chiavi (Laravel)
+php artisan key:generate
+```
+
+### Script Frontend
+```bash
+# Se menu/elementi frontend non si aggiornano
+composer go
+
+# Build assets
+npm run build
+npm run dev
+npm run watch
+```
+
+## 🔄 Comandi Sistema Utili
+
+### Navigazione e File
+```bash
+# Cambia directory e lista
+cd <dir> && ls -la
+
+# Spazio disco
+df -h
+du -sh *
+
+# Processi in esecuzione
+ps aux | grep <processo>
+top
+htop
+
+# Rete
+netstat -tlnp
+ss -tlnp
+```
+
+### Alias Utili da aggiungere in ~/.bashrc
+```bash
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+alias ..='cd ..'
+alias ...='cd ../..'
+```
+
+## ⚠️ Risoluzione Problemi Comuni
+
+### Permission Denied
+```bash
+# Problema: zsh: permission denied: ./script.sh
+# Soluzione:
+chmod +x script.sh
+```
+
+### Include Path Errato (PHP)
+```bash
+# Problema: include(/path/to/file): Failed to open stream
+# Soluzioni:
+1. Controlla path relativi/assoluti
+2. Verifica permessi directory
+3. Rimuovi suffisso "_old" da cartelle moduli
+4. Controlla include_path in php.ini
+```
+
+### Git Push Rejected
+```bash
+# Problema: Updates were rejected
+# Soluzioni:
+git pull --rebase origin main
+# Oppure (se sicuri):
+git push --force-with-lease origin main
+```
+
+### SSH Connection Issues
+```bash
+# Problema: Permission denied (publickey)
+# Soluzioni:
+ssh-add ~/.ssh/id_ed25519
+ssh -vT git@github.com  # Debug verboso
+# Verifica che la chiave sia aggiunta al servizio Git
+```
+
+### Merge Conflicts
+```bash
+# Risolvi conflitti
+git status  # Vedi file in conflitto
+# Modifica manualmente i file
+git add <file-risolto>
+git commit
+
+# Oppure usa tool grafico
+git mergetool
+```
+
+## 📝 Note Importanti
+
+- **Backup sempre** prima di operazioni distruttive
+- **Mai chmod 777** in produzione (usa 755/644)
+- **Force push** solo su branch personali
+- **Test SSH** dopo ogni modifica configurazione
+- **Commit frequenti** con messaggi descrittivi
+- **Pull prima** di ogni push su branch condivisi
+# Configura remote
+git remote add origin <url>
+git push -u origin main
+```
+
+## ⚙️ Configurazione PHP
+```bash
+# Cambia versione PHP
+sudo update-alternatives --config php
+```
+
+## 🔄 Comandi Utili
+```bash
+# Cambia directory
+cd <dir>
+
+# Lista file con dettagli
+ls -la
+
+# Mostra stato git
+git status
+
+# Pull con rebase
+git pull --rebase
+
+# Push forzato
+git push -f origin <branch>
+```
+
+## ⚠️ Problemi Comuni e Soluzioni
+
+### Problema: Accesso Cartelle
+```bash
+# Soluzione: Modifica permessi
+sudo chmod 777 -R .
+```
+
+### Problema: Include Path Errato
+```
+Errore: include(/path/to/file): Failed to open stream
+Soluzione: Rimuovere suffisso _old dalle cartelle del modulo
+```
+
+### Problema: Permission Denied
+```
+Errore: zsh: permission denied: ./script.sh
+Soluzione: sudo chmod 777 -R .
+```
+
+## 🔄 Gestione PHP
+```bash
+# Cambia versione PHP
+sudo update-alternatives --config php
+```
+
+## 🔄 Se menù o altri elementi frontend non si aggiornano
+```bash
+# Eseguire script "go" presente nel composer.json
+composer go
+```

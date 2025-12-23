@@ -31,6 +31,7 @@ Anche se i temi sono principalmente presentation layer, alcune parti contengono 
 ./vendor/bin/phpstan analyse Themes/Zero/resources/views/pages --level=10
 ```
 
+<<<<<<< HEAD
 ### ✅ Shared Tooling Notes (Nov 2025)
 
 - **Composer lock centralizzato** – quando strumenti come PHP Insights o Rector vengono eseguiti dal tema, passare sempre `--composer=/var/www/_bases/base_ptvx_fila4_mono/laravel/composer.lock` per riutilizzare il lockfile principale ed evitare errori `composer.lock not found`.
@@ -38,6 +39,8 @@ Anche se i temi sono principalmente presentation layer, alcune parti contengono 
 - **Cache pulita prima di PHPMD** – eliminare `Modules/*/build` prima di lanciare PHPMD/Insights per evitare report su file generati (es. cache PHPStan) che non appartengono al tema.
 - **Relazioni Sigma tipizzate** – dopo il refactoring di `Dipt00f`, `Qua00f` e `Rep00f`, gli accessor ritornano `null` invece che stringhe placeholder (“---”). Le viste del tema che mostravano questi dati devono prevedere la possibilità di `null` e non forzare cast impliciti (`(string)`); in caso contrario PHPStan segnalerà `binaryOp.invalid`.
 
+=======
+>>>>>>> laraxot/develop
 ---
 
 ## DRY Principle in Themes

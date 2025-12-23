@@ -1,0 +1,100 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Migration Management Workflow
+
+Workflow dedicato alla gestione completa delle migrazioni database, seguendo rigorosamente le regole specifiche di Laraxot <nome progetto> per evitare errori critici.
+
+## Invocazione
+Usa `/migration-check` in Windsurf Cascade per eseguire controlli completi sulle migrazioni.
+
+## ⚠️ REGOLE CRITICHE LARAXOT ⚠️
+
+### REGOLE ASSOLUTE (Violazione = Errore Critico)
+1. **SOLO classi anonime** che estendono XotBaseMigration
+2. **MAI implementare metodo down()** nelle migrazioni
+3. **SEMPRE verificare esistenza** con hasTable() e hasColumn()
+4. **Per aggiungere colonne**: copiare migrazione originale con nuovo timestamp
+5. **MAI creare migrazioni separate** per aggiungere colonne a tabelle esistenti
+
+## Controlli Fondamentali
+
+### Controllo Classi Anonime Obbligatorie
+```bash
+# Cerca migrazioni con classi nominate (VIETATE)
+for file in $(find Modules/*/database/migrations/ -name "*.php"); do
+    if grep -q "^class" "$file"; then
+        echo "❌ ERRORE CRITICO: $file usa classe nominata"
+    fi
+done
+```
+
+### Controllo Metodo down() VIETATO
+```bash
+# Cerca implementazioni del metodo down (ASSOLUTAMENTE VIETATE)
+for file in $(find Modules/*/database/migrations/ -name "*.php"); do
+    if grep -q "function down" "$file"; then
+        echo "❌ ERRORE CRITICO: $file implementa metodo down() - RIMUOVERE IMMEDIATAMENTE"
+    fi
+done
+```
+
+### Dry Run Obbligatorio
+```bash
+# Test migrazioni senza eseguirle (OBBLIGATORIO prima di ogni migrate)
+php artisan migrate --pretend | head -20
+```
+
+## Template per Nuove Migrazioni
+
+### Creazione Tabella
+```php
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Xot\Database\Migrations\XotBaseMigration;
+
+return new class extends XotBaseMigration
+{
+    public function up(): void
+    {
+        // Controllo esistenza tabella
+        if ($this->hasTable('nome_tabella')) {
+            return;
+        }
+
+        // Creazione tabella
+        Schema::create('nome_tabella', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome')->index();
+            $table->text('descrizione')->nullable();
+            $table->timestamps();
+        });
+
+        // Commento tabella
+        $this->tableComment('nome_tabella', 'Descrizione della tabella');
+    }
+};
+```
+
+## Best Practice Riassunto
+
+1. **SEMPRE** backup prima di migrazioni
+2. **SEMPRE** dry run con --pretend
+3. **SEMPRE** classi anonime che estendono XotBaseMigration
+4. **MAI** implementare metodo down()
+5. **SEMPRE** verificare esistenza con hasTable()/hasColumn()
+6. **Per aggiungere colonne**: copiare migrazione originale
+7. **SEMPRE** documentare modifiche schema
+8. **MAI** rollback in produzione
+
+---
+
+**Ultimo aggiornamento**: Dicembre 2024
+**Versione**: 1.0
+**Compatibilità**: Laraxot <nome progetto>, XotBaseMigration

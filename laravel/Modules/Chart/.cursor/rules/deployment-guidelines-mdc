@@ -1,0 +1,12 @@
+# Deployment Guidelines
+
+**When** you are preparing the application for deployment
+
+**Then** use staging environments for testing, production for live deployment, CI/CD with GitHub Actions, and monitoring with Sentry. Schedule daily database backups and weekly file backups with a 30-day retention policy.
+
+**Because** this ensures a smooth deployment process, minimizes downtime, and provides mechanisms for error tracking and data recovery.
+
+**Examples**
+
+- Correct: Deploy to staging first, test thoroughly, then move to production with CI/CD pipelines.
+- Incorrect: Deploy directly to production without testing or skip backup schedules.

@@ -1,0 +1,208 @@
+# Calendar Widgets Implementation Rules
+
+## Project Standards Compliance
+
+This document follows the project's standards and best practices for implementing calendar widgets in the <nome progetto> module.
+
+## Important Notes
+
+1. **Base Classes**: All calendar widgets must extend the appropriate XotBase class
+2. **Namespaces**: Use `Modules\\<nome progetto>\\Filament` for all Filament components
+3. **Translations**: Use language files instead of `->label()` methods
+4. **Documentation**: Keep documentation in sync with code changes
+5. **Testing**: Ensure all widgets are properly tested
+
+## Base Widget Structure
+
+All calendar widgets must extend `XotBaseFullCalendarWidget`:
+
+```php
+namespace Modules\\<nome progetto>\\Filament\\Widgets;
+
+use Modules\\Xot\\Filament\\Widgets\\XotBaseFullCalendarWidget;
+
+abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
+{
+    // Implementation...
+}
+```
+
+## Base Rules
+
+1. **Widget Naming**
+   - Use `BaseCalendarWidget` as the base class for all calendar widgets
+   - Follow the naming pattern `{UserType}CalendarWidget` (e.g., `DoctorCalendarWidget`)
+   - Place widgets in `Modules/<nome progetto>/Filament/Widgets/{UserType}/`
+
+2. **File Structure**
+   ```
+   Modules/
+   └── <nome progetto>/
+       ├── Filament/
+       │   └── Widgets/
+       │       ├── BaseCalendarWidget.php
+       │       ├── Admin/
+       │       │   └── AdminCalendarWidget.php
+       │       ├── Doctor/
+       │       │   └── DoctorCalendarWidget.php
+       │       └── Patient/
+       │           └── PatientCalendarWidget.php
+       └── docs/
+           └── calendar/
+               └── widgets/
+                   ├── README.md
+                   ├── admin-calendar-widget.md
+                   ├── doctor-calendar-widget.md
+                   └── patient-calendar-widget.md
+   ```
+
+3. **Code Standards**
+   - Always extend `BaseCalendarWidget`
+   - Implement required abstract methods
+   - Use type hints and return types
+   - Document all public and protected methods
+   - Follow PSR-12 coding standards
+
+## Required Methods
+
+### BaseCalendarWidget (Extends XotBaseFullCalendarWidget)
+
+```php
+abstract class BaseCalendarWidget extends XotBaseFullCalendarWidget
+{
+    protected static ?string $model = null;
+    protected static string $heading = 'Calendar';
+
+    protected function getEventsQuery();
+    abstract protected function mapToEvent($model): array;
+    protected function getCalendarConfig(): array;
+}
+```
+
+### Required Methods in Child Classes
+
+1. **getEventsQuery()**
+   - Must return a query builder instance
+   - Must apply proper scoping (tenancy, user permissions)
+   - Must eager load required relationships
+
+2. **mapToEvent()**
+   - Must return an array with required FullCalendar event properties
+   - Must include all necessary extended properties
+   - Must handle null values gracefully
+
+3. **getCalendarConfig()**
+   - Must return an array of FullCalendar options
+   - Should include view configuration, header toolbar, and other settings
+
+## Security and Best Practices
+
+### Authorization
+- Always check user permissions before displaying data
+- Use policies for complex authorization logic
+- Never expose sensitive data in the frontend
+
+### Data Protection
+- Use proper model scopes for data access
+- Implement proper validation for all inputs
+- Use form requests for complex validation rules
+
+## Documentation
+
+### Code Documentation
+- Document all public and protected methods
+- Include examples where necessary
+- Document any non-obvious behavior
+
+### User Documentation
+- Document widget features and usage
+- Include screenshots where helpful
+- Provide examples of common tasks
+
+## Testing Guidelines
+
+### Unit Tests
+- Test all widget methods
+- Test edge cases and error conditions
+- Mock external dependencies
+
+### Feature Tests
+- Test widget rendering
+- Test user interactions
+- Test different user roles and permissions
+
+## Performance Considerations
+
+### Database Queries
+- Use eager loading to prevent N+1 queries
+- Add indexes for frequently queried columns
+- Cache expensive operations
+
+### Frontend Performance
+- Minimize JavaScript and CSS
+- Use lazy loading for images
+- Optimize event handlers
+
+## Related Documentation
+
+- [XotBaseFullCalendarWidget Documentation](../xot-base-fullcalendar-widget.md)
+- [Filament Widgets](https://filamentphp.com/docs/3.x/panels/widgets)
+- [FullCalendar Documentation](https://fullcalendar.io/docs)
+
+## Changelog
+
+- 2023-10-26: Initial version
+- 2023-10-27: Updated to extend XotBaseFullCalendarWidget
+- 2023-10-28: Added security and performance sections
+
+1. **Tenancy**
+   - Always scope queries to the current tenant
+   - Use `Filament::getTenant()` to get the current clinic
+   - Never expose data across tenant boundaries
+
+2. **Authorization**
+   - Check user permissions before performing actions
+   - Use policies for complex authorization logic
+   - Validate all user inputs
+
+3. **Data Protection**
+   - Never expose sensitive data in the frontend
+   - Use proper data masking for PII
+   - Implement rate limiting for API endpoints
+
+## Best Practices
+
+1. **Performance**
+   - Eager load relationships to prevent N+1 queries
+   - Cache frequently accessed data
+   - Use pagination for large datasets
+
+2. **Error Handling**
+   - Use proper exception handling
+   - Log all errors with appropriate context
+   - Provide user-friendly error messages
+
+3. **Testing**
+   - Write tests for all calendar widgets
+   - Test different user roles and permissions
+   - Test tenancy boundaries
+
+## Documentation
+
+1. **Code Documentation**
+   - Document all public and protected methods
+   - Include examples where necessary
+   - Document any non-obvious behavior
+
+2. **User Documentation**
+   - Document widget features and usage
+   - Include screenshots where helpful
+   - Provide examples of common tasks
+
+## Related Files
+
+- `docs/calendar/architecture.md`
+- `docs/calendar/widgets/README.md`
+- `docs/calendar/widgets/admin-calendar-widget.md`
+- `docs/calendar/widgets/doctor-calendar-widget.md`
+- `docs/calendar/widgets/patient-calendar-widget.md`

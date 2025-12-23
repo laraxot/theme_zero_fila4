@@ -1,0 +1,96 @@
+# Regole Windsurf per Laraxot <nome progetto>
+
+## Architettura e Namespace
+- Ogni modello concreto di un modulo deve estendere **esclusivamente** `BaseModel` del proprio modulo
+- Mai estendere direttamente `Modules\Xot\Models\XotBaseModel`
+- Namespace corretto per risorse Filament: `Modules\<NomeModulo>\Filament` (mai `App\Filament`)
+- Nessun segmento 'app' nei namespace: `Modules\ModuleName\Models` (corretto) vs `Modules\ModuleName\App\Models` (errato)
+
+## Modelli
+- Proprietà `$fillable` sempre `protected` e annotata con `/** @var list<string> */`
+- Usare `casts()` method invece di `$casts` property (deprecato)
+- Implementare correttamente `casts()`:
+  ```php
+  /**
+   * Get the attributes that should be cast.
+   *
+   * @return array<string, string>
+   */
+  protected function casts(): array
+  {
+      return [
+          'created_at' => 'datetime',
+          'updated_at' => 'datetime',
+      ];
+  }
+  ```
+- Tutte le proprietà array devono usare annotazione `@var list<string>` o `@var array<string, mixed>`
+- Tipizzazione rigorosa di tutti i metodi e proprietà
+
+## Migrazioni
+- Tutte le migrazioni devono essere **classi anonime** restituite da `return new class extends XotBaseMigration { ... }`
+- Mai implementare il metodo `down` nelle migrazioni che estendono `XotBaseMigration`
+- Per aggiungere colonne a tabelle esistenti:
+  - Copiare la migrazione originale
+  - Aggiornare il timestamp
+  - Aggiungere la colonna nella sezione di update solo se non esiste (`if (! $this->hasColumn(...))`)
+
+## Filament
+- Le tabelle Filament devono avere colonne ricavate SOLO dal modello e dalla migrazione
+- Le label devono provenire SOLO dai file di traduzione del modulo (`Modules/<nome modulo>/lang/<lingua>`)
+- Mai usare `->label()` ma solo traduzioni
+- Le view custom devono usare `<x-filament::page>` come wrapper principale
+- Override di `setUp()` per configurare tutte le proprietà delle action custom
+
+## Documentazione
+- Documentazione del modulo in `Modules/<NomeModulo>/docs/` (MAI in `resources/views/docs/`)
+- Aggiornare sempre la documentazione più vicina al file modificato
+- Documentare pattern e anti-pattern per ogni bugfix
+- Creare collegamenti bidirezionali tra doc di modulo e doc root
+- Le regole generali vanno in `Modules/Xot/docs/`, i moduli specifici fanno solo riferimento/link
+
+## PHPStan
+- Eseguire PHPStan sempre dalla directory Laravel root: `/var/www/html/<nome progetto>/laravel`
+- Usare `./vendor/bin/phpstan` (mai `php artisan test:phpstan`)
+- Livello minimo: 9
+- Correggere subito errori di tipizzazione:
+  - Tipi di ritorno mancanti
+  - Tipi di parametri mancanti
+  - Tipi di proprietà mancanti
+  - Annotazioni PHPDoc errate
+  - Uso di classi non esistenti
+
+## Traduzioni
+- Struttura per traduzioni di campo:
+  ```php
+  'fields' => [
+      'field_name' => [
+          'label' => 'Human Readable Label',
+          'help' => 'Help text if needed',
+          'placeholder' => 'Placeholder text if needed'
+      ]
+  ]
+  ```
+- Struttura per traduzioni di azioni:
+  ```php
+  'actions' => [
+      'action_name' => [
+          'label' => 'Action Label',
+          'success' => 'Success message',
+          'error' => 'Error message'
+      ]
+  ]
+  ```
+- Coerenza nella terminologia e nella capitalizzazione
+- Utilizzo corretto della grammatica italiana
+
+## Componenti UI
+- Componenti Blade UI condivisi posizionati in `Modules/UI/resources/views/components/ui/` (MAI in `resources/views/components/`)
+
+## Generale
+- Validazione statica con phpstan e test di regressione dopo ogni bugfix
+- Documentazione aggiornata e collegata (modulo e root)
+- Tipizzazione rigorosa di tutti i metodi, evitare mixed se non strettamente necessario
+- Usare dichiarazione `declare(strict_types=1);` in ogni file PHP
+- Usare le funzioni sicure di `thecodingmachine/safe`
+- Preferire Spatie Laravel Data e Spatie QueueableActions

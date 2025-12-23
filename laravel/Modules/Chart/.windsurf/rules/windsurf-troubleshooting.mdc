@@ -1,0 +1,47 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Windsurf – Troubleshooting, Errori Comuni e Soluzioni
+
+## Errori Comuni
+- Migrazione non applicata: controllare timestamp e presenza della colonna
+- Metodo down implementato: rimuovere il metodo down
+- Namespace errato: evitare il segmento 'app' nei namespace
+- Percorsi errati: usare sempre percorsi relativi
+- Proprietà non tipizzate: aggiungere sempre PHPDoc e tipi espliciti
+- Traduzioni non espanse: usare sempre la struttura espansa
+
+## Edge Case
+- Migrazione che fallisce solo in produzione: controllare permessi e ambiente
+- Colonna aggiunta ma non visibile: verificare la copia della migrazione e il controllo hasColumn
+- Conflitti tra moduli: ogni modulo deve usare il proprio BaseModel
+- Traduzioni che non si applicano: controllare la struttura e la posizione dei file
+
+## Soluzioni Pratiche
+- Validare sempre la configurazione MCP dopo ogni modifica
+- Usare script di validazione automatica per percorsi e namespace
+- Aggiornare la documentazione e i file .mdc dopo ogni fix
+- Eseguire PHPStan livello 9+ dopo ogni modifica strutturale
+
+## Checklist Troubleshooting
+- [ ] Validare la configurazione MCP (stdio/SSE)
+- [ ] Controllare permessi e variabili d'ambiente
+- [ ] Aggiornare docs e .windsurf/rules dopo ogni fix
+- [ ] Documentare errori e soluzioni
+- [ ] Eseguire test di regressione
+
+## Warning
+- Non ignorare warning di PHPStan o errori di validazione
+- Non usare percorsi assoluti nei riferimenti
+- Non modificare la struttura dei moduli senza aggiornare la documentazione
+
+## Riferimenti e Collegamenti
+- [model_context_protocol.md](mdc:../../docs/model_context_protocol.md)
+- [mcp_implementation_guide.md](mdc:../../docs/mcp_implementation_guide.md)
+- [mcp_errors_and_lessons.md](mdc:../../docs/mcp_errors_and_lessons.md)
+- [laraxot_conventions.md](mdc:../../docs/laraxot_conventions.md)
+- [links.md](mdc:../../docs/links.md)
+
+*Ultimo aggiornamento: giugno 2025 – conforme a standard Laraxot, best practice Windsurf, e regole di documentazione interna.*
