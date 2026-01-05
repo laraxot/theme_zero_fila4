@@ -87,8 +87,6 @@ class LoginWidget extends XotBaseWidget
 </x-filament-widgets::widget>
 ```
 
-<<<<<<< HEAD
-=======
 #### Runtime Guards (Webmozart Assert)
 
 Se il widget prepara payload complessi (array `$data`, opzioni, configurazioni), la validazione deve avvenire nel widget (o action) con `Webmozart\Assert\Assert`.
@@ -96,7 +94,6 @@ Se il widget prepara payload complessi (array `$data`, opzioni, configurazioni),
 - ✅ OK: `Assert` in widget/controller/action prima di passare dati alla view
 - ❌ NO: `Assert` in Blade
 
->>>>>>> laraxot/develop
 ### Pattern 2: Via Folio Pages with Controller Logic
 
 For Folio pages that need data, use route model binding or controller-like logic within the Folio page.
