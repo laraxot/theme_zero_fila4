@@ -193,9 +193,9 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 ├── README.md                    # Questo file
 ├── database/                    # Script relativi al database
 │   ├── seeding/                # Script per popolamento database
-│   │   ├── saluteora-1000-records.php        # 🎯 PRINCIPALE: 1000 record per modello
-│   │   ├── saluteora-20-studios-66010.php    # 🆕 NUOVO: 20 studi con postal_code 66010 + dottori
-│   │   ├── saluteora-mass-seeding.php         # Popolamento massivo SaluteOra
+│   │   ├── <nome progetto>-1000-records.php        # 🎯 PRINCIPALE: 1000 record per modello
+│   │   ├── <nome progetto>-20-studios-66010.php    # 🆕 NUOVO: 20 studi con postal_code 66010 + dottori
+│   │   ├── <nome progetto>-mass-seeding.php         # Popolamento massivo <nome progetto>
 │   │   ├── salutemo-database-seeding.php      # Popolamento SaluteMo
 │   │   ├── tinker-commands.php                 # Comandi per Tinker
 │   │   ├── tinker-1000-records.php            # Script Tinker per 1000 record
@@ -217,11 +217,11 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 ## Script di Seeding Database
 
 ### 🎯 **Script Principale: 1000 Record per Modello**
-- **`saluteora-1000-records.php`**: Genera esattamente 1000 doctor, 1000 patients, 1000 studios e 500 appointments
+- **`<nome progetto>-1000-records.php`**: Genera esattamente 1000 doctor, 1000 patients, 1000 studios e 500 appointments
 - **`tinker-1000-records.php`**: Versione semplificata per Tinker
 
 ### 🆕 **Script Specializzato: 20 Studi con Postal Code 66010**
-- **`saluteora-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
+- **`<nome progetto>-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
 - **`tinker-20-studios-66010.php`**: Versione Tinker per 20 studi + dottori
 
 **Caratteristiche principali:**
@@ -233,7 +233,7 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 - ✅ **Verifica finale** che ogni studio abbia dottori
 
 ### **Script Generali**
-- **`saluteora-mass-seeding.php`**: Popolamento massivo generale
+- **`<nome progetto>-mass-seeding.php`**: Popolamento massivo generale
 - **`salutemo-database-seeding.php`**: Popolamento modulo SaluteMo
 - **`tinker-commands.php`**: Comandi generali per Tinker
 
@@ -243,13 +243,13 @@ Tutti gli script sono organizzati in sottocartelle per categoria:
 
 ```bash
 # Dalla root del progetto
-cd /var/www/html/_bases/base_saluteora
+cd /var/www/html/_bases/base_<nome progetto>
 
 # Script per 20 studi con dottori (RACCOMANDATO per iniziare)
-php bashscripts/database/seeding/saluteora-20-studios-66010.php
+php bashscripts/database/seeding/<nome progetto>-20-studios-66010.php
 
 # Script per 1000 record per modello
-php bashscripts/database/seeding/saluteora-1000-records.php
+php bashscripts/database/seeding/<nome progetto>-1000-records.php
 # Rendi gli script eseguibili
 chmod +x *.sh
 chmod +x scripts/**/*.sh
@@ -307,7 +307,7 @@ php artisan tinker
 ### Script 1000 Record
 
 ```bash
-🚀 Inizializzazione seeding massivo SaluteOra - 1000 record per modello...
+🚀 Inizializzazione seeding massivo <nome progetto> - 1000 record per modello...
 📊 RISULTATO FINALE:
   - Studi creati: 1000
   - Dottori totali: 1000
@@ -324,9 +324,9 @@ php artisan tinker
 ├── README.md                    # Questo file
 ├── database/                    # Script relativi al database
 │   ├── seeding/                # Script per popolamento database
-│   │   ├── saluteora-1000-records.php        # 🎯 PRINCIPALE: 1000 record per modello
-│   │   ├── saluteora-20-studios-66010.php    # 🆕 NUOVO: 20 studi con postal_code 66010 + dottori
-│   │   ├── saluteora-mass-seeding.php         # Popolamento massivo SaluteOra
+│   │   ├── <nome progetto>-1000-records.php        # 🎯 PRINCIPALE: 1000 record per modello
+│   │   ├── <nome progetto>-20-studios-66010.php    # 🆕 NUOVO: 20 studi con postal_code 66010 + dottori
+│   │   ├── <nome progetto>-mass-seeding.php         # Popolamento massivo <nome progetto>
 │   │   ├── salutemo-database-seeding.php      # Popolamento SaluteMo
 │   │   ├── tinker-commands.php                 # Comandi per Tinker
 │   │   ├── tinker-1000-records.php            # Script Tinker per 1000 record
@@ -348,11 +348,11 @@ php artisan tinker
 ## Script di Seeding Database
 
 ### 🎯 **Script Principale: 1000 Record per Modello**
-- **`saluteora-1000-records.php`**: Genera esattamente 1000 doctor, 1000 patients, 1000 studios e 500 appointments
+- **`<nome progetto>-1000-records.php`**: Genera esattamente 1000 doctor, 1000 patients, 1000 studios e 500 appointments
 - **`tinker-1000-records.php`**: Versione semplificata per Tinker
 
 ### 🆕 **Script Specializzato: 20 Studi con Postal Code 66010**
-- **`saluteora-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
+- **`<nome progetto>-20-studios-66010.php`**: Crea 20 studi medici con postal_code = '66010' e **garantisce che ogni studio abbia almeno un dottore collegato**
 - **`tinker-20-studios-66010.php`**: Versione Tinker per 20 studi + dottori
 
 **Caratteristiche principali:**
@@ -364,7 +364,7 @@ php artisan tinker
 - ✅ **Verifica finale** che ogni studio abbia dottori
 
 ### **Script Generali**
-- **`saluteora-mass-seeding.php`**: Popolamento massivo generale
+- **`<nome progetto>-mass-seeding.php`**: Popolamento massivo generale
 - **`salutemo-database-seeding.php`**: Popolamento modulo SaluteMo
 - **`tinker-commands.php`**: Comandi generali per Tinker
 
@@ -374,7 +374,7 @@ php artisan tinker
 
 ```bash
 # Dalla root del progetto
-cd /var/www/html/_bases/base_saluteora
+cd /var/www/html/_bases/base_<nome progetto>
 
 # Rendi gli script eseguibili
 chmod +x *.sh
@@ -476,7 +476,7 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 ## Troubleshooting
 
 ### Errori Comuni
-1. **Modulo non trovato**: Verificare installazione modulo SaluteOra
+1. **Modulo non trovato**: Verificare installazione modulo <nome progetto>
 2. **Factory non trovato**: Controllare esistenza factory nel modulo
 3. **Errore database**: Verificare migrazioni e configurazione
 4. **Memoria insufficiente**: Utilizzare script in batch più piccoli
@@ -517,7 +517,7 @@ REMOTE_BRANCH=develop ./scripts/phpstan/check_before_phpstan.sh
 ## Troubleshooting
 
 ### Errori Comuni
-1. **Modulo non trovato**: Verificare installazione modulo SaluteOra
+1. **Modulo non trovato**: Verificare installazione modulo <nome progetto>
 2. **Factory non trovato**: Controllare esistenza factory nel modulo
 3. **Errore database**: Verificare migrazioni e configurazione
 4. **Memoria insufficiente**: Utilizzare script in batch più piccoli
@@ -631,7 +631,7 @@ Questo progetto è rilasciato sotto licenza MIT. Vedi il file [LICENSE](LICENSE)
 
 **Ultimo aggiornamento**: Gennaio 2025
 **Versione**: 2.0
-**Compatibilità**: Laravel 10+, Moduli SaluteOra/SaluteMo
+**Compatibilità**: Laravel 10+, Moduli <nome progetto>/SaluteMo
    **Soluzione**: Verifica che il path del subtree sia corretto
 
 - **Regola fondamentale**: Script SEMPRE in `bashscripts/`, MAI in `laravel/`
