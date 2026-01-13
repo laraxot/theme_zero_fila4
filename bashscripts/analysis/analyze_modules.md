@@ -4,12 +4,11 @@
 Lo script `analyze_modules.sh` esegue l'analisi PHPStan su tutti i moduli Laravel presenti nella cartella `laravel/Modules/`. Per ogni modulo, esegue l'analisi a tutti i livelli di PHPStan (da 1 a max) e salva i risultati in formato JSON nella cartella `docs/phpstan` di ogni modulo.
 
 ## Posizione
-`/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/analyze_modules.sh`
+`bashscripts/analyze_modules.sh`
 
 ## Utilizzo
 ```bash
-cd /var/www/html/_bases/base_ptvx_fila3_mono
-./bashscripts/analyze_modules.sh
+cd bashscripts/analyze_modules.sh
 ```
 
 ## Funzionalità
@@ -40,7 +39,7 @@ Modules/<NomeModulo>/docs/phpstan/
 - Configurazione PHPStan in `laravel/phpstan.neon`
 
 ## Variabili di Ambiente
-- `BASE_DIR`: Directory base del progetto (`/var/www/html/_bases/base_ptvx_fila3_mono/laravel`)
+- `BASE_DIR`: Directory base del progetto (`laravel`)
 - `MODULES_DIR`: Directory dei moduli (`$BASE_DIR/Modules`)
 - `LEVELS`: Array dei livelli PHPStan da analizzare
 
@@ -155,7 +154,7 @@ jobs:
 ```
 
 ## Collegamenti Bidirezionali
-- [Configurazione PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/docs/phpstan.md)
-- [Struttura dei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
-- [Best Practices PHPStan](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
-- [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
+- [Configurazione PHPStan](laravel/docs/phpstan.md)
+- [Struttura dei Moduli](laravel/Modules/Xot/docs/MODULE-STRUCTURE.md)
+- [Best Practices PHPStan](laravel/Modules/Xot/docs/PHPSTAN-LEVEL9-GUIDE.md)
+- [Script di Automazione](bashscripts/docs/scripts.md)

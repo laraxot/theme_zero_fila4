@@ -89,7 +89,7 @@ Dopo l'esecuzione dello script, è consigliabile verificare che tutti i conflitt
 5. **Test Post-Risoluzione**: Dopo la risoluzione automatica, eseguire test per verificare che il codice funzioni ancora correttamente.
 
 ## Collegamenti Bidirezionali
-- [Gestione Conflitti Git](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/git_conflicts_resolution.md)
-- [Script di Automazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/scripts.md)
-- [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
-- [Risoluzione Conflitti nei Moduli](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
+- [Gestione Conflitti Git](bashscripts/docs/git_conflicts_resolution.md)
+- [Script di Automazione](bashscripts/docs/scripts.md)
+- [Conflitti nei File di Configurazione](bashscripts/docs/config_file_conflicts.md)
+- [Risoluzione Conflitti nei Moduli](laravel/Modules/Xot/docs/conflitti_merge_risolti.md)

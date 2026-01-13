@@ -38,4 +38,4 @@ class SendSMSPage extends XotBasePage
 ```
 
 ## Riferimenti
-- [Modules/Notify/docs/FILAMENT_EXTENSION_RULES.md](file:///var/www/html/saluteora/laravel/Modules/Notify/docs/FILAMENT_EXTENSION_RULES.md)
+- [Modules/Notify/docs/FILAMENT_EXTENSION_RULES.md](file://Modules/Notify/docs/FILAMENT_EXTENSION_RULES.md)

@@ -1,8 +1,8 @@
-# Convenzioni per i Form Schema in SaluteOra
+# Convenzioni per i Form Schema in <nome progetto>
 
 ## Regola Fondamentale per Array di Schema
 
-Tutti i metodi `getXFormSchema()` in SaluteOra **DEVONO** restituire array **associativi** con **chiavi string**, non array sequenziali.
+Tutti i metodi `getXFormSchema()` in <nome progetto> **DEVONO** restituire array **associativi** con **chiavi string**, non array sequenziali.
 
 ## Convenzione di Naming
 
@@ -58,4 +58,4 @@ public function getSmsFormSchema(): array
 4. **Compatibilità XotBasePage**: Progettato per lavorare con array associativi
 
 ## Riferimenti
-- [Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md](file:///var/www/html/saluteora/laravel/Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md)
+- [Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md](file://Modules/Notify/docs/FORM_SCHEMA_CONVENTIONS.md)

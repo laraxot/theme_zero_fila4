@@ -1,4 +1,4 @@
-# Convenzioni SaluteOra
+# Convenzioni <nome progetto>
 
 ## Indice
 - [Filament e XotBase](#filament-e-xotbase)
@@ -91,10 +91,10 @@ class MyResource extends Resource // ❌ Estende direttamente Resource
 
 ### Implementazione
 Il LangServiceProvider si trova in:
-`/var/www/html/saluteora/laravel/Modules/Lang/app/Providers/LangServiceProvider.php`
+`Modules/Lang/app/Providers/LangServiceProvider.php`
 
 L'azione principale che gestisce l'etichettatura automatica è:
-`/var/www/html/saluteora/laravel/Modules/Lang/app/Actions/Filament/AutoLabelAction.php`
+`Modules/Lang/app/Actions/Filament/AutoLabelAction.php`
 
 ### Esempi
 
@@ -119,7 +119,7 @@ TextInput::make('name')
 
 ### Single Table Inheritance con Parental
 
-SaluteOra utilizza [tighten/parental](https://github.com/tighten/parental) per implementare il pattern Single Table Inheritance (STI), che permette di rappresentare una gerarchia di classi utilizzando una singola tabella del database.
+<nome progetto> utilizza [tighten/parental](https://github.com/tighten/parental) per implementare il pattern Single Table Inheritance (STI), che permette di rappresentare una gerarchia di classi utilizzando una singola tabella del database.
 
 ### Implementazione Base
 ```php
@@ -151,14 +151,14 @@ class Doctor extends User
 
 1. **Naming Consistente**: Il dentista è chiamato genericamente "Doctor" nel sistema, non "Dentist" o "Odontoiatra" nel codice
 2. **Relazioni Corrette**: Doctor è implementato come tipo di User tramite parental
-3. **Registrazione**: La registrazione viene fatta tramite il widget in `/var/www/html/saluteora/laravel/Modules/User/app/Filament/Widgets/RegistrationWidget.php`
+3. **Registrazione**: La registrazione viene fatta tramite il widget in `Modules/User/app/Filament/Widgets/RegistrationWidget.php`
 4. **Form Schema**: Il form schema viene recuperato da `DoctorResource::getFormSchemaWidget()`
 
 ## Sistema di Notifiche
 
 ### RecordNotificationAction
 
-SaluteOra utilizza un sistema centralizzato di notifiche tramite `RecordNotificationAction` invece di creare classi specifiche per ogni tipo di notifica.
+<nome progetto> utilizza un sistema centralizzato di notifiche tramite `RecordNotificationAction` invece di creare classi specifiche per ogni tipo di notifica.
 
 ### Implementazione Corretta
 ```php

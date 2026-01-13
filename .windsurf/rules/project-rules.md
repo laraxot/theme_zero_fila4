@@ -8,7 +8,7 @@ globs:
 
 ## Struttura dei File di Configurazione JSON
 
-I file di configurazione JSON, come `1.json`, sono utilizzati per definire sezioni di contenuto all'interno del sistema di gestione dei contenuti. Questi file si trovano nella cartella `config/local/saluteora/database/content/sections/` e contengono dettagli come:
+I file di configurazione JSON, come `1.json`, sono utilizzati per definire sezioni di contenuto all'interno del sistema di gestione dei contenuti. Questi file si trovano nella cartella `config/local/<nome progetto>/database/content/sections/` e contengono dettagli come:
 
 - `id`: Identificatore univoco della sezione.
 - `name`: Nome della sezione in diverse lingue.

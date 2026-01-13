@@ -1,8 +1,8 @@
-# Principi di Utilizzo delle Configurazioni in SaluteOra
+# Principi di Utilizzo delle Configurazioni in <nome progetto>
 
 ## Regola Fondamentale
 
-In SaluteOra, tutte le opzioni configurabili **DEVONO** essere definite nei file di configurazione e **MAI** hardcoded direttamente nel codice.
+In <nome progetto>, tutte le opzioni configurabili **DEVONO** essere definite nei file di configurazione e **MAI** hardcoded direttamente nel codice.
 
 ## Convenzioni per i Driver e le Opzioni
 
@@ -57,4 +57,4 @@ Le azioni dei form **DEVONO** essere richiamate dai metodi PHP, non hardcoded ne
 ```
 
 ## Riferimenti
-- [Documentazione completa](/var/www/html/saluteora/laravel/Modules/Notify/docs/CONFIGURATIONS_USAGE_PRINCIPLES.md)
+- [Documentazione completa](Modules/Notify/docs/CONFIGURATIONS_USAGE_PRINCIPLES.md)

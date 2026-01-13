@@ -24,11 +24,11 @@
 ## Verifica Automatica
 
 ```bash
-find /var/www/html/saluteora/laravel/Modules -path "*/Filament/*/Pages/*.php" | grep -v "Page.php$"
+find Modules -path "*/Filament/*/Pages/*.php" | grep -v "Page.php$"
 ```
 
 ## Riferimenti
 
 - [Filament Documentation](https://filamentphp.com/docs/3.x/panels/pages)
 - [PSR-4 Autoloading Standard](https://www.php-fig.org/psr/psr-4/)
-- [Modules/Notify/docs/FILAMENT_PAGE_NAMING_CONVENTION.md](file:///var/www/html/saluteora/laravel/Modules/Notify/docs/FILAMENT_PAGE_NAMING_CONVENTION.md)
+- [Modules/Notify/docs/FILAMENT_PAGE_NAMING_CONVENTION.md](file://Modules/Notify/docs/FILAMENT_PAGE_NAMING_CONVENTION.md)

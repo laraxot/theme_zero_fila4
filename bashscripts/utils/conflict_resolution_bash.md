@@ -136,9 +136,9 @@ BRANCH="${3:-main}"  # Usa il terzo parametro se fornito, altrimenti "main"
 
 ## COLLEGAMENTI ALLA DOCUMENTAZIONE PRINCIPALE
 
-- [Risoluzione Manuale dei Conflitti](/var/www/html/_bases/base_predict_fila3_mono/docs/CONFLICT_RESOLUTION.md) - Principi generali per la risoluzione dei conflitti
-- [Principio DRY negli Script Bash](/var/www/html/_bases/base_predict_fila3_mono/bashscripts/docs/NO_DUPLICATE_FUNCTIONS_IN_SOURCED_SCRIPTS.md) - Linee guida per evitare la duplicazione di codice
-- [Filosofia della Documentazione](/var/www/html/_bases/base_predict_fila3_mono/docs/DOCUMENTATION_PHILOSOPHY.md) - Principi fondamentali di documentazione
+- [Risoluzione Manuale dei Conflitti](docs/CONFLICT_RESOLUTION.md) - Principi generali per la risoluzione dei conflitti
+- [Principio DRY negli Script Bash](bashscripts/docs/NO_DUPLICATE_FUNCTIONS_IN_SOURCED_SCRIPTS.md) - Linee guida per evitare la duplicazione di codice
+- [Filosofia della Documentazione](docs/DOCUMENTATION_PHILOSOPHY.md) - Principi fondamentali di documentazione
 
 ---
 

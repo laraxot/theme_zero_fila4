@@ -173,7 +173,7 @@ Il progetto include alcuni script per facilitare la gestione dei conflitti:
 
 ## Collegamenti Bidirezionali
 
-- [Conflitti Merge Risolti Xot](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
-- [Script di Risoluzione Automatica](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/fix_all_git_conflicts.md)
-- [Conflitti nei File di Configurazione](/var/www/html/_bases/base_ptvx_fila3_mono/bashscripts/docs/config_file_conflicts.md)
-- [Convenzioni Namespace](/var/www/html/_bases/base_ptvx_fila3_mono/laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)
+- [Conflitti Merge Risolti Xot](laravel/Modules/Xot/docs/conflitti_merge_risolti.md)
+- [Script di Risoluzione Automatica](bashscripts/docs/fix_all_git_conflicts.md)
+- [Conflitti nei File di Configurazione](bashscripts/docs/config_file_conflicts.md)
+- [Convenzioni Namespace](laravel/Modules/Xot/docs/NAMESPACE-CONVENTIONS.md)

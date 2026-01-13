@@ -306,14 +306,14 @@ class PredictResource extends XotBaseResource // Sempre estendere XotBase
 ## Regole Critiche per Progetti Laraxot
 
 ### Struttura del Progetto
-- Root progetto: `/var/www/html/_bases/base_{nome_progetto}/`
-- Root Laravel: `/var/www/html/_bases/base_{nome_progetto}/laravel/`
-- Moduli: `/var/www/html/_bases/base_{nome_progetto}/laravel/Modules/{ModuleName}/`
-- Temi: `/var/www/html/_bases/base_{nome_progetto}/laravel/Themes/One/`
+- Root progetto: ``
+- Root Laravel: ``
+- Moduli: `Modules/{ModuleName}/`
+- Temi: `Themes/One/`
 
 ### Autenticazione
 - Pagina login: `/it/auth/login` (rotta localizzata)
-- Blade template: `/var/www/html/_bases/base_{nome_progetto}/laravel/Themes/One/resources/views/pages/auth/login.blade.php`
+- Blade template: `Themes/One/resources/views/pages/auth/login.blade.php`
 - Widget: `Modules\User\Filament\Widgets\Auth\LoginWidget`
 
 ### Pattern Test Separati

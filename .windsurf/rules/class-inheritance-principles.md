@@ -1,8 +1,8 @@
-# Principi di Ereditarietà nelle Classi SaluteOra
+# Principi di Ereditarietà nelle Classi <nome progetto>
 
 ## Regola Fondamentale: No Duplicate Declarations
 
-Le classi che estendono altre classi in SaluteOra **NON devono ridichiarare** interfacce, trait o metodi già presenti nella classe genitore, a meno che non ne modifichino il comportamento.
+Le classi che estendono altre classi in <nome progetto> **NON devono ridichiarare** interfacce, trait o metodi già presenti nella classe genitore, a meno che non ne modifichino il comportamento.
 
 ## Esempi Corretti vs Errati
 
@@ -54,4 +54,4 @@ class SendSmsPage extends XotBasePage
    - Rende più chiara la gerarchia delle classi
 
 ## Riferimenti
-- [Modules/Notify/docs/CLASS_INHERITANCE_PRINCIPLES.md](file:///var/www/html/saluteora/laravel/Modules/Notify/docs/CLASS_INHERITANCE_PRINCIPLES.md)
+- [Modules/Notify/docs/CLASS_INHERITANCE_PRINCIPLES.md](file://Modules/Notify/docs/CLASS_INHERITANCE_PRINCIPLES.md)

@@ -1,4 +1,4 @@
-# Pattern Corretti per Migrazioni JSON in SaluteOra
+# Pattern Corretti per Migrazioni JSON in <nome progetto>
 
 ## Problema Critico
 
@@ -104,7 +104,7 @@ return json_encode($translations);
 
 **MAI** tentare di convertire direttamente una colonna a JSON senza prima validare e convertire i dati esistenti in un formato JSON valido.
 
-Questi pattern si applicano a TUTTE le migrazioni in SaluteOra che coinvolgono colonne JSON, in particolare per:
+Questi pattern si applicano a TUTTE le migrazioni in <nome progetto> che coinvolgono colonne JSON, in particolare per:
 - Traduzioni con `HasTranslations`
 - Configurazioni o meta-dati strutturati
 - Qualsiasi campo che memorizza dati complessi
